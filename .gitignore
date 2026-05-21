@@ -1,0 +1,75 @@
+# Secrets
+.env
+.env.*
+*.password
+.topmed_password
+**/secrets/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs / temp
+*.log
+*.tmp
+tmp/
+
+# === Personal data (large + private) ===
+# DNA — raw vendor CSVs, normalized VCFs, all intermediates
+users/*/dna/raw/*
+users/*/dna/normalized/*
+users/*/dna/imputation_input/*
+users/*/dna/imputed_local/*
+users/*/dna/topmed/*
+users/*/dna/annotated/*
+users/*/dna/annotated_imputed/*
+users/*/dna/annotated_topmed/*
+
+# Blood test sources (PDFs / Excels — contain PII)
+users/*/bloods/*
+
+# Wearable raw exports (multi-GB Apple Health dumps) + parsed JSON
+users/*/wearables/apple_export/*
+users/*/wearables/parsed/*
+
+# Healthlake (contains personal medical text)
+users/*/healthlake/manifest/*
+users/*/healthlake/bronze/*
+users/*/healthlake/silver/*
+users/*/healthlake/gold/*
+users/*/healthlake/exports/*
+
+# Bundles (contain personal annotations)
+users/*/bundles/*
+
+# Reports (contain personal findings)
+users/*/reports/**/*.md
+users/*/reports/**/*.pdf
+users/*/reports/**/*.png
+users/*/reports/**/*.json
+
+# === Reference data (large, public, re-downloadable) ===
+shared/pgs_cache/*
+shared/_1kg_cache/
+shared/gnomad_cache.json
+shared/pharmcat/*
+shared/beagle/*
+shared/fasta/*
+shared/liftover/*
+
+# === Re-allow scaffolding markers and per-folder READMEs ===
+# (Must come after the ignore rules — last matching pattern wins.)
+!**/README.md
+!**/.gitkeep

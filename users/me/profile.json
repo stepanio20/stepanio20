@@ -1,0 +1,62 @@
+{
+  "_instructions": "Fill in the fields below. Remove this _instructions field once you're done. Field definitions are in NEXT_STEPS.md and ARCHITECTURE.md (search for 'profile.json'). Fields marked TBD will be filled in by you; fields under data_provenance are auto-populated by pipeline scripts.",
+
+  "name": "Me",
+  "sex": "TBD",
+  "_sex_help": "Chromosomal sex: 'XY' or 'XX'. Drives chrX imputation strategy and sex-specific PGS scoring.",
+
+  "date_of_birth": "TBD",
+  "_dob_help": "YYYY-MM-DD. Age is computed from this whenever a report renders.",
+
+  "country_of_residence": "TBD",
+  "_country_help": "Two-letter ISO code (e.g. 'NL'). Drives GP-letter language + locale-specific lab references.",
+
+  "anthropometric": {
+    "height_cm": null,
+    "weight_kg": null,
+    "_help": "Used for BMI + body-composition trend context in Phase 6 reports."
+  },
+
+  "family_history": {
+    "_help": "Each diagnosis row: {condition, age_of_onset, status}. The closer the relative and earlier the onset, the heavier the prior used in Phase 4 P/LP screening and Phase 7 narrative reports.",
+    "mother": {
+      "alive": null,
+      "diagnoses": []
+    },
+    "father": {
+      "alive": null,
+      "diagnoses": []
+    },
+    "siblings": [],
+    "maternal_grandparents": [],
+    "paternal_grandparents": [],
+    "aunts_uncles": []
+  },
+
+  "current_medications": [],
+  "_medications_help": "Each row: {drug, dose, start_date, indication}. Cross-checked against PharmCAT output in Phase 3.",
+
+  "chronic_conditions": [],
+  "_conditions_help": "Each row: {condition, diagnosis_date, status}.",
+
+  "lifestyle": {
+    "smoking_status": null,
+    "alcohol_units_per_week": null,
+    "exercise_frequency_per_week": null,
+    "diet_pattern": null
+  },
+
+  "data_provenance": {
+    "_help": "Auto-populated as each pipeline phase completes — don't edit by hand.",
+    "dna_chip": null,
+    "dna_imputed_beagle": null,
+    "dna_imputed_topmed": null,
+    "bloods_latest": null,
+    "wearable_export_latest": null,
+    "cgm_latest": null
+  },
+
+  "key_genetic_findings_v2_topmed": [],
+  "tier_a_actions": [],
+  "headline_findings": []
+}
