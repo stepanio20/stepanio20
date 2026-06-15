@@ -11,14 +11,29 @@ orchestration engine, connectors, and the weekly-plan renderer as they're built
 
 | Path | Role | Milestone |
 |---|---|---|
-| `config.schema.json` | JSON Schema for a user's concierge config (prefs, budget, integrations) | M0 ✅ (here) |
-| `recommend/` | Health Graph → `weekly_targets` (deterministic; macros, training, recovery, screening) | M1 |
+| `config.schema.json` | JSON Schema for a user's concierge config (prefs, budget, integrations) | M0 ✅ |
+| `recommend/` | Health Graph → weekly targets (deterministic; macros, training, recovery, screening, data gaps) | **M1 ✅** |
+| `orchestrate/` | targets + prefs → a concrete dated 7-day plan, rendered to Markdown | **M3 ✅** |
+| `make_weekly_plan.py` | CLI that assembles context and writes the plan | **M1/M3 ✅** |
+| `tests/` | deterministic engine + render tests (`python -m concierge.tests.test_engine`) | ✅ |
 | `connectors/whoop/` | OAuth + webhook → wearable facts into the graph | M2 |
 | `connectors/gcal/` | Google Calendar read free/busy + write confirmed plan | M5 |
-| `orchestrate/` | `weekly_targets` + constraints → a concrete dated weekly plan | M3 |
 | `action/` | execute plan at best available "rung" (API book / deep-link / hand-off) | M6 |
-| `datagap/` | gap → Barcelona test recommendation (extends pipeline phase 6g) | M7 |
+| `datagap/` | gap → Barcelona test recommendation (extends pipeline phase 6g) — partial, in `recommend/engine.py` | M7 |
 | `app/` | Next.js PWA — the weekly review/edit/approve screen | M4 |
+
+## Run (M1 + M3, works today — stdlib only, no deps)
+
+```bash
+python -m concierge.make_weekly_plan --user me              # writes users/me/reports/weekly_plan.md
+python -m concierge.make_weekly_plan --user me --out -      # print to stdout
+python -m concierge.tests.test_engine                       # run the tests
+```
+
+Reads `users/<user>/concierge.json` (prefs) + `users/<user>/bundles/health_graph.json`
+(your real facts, gitignored). If no real graph exists it falls back to
+`recommend/health_graph.sample.json` so it always runs. Render to PDF by feeding the
+output through `pipeline/08_build_pdfs.sh` (reuses the Phase-8 stylesheet).
 
 ## Config
 

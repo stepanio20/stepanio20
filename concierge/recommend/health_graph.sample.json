@@ -1,0 +1,29 @@
+{
+  "_comment": "SYNTHETIC example — not a real person. Used for tests + so the engine runs out-of-the-box. A real user's graph lives at users/<user>/bundles/health_graph.json (gitignored).",
+  "weight_kg": 70.0,
+  "height_cm": 175,
+  "age": 30,
+  "sex": "XY",
+  "lean_mass_kg": 58.0,
+  "body_fat_pct": 17.0,
+  "training_days": 3,
+  "bloods": {
+    "drawn_date": "2025-01-01",
+    "vitamin_d_ng_ml": 28,
+    "b12_pg_ml": 410,
+    "ferritin_ng_ml": 120,
+    "ldl_mg_dl": 110,
+    "hdl_mg_dl": 55,
+    "triglycerides_mg_dl": 95,
+    "hba1c_pct": 5.3
+  },
+  "last_tests": {
+    "lipid_panel": "2025-01-01"
+  },
+  "lifestyle": {
+    "nicotine": null,
+    "alcohol_units_per_week": 4,
+    "bp_systolic": null
+  },
+  "wearable": null
+}
