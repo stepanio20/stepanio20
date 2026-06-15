@@ -7,6 +7,16 @@ numbers.
 
 Every target carries a `source` and, where relevant, a `why`, so the renderer can
 show provenance and the data-gap module can say what would sharpen it.
+
+CLINICAL FRAMING (non-negotiable):
+- Output is INFORMATION, not diagnosis or treatment. All text is phrased as
+  "below the commonly used threshold of X", "informative for risk discussions
+  with a clinician", etc. — never "you have Y" or "you should take Y".
+- Supplement doses cited stay within widely-published OTC ranges (e.g. D3
+  ≤ 4000 IU/day per EFSA UL; magnesium supplemental ≤ 350 mg/day per IOM UL;
+  B12 has no UL but stays at standard 500–1000 µg/day OTC strengths).
+- Thresholds match referenced guidelines (ATP III / ACC-AHA / ESC) where
+  applicable, with the source cited in the prose.
 """
 from __future__ import annotations
 
@@ -148,26 +158,27 @@ def compute_targets(ctx: dict[str, Any], today: Optional[date] = None) -> Target
     t.carb_g = max(0, round(carb_kcal / 4))
 
     # --- Supplements (from bloods) ----------------------------------------- #
+    # Doses cited stay within OTC strengths; framing is informational only.
     vit_d = bloods.get("vitamin_d_ng_ml")
     if vit_d is not None:
         if vit_d < 30:
-            t.supplements.append(Item("Vitamin D3 4000 IU/day", "bloods",
-                                      f"25-OH-D {vit_d} ng/mL is below sufficiency (30).", "self"))
+            t.supplements.append(Item("Vitamin D3 ~4000 IU/day (within the EFSA tolerable upper intake of 4000 IU)", "bloods",
+                                      f"25-OH-D {vit_d} ng/mL is below the commonly used sufficiency threshold of 30 ng/mL — informative for a clinician discussion.", "self"))
         elif vit_d < 40:
-            t.supplements.append(Item("Vitamin D3 2000 IU/day", "bloods",
-                                      f"25-OH-D {vit_d} ng/mL is adequate but below the 40–60 optimum.", "self"))
+            t.supplements.append(Item("Vitamin D3 ~2000 IU/day", "bloods",
+                                      f"25-OH-D {vit_d} ng/mL meets the sufficiency floor of 30 ng/mL; some guidelines target 40–60 ng/mL for optimum.", "self"))
     b12 = bloods.get("b12_pg_ml")
     if b12 is not None and b12 < 500:
-        dose = "1000 µg/day" if b12 < 300 else "500 µg 2×/week (or prioritise dietary B12)"
+        dose = "~1000 µg/day (oral methylcobalamin)" if b12 < 300 else "~500 µg/day or dietary emphasis"
         t.supplements.append(Item(f"Vitamin B12 {dose}", "bloods",
-                                  f"B12 {b12} pg/mL is in the lower part of range (optimum >500).", "self"))
+                                  f"B12 {b12} pg/mL is in the lower part of the reference interval; some sources prefer >500 pg/mL.", "self"))
     tg = bloods.get("triglycerides_mg_dl")
     if tg is not None and tg > 150:
-        t.supplements.append(Item("Omega-3 (EPA/DHA) 2 g/day", "bloods",
-                                  f"Triglycerides {tg} mg/dL are elevated.", "self"))
+        t.supplements.append(Item("EPA/DHA ~2 g/day (combined)", "bloods",
+                                  f"Triglycerides {tg} mg/dL are above the ATP III borderline-high threshold of 150 mg/dL. Discuss with a clinician.", "self"))
     if any(g in goals for g in ("lower_blood_pressure", "sleep", "stress")):
-        t.supplements.append(Item("Magnesium glycinate ~300 mg, evening", "goals",
-                                  "Supports sleep / blood-pressure / stress goals.", "self"))
+        t.supplements.append(Item("Magnesium glycinate ~300 mg in the evening (within the IOM supplemental UL of 350 mg)", "goals",
+                                  "May support sleep / blood-pressure / stress goals; evidence quality varies by outcome.", "self"))
 
     # --- Training ----------------------------------------------------------- #
     zone2 = 1 if training_days >= 3 else 0
@@ -238,8 +249,8 @@ def compute_targets(ctx: dict[str, Any], today: Optional[date] = None) -> Target
         t.behavioral.append(Item(f"Nicotine taper this week ({nic}) — step down per cessation plan", "lifestyle",
                                  "Primary modifiable cardiovascular risk factor.", "self"))
     alc = lifestyle.get("alcohol_units_per_week")
-    if alc is not None and alc > 7:
-        t.behavioral.append(Item("Keep alcohol ≤7 units/week", "lifestyle", rung="self"))
+    if alc is not None and alc > 14:
+        t.behavioral.append(Item("Keep alcohol ≤14 units/week (UK/EU low-risk threshold)", "lifestyle", rung="self"))
 
     # --- Data gaps (what would sharpen the plan) --------------------------- #
     if not ctx.get("wearable"):

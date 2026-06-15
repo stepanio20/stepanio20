@@ -35,10 +35,10 @@ def test_katch_mcardle_and_macros():
     assert t.protein_g_per_kg == 1.8 and t.protein_g == 126
     assert t.fat_g == 56
     assert t.carb_g == 377, t.carb_g                            # (2516-(126*4+56*9))/4
-    # vitamin D 28 (<30) => 4000 IU ; B12 410 (<500) => present ; TG 95 => no omega-3
+    # vitamin D 28 (<30) => ~4000 IU ; B12 410 (<500) => present ; TG 95 => no omega-3
     assert _has(t.supplements, "4000 IU")
     assert _has(t.supplements, "B12")
-    assert not _has(t.supplements, "Omega-3")
+    assert not _has(t.supplements, "EPA")
     assert not _has(t.supplements, "Magnesium")                 # no BP/sleep/stress goal
     assert len(t.training) == 2                                 # 2x resistance + 1x zone-2
     assert _has(t.screenings, "ApoB") and _has(t.screenings, "Lp(a)")
@@ -64,6 +64,10 @@ def test_real_profile_branches():
     assert t.protein_g == 119                                    # round(1.8*66.1)
     assert _has(t.supplements, "2000 IU")                       # vit D 35 in [30,40)
     assert _has(t.supplements, "Magnesium")                     # lower_blood_pressure goal
+    # clinical-framing check: thresholds + clinician phrasing present
+    for sup in t.supplements:
+        if "Vitamin D3" in sup.text:
+            assert "sufficiency" in sup.why or "guidelines" in sup.why, sup.why
     assert _has(t.behavioral, "taper")                          # nicotine present
     assert len(t.screenings) >= 3
 
@@ -116,6 +120,33 @@ def test_weekly_plan_renders():
     assert "# Weekly Plan" in md and "Barcelona" in md
     assert "Tests & screening due" in md
     assert "Approve & pay" in md
+
+
+def test_clinical_framing_guardrails():
+    """Information-not-diagnosis framing is non-negotiable. Check copy stays inside
+    OTC dose limits and avoids diagnostic / imperative phrasing."""
+    ctx = {
+        "weight_kg": 80, "lean_mass_kg": 60,
+        "goals": ["lose_fat", "lower_blood_pressure"], "training_days": 4,
+        "bloods": {"vitamin_d_ng_ml": 18, "b12_pg_ml": 250, "triglycerides_mg_dl": 220},
+        "last_tests": {}, "lifestyle": {"alcohol_units_per_week": 18}, "wearable": None, "has_dna": False,
+        "city": "Barcelona",
+    }
+    t = compute_targets(ctx, today=FIXED_TODAY)
+    joined = " | ".join(it.text + " " + it.why for it in
+                        t.supplements + t.screenings + t.behavioral + t.recovery + t.training)
+    # No diagnostic / imperative phrasing
+    forbidden = ["you have", "you should", "is dangerous", "abnormally", "diagnosed"]
+    for phrase in forbidden:
+        assert phrase.lower() not in joined.lower(), f"forbidden phrase: {phrase!r}"
+    # OTC dose caps
+    assert "4000 IU" in joined and "5000" not in joined and "10000" not in joined
+    # B12 1000 µg max OTC (water-soluble, no UL — but stays at standard supp strength)
+    assert "1000 µg" in joined or "500 µg" in joined
+    # Magnesium within UL
+    assert "300 mg" in joined
+    # Threshold provenance is named
+    assert "ATP III" in joined or "EFSA" in joined or "IOM" in joined or "UK/EU" in joined or "guideline" in joined.lower()
 
 
 def test_ics_export():
