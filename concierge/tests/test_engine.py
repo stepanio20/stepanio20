@@ -7,8 +7,9 @@ from __future__ import annotations
 
 from datetime import date
 
+from ..orchestrate import build_ics, build_week, render_markdown
+from ..orchestrate.shopping_list import aggregate, render as render_shopping_list
 from ..recommend import compute_targets
-from ..orchestrate import build_week, render_markdown, build_ics
 
 FIXED_TODAY = date(2026, 6, 15)
 
@@ -147,6 +148,35 @@ def test_clinical_framing_guardrails():
     assert "300 mg" in joined
     # Threshold provenance is named
     assert "ATP III" in joined or "EFSA" in joined or "IOM" in joined or "UK/EU" in joined or "guideline" in joined.lower()
+
+
+def test_shopping_list():
+    ctx = {
+        "weight_kg": 66.1, "lean_mass_kg": 55.26,
+        "goals": ["recomposition"], "training_days": 3,
+        "bloods": {}, "last_tests": {}, "lifestyle": {},
+        "wearable": None, "has_dna": True, "city": "Barcelona",
+    }
+    t = compute_targets(ctx, today=FIXED_TODAY)
+    prefs = {"diet": {"pattern": "omnivore", "meals_per_day": 3}, "budget": {"weekly_eur": 200}}
+    plan = build_week(t, prefs, start=date(2026, 6, 22))
+
+    agg = aggregate(plan)
+    assert "protein" in agg or "produce" in agg, list(agg.keys())
+    items = [r["item"] for cat in agg.values() for r in cat]
+    assert any("Salmon" in i or "Chicken" in i for i in items), items
+    # Quantities must scale by portion factor — should be non-trivial > 50 g of protein
+    protein_items = agg.get("protein", [])
+    assert protein_items, agg.get("protein")
+    has_grams = any("g" in r["qty"] for r in protein_items)
+    assert has_grams, [r["qty"] for r in protein_items]
+
+    md = render_shopping_list(plan)
+    assert md.startswith("# Shopping list")
+    assert "Mercadona" in md and "Carrefour" in md
+    assert "cook-meals" in md.lower()
+    # Order-only meals must NOT contribute ingredients (poke etc.)
+    assert "edamame" not in md.lower(), "order-meal ingredients leaked"
 
 
 def test_ics_export():

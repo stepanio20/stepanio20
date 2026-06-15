@@ -3,7 +3,9 @@
    renders cards with approve / skip toggles + a sticky bottom bar.
    Zero deps; vanilla JS. State is in-memory only (no network, no auth). */
 
-const PLAN_URL = "sample_plan.md";  // swap to a server endpoint or upload UI in V2
+// Prefer a real plan.md if the user dropped one next to the app; otherwise sample.
+// plan.md is gitignored — never committed.
+const PLAN_CANDIDATES = ["plan.md", "sample_plan.md"];
 
 const PRICES = {
   // per-card estimates; venue prices in MD aren't always present, so fall back here
@@ -220,9 +222,22 @@ document.getElementById("approve").addEventListener("click", () => {
   alert(`Mock-approve ${stats.a} cards (~€${stats.cost}).\n\nIn a real deploy this triggers:\n• Whoop/Calendar push\n• booking-API calls (Mindbody etc.) where supported\n• deep-link hand-off (Uber Eats, walk-in labs)\n\nNo network calls happen from this preview.`);
 });
 
-fetch(PLAN_URL).then(r => r.ok ? r.text() : Promise.reject(r.status))
-  .then(md => render(parsePlan(md)))
-  .catch(err => {
-    document.getElementById("root").innerHTML =
-      `<p class="hint">Couldn't load <code>${PLAN_URL}</code> (${err}). On a static host this should just work. Running locally? <code>python3 -m http.server</code> in this folder, then open <code>http://localhost:8000</code>.</p>`;
-  });
+async function loadPlan() {
+  for (const url of PLAN_CANDIDATES) {
+    try {
+      const r = await fetch(url);
+      if (r.ok) {
+        const md = await r.text();
+        render(parsePlan(md));
+        if (url === "plan.md") {
+          document.getElementById("week-label").textContent += " · your plan";
+        }
+        return;
+      }
+    } catch (e) { /* try next */ }
+  }
+  document.getElementById("root").innerHTML =
+    `<p class="hint">Couldn't load <code>plan.md</code> or <code>sample_plan.md</code>. Running locally? <code>python3 -m http.server</code> in this folder, then open <code>http://localhost:8000</code>.</p>`;
+}
+
+loadPlan();
