@@ -1,0 +1,56 @@
+{
+  "version": 1,
+
+  "locale": {
+    "city": "Barcelona",
+    "country": "ES",
+    "neighbourhood": "TBD",
+    "timezone": "Europe/Madrid",
+    "currency": "EUR",
+    "language": "ru"
+  },
+
+  "goals": ["quit_nicotine", "lower_blood_pressure", "recomposition", "longevity"],
+
+  "diet": {
+    "pattern": "mediterranean",
+    "allergies": [],
+    "dislikes": [],
+    "meals_per_day": 3,
+    "cook_vs_order": "mixed",
+    "protein_target_g_per_kg": null
+  },
+
+  "schedule": {
+    "wake_time": "08:00",
+    "sleep_time": "00:00",
+    "training_days_per_week": 3,
+    "preferred_training_times": ["18:00"],
+    "no_go_slots": []
+  },
+
+  "budget": {
+    "weekly_eur": 200,
+    "food_eur": null,
+    "wellness_eur": null,
+    "tests_eur": null
+  },
+
+  "automation": {
+    "auto_book_when_api_available": true,
+    "max_auto_spend_eur_per_week": 0,
+    "weekly_plan_dropday": "mon",
+    "weekly_plan_drophour": 7
+  },
+
+  "integrations": {
+    "whoop": { "connected": false, "last_sync": null },
+    "apple_health": { "connected": false, "last_sync": null },
+    "oura": { "connected": false, "last_sync": null },
+    "google_calendar": { "connected": false, "last_sync": null },
+    "dna_vendor": "23andme",
+    "food_delivery": "none",
+    "wellness_booking": "manual",
+    "lab": "manual"
+  }
+}

@@ -816,7 +816,8 @@ These cost time to figure out and would be lost without writing them down.
 | ✅ DONE | Clinical-WES track (Veronika) | Exome FASTQ → re-align → AGS gene-panel screen → read-based phasing (§8b) |
 | ✅ DONE (MVP) | Healthlake document data lake | `pipeline/healthlake/` — bronze→gold + FHIR; Ruslan only, not yet wired into bundles (§8c) |
 | **Next** | Decide what to upgrade — possible directions: | |
-| candidate | Daily-advice agent that fuses genetics + wearable + blood + CGM + lifestyle over time | The long-term goal; healthlake's canonical observation store is the foundation it needs |
+| 📐 designed | **Concierge product layer** — funnel → weekly plan → book/order/calendar | Full design in [`PRODUCT_ARCHITECTURE.md`](./PRODUCT_ARCHITECTURE.md). Subsumes the two candidates below (daily-advice agent + web frontend) into one product. MVP = Whoop + Google Calendar live, rest as one-tap hand-offs. |
+| candidate | Daily-advice agent that fuses genetics + wearable + blood + CGM + lifestyle over time | The long-term goal; healthlake's canonical observation store is the foundation it needs. Now the Recommendation Engine in `PRODUCT_ARCHITECTURE.md` §7. |
 | candidate | Wire healthlake into the pipeline | Extend it to all users; feed its `silver/` facts into the Phase 6 bundles instead of one-off blood extraction |
 | candidate | WGS upgrade (~€300-500) | Biggest long-term quality lever — replaces imputation for high-impact disease screens |
 | candidate | Formalise the clinical-WES track | If WES recurs, turn the `users/Verona/align/` ad-hoc scripts into a numbered pipeline |
