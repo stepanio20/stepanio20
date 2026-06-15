@@ -63,6 +63,9 @@ users/*/reports/**/*.pdf
 users/*/reports/**/*.png
 users/*/reports/**/*.json
 
+# Concierge PWA — local-only "real plan" copy users may render here
+concierge/app/plan.md
+
 # === Reference data (large, public, re-downloadable) ===
 shared/pgs_cache/*
 shared/_1kg_cache/

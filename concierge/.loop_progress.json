@@ -1,5 +1,6 @@
 {
-  "iteration": 4,
-  "completed": ["barcelona_venue_catalog", "wire_catalog_into_plan", "restaurant_suggestions_per_meal", "ics_calendar_export"],
-  "in_progress": []
+  "iteration": 5,
+  "completed": ["barcelona_venue_catalog", "wire_catalog_into_plan", "restaurant_suggestions_per_meal", "ics_calendar_export", "pwa_shell"],
+  "deployed_url": null,
+  "deploy_notes": "Vercel CLI requires interactive login that the build sandbox cannot reach (Host blocked). One-command deploy lives in concierge/app/README.md — run `npx vercel deploy --prod` locally."
 }
