@@ -21,7 +21,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 from .recommend import compute_targets
-from .orchestrate import build_week, render_markdown
+from .orchestrate import build_week, render_markdown, write_ics
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -99,7 +99,10 @@ def main(argv: list[str] | None = None) -> int:
         out = Path(args.out) if args.out else ROOT / "users" / args.user / "reports" / "weekly_plan.md"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(md)
+        ics_path = ROOT / "users" / args.user / "exports" / f"week_{start.isoformat()}.ics"
+        write_ics(plan, ics_path)
         print(f"Wrote {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
+        print(f"Wrote {ics_path.relative_to(ROOT)} (drag-and-drop into Google Calendar)")
         print(f"  graph source : {ctx['_graph_source']}")
         print(f"  energy       : {targets.calorie_target_kcal} kcal/day ({targets.calorie_strategy})")
         print(f"  protein      : {targets.protein_g} g  · BMR {targets.bmr_kcal} ({targets.bmr_method})")

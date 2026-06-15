@@ -8,7 +8,7 @@ from __future__ import annotations
 from datetime import date
 
 from ..recommend import compute_targets
-from ..orchestrate import build_week, render_markdown
+from ..orchestrate import build_week, render_markdown, build_ics
 
 FIXED_TODAY = date(2026, 6, 15)
 
@@ -116,6 +116,37 @@ def test_weekly_plan_renders():
     assert "# Weekly Plan" in md and "Barcelona" in md
     assert "Tests & screening due" in md
     assert "Approve & pay" in md
+
+
+def test_ics_export():
+    ctx = {
+        "weight_kg": 66.1, "lean_mass_kg": 55.26,
+        "goals": ["lower_blood_pressure"], "training_days": 3,
+        "bloods": {}, "last_tests": {"lipid_panel": "2024-01-01"},
+        "lifestyle": {"bp_systolic": None}, "wearable": None, "has_dna": True,
+        "city": "Barcelona", "wellness_booking": "manual",
+    }
+    t = compute_targets(ctx, today=FIXED_TODAY)
+    prefs = {"diet": {"pattern": "omnivore", "meals_per_day": 3}, "budget": {"weekly_eur": 200}}
+    plan = build_week(t, prefs, start=date(2026, 6, 22))
+    ics = build_ics(plan)
+
+    # RFC 5545 structural requirements
+    assert ics.startswith("BEGIN:VCALENDAR"), ics[:50]
+    assert ics.rstrip().endswith("END:VCALENDAR"), ics[-50:]
+    assert "VERSION:2.0" in ics
+    assert "X-WR-TIMEZONE:Europe/Madrid" in ics
+    assert "\r\n" in ics, "must use CRLF line endings"
+
+    # Counts: ≥3 sessions, 1 meal-prep, ≥3 screening reminders
+    n_events = ics.count("BEGIN:VEVENT")
+    assert n_events >= 7, n_events
+    assert "Meal prep & weekly order" in ics
+    assert "Sauna" in ics
+    assert "ILO STUDIOS" in ics
+    assert "Echevarne" in ics or "SYNLAB" in ics
+    # Information-not-diagnosis framing must be present
+    assert "Information only" in ics or "information only" in ics
 
 
 def main() -> int:

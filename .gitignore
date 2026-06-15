@@ -44,6 +44,9 @@ users/*/bloods/*
 users/*/wearables/apple_export/*
 users/*/wearables/parsed/*
 
+# Concierge calendar exports (.ics — contain schedule + venue info)
+users/*/exports/*
+
 # Healthlake (contains personal medical text)
 users/*/healthlake/manifest/*
 users/*/healthlake/bronze/*
