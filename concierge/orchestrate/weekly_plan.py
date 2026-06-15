@@ -9,6 +9,7 @@ from __future__ import annotations
 from datetime import date, timedelta
 from typing import Any
 
+from ..data import venues_for_dish
 from ..recommend import meals as meal_lib
 
 _WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -46,13 +47,19 @@ def _distribute_sessions(targets, n_days: int = 7) -> dict[int, list[dict[str, s
         plan[5].append({"text": "Zone-2 cardio 40–50 min", "rung": "self"})
 
     # Recovery: sauna 2× on lower-load days, massage 1× weekend.
+    def _venue_meta(it) -> dict[str, str]:
+        return {"venue_name": getattr(it, "venue_name", ""),
+                "venue_url": getattr(it, "venue_url", ""),
+                "venue_address": getattr(it, "venue_address", "")}
+
     saunas = [it for it in targets.recovery if "sauna" in it.text.lower()]
     if saunas:
-        plan[1].append({"text": "Sauna session", "rung": saunas[0].rung})
-        plan[3].append({"text": "Sauna session", "rung": saunas[0].rung})
+        s = saunas[0]
+        plan[1].append({"text": "Sauna session", "rung": s.rung, **_venue_meta(s)})
+        plan[3].append({"text": "Sauna session", "rung": s.rung, **_venue_meta(s)})
     massage = next((it for it in targets.recovery if "massage" in it.text.lower()), None)
     if massage:
-        plan[6].append({"text": "Massage", "rung": massage.rung})
+        plan[6].append({"text": "Massage", "rung": massage.rung, **_venue_meta(massage)})
 
     return plan
 
@@ -81,13 +88,21 @@ def build_week(targets, prefs: dict[str, Any], start: date) -> dict[str, Any]:
 # --------------------------------------------------------------------------- #
 # Rendering
 # --------------------------------------------------------------------------- #
+def _venue_md(it) -> str:
+    if not getattr(it, "venue_name", ""):
+        return ""
+    if it.venue_url:
+        return f"  \n  📍 [{it.venue_name}]({it.venue_url}) · _{it.venue_address}_"
+    return f"  \n  📍 {it.venue_name} · _{it.venue_address}_"
+
+
 def _items_md(items, bullet="-") -> str:
     out = []
     for it in items:
         rung = _RUNG_LABEL.get(it.rung, it.rung)
         tag = f" _({rung})_" if rung and rung != "self" else ""
         why = f" — {it.why}" if it.why else ""
-        out.append(f"{bullet} {it.text}{tag}{why}")
+        out.append(f"{bullet} {it.text}{tag}{why}{_venue_md(it)}")
     return "\n".join(out) if out else "_(none)_"
 
 
@@ -95,6 +110,7 @@ def render_markdown(plan: dict[str, Any], ctx: dict[str, Any]) -> str:
     t = plan["targets"]
     prefs = plan["prefs"]
     city = ctx.get("city", "")
+    city_key = city.lower()
     L: list[str] = []
 
     L.append(f"# Weekly Plan — week of {plan['start']}")
@@ -138,11 +154,18 @@ def render_markdown(plan: dict[str, Any], ctx: dict[str, Any]) -> str:
             rung = _RUNG_LABEL.get(m["rung"], m["rung"])
             L.append(f"- _{m['slot']}_ — {m['name']} "
                      f"(~{m['kcal']} kcal, P{m['p']}/C{m['c']}/F{m['f']}) · {rung}")
+            if m["rung"] == "order" and city_key:
+                for v in venues_for_dish(m["name"], city_key, limit=2):
+                    L.append(f"  - 🔗 [{v['name']}]({v.get('booking_url') or v['url']}) "
+                             f"· _{v['neighbourhood']}_ · ~€{v.get('price_est_eur', {}).get('average_main', '')}")
         if day["sessions"]:
             for s in day["sessions"]:
                 rung = _RUNG_LABEL.get(s["rung"], s["rung"])
                 tag = f" · {rung}" if rung and rung != "self" else ""
-                L.append(f"- 🏋️ {s['text']}{tag}")
+                line = f"- 🏋️ {s['text']}{tag}"
+                if s.get("venue_name"):
+                    line += f"  \n  📍 [{s['venue_name']}]({s['venue_url']}) · _{s['venue_address']}_"
+                L.append(line)
         L.append("")
 
     # ---- screenings (Ornament-style, non-blocking) ----

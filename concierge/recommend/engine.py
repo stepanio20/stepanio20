@@ -14,6 +14,8 @@ from dataclasses import dataclass, field, asdict
 from datetime import date
 from typing import Any, Optional
 
+from ..data import load_venues, venue_for_service, wellness_venue
+
 
 # --------------------------------------------------------------------------- #
 # Output types
@@ -25,6 +27,9 @@ class Item:
     source: str = "profile"          # profile | bloods | wearable | goals | lifestyle | gaps
     why: str = ""
     rung: str = ""                   # cook | order | book_api | book_handoff | self | "" (n/a)
+    venue_name: str = ""             # display name from the catalog
+    venue_url: str = ""              # one-tap deep link (book/order/info)
+    venue_address: str = ""          # short address for the card
 
 
 @dataclass
@@ -178,30 +183,54 @@ def compute_targets(ctx: dict[str, Any], today: Optional[date] = None) -> Target
     wants_recovery = any(g in goals for g in ("lower_blood_pressure", "stress", "longevity", "sleep"))
     wellness_budget = ctx.get("wellness_eur")
     booking_rung = "book_api" if ctx.get("wellness_booking") in ("mindbody", "fresha", "vagaro") else "book_handoff"
+    city = (ctx.get("city") or "").lower()
     if wants_recovery and (wellness_budget is None or wellness_budget > 0):
-        t.recovery.append(Item("2× sauna session", "goals",
-                               "Recovery + cardiovascular/relaxation benefit.", booking_rung))
-        t.recovery.append(Item("1× massage", "goals", "Stress + recovery.", booking_rung))
+        sauna = wellness_venue("sauna", city) if city else None
+        massage = wellness_venue("massage", city) if city else None
+        sauna_item = Item("2× sauna session", "goals",
+                          "Recovery + cardiovascular/relaxation benefit.", booking_rung)
+        if sauna:
+            sauna_item.venue_name = sauna["name"]
+            sauna_item.venue_url = sauna.get("booking_url") or sauna["url"]
+            sauna_item.venue_address = sauna["address"]
+        t.recovery.append(sauna_item)
+        massage_item = Item("1× massage", "goals", "Stress + recovery.", booking_rung)
+        if massage:
+            massage_item.venue_name = massage["name"]
+            massage_item.venue_url = massage.get("booking_url") or massage["url"]
+            massage_item.venue_address = massage["address"]
+        t.recovery.append(massage_item)
     t.recovery.append(Item("Lights-down 60 min before target sleep time", "goals", rung="self"))
 
     # --- Screenings (Ornament-style; non-blocking) ------------------------- #
+    def _attach_lab(item: Item, service_key: str) -> Item:
+        v = venue_for_service(service_key, city) if city else None
+        if v:
+            item.venue_name = v["name"]
+            item.venue_url = v.get("booking_url") or v["url"]
+            item.venue_address = v["address"]
+        return item
+
     lipid_date = _parse_date(last_tests.get("lipid_panel"))
     if lipid_date is None:
-        t.screenings.append(Item("Lipid panel (LDL/HDL/TG) — no prior on file", "gaps",
-                                 "Establish a baseline.", "book_handoff"))
+        t.screenings.append(_attach_lab(Item("Lipid panel (LDL/HDL/TG) — no prior on file", "gaps",
+                                             "Establish a baseline.", "book_handoff"), "lipid_panel"))
     elif _months_between(lipid_date, today) >= 12:
         m = _months_between(lipid_date, today)
-        t.screenings.append(Item("Repeat lipid panel + liver/metabolic basics", "bloods",
-                                 f"Last panel was {m} months ago (>12).", "book_handoff"))
+        t.screenings.append(_attach_lab(Item("Repeat lipid panel + liver/metabolic basics", "bloods",
+                                             f"Last panel was {m} months ago (>12).", "book_handoff"), "lipid_panel"))
     if "apob_mg_dl" not in bloods:
-        t.screenings.append(Item("Add ApoB to next lipid draw (~€30)", "gaps",
-                                 "ApoB is the better long-term cardiovascular risk metric than calculated LDL.", "book_handoff"))
+        t.screenings.append(_attach_lab(Item("Add ApoB to next lipid draw (~€20–30)", "gaps",
+                                             "ApoB measures the count of atherogenic lipoprotein particles; "
+                                             "informative for long-term cardiovascular risk discussions with a clinician.",
+                                             "book_handoff"), "apob"))
     if "lpa_nmol_l" not in bloods:
-        t.screenings.append(Item("Lp(a) — once in a lifetime", "gaps",
-                                 "Genetically fixed; a single measurement settles a major risk modifier.", "book_handoff"))
+        t.screenings.append(_attach_lab(Item("Lp(a) — once in a lifetime", "gaps",
+                                             "Lp(a) is genetically determined; a single measurement is informative for risk discussions.",
+                                             "book_handoff"), "lpa"))
     if lifestyle.get("bp_systolic") is None:
         t.screenings.append(Item("Home blood pressure: 2×/day for 7 days, then average", "gaps",
-                                 "BP is currently unknown; one reading is not a diagnosis.", "self"))
+                                 "BP is currently unknown; a single reading is not a diagnosis.", "self"))
 
     # --- Behavioral --------------------------------------------------------- #
     nic = lifestyle.get("nicotine")

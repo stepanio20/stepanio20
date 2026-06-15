@@ -1,5 +1,5 @@
 {
-  "iteration": 2,
-  "completed": ["barcelona_venue_catalog"],
+  "iteration": 3,
+  "completed": ["barcelona_venue_catalog", "wire_catalog_into_plan", "restaurant_suggestions_per_meal"],
   "in_progress": []
 }

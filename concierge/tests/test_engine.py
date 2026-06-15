@@ -81,6 +81,22 @@ def test_lose_fat_path():
     assert _has(t.data_gaps, "23andMe")                          # has_dna False
 
 
+def test_barcelona_venues_attached():
+    ctx = {
+        "weight_kg": 66.1, "lean_mass_kg": 55.26,
+        "goals": ["lower_blood_pressure", "longevity"], "training_days": 3,
+        "bloods": {}, "last_tests": {"lipid_panel": "2024-01-01"},
+        "lifestyle": {"bp_systolic": None}, "wearable": None, "has_dna": True,
+        "city": "Barcelona", "wellness_booking": "manual",
+    }
+    t = compute_targets(ctx, today=FIXED_TODAY)
+    lipid = next(it for it in t.screenings if "lipid" in it.text.lower())
+    assert lipid.venue_name, "lipid panel should carry a Barcelona venue"
+    assert lipid.venue_url.startswith("http"), lipid.venue_url
+    sauna = next(it for it in t.recovery if "sauna" in it.text.lower())
+    assert "ILO" in sauna.venue_name, sauna.venue_name
+
+
 def test_weekly_plan_renders():
     ctx = {
         "weight_kg": 66.1, "lean_mass_kg": 55.26, "goals": ["recomposition", "lower_blood_pressure"],
