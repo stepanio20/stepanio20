@@ -118,6 +118,11 @@ def compute_targets(ctx: dict[str, Any], today: Optional[date] = None) -> Target
     bloods = ctx.get("bloods", {}) or {}
     last_tests = ctx.get("last_tests", {}) or {}
     lifestyle = ctx.get("lifestyle", {}) or {}
+    medications = [m for m in (ctx.get("medications") or []) if isinstance(m, dict)]
+    chronic = [c for c in (ctx.get("chronic_conditions") or []) if isinstance(c, dict)]
+    allergies = {a.lower() for a in (ctx.get("allergies") or [])}
+    fam_hx = ctx.get("family_history") or {}
+    wearable = ctx.get("wearable") or {}
 
     # --- BMR ---------------------------------------------------------------- #
     if lean:
@@ -180,15 +185,54 @@ def compute_targets(ctx: dict[str, Any], today: Optional[date] = None) -> Target
         t.supplements.append(Item("Magnesium glycinate ~300 mg in the evening (within the IOM supplemental UL of 350 mg)", "goals",
                                   "May support sleep / blood-pressure / stress goals; evidence quality varies by outcome.", "self"))
 
+    # --- Medication / allergy / chronic-condition interactions ------------ #
+    med_names = " ".join((m.get("drug") or "").lower() for m in medications)
+    if any(k in med_names for k in ("warfarin", "apixaban", "rivaroxaban", "dabigatran", "acenocoumarol")):
+        for sup in t.supplements:
+            if "EPA" in sup.text or "Omega" in sup.text:
+                sup.why += " Note: high-dose fish oil may interact with anticoagulants — discuss with your clinician before starting."
+    if any(k in med_names for k in ("statin", "atorvastatin", "rosuvastatin", "simvastatin", "pravastatin")):
+        t.supplements.append(Item("Coenzyme Q10 100–200 mg/day (optional)", "lifestyle",
+                                  "Some patients on statins report myalgia improvement with CoQ10. Evidence is mixed; discuss with your clinician.", "self"))
+    if "fish" in allergies or "seafood" in allergies:
+        t.supplements = [s for s in t.supplements if "EPA" not in s.text]
+        t.supplements.append(Item("Algae-based DHA/EPA (instead of fish-oil)", "lifestyle",
+                                  "Fish allergy on file — algae oil is the vegan EPA/DHA alternative.", "self"))
+    if any(c.get("condition", "").lower() in ("hypothyroidism",) for c in chronic):
+        t.notes.append("Hypothyroidism noted — confirm any iodine-rich supplements with your endocrinologist; soy and brassicas can affect levothyroxine absorption when taken together.")
+    if any(c.get("condition", "").lower() in ("ckd", "chronic kidney disease") for c in chronic):
+        # Re-cap protein for safety; CKD nutrition is patient-specific.
+        if t.protein_g_per_kg > 1.0:
+            t.protein_g_per_kg = 1.0
+            t.protein_g = round(1.0 * weight)
+            t.notes.append("CKD on file — protein target reduced to 1.0 g/kg as a safety default. Your nephrologist should set the actual target.")
+
     # --- Training ----------------------------------------------------------- #
-    zone2 = 1 if training_days >= 3 else 0
-    resistance = max(0, training_days - zone2)
+    # Optional recovery-aware tweak: if Whoop reports low average recovery,
+    # quietly drop one resistance day.
+    rec_avg = wearable.get("recovery_avg") if isinstance(wearable, dict) else None
+    eff_training_days = training_days
+    if rec_avg is not None and rec_avg < 40 and training_days > 2:
+        eff_training_days = training_days - 1
+
+    zone2 = 1 if eff_training_days >= 3 else 0
+    resistance = max(0, eff_training_days - zone2)
     if resistance:
         t.training.append(Item(f"{resistance}× resistance (compound-focused)", "goals", rung="self"))
     if zone2:
         t.training.append(Item(f"{zone2}× Zone-2 cardio, 40–50 min", "goals", rung="self"))
-    if ctx.get("wearable"):
-        t.training.append(Item("Deload any day recovery/HRV trends low two days running", "wearable", rung="self"))
+    if wearable:
+        low_days = wearable.get("recovery_low_days")
+        hrv_ms = wearable.get("hrv_rmssd_avg_ms")
+        if rec_avg is None:
+            t.training.append(Item("Deload any day recovery/HRV trends low two days running", "wearable", rung="self"))
+        elif rec_avg < 40:
+            t.training.append(Item(f"Recovery averaged {rec_avg}/100 — dropped one session this week", "wearable",
+                                   "Recovery scores in the red/yellow band suggest cumulative load.", "self"))
+        elif low_days and low_days >= 3:
+            t.training.append(Item(f"{low_days} low-recovery days in the last window — keep an eye on sleep + caffeine timing", "wearable", rung="self"))
+        else:
+            t.training.append(Item(f"Recovery trend OK (avg {rec_avg}/100, HRV {hrv_ms} ms)", "wearable", rung="self"))
 
     # --- Recovery / therapy ------------------------------------------------- #
     wants_recovery = any(g in goals for g in ("lower_blood_pressure", "stress", "longevity", "sleep"))

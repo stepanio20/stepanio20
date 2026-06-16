@@ -179,6 +179,47 @@ def test_shopping_list():
     assert "edamame" not in md.lower(), "order-meal ingredients leaked"
 
 
+def test_profile_aware_interactions():
+    """profile.json medications + chronic conditions + allergies adjust the plan."""
+    ctx = {
+        "weight_kg": 80, "goals": ["recomposition"], "training_days": 3,
+        "bloods": {"triglycerides_mg_dl": 200}, "last_tests": {}, "lifestyle": {},
+        "wearable": None, "has_dna": True, "city": "Barcelona",
+        "medications": [
+            {"drug": "atorvastatin 20 mg", "indication": "lipid"},
+            {"drug": "apixaban", "indication": "AF"},
+        ],
+        "chronic_conditions": [],
+        "allergies": ["fish"],
+    }
+    t = compute_targets(ctx, today=FIXED_TODAY)
+    # CoQ10 added by statin
+    assert _has(t.supplements, "Coenzyme Q10"), [s.text for s in t.supplements]
+    # Fish allergy → algae alternative, no fish-oil EPA recommendation
+    assert any("Algae" in s.text for s in t.supplements)
+    assert not any("EPA" in s.text and "Algae" not in s.text for s in t.supplements)
+    # Anticoagulant caveat travels with omega text if present (but here EPA was swapped)
+    # CKD safety cap
+    ctx2 = dict(ctx, chronic_conditions=[{"condition": "CKD", "status": "stage 3"}],
+                medications=[], allergies=[])
+    t2 = compute_targets(ctx2, today=FIXED_TODAY)
+    assert t2.protein_g_per_kg == 1.0
+    assert any("CKD" in n for n in t2.notes)
+
+
+def test_wearable_summary_drops_session():
+    """Recovery_avg < 40 from a Whoop sync drops one resistance day."""
+    base = {"weight_kg": 70, "lean_mass_kg": 55, "goals": ["recomposition"],
+            "training_days": 4, "bloods": {}, "last_tests": {}, "lifestyle": {},
+            "has_dna": True, "city": "Barcelona"}
+    t_high = compute_targets(dict(base, wearable={"recovery_avg": 65.0, "hrv_rmssd_avg_ms": 90.0, "recovery_low_days": 0}), today=FIXED_TODAY)
+    t_low = compute_targets(dict(base, wearable={"recovery_avg": 32.0, "hrv_rmssd_avg_ms": 40.0, "recovery_low_days": 5}), today=FIXED_TODAY)
+    res_high = sum(int(it.text.split("×")[0]) for it in t_high.training if "resistance" in it.text)
+    res_low = sum(int(it.text.split("×")[0]) for it in t_low.training if "resistance" in it.text)
+    assert res_low == res_high - 1, (res_high, res_low)
+    assert any("dropped one session" in it.text for it in t_low.training)
+
+
 def test_ics_export():
     ctx = {
         "weight_kg": 66.1, "lean_mass_kg": 55.26,

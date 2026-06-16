@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -66,6 +67,10 @@ def assemble_context(user: str) -> tuple[dict, dict]:
         "last_tests": graph.get("last_tests", {}),
         "lifestyle": graph.get("lifestyle", {}),
         "wearable": graph.get("wearable"),
+        "medications": profile.get("current_medications", []),
+        "chronic_conditions": profile.get("chronic_conditions", []),
+        "allergies": diet.get("allergies", []),
+        "family_history": profile.get("family_history", {}),
         "wellness_eur": budget.get("wellness_eur"),
         "wellness_booking": integ.get("wellness_booking"),
         "has_dna": integ.get("dna_vendor", "none") != "none",
@@ -76,11 +81,62 @@ def assemble_context(user: str) -> tuple[dict, dict]:
     return ctx, prefs
 
 
+def _push_to_gcal(plan: dict, ctx: dict) -> str:
+    """Push the .ics plan to Google Calendar via the connector. Returns calendar id or '' on skip."""
+    try:
+        from .connectors.gcal import GCalClient
+        from .orchestrate.ical import _slot_time  # noqa
+    except Exception as e:  # noqa: BLE001
+        return f"_(GCal push skipped — connector not importable: {e})_"
+    try:
+        c = GCalClient.from_env()
+    except RuntimeError as e:
+        return f"_(GCal push skipped — {e})_"
+    cal_id = c.find_or_create_calendar(os.environ.get("GCAL_CALENDAR_NAME", "Concierge"))
+    inserted = 0
+    targets = plan["targets"]
+    from datetime import date as _date
+    from .orchestrate.ical import _slot_time as slot_time
+    start = _date.fromisoformat(plan["start"])
+    for day in plan["days"]:
+        d = _date.fromisoformat(day["date"])
+        for s in day.get("sessions", []):
+            title = s["text"]
+            kind = ("resistance" if "resistance" in title.lower() else
+                    "zone-2" if "zone-2" in title.lower() else
+                    "sauna" if "sauna" in title.lower() else
+                    "massage" if "massage" in title.lower() else "resistance")
+            dt_s, dt_e = slot_time(d, kind)
+            ev = {
+                "summary": title,
+                "description": "Information only — not medical advice.\n" + (s.get("venue_url") or ""),
+                "location": s.get("venue_address", ""),
+                "start": {"dateTime": dt_s.isoformat(), "timeZone": "Europe/Madrid"},
+                "end":   {"dateTime": dt_e.isoformat(), "timeZone": "Europe/Madrid"},
+            }
+            c.insert_event(cal_id, ev)
+            inserted += 1
+    for it in targets.screenings:
+        dt_s, dt_e = slot_time(start, "screening")
+        ev = {
+            "summary": f"Screening reminder — {it.text[:60]}",
+            "description": (it.why or "") + ("\n" + (getattr(it, "venue_url", "") or "")),
+            "location": getattr(it, "venue_address", "") or "",
+            "start": {"dateTime": dt_s.isoformat(), "timeZone": "Europe/Madrid"},
+            "end":   {"dateTime": dt_e.isoformat(), "timeZone": "Europe/Madrid"},
+        }
+        c.insert_event(cal_id, ev)
+        inserted += 1
+    return f"Pushed {inserted} events to Google Calendar (id={cal_id})"
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Generate a weekly plan from a user's Health Graph.")
     ap.add_argument("--user", default="me")
     ap.add_argument("--start", help="YYYY-MM-DD (default: next Monday)")
     ap.add_argument("--out", help="output path, or '-' for stdout (default: users/<user>/reports/weekly_plan.md)")
+    ap.add_argument("--push-calendar", action="store_true",
+                    help="Push sessions + screenings to Google Calendar via the gcal connector.")
     args = ap.parse_args(argv)
 
     ctx, prefs = assemble_context(args.user)
@@ -111,6 +167,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  protein      : {targets.protein_g} g  · BMR {targets.bmr_kcal} ({targets.bmr_method})")
         print(f"  screenings   : {len(targets.screenings)} · data gaps: {len(targets.data_gaps)}")
         print("  → render to PDF with: pipeline/08_build_pdfs.sh (reuses the Phase-8 stylesheet)")
+        if args.push_calendar:
+            print("  → " + _push_to_gcal(plan, ctx))
     return 0
 
 

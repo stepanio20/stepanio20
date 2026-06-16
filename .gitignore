@@ -1,6 +1,7 @@
 # Secrets
 .env
 .env.*
+secrets.env
 *.password
 .topmed_password
 **/secrets/
