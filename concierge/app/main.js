@@ -240,4 +240,5 @@ async function loadPlan() {
     `<p class="hint">Couldn't load <code>plan.md</code> or <code>sample_plan.md</code>. Running locally? <code>python3 -m http.server</code> in this folder, then open <code>http://localhost:8000</code>.</p>`;
 }
 
-loadPlan();
+// Funnel calls us once the user has paid / skipped onboarding.
+window.__startDashboard = loadPlan;

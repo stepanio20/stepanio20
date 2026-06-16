@@ -35,7 +35,20 @@ $EDITOR secrets.env
 
 ## 1. Whoop — recovery, sleep, strain, HRV, VO2max
 
-**~5 minutes.**
+### From the PWA on your phone (no laptop needed)
+
+Open the app. Step 2 of the funnel shows a **Whoop** tile — tap it to open the
+Connect modal. Three options inside:
+
+- **A · Simulate** — marks you connected without real data. Useful to demo the funnel.
+- **B · Paste access token** — go to <https://developer.whoop.com/dashboard> on the same phone, open your app's settings, copy the **Test Token**, paste it here. Token is stored in your browser's localStorage (this device only) — never sent anywhere.
+- **C · Upload Whoop snapshot JSON** — if you've already run the Python sync on a laptop (next section), AirDrop / iCloud Drive / email the resulting `whoop_latest.json` to your phone, then tap "Choose JSON file" in the modal. The app parses the summary locally and uses it for the plan.
+
+The PWA can't currently call the Whoop API directly from the browser (CORS),
+so option B is "credential saved, ready for backend use" — until a backend
+lands, **option C is the path that actually feeds data into the plan**.
+
+### From a laptop (full automated sync, ~5 minutes)
 
 1. Open <https://developer.whoop.com/dashboard>. Sign in with your normal Whoop account.
 2. Click **Create app**.

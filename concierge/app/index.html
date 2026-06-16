@@ -12,14 +12,20 @@
 <body>
 <header>
   <div class="brand">Concierge<span class="dot">·</span><small>Barcelona</small></div>
-  <div class="week" id="week-label">Loading…</div>
+  <div class="week" id="week-label"></div>
 </header>
 
-<main id="root">
+<!-- Onboarding funnel — first-visit (or "Start over" from settings). -->
+<section id="funnel" hidden>
+  <div id="funnel-inner"></div>
+</section>
+
+<!-- Dashboard — only shown after funnel is complete (or skipped). -->
+<main id="root" hidden>
   <p class="hint">Loading your week. If nothing appears, your browser blocked <code>fetch()</code> from <code>file://</code> — run <code>python3 -m http.server</code> in this folder and open <code>http://localhost:8000</code>.</p>
 </main>
 
-<footer id="bar">
+<footer id="bar" hidden>
   <div class="totals">
     <div><strong id="approved-n">0</strong><span> approved</span></div>
     <div><span id="skipped-n">0</span><span> skipped</span></div>
@@ -29,6 +35,7 @@
   <p class="legal">Information only. Money + medical actions always require your confirmation. Nothing is ordered or charged from this preview.</p>
 </footer>
 
+<script src="funnel.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
