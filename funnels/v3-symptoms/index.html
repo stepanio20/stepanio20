@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your DNA might explain your symptoms — Indaga</title>
+<meta name="description" content="Bloated, tired, or stuck? 40% of 'mystery' symptoms trace to genetics your 23andMe file already contains.">
+<link rel="stylesheet" href="../shared/quiz.css">
+</head>
+<body data-variant="v3-symptoms" style="--accent:#ff8f6b;--accent-2:#ffd166">
+<div id="app"></div>
+<script>
+window.ANALYTICS = { provider: 'console' };
+window.FUNNEL = {
+  variant: 'v3-symptoms', brand: 'Indaga',
+  hero: {
+    eyebrow: 'Powered by your DNA',
+    headline: 'Bloated, tired, or stuck?<br><span class="grad">Your DNA might explain why.</span>',
+    sub: 'Many everyday symptoms trace back to genetics your 23andMe or MyHeritage file already contains. Find your matches in 3 minutes.',
+    stats: [ {n:'40+', l:'trait links'}, {n:'700k', l:'markers'}, {n:'3 min', l:'to answers'} ],
+    trust: ['🔒 DNA never sold', '🧬 Uses your existing test', '🩺 Information, not diagnosis'],
+    cta: 'Find my matches →'
+  },
+  questions: [
+    { id:'symptoms', q:'Which of these sound like you?', hint:'Pick all that apply — we’ll map them to your genes.', type:'multi',
+      options:[ {emoji:'🤰',label:'Bloated after meals',value:'bloat'}, {emoji:'📉',label:'Afternoon energy crashes',value:'crash'},
+                {emoji:'🔥',label:'Can’t lose fat easily',value:'fat'}, {emoji:'😖',label:'Poor sleep',value:'sleep'},
+                {emoji:'😬',label:'Jittery / anxious on coffee',value:'jitter'}, {emoji:'🌫️',label:'Brain fog',value:'fog'} ] },
+    { id:'dairy', q:'How does dairy sit with you?', type:'single',
+      options:[ {emoji:'👍',label:'Totally fine',value:'fine'}, {emoji:'😕',label:'Sometimes bloated',value:'sometimes'}, {emoji:'🚫',label:'I avoid it',value:'avoid'} ] },
+    { id:'test', q:'Which DNA test do you have?', hint:'We read the raw file.', type:'single',
+      options:[ {emoji:'🧬',label:'23andMe',value:'23andme'}, {emoji:'🌳',label:'MyHeritage',value:'myheritage'}, {emoji:'🔍',label:'AncestryDNA',value:'ancestry'}, {emoji:'🤔',label:'None yet',value:'none'} ] },
+    { id:'bloods', q:'Recent blood test?', type:'single',
+      options:[ {emoji:'✅',label:'Yes, have the file',value:'have'}, {emoji:'🩸',label:'Yes, no file',value:'nofile'}, {emoji:'❌',label:'No',value:'no'} ] },
+    { id:'age', q:'Your age range?', type:'single',
+      options:[ {label:'18–29',value:'18-29'}, {label:'30–39',value:'30-39'}, {label:'40–49',value:'40-49'}, {label:'50+',value:'50+'} ] }
+  ],
+  analyzing: { title:'Matching symptoms to genes…', lines:[
+    'Reading your genetic markers…', 'Mapping your symptoms to variants…', 'Checking lactose, caffeine & folate genes…', 'Ranking your strongest matches…', 'Preparing your report…' ] },
+  result: {
+    eyebrow: 'Your matches', headline: 'We found <span class="grad">likely genetic explanations.</span>',
+    sub: 'Based on your symptoms and DNA. Your full report confirms each one against your actual genotype.',
+    cards: [
+      { ic:'🥛', title:'Bloating ↔ Lactose gene', tag:'strong match', locked:true, teaser:'Your MCM6/LCT variant may mean you don’t break down lactose well as an adult — a top cause of exactly this.' },
+      { ic:'😬', title:'Coffee jitters ↔ Caffeine genes', locked:true, teaser:'Two genes (CYP1A2 + ADORA2A) decide your caffeine anxiety. Yours suggest…' },
+      { ic:'🌫️', title:'Brain fog ↔ Folate (MTHFR)', locked:true, teaser:'Your MTHFR status affects folate — relevant to energy and focus. Yours is…' },
+      { ic:'✅', title:'+ more matches', locked:false, teaser:'Every symptom you picked, cross-checked against your genome.' }
+    ],
+    cta: 'Confirm my matches →'
+  },
+  lead: { headline:'Where do we send your matches?', sub:'Your symptom-to-gene report, confirmed against your DNA.', placeholder:'you@email.com', cta:'Continue →' },
+  offer: {
+    eyebrow:'Founding-member price', headline:'Confirm what your DNA <span class="grad">says about your symptoms</span>',
+    sub:'Each match verified against your real genotype — plus what to actually do about it.',
+    priceOld:'€19', price:'€9', per:'/mo', guarantee:'7-day money-back guarantee',
+    perks:['Every symptom mapped to your genotype','Clear next steps (diet, tests, supplements)','Add bloods to confirm the physical picture','Honest: it tells you when DNA can’t explain it','Cites the research behind each link'],
+    sources:['🧬 23andMe ✓','🌳 MyHeritage ✓'],
+    cta:'Unlock my matches →', uploadCta:'I have my DNA file ready ›', plan:'plus'
+  }
+};
+</script>
+<script src="../shared/analytics.js"></script>
+<script src="../shared/quiz.js"></script>
+</body>
+</html>

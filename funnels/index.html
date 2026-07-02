@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Indaga — funnel variants</title>
+<link rel="stylesheet" href="shared/quiz.css">
+<style>
+  #app { justify-content: flex-start; padding-top: 8px; }
+  .vlist { display: flex; flex-direction: column; gap: 12px; margin: 18px 0 30px; }
+  .vitem { display: block; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px; color: var(--fg); }
+  .vitem b { font-size: 16px; } .vitem .a { color: var(--fg-dim); font-size: 13.5px; margin-top: 4px; }
+  .vitem .go { float: right; color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body data-variant="hub" style="--accent:#5eead4;--accent-2:#6aa8ff">
+<div id="app">
+  <div class="topbar"><div class="brand">Indaga<span class="dot">.</span></div></div>
+  <div class="screen" style="justify-content:flex-start">
+    <span class="eyebrow">Internal · 5 funnel variants</span>
+    <h1 class="hero" style="font-size:30px">Pick a variant to <span class="grad">preview & test.</span></h1>
+    <p class="sub">All target existing 23andMe / MyHeritage owners. Same engine, different angle & look. Clean links for Instagram: <b>/1</b> … <b>/5</b>.</p>
+    <div class="vlist">
+      <a class="vitem" href="/1"><span class="go">Open ›</span><b>V1 · Unlock your DNA</b><div class="a">“You already spat in the tube — we unlock the health part.” The wedge angle.</div></a>
+      <a class="vitem" href="/2"><span class="go">Open ›</span><b>V2 · Biological age</b><div class="a">“What’s your biological age?” Longevity / optimization quiz.</div></a>
+      <a class="vitem" href="/3"><span class="go">Open ›</span><b>V3 · Symptoms</b><div class="a">“Bloated, tired, stuck? Your DNA explains why.” Problem-first.</div></a>
+      <a class="vitem" href="/4"><span class="go">Open ›</span><b>V4 · Multi-omic honesty</b><div class="a">“DNA + bloods, one honest picture.” The trust / differentiator angle.</div></a>
+      <a class="vitem" href="/5"><span class="go">Open ›</span><b>V5 · 12 things (curiosity)</b><div class="a">“12 fun things your DNA says.” Viral / shareable.</div></a>
+    </div>
+    <p class="fineprint">Set the analytics provider in each variant’s <code>window.ANALYTICS</code> before driving traffic. Checkout & upload are demo stubs — wire Stripe (web) / Apple IAP (app).</p>
+  </div>
+</div>
+</body>
+</html>

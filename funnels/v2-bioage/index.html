@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What's your biological age? — Indaga</title>
+<meta name="description" content="Your DNA + a few answers reveal how fast you're really aging — and the levers to slow it down.">
+<link rel="stylesheet" href="../shared/quiz.css">
+</head>
+<body data-variant="v2-bioage" style="--accent:#c084fc;--accent-2:#6aa8ff">
+<div id="app"></div>
+<script>
+window.ANALYTICS = { provider: 'console' };
+window.FUNNEL = {
+  variant: 'v2-bioage', brand: 'Indaga',
+  hero: {
+    eyebrow: 'DNA-powered longevity',
+    headline: 'What’s your <span class="grad">biological age?</span>',
+    sub: 'Your 23andMe or MyHeritage file plus a few answers reveal how fast you’re really aging — and the 5 levers to slow it down.',
+    stats: [ {n:'5', l:'aging levers'}, {n:'700k', l:'markers'}, {n:'3 min', l:'to results'} ],
+    trust: ['🔒 DNA never sold', '🧬 Uses your existing test', '🔬 Grounded in research'],
+    cta: 'Reveal my biological age →'
+  },
+  questions: [
+    { id:'age', q:'How old are you?', type:'single',
+      options:[ {label:'18–29',value:'18-29'}, {label:'30–39',value:'30-39'}, {label:'40–49',value:'40-49'}, {label:'50–59',value:'50-59'}, {label:'60+',value:'60+'} ] },
+    { id:'sleep', q:'How’s your sleep, honestly?', type:'single',
+      options:[ {emoji:'😴',label:'Great — wake up rested',value:'great'}, {emoji:'😐',label:'OK, could be better',value:'ok'}, {emoji:'🥱',label:'Poor — often tired',value:'poor'} ] },
+    { id:'energy', q:'Your afternoon energy?', type:'single',
+      options:[ {emoji:'⚡',label:'Steady all day',value:'steady'}, {emoji:'📉',label:'Crashes around 3pm',value:'crash'}, {emoji:'☕',label:'Only survive on caffeine',value:'caffeine'} ] },
+    { id:'move', q:'How often do you train?', type:'single',
+      options:[ {label:'4+ times a week',value:'high'}, {label:'1–3 times',value:'mid'}, {label:'Rarely',value:'low'} ] },
+    { id:'test', q:'Which DNA test do you have?', hint:'We read the raw file — not the reports.', type:'single',
+      options:[ {emoji:'🧬',label:'23andMe',value:'23andme'}, {emoji:'🌳',label:'MyHeritage',value:'myheritage'}, {emoji:'🔍',label:'AncestryDNA',value:'ancestry'}, {emoji:'🤔',label:'None yet',value:'none'} ] }
+  ],
+  analyzing: { title:'Estimating your biology…', lines:[
+    'Reading genetic aging markers…', 'Weighing sleep, energy & activity…', 'Modelling your pace of aging…', 'Finding your top 5 levers…', 'Preparing your longevity report…' ] },
+  result: {
+    eyebrow: 'Your estimate', headline: 'Your biological age looks <span class="grad">different from your real one.</span>',
+    sub: 'Based on your answers and genetics. The exact number — and your 5 personalized levers — unlock below.',
+    cards: [
+      { ic:'🎂', title:'Biological age', tag:'result', locked:true, teaser:'Your estimated biological age is XX — that’s N years from your calendar age.' },
+      { ic:'🧬', title:'Your fastest-aging system', locked:true, teaser:'Genetics point to one system aging quicker than the rest: your…' },
+      { ic:'🥗', title:'Lever #1', locked:true, teaser:'The single highest-impact change for your genotype is…' },
+      { ic:'😴', title:'Lever #2', locked:true, teaser:'Your sleep genetics suggest…' },
+      { ic:'✅', title:'+ 3 more levers', locked:false, teaser:'Ranked by impact for your DNA — in your full report.' }
+    ],
+    cta: 'Reveal my biological age →'
+  },
+  lead: { headline:'Where do we send your longevity report?', sub:'Your biological-age estimate + your 5 levers.', placeholder:'you@email.com', cta:'Continue →' },
+  offer: {
+    eyebrow:'Founding-member price', headline:'See your biological age & <span class="grad">how to lower it</span>',
+    sub:'A living longevity plan built from your DNA — refined every time you add a blood test or wearable.',
+    priceOld:'€19', price:'€9', per:'/mo', guarantee:'7-day money-back guarantee',
+    perks:['Your biological-age estimate','Your 5 highest-impact levers, ranked','DNA-based diet, supplement & training plan','Add bloods & wearable to sharpen it','Honest science — no fear-mongering'],
+    sources:['🧬 23andMe ✓','🌳 MyHeritage ✓'],
+    cta:'Unlock my longevity report →', uploadCta:'I have my DNA file ready ›', plan:'plus'
+  }
+};
+</script>
+<script src="../shared/analytics.js"></script>
+<script src="../shared/quiz.js"></script>
+</body>
+</html>

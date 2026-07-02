@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DNA + bloods, one honest picture — Indaga</title>
+<meta name="description" content="Most health apps guess. Indaga only tells you what's actually measured — and exactly what's missing.">
+<link rel="stylesheet" href="../shared/quiz.css">
+</head>
+<body data-variant="v4-multiomic" style="--accent:#5dd39e;--accent-2:#5eead4">
+<div id="app"></div>
+<script>
+window.ANALYTICS = { provider: 'console' };
+window.FUNNEL = {
+  variant: 'v4-multiomic', brand: 'Indaga',
+  hero: {
+    eyebrow: 'The honest health report',
+    headline: 'One honest picture of your health —<br><span class="grad">DNA + bloods, together.</span>',
+    sub: 'Most apps guess and call everything “normal.” Indaga only tells you what’s actually measured — and names exactly what’s missing.',
+    stats: [ {n:'DNA', l:'+ bloods'}, {n:'0', l:'guesses'}, {n:'3 min', l:'to start'} ],
+    trust: ['🔒 Data never sold', '🧬 23andMe · MyHeritage', '🩺 Information, not diagnosis'],
+    cta: 'Build my honest report →'
+  },
+  questions: [
+    { id:'test', q:'Which DNA test do you have?', type:'single',
+      options:[ {emoji:'🧬',label:'23andMe',value:'23andme'}, {emoji:'🌳',label:'MyHeritage',value:'myheritage'}, {emoji:'🔍',label:'AncestryDNA',value:'ancestry'}, {emoji:'🤔',label:'None yet',value:'none'} ] },
+    { id:'bloods', q:'Do you have recent blood results?', hint:'A PDF or photo is enough — we read it.', type:'single',
+      options:[ {emoji:'✅',label:'Yes — I have a file',value:'have'}, {emoji:'🩸',label:'Somewhere, not handy',value:'somewhere'}, {emoji:'❌',label:'Not recently',value:'no'} ] },
+    { id:'wearable', q:'Do you wear a tracker?', type:'single',
+      options:[ {emoji:'⌚',label:'Apple Watch / Whoop / Oura',value:'yes'}, {emoji:'📱',label:'Just my phone',value:'phone'}, {emoji:'🚫',label:'No',value:'no'} ] },
+    { id:'trust', q:'What frustrates you about health apps?', hint:'Pick all that apply.', type:'multi',
+      options:[ {emoji:'🤥',label:'They oversell / fear-monger',value:'oversell'}, {emoji:'🕳️',label:'Vague “you’re fine”',value:'vague'},
+                {emoji:'🔓',label:'They sell my data',value:'data'}, {emoji:'🧩',label:'Nothing connects together',value:'silo'} ] },
+    { id:'goal', q:'Your main goal?', type:'single',
+      options:[ {emoji:'♾️',label:'Longevity',value:'longevity'}, {emoji:'⚡',label:'Energy',value:'energy'}, {emoji:'🎯',label:'Optimization',value:'perf'}, {emoji:'🛡️',label:'Catch risks early',value:'risk'} ] }
+  ],
+  analyzing: { title:'Assembling your picture…', lines:[
+    'Reading your genome…', 'Parsing your blood analytes…', 'Cross-referencing DNA × bloods…', 'Marking what was NOT measured…', 'Building your honesty report…' ] },
+  result: {
+    eyebrow: 'Preview', headline: 'Your report knows <span class="grad">what it doesn’t know.</span>',
+    sub: 'That’s the point. Here’s a peek — including the gaps most apps hide from you.',
+    cards: [
+      { ic:'🟢', title:'Measured & clear', locked:true, teaser:'From your data, these markers are in good shape: your…' },
+      { ic:'🟡', title:'Measured, worth optimizing', locked:true, teaser:'A couple of values are fine-but-not-optimal, like your…' },
+      { ic:'⚪', title:'NOT measured (unknown, not normal)', tag:'the honest part', locked:true, teaser:'Two high-value tests were never done — we name them and where to get them: …' },
+      { ic:'✅', title:'Your action plan', locked:false, teaser:'Ranked by impact, mapped to real next steps.' }
+    ],
+    cta: 'See my honest report →'
+  },
+  lead: { headline:'Where do we send your report?', sub:'Your DNA × bloods picture, gaps and all.', placeholder:'you@email.com', cta:'Continue →' },
+  offer: {
+    eyebrow:'Founding-member price', headline:'Your honest, <span class="grad">multi-omic report</span>',
+    sub:'DNA + bloods + wearable in one place. Every answer knows its own confidence. Nothing invented.',
+    priceOld:'€19', price:'€9', per:'/mo', guarantee:'7-day money-back guarantee',
+    perks:['DNA + bloods + wearable, cross-referenced','Every answer labeled measured / inferred / unknown','The exact tests worth adding next','Updates every time you add data','Your data is never sold — that’s the deal'],
+    sources:['🧬 23andMe ✓','🌳 MyHeritage ✓'],
+    cta:'Unlock my report →', uploadCta:'I have my files ready ›', plan:'plus'
+  }
+};
+</script>
+<script src="../shared/analytics.js"></script>
+<script src="../shared/quiz.js"></script>
+</body>
+</html>

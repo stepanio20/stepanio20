@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unlock your DNA — Indaga</title>
+<meta name="description" content="You already did a 23andMe or MyHeritage test. Unlock the health insights they legally can't give you — in 3 minutes.">
+<link rel="stylesheet" href="../shared/quiz.css">
+</head>
+<body data-variant="v1-unlock" style="--accent:#5eead4;--accent-2:#6aa8ff">
+<div id="app"></div>
+<script>
+window.ANALYTICS = { provider: 'console' }; /* swap: {provider:'posthog',key:'phc_...'} | {provider:'plausible'} | {provider:'ga',id:'G-..'} | {provider:'custom',endpoint:'/api/track'} */
+window.FUNNEL = {
+  variant: 'v1-unlock', brand: 'Indaga',
+  hero: {
+    eyebrow: 'For 23andMe & MyHeritage users',
+    headline: 'Your DNA test told you you’re 2% Neanderthal.<br><span class="grad">We tell you what actually matters.</span>',
+    sub: 'Upload the raw file you already have. Get the health insights 23andMe legally can’t — in 3 minutes. No new spit kit.',
+    stats: [ {n:'700k+', l:'markers read'}, {n:'41', l:'health traits'}, {n:'3 min', l:'to results'} ],
+    trust: ['🔒 Your DNA is never sold', '🧬 23andMe · MyHeritage · Ancestry', '⚡ Instant, offline analysis'],
+    cta: 'Unlock my DNA →'
+  },
+  questions: [
+    { id:'test', q:'Which DNA test do you have?', hint:'We read the raw data file — not the reports.', type:'single',
+      options:[ {emoji:'🧬',label:'23andMe',value:'23andme'}, {emoji:'🌳',label:'MyHeritage',value:'myheritage'},
+                {emoji:'🔍',label:'AncestryDNA',value:'ancestry'}, {emoji:'🤔',label:'Not sure / none yet',value:'none'} ] },
+    { id:'want', q:'What do you most want to unlock?', hint:'Pick all that apply.', type:'multi',
+      options:[ {emoji:'🥗',label:'How to eat for my genes',value:'diet'}, {emoji:'⚠️',label:'My disease risks',value:'risk'},
+                {emoji:'🔋',label:'Why I’m always tired',value:'energy'}, {emoji:'💊',label:'Best supplements for me',value:'supp'},
+                {emoji:'🏋️',label:'Fitness & recovery',value:'fitness'}, {emoji:'💊',label:'How I respond to meds',value:'pgx'} ] },
+    { id:'bloods', q:'Do you have a recent blood test?', hint:'Combining bloods + DNA makes it far more accurate.', type:'single',
+      options:[ {emoji:'✅',label:'Yes — I have the PDF',value:'have'}, {emoji:'🩸',label:'Yes, but no file',value:'nofile'}, {emoji:'❌',label:'Not recently',value:'no'} ] },
+    { id:'goal', q:'What’s your #1 health goal?', type:'single',
+      options:[ {emoji:'♾️',label:'Live longer & healthier',value:'longevity'}, {emoji:'🔥',label:'Lose fat',value:'fatloss'},
+                {emoji:'⚡',label:'More energy',value:'energy'}, {emoji:'🎯',label:'Optimize performance',value:'perf'}, {emoji:'👀',label:'Just curious',value:'curious'} ] },
+    { id:'age', q:'Your age range?', type:'single',
+      options:[ {label:'18–29',value:'18-29'}, {label:'30–39',value:'30-39'}, {label:'40–49',value:'40-49'}, {label:'50+',value:'50+'} ] }
+  ],
+  analyzing: { title:'Reading your genome…', lines:[
+    'Parsing 700,000 genetic markers…', 'Screening pharmacogenomics (CYP genes)…',
+    'Cross-referencing 41 health traits…', 'Flagging what’s still unmeasured…', 'Building your honest report…' ] },
+  result: {
+    eyebrow: 'Preview', headline: 'Your DNA is ready to reveal <span class="grad">41 health traits.</span>',
+    sub: 'Here’s a peek from your answers. Your full report unlocks all of it — plus what’s missing.',
+    cards: [
+      { ic:'🥛', title:'Lactose', tag:'diet', locked:true, teaser:'Your genotype at rs4988235 strongly suggests you are lactase… which explains a lot about how dairy treats you.' },
+      { ic:'☕', title:'Caffeine', locked:true, teaser:'You’re likely a fast/slow metabolizer — which changes your ideal daily cutoff time and dose.' },
+      { ic:'🧠', title:'APOE (heart & memory)', tag:'high-value', locked:true, teaser:'One of the most important genes you have. Your variant sits in the… category.' },
+      { ic:'💊', title:'Medication response', locked:true, teaser:'Your CYP genes change how you process common drugs — including…' },
+      { ic:'✅', title:'+ 37 more traits', locked:false, teaser:'Sleep, iron, folate, alcohol, appetite, stress chemistry… all unlocked in your report.' }
+    ],
+    cta: 'Unlock all 41 traits →'
+  },
+  lead: { headline:'Where should we send your report?', sub:'We’ll email your results and a link to unlock the full analysis.',
+    placeholder:'you@email.com', cta:'Continue →', fine:'No spam. Unsubscribe anytime. Your DNA is never sold.' },
+  offer: {
+    eyebrow:'Founding-member price', headline:'Unlock your complete <span class="grad">DNA health report</span>',
+    sub:'Everything your 23andMe raw file can reveal — read honestly, updated as you add blood tests.',
+    priceOld:'€19', price:'€9', per:'/mo', guarantee:'7-day money-back guarantee',
+    perks:['All 41 genetic health traits, in plain language','Pharmacogenomics: how you respond to meds',
+           'Personalized supplement & diet plan','Add blood tests for the full picture','Every claim cites its science — or admits what’s unknown'],
+    sources:['🧬 23andMe ✓','🌳 MyHeritage ✓','🔍 Ancestry ✓'],
+    cta:'Unlock my report →', uploadCta:'I have my raw DNA file ready ›', plan:'plus'
+  }
+};
+</script>
+<script src="../shared/analytics.js"></script>
+<script src="../shared/quiz.js"></script>
+</body>
+</html>
