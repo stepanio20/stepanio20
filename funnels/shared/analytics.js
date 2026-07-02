@@ -29,6 +29,13 @@
 
   function send(event, props) {
     const payload = Object.assign({ variant: VARIANT, aid: AID, ts: Date.now(), path: location.pathname }, props || {});
+    // local ring buffer so the built-in dashboard renders this device's funnel with no backend
+    try {
+      const buf = JSON.parse(localStorage.getItem('idg_events') || '[]');
+      buf.push({ event: event, variant: payload.variant, aid: payload.aid, ts: payload.ts });
+      while (buf.length > 500) buf.shift();
+      localStorage.setItem('idg_events', JSON.stringify(buf));
+    } catch (e) {}
     try {
       switch (cfg.provider) {
         case 'plausible':

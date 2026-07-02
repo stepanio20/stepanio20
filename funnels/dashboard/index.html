@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Funnel Dashboard — Indaga</title>
+<link rel="stylesheet" href="../shared/quiz.css">
+<style>
+  #dash { max-width: 940px; margin: 0 auto; padding: 20px 18px 60px; }
+  .dhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0 18px; flex-wrap: wrap; }
+  .dhead h1 { font-size: 22px; margin: 0; letter-spacing: -.02em; }
+  .dhead .actions { display: flex; gap: 8px; }
+  .btn { background: var(--surface); color: var(--fg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 9px 13px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn.p { background: linear-gradient(115deg,var(--accent),var(--accent-2)); color:#06210f; border:0; }
+  .note { background: color-mix(in srgb, var(--warn) 12%, transparent); border:1px solid color-mix(in srgb,var(--warn) 40%,transparent);
+    color: #d9c07a; border-radius: 12px; padding: 12px 14px; font-size: 13px; margin-bottom: 18px; line-height:1.5; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 12px; margin-bottom: 22px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .tile b { display:block; font-size: 30px; letter-spacing: -.02em; }
+  .tile span { font-size: 12.5px; color: var(--fg-dim); }
+  .tile .sub2 { font-size: 12px; color: var(--accent); margin-top:2px; }
+  .card { background: var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px; margin-bottom:18px; }
+  .card h2 { font-size:15px; margin:0 0 14px; letter-spacing:-.01em; }
+  .frow { display:flex; align-items:center; gap:12px; margin:9px 0; }
+  .frow .lbl { width: 130px; font-size:13px; color:var(--fg-dim); flex:none; }
+  .frow .bar { flex:1; height: 26px; background: var(--surface-2); border-radius:8px; overflow:hidden; position:relative; }
+  .frow .bar > span { display:block; height:100%; background: linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:8px; transition:width .5s; }
+  .frow .val { width: 96px; text-align:right; font-size:13px; font-weight:700; flex:none; }
+  .frow .val small { color:var(--fg-dim); font-weight:500; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th,td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--border); }
+  th { color:var(--fg-dim); font-weight:600; font-size:12px; }
+  td.n { text-align:right; font-variant-numeric: tabular-nums; }
+  .win { color: var(--good); font-weight:700; }
+  .steps { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+  .steps li { display:flex; gap:10px; font-size:13.5px; align-items:center; }
+  .steps code { background: var(--surface-2); padding:2px 8px; border-radius:6px; font-size:12.5px; }
+  .empty { text-align:center; color:var(--fg-dim); padding:30px 10px; font-size:14px; }
+</style>
+</head>
+<body data-variant="dashboard">
+<div id="dash">
+  <div class="dhead">
+    <h1>Funnel Dashboard <span style="color:var(--accent)">·</span> Indaga</h1>
+    <div class="actions">
+      <button class="btn" id="demo">Load demo data</button>
+      <button class="btn" id="clear">Clear</button>
+      <button class="btn p" id="refresh">Refresh</button>
+    </div>
+  </div>
+
+  <div class="note" id="src"></div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="card">
+    <h2>Conversion funnel (unique visitors)</h2>
+    <div id="funnel"></div>
+  </div>
+
+  <div class="card">
+    <h2>Variant A/B — which onboarding sells best</h2>
+    <div id="variants"></div>
+  </div>
+
+  <div class="card">
+    <h2>Connect PostHog for all-users analytics (5 min)</h2>
+    <p style="color:var(--fg-dim);font-size:13.5px;margin:0 0 12px;line-height:1.55">
+      This dashboard shows <b>this browser's</b> events (great for QA/demo). For real, all-users
+      funnel data across everyone you send traffic to, drop a PostHog key in
+      <code>funnels/shared/config.js</code> and build this funnel in PostHog:</p>
+    <ol class="steps">
+      <li>1️⃣ <code>funnel_view</code> — landed on the funnel</li>
+      <li>2️⃣ <code>quiz_start</code> — tapped Start</li>
+      <li>3️⃣ <code>quiz_complete</code> — finished all questions</li>
+      <li>4️⃣ <code>lead</code> — gave email <span style="color:var(--good)">← your cost-per-lead</span></li>
+      <li>5️⃣ <code>offer_view</code> — saw the paywall</li>
+      <li>6️⃣ <code>checkout_start</code> — hit buy <span style="color:var(--good)">← your conversion</span></li>
+    </ol>
+    <p style="color:var(--fg-dim);font-size:12.5px;margin:12px 0 0">Every event carries <code>variant</code> so you can break the funnel down by v1–v5 automatically.</p>
+  </div>
+</div>
+
+<script src="../shared/config.js"></script>
+<script>
+const STEPS = [
+  ['funnel_view','Landed'],['quiz_start','Started quiz'],['quiz_complete','Finished quiz'],
+  ['lead','Gave email'],['offer_view','Saw offer'],['checkout_start','Hit buy']
+];
+const VARIANTS = ['v1-unlock','v2-bioage','v3-symptoms','v4-multiomic','v5-curiosity'];
+const $ = s => document.querySelector(s);
+
+function events(){ try { return JSON.parse(localStorage.getItem('idg_events')||'[]'); } catch(e){ return []; } }
+function uniqBy(evs, ev){ return new Set(evs.filter(e=>e.event===ev).map(e=>e.aid)).size; }
+
+function render(){
+  const evs = events();
+  const posthog = window.ANALYTICS && window.ANALYTICS.provider === 'posthog';
+  $('#src').innerHTML = posthog
+    ? '✅ PostHog key detected — production events also flow to your PostHog project. Numbers below are still this browser only; see PostHog for all-users data.'
+    : '⚠️ Preview mode — showing THIS browser\'s events (for QA/demo). Add a PostHog key in <code>shared/config.js</code> for real all-users analytics. Or hit “Load demo data”.';
+
+  // tiles
+  const landed = uniqBy(evs,'funnel_view'), started = uniqBy(evs,'quiz_start'),
+        leads = uniqBy(evs,'lead'), buys = uniqBy(evs,'checkout_start');
+  const cvr = landed ? (buys/landed*100) : 0, lcr = landed ? (leads/landed*100) : 0;
+  $('#tiles').innerHTML = [
+    ['Visitors', landed, ''],
+    ['Leads (emails)', leads, lcr.toFixed(0)+'% of visitors'],
+    ['Checkout starts', buys, cvr.toFixed(1)+'% conversion'],
+    ['Quiz completion', started?Math.round(uniqBy(evs,'quiz_complete')/started*100):0 , '% who finished']
+  ].map(t=>`<div class="tile"><b>${t[1]}</b><span>${t[0]}</span>${t[2]?`<div class="sub2">${t[2]}</div>`:''}</div>`).join('');
+
+  // funnel
+  const top = landed || 1;
+  $('#funnel').innerHTML = evs.length ? STEPS.map(([ev,lbl])=>{
+    const n = uniqBy(evs,ev); const p = (n/top*100);
+    return `<div class="frow"><div class="lbl">${lbl}</div>
+      <div class="bar"><span style="width:${Math.max(2,p)}%"></span></div>
+      <div class="val">${n} <small>${p.toFixed(0)}%</small></div></div>`;
+  }).join('') : '<div class="empty">No events yet. Open a funnel link (or “Load demo data”) then Refresh.</div>';
+
+  // variants
+  const rows = VARIANTS.map(v=>{
+    const ve = evs.filter(e=>e.variant===v);
+    const l = new Set(ve.filter(e=>e.event==='funnel_view').map(e=>e.aid)).size;
+    const b = new Set(ve.filter(e=>e.event==='checkout_start').map(e=>e.aid)).size;
+    const em = new Set(ve.filter(e=>e.event==='lead').map(e=>e.aid)).size;
+    return { v, l, em, b, cvr: l? b/l*100 : 0 };
+  });
+  const best = Math.max(...rows.map(r=>r.cvr));
+  $('#variants').innerHTML = evs.length
+   ? `<table><tr><th>Variant</th><th class="n">Visitors</th><th class="n">Leads</th><th class="n">Checkouts</th><th class="n">CVR</th></tr>`
+     + rows.map(r=>`<tr><td>${r.v}</td><td class="n">${r.l}</td><td class="n">${r.em}</td><td class="n">${r.b}</td>
+        <td class="n ${r.cvr===best&&best>0?'win':''}">${r.cvr.toFixed(1)}%</td></tr>`).join('') + `</table>`
+   : '<div class="empty">Traffic split by variant appears here — the A/B winner is highlighted.</div>';
+}
+
+function demo(){
+  // synthetic but realistic funnel across the 5 variants (clearly labeled demo)
+  const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a));
+  const buf=[]; let id=0;
+  const rates={ 'v1-unlock':[1,.72,.5,.28,.24,.09], 'v2-bioage':[1,.68,.46,.22,.19,.07],
+    'v3-symptoms':[1,.74,.52,.3,.26,.11], 'v4-multiomic':[1,.6,.4,.2,.17,.06], 'v5-curiosity':[1,.8,.58,.26,.2,.05] };
+  VARIANTS.forEach(v=>{ const N=rnd(60,140);
+    for(let i=0;i<N;i++){ const aid='d_'+(id++); rates[v].forEach((r,si)=>{ if(Math.random()<r) buf.push({event:STEPS[si][0],variant:v,aid,ts:Date.now()});});}});
+  localStorage.setItem('idg_events', JSON.stringify(buf.slice(-500))); render();
+}
+$('#demo').onclick=demo;
+$('#clear').onclick=()=>{ localStorage.removeItem('idg_events'); render(); };
+$('#refresh').onclick=render;
+render();
+</script>
+</body>
+</html>
