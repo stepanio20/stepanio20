@@ -5,11 +5,10 @@ name: Deploy funnels to GitHub Pages
 # Live URL appears in the run's "github-pages" environment + Settings → Pages.
 
 on:
-  push:
-    branches: ["claude/improve-architecture-docs-7adUg"]
-    paths:
-      - "funnels/**"
-      - ".github/workflows/deploy-funnels.yml"
+  # Manual-only until GitHub Pages is enabled once:
+  #   Settings → Pages → Build and deployment → Source: GitHub Actions
+  # Then run this workflow (Actions tab → Run workflow). After that you can
+  # re-add the push trigger for auto-deploy on every funnels change.
   workflow_dispatch:
 
 permissions:
