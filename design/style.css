@@ -182,6 +182,32 @@ a { color: inherit; }
 footer { border-top: 1px solid var(--line); padding: 34px 0 44px; margin-top: 60px; }
 footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 
+/* галерея визуализаций варианта */
+.v-gallery { margin: 22px 26px 0; }
+.g-hero {
+  width: 100%; border-radius: 12px; border: 1px solid var(--line);
+  background: #efe9de; display: block; aspect-ratio: 12 / 7;
+}
+.g-thumbs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;
+}
+.g-thumbs img {
+  width: 100%; border-radius: 10px; border: 1px solid var(--line);
+  background: #efe9de; aspect-ratio: 4 / 3; cursor: zoom-in;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.g-thumbs img:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.g-caption { font-size: .78rem; color: var(--ink-soft); text-align: center; margin-top: 8px; }
+
+/* лайтбокс */
+.lightbox {
+  position: fixed; inset: 0; z-index: 100; display: none;
+  align-items: center; justify-content: center; padding: 24px;
+  background: rgba(20, 17, 13, .82); backdrop-filter: blur(4px); cursor: zoom-out;
+}
+.lightbox.on { display: flex; }
+.lightbox img { max-width: 96vw; max-height: 92vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+
 /* поэтажный план */
 .v-plan {
   margin: 22px 26px 0; background: #fbf9f4;
