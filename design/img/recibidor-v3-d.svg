@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="matteGrey" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a4744"/>
+      <stop offset="0.5" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2f2c29"/>
+    </linearGradient>
+    <linearGradient id="matteGreyDoor" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#524f4b"/>
+      <stop offset="1" stop-color="#3a3733"/>
+    </linearGradient>
+    <linearGradient id="mirrorGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dfe7ea"/>
+      <stop offset="0.4" stop-color="#cdd9de"/>
+      <stop offset="0.6" stop-color="#e6eef0"/>
+      <stop offset="1" stop-color="#c2d0d6"/>
+    </linearGradient>
+    <linearGradient id="mirrorFrame" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="0.5" stop-color="#15130f"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="chromeLeg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9c5be"/>
+      <stop offset="0.5" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="steelBlack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="glassTower" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dfe7ea" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#b8cdd6" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#c2d0d6" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="glassTowerSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#9fb7c0" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="helmetGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="0.5" stop-color="#b98a4a"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="helmetOlive" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="bamboo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="cushion" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="vacuum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a4744"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <radialGradient id="softShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1f1b16" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#1f1b16" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="glassShine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+
+  <!-- FLOOR band lower third -->
+  <rect x="0" y="400" width="800" height="200" fill="url(#floor)"/>
+  <!-- skirting line -->
+  <rect x="0" y="393" width="800" height="7" fill="#a5876a"/>
+  <rect x="0" y="391" width="800" height="2" fill="#cbb287"/>
+  <!-- plank lines -->
+  <g stroke="#bda87e" stroke-width="1.4" opacity="0.55">
+    <line x1="0" y1="440" x2="800" y2="440"/>
+    <line x1="0" y1="485" x2="800" y2="485"/>
+    <line x1="0" y1="533" x2="800" y2="533"/>
+    <line x1="0" y1="583" x2="800" y2="583"/>
+  </g>
+  <g stroke="#b09a6f" stroke-width="1" opacity="0.4">
+    <line x1="130" y1="400" x2="130" y2="440"/>
+    <line x1="300" y1="440" x2="300" y2="485"/>
+    <line x1="470" y1="400" x2="470" y2="440"/>
+    <line x1="210" y1="485" x2="210" y2="533"/>
+    <line x1="560" y1="485" x2="560" y2="533"/>
+    <line x1="380" y1="533" x2="380" y2="583"/>
+    <line x1="650" y1="440" x2="650" y2="485"/>
+  </g>
+
+  <!-- ===================== -->
+  <!-- SHADOWS on floor -->
+  <ellipse cx="120" cy="470" rx="70" ry="16" fill="url(#softShadow)"/>
+  <ellipse cx="400" cy="474" rx="120" ry="20" fill="url(#softShadow)"/>
+  <ellipse cx="605" cy="470" rx="60" ry="15" fill="url(#softShadow)"/>
+  <ellipse cx="705" cy="520" rx="80" ry="18" fill="url(#softShadow)"/>
+
+  <!-- ===================== SHOE COLUMN (left) ===================== -->
+  <g>
+    <ellipse cx="120" cy="465" rx="58" ry="12" fill="url(#softShadow)"/>
+    <!-- body -->
+    <rect x="78" y="150" width="84" height="315" rx="6" fill="url(#matteGrey)"/>
+    <rect x="78" y="150" width="10" height="315" rx="5" fill="#524f4b" opacity="0.6"/>
+    <!-- top cap -->
+    <rect x="74" y="144" width="92" height="12" rx="4" fill="#3d3a36"/>
+    <!-- five flip fronts -->
+    <g>
+      <rect x="86" y="160" width="68" height="56" rx="4" fill="url(#matteGreyDoor)"/>
+      <rect x="86" y="160" width="68" height="4" rx="2" fill="#5a5652" opacity="0.7"/>
+      <rect x="112" y="207" width="16" height="4" rx="2" fill="#9a968f"/>
+      <rect x="86" y="221" width="68" height="56" rx="4" fill="url(#matteGreyDoor)"/>
+      <rect x="86" y="221" width="68" height="4" rx="2" fill="#5a5652" opacity="0.7"/>
+      <rect x="112" y="268" width="16" height="4" rx="2" fill="#9a968f"/>
+      <rect x="86" y="282" width="68" height="56" rx="4" fill="url(#matteGreyDoor)"/>
+      <rect x="86" y="282" width="68" height="4" rx="2" fill="#5a5652" opacity="0.7"/>
+      <rect x="112" y="329" width="16" height="4" rx="2" fill="#9a968f"/>
+      <rect x="86" y="343" width="68" height="56" rx="4" fill="url(#matteGreyDoor)"/>
+      <rect x="86" y="343" width="68" height="4" rx="2" fill="#5a5652" opacity="0.7"/>
+      <rect x="112" y="390" width="16" height="4" rx="2" fill="#9a968f"/>
+      <rect x="86" y="404" width="68" height="52" rx="4" fill="url(#matteGreyDoor)"/>
+      <rect x="86" y="404" width="68" height="4" rx="2" fill="#5a5652" opacity="0.7"/>
+      <rect x="112" y="447" width="16" height="4" rx="2" fill="#9a968f"/>
+    </g>
+    <!-- little feet -->
+    <rect x="86" y="460" width="10" height="8" rx="2" fill="#15130f"/>
+    <rect x="144" y="460" width="10" height="8" rx="2" fill="#15130f"/>
+  </g>
+
+  <!-- small decorative tray on top of column -->
+  <rect x="90" y="130" width="60" height="14" rx="4" fill="#8a8c62"/>
+  <rect x="98" y="120" width="16" height="12" rx="3" fill="#7a7c5c"/>
+  <rect x="122" y="123" width="18" height="9" rx="3" fill="#63654a"/>
+
+  <!-- ===================== FULL-HEIGHT MIRROR (center-left hero) ===================== -->
+  <g>
+    <ellipse cx="315" cy="470" rx="80" ry="14" fill="url(#softShadow)"/>
+    <!-- frame -->
+    <rect x="248" y="96" width="134" height="372" rx="12" fill="url(#mirrorFrame)"/>
+    <!-- glass -->
+    <rect x="264" y="112" width="102" height="340" rx="7" fill="url(#mirrorGlass)"/>
+    <!-- reflection streaks -->
+    <polygon points="278,120 312,120 258,444 244,444" fill="#ffffff" opacity="0.28"/>
+    <polygon points="330,120 352,120 316,444 300,444" fill="#ffffff" opacity="0.15"/>
+    <!-- reflected floor line -->
+    <rect x="264" y="420" width="102" height="32" rx="4" fill="#cbb287" opacity="0.4"/>
+    <!-- base feet -->
+    <rect x="260" y="466" width="14" height="10" rx="3" fill="#15130f"/>
+    <rect x="356" y="466" width="14" height="10" rx="3" fill="#15130f"/>
+  </g>
+
+  <!-- ===================== GLASS DISPLAY TOWER + HELMET (center-right hero) ===================== -->
+  <g>
+    <ellipse cx="470" cy="474" rx="58" ry="12" fill="url(#softShadow)"/>
+    <!-- base plinth -->
+    <rect x="428" y="452" width="84" height="18" rx="4" fill="#3d3a36"/>
+    <rect x="428" y="452" width="84" height="4" rx="2" fill="#524f4b"/>
+    <!-- glass box back faces -->
+    <polygon points="440,206 500,206 500,452 440,452" fill="url(#glassTowerSide)" opacity="0.5"/>
+    <!-- front glass panel -->
+    <rect x="434" y="200" width="72" height="252" rx="4" fill="url(#glassTower)"/>
+    <rect x="434" y="200" width="72" height="252" rx="4" fill="none" stroke="#2a2724" stroke-width="3"/>
+    <!-- vertical mullions -->
+    <line x1="470" y1="200" x2="470" y2="452" stroke="#2a2724" stroke-width="1.6" opacity="0.5"/>
+    <rect x="440" y="210" width="20" height="120" fill="url(#glassShine)" opacity="0.7"/>
+    <!-- top cap -->
+    <rect x="428" y="192" width="84" height="12" rx="3" fill="#2a2724"/>
+    <!-- interior shelf -->
+    <rect x="438" y="320" width="64" height="6" rx="2" fill="#3d3a36" opacity="0.5"/>
+
+    <!-- HELMET gold and olive on shelf -->
+    <g transform="translate(470,290)">
+      <!-- dome -->
+      <path d="M -26,20 A 26,30 0 0 1 26,20 L 26,26 L -26,26 Z" fill="url(#helmetGold)"/>
+      <path d="M -26,20 A 26,30 0 0 1 26,20 L 26,4 A 26,24 0 0 0 -26,4 Z" fill="url(#helmetOlive)"/>
+      <!-- center ridge -->
+      <path d="M -4,-4 A 4,26 0 0 1 4,-4 L 3,24 L -3,24 Z" fill="#cf9f5c"/>
+      <!-- visor slot -->
+      <rect x="-20" y="12" width="40" height="7" rx="3" fill="#3d3a36"/>
+      <!-- highlight -->
+      <ellipse cx="-10" cy="2" rx="8" ry="12" fill="#e3c88a" opacity="0.5"/>
+      <!-- base rim -->
+      <rect x="-28" y="24" width="56" height="6" rx="3" fill="#8a5a20"/>
+    </g>
+  </g>
+
+  <!-- ===================== THIN BLACK STEEL TWO-LEVEL CONSOLE (right) + ROBOT VACUUM ===================== -->
+  <g>
+    <ellipse cx="670" cy="465" rx="95" ry="14" fill="url(#softShadow)"/>
+    <!-- legs -->
+    <rect x="586" y="300" width="6" height="162" rx="2" fill="url(#steelBlack)"/>
+    <rect x="748" y="300" width="6" height="162" rx="2" fill="url(#steelBlack)"/>
+    <rect x="586" y="458" width="6" height="8" rx="2" fill="#15130f"/>
+    <rect x="748" y="458" width="6" height="8" rx="2" fill="#15130f"/>
+    <!-- top level (shelf) -->
+    <rect x="576" y="300" width="188" height="9" rx="3" fill="#2a2724"/>
+    <rect x="576" y="300" width="188" height="3" rx="1.5" fill="#4a4744"/>
+    <!-- lower level -->
+    <rect x="576" y="382" width="188" height="8" rx="3" fill="#2a2724"/>
+    <rect x="576" y="382" width="188" height="2.5" rx="1.5" fill="#4a4744"/>
+    <!-- cross braces -->
+    <line x1="592" y1="309" x2="592" y2="382" stroke="#3d3a36" stroke-width="2"/>
+    <line x1="748" y1="309" x2="748" y2="382" stroke="#3d3a36" stroke-width="2"/>
+
+    <!-- decor on top: tray + bowl + candle -->
+    <rect x="600" y="286" width="52" height="14" rx="4" fill="#7a7c5c"/>
+    <ellipse cx="626" cy="290" rx="22" ry="6" fill="#8a8c62"/>
+    <rect x="690" y="272" width="26" height="28" rx="6" fill="#cbb287"/>
+    <rect x="690" y="272" width="26" height="6" rx="3" fill="#d8c19a"/>
+    <rect x="726" y="280" width="16" height="20" rx="4" fill="#b8cdd6"/>
+
+    <!-- items on lower shelf -->
+    <rect x="600" y="358" width="40" height="24" rx="3" fill="#8a5a20"/>
+    <rect x="600" y="358" width="40" height="24" rx="3" fill="none" stroke="#6d5138" stroke-width="1.5"/>
+    <rect x="648" y="352" width="30" height="30" rx="3" fill="#63654a"/>
+
+    <!-- ROBOT VACUUM parked under -->
+    <g transform="translate(690,438)">
+      <ellipse cx="0" cy="18" rx="42" ry="9" fill="url(#softShadow)"/>
+      <ellipse cx="0" cy="8" rx="40" ry="14" fill="#2a2724"/>
+      <ellipse cx="0" cy="4" rx="40" ry="14" fill="url(#vacuum)"/>
+      <ellipse cx="0" cy="1" rx="34" ry="10" fill="#3d3a36"/>
+      <circle cx="0" cy="1" r="9" fill="#4a4744"/>
+      <circle cx="0" cy="1" r="4" fill="#9a968f"/>
+      <rect x="-4" y="-4" width="8" height="4" rx="1.5" fill="#b8cdd6"/>
+      <ellipse cx="-14" cy="-2" rx="10" ry="4" fill="#e3e1dc" opacity="0.2"/>
+    </g>
+  </g>
+
+  <!-- ===================== BAMBOO BENCH with dark cushion (center-front) ===================== -->
+  <g>
+    <ellipse cx="400" cy="530" rx="118" ry="18" fill="url(#softShadow)"/>
+    <!-- legs -->
+    <rect x="312" y="486" width="12" height="42" rx="4" fill="url(#bamboo)"/>
+    <rect x="476" y="486" width="12" height="42" rx="4" fill="url(#bamboo)"/>
+    <rect x="312" y="486" width="4" height="42" rx="2" fill="#c8a87c" opacity="0.7"/>
+    <rect x="476" y="486" width="4" height="42" rx="2" fill="#c8a87c" opacity="0.7"/>
+    <!-- bamboo joints -->
+    <rect x="311" y="500" width="14" height="3" rx="1.5" fill="#a5876a"/>
+    <rect x="311" y="516" width="14" height="3" rx="1.5" fill="#a5876a"/>
+    <rect x="475" y="500" width="14" height="3" rx="1.5" fill="#a5876a"/>
+    <rect x="475" y="516" width="14" height="3" rx="1.5" fill="#a5876a"/>
+    <!-- seat frame -->
+    <rect x="300" y="474" width="200" height="18" rx="6" fill="url(#bamboo)"/>
+    <rect x="300" y="474" width="200" height="5" rx="2.5" fill="#e3d0aa" opacity="0.7"/>
+    <!-- bamboo slats -->
+    <g stroke="#a5876a" stroke-width="1" opacity="0.5">
+      <line x1="340" y1="474" x2="340" y2="492"/>
+      <line x1="380" y1="474" x2="380" y2="492"/>
+      <line x1="420" y1="474" x2="420" y2="492"/>
+      <line x1="460" y1="474" x2="460" y2="492"/>
+    </g>
+    <!-- dark cushion -->
+    <rect x="308" y="456" width="184" height="24" rx="10" fill="url(#cushion)"/>
+    <rect x="308" y="456" width="184" height="8" rx="6" fill="#4a4744" opacity="0.6"/>
+    <!-- cushion tufting -->
+    <circle cx="352" cy="468" r="2.5" fill="#15130f"/>
+    <circle cx="400" cy="468" r="2.5" fill="#15130f"/>
+    <circle cx="448" cy="468" r="2.5" fill="#15130f"/>
+  </g>
+
+  <!-- ===================== PLANT (right foreground) ===================== -->
+  <g>
+    <ellipse cx="705" cy="562" rx="46" ry="12" fill="url(#softShadow)"/>
+    <!-- pot -->
+    <path d="M 682,505 L 728,505 L 722,562 L 688,562 Z" fill="url(#pot)"/>
+    <rect x="680" y="500" width="50" height="10" rx="3" fill="#c9c5be"/>
+    <rect x="680" y="500" width="50" height="3" rx="1.5" fill="#e3e1dc"/>
+    <!-- foliage -->
+    <g fill="#7a7c5c">
+      <path d="M 705,500 C 686,468 680,438 692,414 C 700,446 704,470 706,500 Z"/>
+      <path d="M 705,500 C 724,470 732,442 722,416 C 712,448 708,472 705,500 Z"/>
+    </g>
+    <g fill="#8a8c62">
+      <path d="M 705,502 C 692,476 686,450 696,428 C 704,454 706,478 707,502 Z"/>
+      <path d="M 705,502 C 718,478 726,454 718,432 C 710,456 707,480 705,502 Z"/>
+    </g>
+    <g fill="#63654a">
+      <path d="M 705,502 C 700,472 700,448 706,424 C 712,450 710,478 707,502 Z"/>
+    </g>
+  </g>
+
+  <!-- small olive floor mat under center -->
+  <rect x="240" y="486" width="330" height="6" rx="3" fill="#8a8c62" opacity="0.18"/>
+
+  <!-- subtle wall light gradient accent -->
+  <ellipse cx="400" cy="120" rx="360" ry="120" fill="#ffffff" opacity="0.12"/>
+</svg>

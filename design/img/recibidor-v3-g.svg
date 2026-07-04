@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="wallWarm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.16"/>
+      <stop offset="0.5" stop-color="#e8dcc6" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#5c4632" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="floorLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e8dcc6" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#e8dcc6" stop-opacity="0"/>
+      <stop offset="1" stop-color="#a5876a" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a968f"/>
+      <stop offset="0.25" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="0.75" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.62"/>
+      <stop offset="0.45" stop-color="#faf7f2" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.50"/>
+    </linearGradient>
+    <linearGradient id="glassPane" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#b8cdd6" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#9a968f" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="velvet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="bamboo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="matteGrey" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#5c5852"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="matteFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a655e"/>
+      <stop offset="1" stop-color="#3d3a36"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="0.5" stop-color="#b98a4a"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="olive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="0.5" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="mirrorGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.4" stop-color="#cbb287" stop-opacity="0.4"/>
+      <stop offset="0.7" stop-color="#b8cdd6" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="rakeLight" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0" stop-color="#faf7f2" stop-opacity="0.45"/>
+      <stop offset="0.35" stop-color="#faf7f2" stop-opacity="0"/>
+      <stop offset="1" stop-color="#5c4632" stop-opacity="0.10"/>
+    </linearGradient>
+    <radialGradient id="softShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1f1b16" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#1f1b16" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="420" fill="url(#wallWarm)"/>
+  <rect x="0" y="0" width="800" height="600" fill="url(#glow)"/>
+
+  <!-- FLOOR band lower third -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <rect x="0" y="410" width="800" height="190" fill="url(#floorLight)"/>
+  <!-- skirting line -->
+  <rect x="0" y="404" width="800" height="8" fill="#e8dcc6"/>
+  <rect x="0" y="410" width="800" height="3" fill="#a5876a" opacity="0.6"/>
+  <!-- plank lines -->
+  <line x1="0" y1="452" x2="800" y2="452" stroke="#a5876a" stroke-width="1.5" opacity="0.4"/>
+  <line x1="0" y1="500" x2="800" y2="500" stroke="#a5876a" stroke-width="1.5" opacity="0.4"/>
+  <line x1="0" y1="552" x2="800" y2="552" stroke="#a5876a" stroke-width="1.5" opacity="0.4"/>
+  <line x1="140" y1="413" x2="140" y2="452" stroke="#a5876a" stroke-width="1" opacity="0.3"/>
+  <line x1="360" y1="452" x2="360" y2="500" stroke="#a5876a" stroke-width="1" opacity="0.3"/>
+  <line x1="560" y1="413" x2="560" y2="452" stroke="#a5876a" stroke-width="1" opacity="0.3"/>
+  <line x1="260" y1="500" x2="260" y2="552" stroke="#a5876a" stroke-width="1" opacity="0.3"/>
+  <line x1="640" y1="500" x2="640" y2="552" stroke="#a5876a" stroke-width="1" opacity="0.3"/>
+  <line x1="440" y1="552" x2="440" y2="600" stroke="#a5876a" stroke-width="1" opacity="0.3"/>
+
+  <!-- ground shadows -->
+  <ellipse cx="150" cy="470" rx="150" ry="26" fill="url(#softShadow)"/>
+  <ellipse cx="470" cy="480" rx="180" ry="30" fill="url(#softShadow)"/>
+  <ellipse cx="690" cy="470" rx="130" ry="24" fill="url(#softShadow)"/>
+
+  <!-- ===== LEFT: black-framed mirror edge (macro, cropped) ===== -->
+  <rect x="-10" y="40" width="150" height="380" fill="url(#mirrorGlass)"/>
+  <rect x="-10" y="40" width="150" height="380" fill="#b8cdd6" opacity="0.12"/>
+  <!-- reflected soft light streaks -->
+  <polygon points="20,60 80,60 30,400 -10,400" fill="#faf7f2" opacity="0.25"/>
+  <polygon points="95,60 120,60 78,400 55,400" fill="#faf7f2" opacity="0.14"/>
+  <rect x="-10" y="40" width="150" height="380" fill="none" stroke="#c9c5be" stroke-width="1" opacity="0.4"/>
+  <!-- thick black frame right edge -->
+  <rect x="132" y="34" width="26" height="392" rx="3" fill="#15130f"/>
+  <rect x="132" y="34" width="10" height="392" rx="3" fill="#3d3a36" opacity="0.7"/>
+  <rect x="150" y="34" width="8" height="392" fill="#2a2724"/>
+
+  <!-- ===== matte grey shoe column with flip fronts ===== -->
+  <rect x="176" y="120" width="116" height="300" rx="6" fill="url(#matteGrey)"/>
+  <rect x="176" y="120" width="116" height="300" rx="6" fill="none" stroke="#15130f" stroke-width="2"/>
+  <!-- five flip fronts -->
+  <g>
+    <rect x="184" y="130" width="100" height="52" rx="4" fill="url(#matteFront)"/>
+    <line x1="184" y1="176" x2="284" y2="180" stroke="#15130f" stroke-width="1.5" opacity="0.6"/>
+    <rect x="222" y="134" width="24" height="5" rx="2.5" fill="url(#chrome)"/>
+  </g>
+  <g>
+    <rect x="184" y="188" width="100" height="52" rx="4" fill="url(#matteFront)"/>
+    <line x1="184" y1="234" x2="284" y2="238" stroke="#15130f" stroke-width="1.5" opacity="0.6"/>
+    <rect x="222" y="192" width="24" height="5" rx="2.5" fill="url(#chrome)"/>
+  </g>
+  <g>
+    <!-- one open flip front tilted -->
+    <polygon points="184,246 284,246 296,290 172,290" fill="#4a4640"/>
+    <polygon points="184,246 284,246 288,262 180,262" fill="#6a655e"/>
+    <rect x="222" y="250" width="24" height="5" rx="2.5" fill="url(#chrome)"/>
+    <rect x="188" y="266" width="92" height="20" rx="3" fill="#2a2724"/>
+  </g>
+  <g>
+    <rect x="184" y="298" width="100" height="52" rx="4" fill="url(#matteFront)"/>
+    <line x1="184" y1="344" x2="284" y2="348" stroke="#15130f" stroke-width="1.5" opacity="0.6"/>
+    <rect x="222" y="302" width="24" height="5" rx="2.5" fill="url(#chrome)"/>
+  </g>
+  <g>
+    <rect x="184" y="356" width="100" height="52" rx="4" fill="url(#matteFront)"/>
+    <rect x="222" y="360" width="24" height="5" rx="2.5" fill="url(#chrome)"/>
+  </g>
+  <!-- raking highlight on column left edge -->
+  <rect x="176" y="120" width="8" height="300" rx="4" fill="#faf7f2" opacity="0.14"/>
+
+  <!-- ===== CENTER: four-sided glass display tower with helmet ===== -->
+  <!-- tower base -->
+  <rect x="384" y="392" width="170" height="24" rx="4" fill="#2a2724"/>
+  <rect x="384" y="392" width="170" height="10" rx="4" fill="#3d3a36"/>
+  <!-- glass box -->
+  <rect x="392" y="150" width="154" height="246" fill="url(#glass)"/>
+  <rect x="392" y="150" width="154" height="246" fill="url(#glassPane)" opacity="0.5"/>
+  <!-- vertical glass edges -->
+  <rect x="392" y="150" width="4" height="246" fill="#e3e1dc" opacity="0.8"/>
+  <rect x="464" y="150" width="3" height="246" fill="#c9c5be" opacity="0.5"/>
+  <rect x="542" y="150" width="4" height="246" fill="#9a968f" opacity="0.7"/>
+  <rect x="392" y="150" width="154" height="6" fill="#e3e1dc" opacity="0.7"/>
+  <rect x="392" y="390" width="154" height="6" fill="#5c4632" opacity="0.4"/>
+  <!-- glass reflection streak -->
+  <polygon points="404,160 430,160 410,388 388,388" fill="#faf7f2" opacity="0.30"/>
+  <polygon points="500,160 512,160 498,388 486,388" fill="#faf7f2" opacity="0.16"/>
+  <!-- pedestal inside -->
+  <rect x="440" y="332" width="58" height="58" rx="3" fill="#3d3a36"/>
+  <rect x="440" y="332" width="58" height="12" rx="3" fill="#5c5852"/>
+
+  <!-- gold-and-olive helmet -->
+  <ellipse cx="469" cy="330" rx="52" ry="12" fill="#1f1b16" opacity="0.18"/>
+  <path d="M424 300 Q424 246 469 246 Q514 246 514 300 L514 314 Q514 330 469 330 Q424 330 424 314 Z" fill="url(#gold)"/>
+  <path d="M424 300 Q424 246 469 246 Q490 246 502 258 Q470 262 452 288 Q436 306 430 322 Q424 314 424 300 Z" fill="#cf9f5c" opacity="0.55"/>
+  <!-- olive crest stripe -->
+  <path d="M462 248 Q469 246 476 248 L476 330 Q469 331 462 330 Z" fill="url(#olive)"/>
+  <path d="M465 250 L473 250 L473 328 L465 328 Z" fill="#8a8c62" opacity="0.5"/>
+  <!-- helmet visor slit -->
+  <rect x="434" y="300" width="70" height="9" rx="4" fill="#2a2724" opacity="0.85"/>
+  <!-- gold rim -->
+  <path d="M424 314 Q469 332 514 314 L514 320 Q469 336 424 320 Z" fill="#8a5a20"/>
+  <!-- specular highlight -->
+  <ellipse cx="448" cy="270" rx="14" ry="8" fill="#f7f3ec" opacity="0.45" transform="rotate(-30 448 270)"/>
+
+  <!-- ===== RIGHT: thin black steel two-level console ===== -->
+  <!-- legs -->
+  <rect x="596" y="300" width="6" height="118" rx="2" fill="url(#steel)"/>
+  <rect x="760" y="300" width="6" height="118" rx="2" fill="url(#steel)"/>
+  <rect x="596" y="360" width="6" height="4" fill="#5c5852"/>
+  <rect x="760" y="360" width="6" height="4" fill="#5c5852"/>
+  <!-- top level -->
+  <rect x="580" y="296" width="200" height="12" rx="3" fill="url(#steel)"/>
+  <rect x="580" y="296" width="200" height="4" rx="2" fill="#5c5852" opacity="0.8"/>
+  <!-- lower shelf -->
+  <rect x="588" y="356" width="184" height="10" rx="3" fill="url(#steel)"/>
+  <rect x="588" y="356" width="184" height="3" rx="1.5" fill="#5c5852" opacity="0.7"/>
+  <!-- thin cross rail -->
+  <rect x="602" y="330" width="158" height="3" fill="#2a2724"/>
+
+  <!-- robot vacuum parked under -->
+  <ellipse cx="690" cy="410" rx="46" ry="10" fill="url(#softShadow)"/>
+  <ellipse cx="690" cy="392" rx="42" ry="20" fill="#2a2724"/>
+  <ellipse cx="690" cy="388" rx="42" ry="18" fill="#3d3a36"/>
+  <ellipse cx="690" cy="386" rx="30" ry="12" fill="#15130f"/>
+  <ellipse cx="682" cy="382" rx="9" ry="4" fill="#9a968f" opacity="0.5"/>
+  <circle cx="690" cy="386" r="6" fill="#5c5852"/>
+  <circle cx="690" cy="386" r="2.5" fill="#b8cdd6"/>
+  <rect x="672" y="374" width="36" height="4" rx="2" fill="#cf9f5c" opacity="0.35"/>
+
+  <!-- small tray object on console top -->
+  <rect x="612" y="284" width="46" height="12" rx="3" fill="url(#gold)"/>
+  <rect x="612" y="284" width="46" height="4" rx="2" fill="#cf9f5c" opacity="0.6"/>
+
+  <!-- ===== FOREGROUND: bamboo bench with dark cushion ===== -->
+  <ellipse cx="300" cy="540" rx="220" ry="30" fill="url(#softShadow)"/>
+  <!-- bench frame -->
+  <rect x="120" y="470" width="360" height="20" rx="8" fill="url(#bamboo)"/>
+  <rect x="120" y="470" width="360" height="7" rx="6" fill="#e8dcc6" opacity="0.5"/>
+  <!-- bamboo grain segments -->
+  <line x1="170" y1="470" x2="170" y2="490" stroke="#a5876a" stroke-width="1.5" opacity="0.5"/>
+  <line x1="230" y1="470" x2="230" y2="490" stroke="#a5876a" stroke-width="1.5" opacity="0.5"/>
+  <line x1="300" y1="470" x2="300" y2="490" stroke="#a5876a" stroke-width="1.5" opacity="0.5"/>
+  <line x1="370" y1="470" x2="370" y2="490" stroke="#a5876a" stroke-width="1.5" opacity="0.5"/>
+  <line x1="430" y1="470" x2="430" y2="490" stroke="#a5876a" stroke-width="1.5" opacity="0.5"/>
+  <!-- dark cushion -->
+  <rect x="132" y="452" width="336" height="26" rx="12" fill="url(#velvet)"/>
+  <rect x="132" y="452" width="336" height="10" rx="10" fill="#5c5852" opacity="0.35"/>
+  <!-- velvet tuft seams -->
+  <line x1="210" y1="454" x2="210" y2="476" stroke="#15130f" stroke-width="2" opacity="0.6"/>
+  <line x1="300" y1="454" x2="300" y2="476" stroke="#15130f" stroke-width="2" opacity="0.6"/>
+  <line x1="390" y1="454" x2="390" y2="476" stroke="#15130f" stroke-width="2" opacity="0.6"/>
+  <ellipse cx="255" cy="458" rx="26" ry="4" fill="#5c5852" opacity="0.3"/>
+  <ellipse cx="345" cy="458" rx="26" ry="4" fill="#5c5852" opacity="0.3"/>
+  <!-- bamboo legs -->
+  <rect x="150" y="490" width="16" height="66" rx="6" fill="url(#bamboo)"/>
+  <rect x="150" y="490" width="6" height="66" rx="4" fill="#e8dcc6" opacity="0.4"/>
+  <line x1="150" y1="516" x2="166" y2="516" stroke="#a5876a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="150" y1="540" x2="166" y2="540" stroke="#a5876a" stroke-width="1.5" opacity="0.6"/>
+  <rect x="434" y="490" width="16" height="66" rx="6" fill="url(#bamboo)"/>
+  <rect x="434" y="490" width="6" height="66" rx="4" fill="#e8dcc6" opacity="0.4"/>
+  <line x1="434" y1="516" x2="450" y2="516" stroke="#a5876a" stroke-width="1.5" opacity="0.6"/>
+  <line x1="434" y1="540" x2="450" y2="540" stroke="#a5876a" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- warm raking light overlay -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#rakeLight)"/>
+  <polygon points="0,0 220,0 90,600 0,600" fill="#faf7f2" opacity="0.10"/>
+</svg>
