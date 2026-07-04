@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="walnutBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="0.55" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="walnutTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#5c4632"/>
+    </linearGradient>
+    <linearGradient id="walnutDoor" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5c4632"/>
+      <stop offset="0.5" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a3624"/>
+      <stop offset="0.5" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <radialGradient id="chromeSphere" cx="0.38" cy="0.32" r="0.85">
+      <stop offset="0" stop-color="#f3f1ec"/>
+      <stop offset="0.35" stop-color="#e3e1dc"/>
+      <stop offset="0.62" stop-color="#c9c5be"/>
+      <stop offset="0.82" stop-color="#9a968f"/>
+      <stop offset="1" stop-color="#6d6a64"/>
+    </radialGradient>
+    <linearGradient id="chromeMetal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a968f"/>
+      <stop offset="0.3" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#c9c5be"/>
+      <stop offset="0.8" stop-color="#9a968f"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <radialGradient id="amberGlow" cx="0.5" cy="0.42" r="0.7">
+      <stop offset="0" stop-color="#f2dca6"/>
+      <stop offset="0.45" stop-color="#cf9f5c"/>
+      <stop offset="0.8" stop-color="#b98a4a"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </radialGradient>
+    <radialGradient id="amberHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.45"/>
+      <stop offset="0.6" stop-color="#cf9f5c" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="veloutPouf" cx="0.42" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="0.55" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </radialGradient>
+    <linearGradient id="juteMat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#d8c19a"/>
+    </linearGradient>
+    <linearGradient id="potGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9c5be"/>
+      <stop offset="0.5" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wallGrad)"/>
+  <!-- soft warm light wash on wall -->
+  <ellipse cx="300" cy="150" rx="360" ry="230" fill="#faf7f2" opacity="0.5"/>
+
+  <!-- FLOOR band lower third -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floorGrad)"/>
+  <!-- skirting line -->
+  <rect x="0" y="404" width="800" height="8" fill="#e8dcc6"/>
+  <rect x="0" y="410" width="800" height="2.5" fill="#a5876a" opacity="0.5"/>
+  <!-- plank lines -->
+  <line x1="0" y1="452" x2="800" y2="452" stroke="#a5876a" stroke-width="1.4" opacity="0.35"/>
+  <line x1="0" y1="500" x2="800" y2="500" stroke="#a5876a" stroke-width="1.4" opacity="0.35"/>
+  <line x1="0" y1="552" x2="800" y2="552" stroke="#a5876a" stroke-width="1.4" opacity="0.35"/>
+  <line x1="130" y1="412" x2="130" y2="452" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+  <line x1="360" y1="452" x2="360" y2="500" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+  <line x1="560" y1="412" x2="560" y2="452" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+  <line x1="240" y1="500" x2="240" y2="552" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+  <line x1="620" y1="500" x2="620" y2="552" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+  <line x1="470" y1="552" x2="470" y2="600" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+  <line x1="90" y1="552" x2="90" y2="600" stroke="#a5876a" stroke-width="1.1" opacity="0.28"/>
+
+  <!-- ===== CONVEX MIRROR SPHERE (above sideboard) ===== -->
+  <ellipse cx="400" cy="188" rx="62" ry="14" fill="rgba(31,27,22,0.12)" opacity="0.0"/>
+  <circle cx="400" cy="168" r="60" fill="#3d3a36"/>
+  <circle cx="400" cy="168" r="56" fill="url(#chromeSphere)"/>
+  <!-- convex reflected horizon + room -->
+  <path d="M348 172 Q400 150 452 172 Q400 200 348 172 Z" fill="#b8cdd6" opacity="0.35"/>
+  <path d="M352 150 Q400 138 448 150 L448 162 Q400 152 352 162 Z" fill="#faf7f2" opacity="0.55"/>
+  <path d="M356 186 Q400 210 444 186 L444 196 Q400 214 356 196 Z" fill="#a5876a" opacity="0.35"/>
+  <ellipse cx="380" cy="150" rx="16" ry="9" fill="#faf7f2" opacity="0.7"/>
+  <circle cx="400" cy="168" r="56" fill="none" stroke="#e3e1dc" stroke-width="2" opacity="0.6"/>
+  <circle cx="400" cy="168" r="60" fill="none" stroke="#9a968f" stroke-width="2"/>
+  <!-- small hanging cord -->
+  <line x1="400" y1="108" x2="400" y2="60" stroke="#5c4632" stroke-width="2"/>
+
+  <!-- ===== FRAMED PICASSO LINE POSTER (right wall) ===== -->
+  <rect x="596" y="196" width="120" height="150" rx="3" fill="#15130f"/>
+  <rect x="602" y="202" width="108" height="138" rx="2" fill="#faf7f2"/>
+  <!-- single continuous line face -->
+  <path d="M636 232
+           C 626 236 624 254 630 268
+           C 634 278 628 288 634 296
+           C 640 302 652 300 658 306
+           C 664 312 660 322 668 322
+           C 678 322 684 306 682 292
+           C 700 288 700 258 686 246
+           C 678 238 664 236 656 240
+           C 648 226 640 228 636 232 Z"
+        fill="none" stroke="#15130f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M650 256 C 654 252 662 252 666 256" fill="none" stroke="#15130f" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="647" cy="270" r="2.4" fill="#15130f"/>
+  <circle cx="669" cy="268" r="2.4" fill="#15130f"/>
+  <path d="M658 274 C 656 282 654 288 660 290" fill="none" stroke="#15130f" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- ===== PLANT (left, floor) ===== -->
+  <ellipse cx="120" cy="470" rx="52" ry="12" fill="rgba(31,27,22,0.12)"/>
+  <!-- leaves behind -->
+  <path d="M120 372 C 92 340 96 300 116 276 C 122 314 124 346 120 372 Z" fill="#63654a"/>
+  <path d="M120 380 C 150 344 156 306 140 278 C 128 314 122 350 120 380 Z" fill="#7a7c5c"/>
+  <path d="M118 388 C 86 366 76 330 88 302 C 106 332 116 360 118 388 Z" fill="#8a8c62"/>
+  <path d="M122 384 C 156 366 172 336 166 306 C 142 330 126 356 122 384 Z" fill="#63654a"/>
+  <path d="M120 392 C 118 356 120 322 120 300" fill="none" stroke="#5c4632" stroke-width="2" opacity="0.4"/>
+  <path d="M120 392 C 112 360 106 336 96 312" fill="none" stroke="#5c4632" stroke-width="1.6" opacity="0.35"/>
+  <!-- pot -->
+  <path d="M96 392 L144 392 L138 452 Q120 460 102 452 Z" fill="url(#potGrad)"/>
+  <ellipse cx="120" cy="392" rx="24" ry="7" fill="#e3e1dc"/>
+  <ellipse cx="120" cy="392" rx="18" ry="5" fill="#5c4632"/>
+  <path d="M100 420 L140 420" stroke="#9a968f" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- ===== POUF (olive velvet, floor) ===== -->
+  <ellipse cx="185" cy="512" rx="66" ry="16" fill="rgba(31,27,22,0.12)"/>
+  <ellipse cx="185" cy="492" rx="60" ry="40" fill="url(#veloutPouf)"/>
+  <ellipse cx="185" cy="474" rx="56" ry="30" fill="#8a8c62"/>
+  <ellipse cx="185" cy="470" rx="52" ry="26" fill="url(#veloutPouf)"/>
+  <!-- tufting seams -->
+  <path d="M185 448 Q170 470 185 494" fill="none" stroke="#63654a" stroke-width="1.4" opacity="0.55"/>
+  <path d="M185 448 Q200 470 185 494" fill="none" stroke="#63654a" stroke-width="1.4" opacity="0.55"/>
+  <path d="M158 452 Q150 470 160 490" fill="none" stroke="#63654a" stroke-width="1.2" opacity="0.45"/>
+  <path d="M212 452 Q220 470 210 490" fill="none" stroke="#63654a" stroke-width="1.2" opacity="0.45"/>
+  <ellipse cx="185" cy="468" r="5" rx="7" ry="4" fill="#63654a"/>
+  <ellipse cx="172" cy="460" rx="14" ry="7" fill="#8a8c62" opacity="0.6"/>
+
+  <!-- ===== JUTE DOORMAT (floor front center) ===== -->
+  <ellipse cx="430" cy="548" rx="120" ry="20" fill="rgba(31,27,22,0.10)"/>
+  <rect x="320" y="524" width="220" height="46" rx="8" fill="url(#juteMat)"/>
+  <rect x="320" y="524" width="220" height="46" rx="8" fill="none" stroke="#cbb287" stroke-width="3"/>
+  <line x1="332" y1="524" x2="332" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="352" y1="524" x2="352" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="372" y1="524" x2="372" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="392" y1="524" x2="392" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="412" y1="524" x2="412" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="432" y1="524" x2="432" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="452" y1="524" x2="452" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="472" y1="524" x2="472" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="492" y1="524" x2="492" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="512" y1="524" x2="512" y2="570" stroke="#cbb287" stroke-width="1" opacity="0.5"/>
+  <line x1="326" y1="538" x2="534" y2="538" stroke="#a5876a" stroke-width="1" opacity="0.35"/>
+  <line x1="326" y1="556" x2="534" y2="556" stroke="#a5876a" stroke-width="1" opacity="0.35"/>
+
+  <!-- ===== SIDEBOARD (hero, centered) ===== -->
+  <!-- floor shadow -->
+  <ellipse cx="400" cy="412" rx="180" ry="20" fill="rgba(31,27,22,0.12)"/>
+  <!-- legs (tapered walnut) -->
+  <path d="M282 356 L292 356 L296 406 L286 406 Z" fill="url(#legGrad)"/>
+  <path d="M508 356 L518 356 L514 406 L504 406 Z" fill="url(#legGrad)"/>
+  <path d="M330 356 L338 356 L340 402 L332 402 Z" fill="url(#legGrad)" opacity="0.9"/>
+  <path d="M462 356 L470 356 L468 402 L460 402 Z" fill="url(#legGrad)" opacity="0.9"/>
+  <ellipse cx="291" cy="407" rx="7" ry="2.5" fill="#c9c5be"/>
+  <ellipse cx="509" cy="407" rx="7" ry="2.5" fill="#c9c5be"/>
+  <!-- body -->
+  <rect x="266" y="258" width="268" height="102" rx="8" fill="url(#walnutBody)"/>
+  <!-- top surface -->
+  <rect x="260" y="248" width="280" height="16" rx="6" fill="url(#walnutTop)"/>
+  <rect x="260" y="248" width="280" height="5" rx="2.5" fill="#8a6a48" opacity="0.6"/>
+  <!-- doors -->
+  <rect x="276" y="270" width="120" height="80" rx="5" fill="url(#walnutDoor)"/>
+  <rect x="404" y="270" width="120" height="80" rx="5" fill="url(#walnutDoor)"/>
+  <rect x="276" y="270" width="120" height="80" rx="5" fill="none" stroke="#4a3624" stroke-width="1.5"/>
+  <rect x="404" y="270" width="120" height="80" rx="5" fill="none" stroke="#4a3624" stroke-width="1.5"/>
+  <!-- wood grain -->
+  <path d="M290 282 Q336 288 384 282" fill="none" stroke="#4a3624" stroke-width="1" opacity="0.35"/>
+  <path d="M290 312 Q336 318 384 312" fill="none" stroke="#4a3624" stroke-width="1" opacity="0.3"/>
+  <path d="M290 338 Q336 344 384 338" fill="none" stroke="#4a3624" stroke-width="1" opacity="0.3"/>
+  <path d="M416 282 Q464 288 512 282" fill="none" stroke="#4a3624" stroke-width="1" opacity="0.35"/>
+  <path d="M416 312 Q464 318 512 312" fill="none" stroke="#4a3624" stroke-width="1" opacity="0.3"/>
+  <path d="M416 338 Q464 344 512 338" fill="none" stroke="#4a3624" stroke-width="1" opacity="0.3"/>
+  <!-- chrome handles -->
+  <rect x="384" y="304" width="6" height="18" rx="3" fill="url(#chromeMetal)"/>
+  <rect x="410" y="304" width="6" height="18" rx="3" fill="url(#chromeMetal)"/>
+  <!-- highlight edge -->
+  <rect x="266" y="258" width="268" height="6" rx="3" fill="#7a5c40" opacity="0.5"/>
+
+  <!-- ===== CHROME CANDLESTICK (on sideboard, right) ===== -->
+  <ellipse cx="476" cy="249" rx="24" ry="5" fill="rgba(31,27,22,0.12)"/>
+  <ellipse cx="476" cy="246" rx="20" ry="5" fill="url(#chromeMetal)"/>
+  <rect x="472" y="212" width="8" height="34" fill="url(#chromeMetal)"/>
+  <ellipse cx="476" cy="230" rx="9" ry="5" fill="url(#chromeMetal)"/>
+  <ellipse cx="476" cy="216" rx="7" ry="4" fill="url(#chromeMetal)"/>
+  <path d="M468 210 L484 210 L481 200 L471 200 Z" fill="url(#chromeMetal)"/>
+  <!-- candle -->
+  <rect x="471" y="182" width="10" height="20" rx="2" fill="#faf7f2"/>
+  <rect x="471" y="182" width="4" height="20" rx="2" fill="#fff" opacity="0.7"/>
+  <path d="M476 170 C 470 176 470 182 476 182 C 482 182 482 176 476 170 Z" fill="url(#amberGlow)"/>
+  <ellipse cx="476" cy="180" rx="4" ry="6" fill="#f2dca6" opacity="0.7"/>
+
+  <!-- ===== AMBER MUSHROOM LAMP (on sideboard, left) ===== -->
+  <ellipse cx="330" cy="200" rx="70" ry="70" fill="url(#amberHalo)"/>
+  <ellipse cx="330" cy="249" rx="30" ry="6" fill="rgba(31,27,22,0.12)"/>
+  <!-- base -->
+  <ellipse cx="330" cy="245" rx="26" ry="6" fill="url(#chromeMetal)"/>
+  <path d="M310 245 Q330 258 350 245 L346 238 Q330 246 314 238 Z" fill="url(#amberGlow)"/>
+  <!-- stem -->
+  <rect x="325" y="212" width="10" height="28" rx="4" fill="#b98a4a"/>
+  <!-- dome cap -->
+  <path d="M292 214 C 292 178 368 178 368 214 Q330 226 292 214 Z" fill="url(#amberGlow)"/>
+  <ellipse cx="330" cy="214" rx="38" ry="9" fill="#cf9f5c"/>
+  <ellipse cx="318" cy="196" rx="14" ry="9" fill="#f2dca6" opacity="0.7"/>
+  <path d="M298 210 Q330 220 362 210" fill="none" stroke="#8a5a20" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- ===== ambient floor glow from lamp ===== -->
+  <ellipse cx="360" cy="420" rx="150" ry="24" fill="#cf9f5c" opacity="0.06"/>
+
+</svg>
