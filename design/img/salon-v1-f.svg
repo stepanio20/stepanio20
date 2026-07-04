@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="0.55" stop-color="#f7f3ec"/>
+      <stop offset="1" stop-color="#efe8db"/>
+    </linearGradient>
+    <radialGradient id="lightGlow" cx="0.22" cy="0.18" r="0.85">
+      <stop offset="0" stop-color="#fff6e6" stop-opacity="0.75"/>
+      <stop offset="0.5" stop-color="#fbf2e2" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#f7f3ec" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c1a679"/>
+    </linearGradient>
+    <linearGradient id="skirtGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#e6dcc9"/>
+    </linearGradient>
+    <linearGradient id="woodTop" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#e2cda4"/>
+      <stop offset="0.5" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="woodEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="woodBody" x1="0" y1="0" x2="1" y2="0.15">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.6" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#bfa274"/>
+    </linearGradient>
+    <linearGradient id="doorGrad" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#ddc7a0"/>
+      <stop offset="0.55" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#b99f72"/>
+    </linearGradient>
+    <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="chromeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.45" stop-color="#c9c5be"/>
+      <stop offset="0.55" stop-color="#9a968f"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#d6e4ea"/>
+      <stop offset="0.5" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#98b3bf"/>
+    </linearGradient>
+    <linearGradient id="potGrad" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#e2cda4"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="potGrad2" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#f2ede3"/>
+      <stop offset="0.6" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#d4c6ab"/>
+    </linearGradient>
+    <linearGradient id="linenGrad" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#efe6d5"/>
+      <stop offset="1" stop-color="#e0d2b8"/>
+    </linearGradient>
+    <linearGradient id="leafA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="leafB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#5b5d44"/>
+    </linearGradient>
+    <linearGradient id="bookOlive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <linearGradient id="bookSand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe6d5"/>
+      <stop offset="1" stop-color="#e0d2b8"/>
+    </linearGradient>
+    <linearGradient id="bookAmber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="bookGraph" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <radialGradient id="softShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1f1b16" stop-opacity="0.16"/>
+      <stop offset="0.7" stop-color="#1f1b16" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#1f1b16" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bowlGrad" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wallGrad)"/>
+  <rect x="0" y="0" width="800" height="420" fill="url(#lightGlow)"/>
+
+  <!-- FRAMED SAND POSTER on wall -->
+  <g>
+    <rect x="298" y="66" width="176" height="150" rx="4" fill="#1f1b16" opacity="0.10"/>
+    <rect x="294" y="62" width="176" height="150" rx="4" fill="#e8dcc6"/>
+    <rect x="302" y="70" width="160" height="134" rx="2" fill="url(#linenGrad)"/>
+    <path d="M312 190 q70 -120 140 0 Z" fill="#c8a87c" opacity="0.65"/>
+    <path d="M330 190 q52 -78 104 0 Z" fill="#8a8c62" opacity="0.55"/>
+    <circle cx="382" cy="104" r="16" fill="#cf9f5c" opacity="0.7"/>
+    <rect x="294" y="62" width="176" height="150" rx="4" fill="none" stroke="#cbb287" stroke-width="4"/>
+  </g>
+
+  <!-- FLOOR -->
+  <rect x="0" y="400" width="800" height="200" fill="url(#floorGrad)"/>
+  <g stroke="#b89a6d" stroke-width="1.4" opacity="0.5">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="508" x2="800" y2="508"/>
+    <line x1="0" y1="566" x2="800" y2="566"/>
+  </g>
+  <g stroke="#b89a6d" stroke-width="1" opacity="0.35">
+    <line x1="150" y1="400" x2="150" y2="452"/>
+    <line x1="470" y1="452" x2="470" y2="508"/>
+    <line x1="300" y1="508" x2="300" y2="566"/>
+    <line x1="620" y1="508" x2="620" y2="566"/>
+  </g>
+
+  <!-- SKIRTING -->
+  <rect x="0" y="388" width="800" height="12" fill="url(#skirtGrad)"/>
+  <line x1="0" y1="388" x2="800" y2="388" stroke="#e6dcc9" stroke-width="1"/>
+
+  <!-- SIDEBOARD SHADOW -->
+  <ellipse cx="400" cy="472" rx="300" ry="34" fill="url(#softShadow)"/>
+
+  <!-- SIDEBOARD -->
+  <g>
+    <!-- legs -->
+    <path d="M162 430 l-10 44 12 0 12 -44 Z" fill="url(#legGrad)"/>
+    <path d="M636 430 l10 44 -12 0 -12 -44 Z" fill="url(#legGrad)"/>
+    <path d="M300 432 l-6 40 10 0 8 -40 Z" fill="url(#legGrad)" opacity="0.92"/>
+    <path d="M498 432 l6 40 -10 0 -8 -40 Z" fill="url(#legGrad)" opacity="0.92"/>
+
+    <!-- body -->
+    <rect x="146" y="266" width="508" height="168" rx="10" fill="url(#woodBody)"/>
+    <!-- doors -->
+    <rect x="156" y="274" width="158" height="152" rx="7" fill="url(#doorGrad)"/>
+    <rect x="322" y="274" width="158" height="152" rx="7" fill="url(#doorGrad)"/>
+    <rect x="488" y="274" width="158" height="152" rx="7" fill="url(#doorGrad)"/>
+    <!-- door grain hints -->
+    <g stroke="#bfa274" stroke-width="1" opacity="0.35">
+      <line x1="176" y1="286" x2="176" y2="414"/>
+      <line x1="210" y1="286" x2="210" y2="414"/>
+      <line x1="342" y1="286" x2="342" y2="414"/>
+      <line x1="378" y1="286" x2="378" y2="414"/>
+      <line x1="510" y1="286" x2="510" y2="414"/>
+      <line x1="548" y1="286" x2="548" y2="414"/>
+    </g>
+    <!-- door shade edges -->
+    <rect x="300" y="274" width="14" height="152" fill="#a5876a" opacity="0.25"/>
+    <rect x="466" y="274" width="14" height="152" fill="#a5876a" opacity="0.25"/>
+    <!-- handles -->
+    <rect x="300" y="330" width="6" height="40" rx="3" fill="url(#chromeGrad)"/>
+    <rect x="466" y="330" width="6" height="40" rx="3" fill="url(#chromeGrad)"/>
+    <rect x="490" y="330" width="6" height="40" rx="3" fill="url(#chromeGrad)"/>
+
+    <!-- top slab -->
+    <rect x="134" y="248" width="532" height="22" rx="7" fill="url(#woodTop)"/>
+    <rect x="134" y="262" width="532" height="10" rx="4" fill="url(#woodEdge)"/>
+    <line x1="150" y1="255" x2="650" y2="255" stroke="#e2cda4" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- PROP SHADOWS on top -->
+  <ellipse cx="242" cy="250" rx="86" ry="10" fill="#1f1b16" opacity="0.10"/>
+  <ellipse cx="392" cy="250" rx="40" ry="8" fill="#1f1b16" opacity="0.10"/>
+  <ellipse cx="470" cy="250" rx="34" ry="7" fill="#1f1b16" opacity="0.10"/>
+  <ellipse cx="566" cy="250" rx="62" ry="9" fill="#1f1b16" opacity="0.11"/>
+
+  <!-- STACK OF BOOKS (left) -->
+  <g>
+    <rect x="172" y="230" width="150" height="18" rx="4" fill="url(#bookGraph)"/>
+    <rect x="176" y="232" width="4" height="14" fill="#4a3624" opacity="0.5"/>
+    <rect x="180" y="214" width="140" height="16" rx="4" fill="url(#bookSand)"/>
+    <rect x="184" y="216" width="4" height="12" fill="#cbb287" opacity="0.7"/>
+    <g transform="rotate(-3 250 208)">
+      <rect x="184" y="199" width="132" height="15" rx="4" fill="url(#bookOlive)"/>
+      <rect x="188" y="201" width="4" height="11" fill="#5b5d44"/>
+    </g>
+    <g transform="rotate(2 250 194)">
+      <rect x="192" y="186" width="118" height="13" rx="4" fill="url(#bookAmber)"/>
+      <rect x="196" y="188" width="3" height="9" fill="#8a5a20"/>
+    </g>
+    <!-- small object on books: a sphere -->
+    <circle cx="300" cy="176" r="12" fill="url(#chromeGrad)"/>
+    <circle cx="296" cy="172" r="4" fill="#fff" opacity="0.7"/>
+  </g>
+
+  <!-- GLASS-BLUE VASE (center) -->
+  <g>
+    <ellipse cx="392" cy="248" rx="30" ry="7" fill="#98b3bf" opacity="0.4"/>
+    <path d="M368 246 q-4 -46 24 -70 q28 24 24 70 Z" fill="url(#glassGrad)"/>
+    <path d="M380 180 q12 -10 24 0" fill="none" stroke="#98b3bf" stroke-width="2" opacity="0.6"/>
+    <path d="M374 196 q0 32 6 48" fill="none" stroke="#d6e4ea" stroke-width="3" opacity="0.6"/>
+    <!-- stems -->
+    <path d="M392 178 q-2 -50 -28 -74" fill="none" stroke="#7a7c5c" stroke-width="3"/>
+    <path d="M392 178 q6 -40 30 -60" fill="none" stroke="#7a7c5c" stroke-width="3"/>
+    <path d="M392 178 q0 -46 2 -78" fill="none" stroke="#8a8c62" stroke-width="3"/>
+    <path d="M364 104 q-20 -6 -30 6 q22 8 30 -6 Z" fill="url(#leafA)"/>
+    <path d="M422 118 q22 -8 32 4 q-24 8 -32 -4 Z" fill="url(#leafB)"/>
+    <path d="M394 100 q-10 -18 -2 -34 q14 14 2 34 Z" fill="url(#leafA)"/>
+    <path d="M394 108 q12 -16 26 -18 q-6 20 -26 18 Z" fill="url(#leafB)"/>
+  </g>
+
+  <!-- SMALL OCHRE BOWL -->
+  <g>
+    <ellipse cx="470" cy="246" rx="30" ry="8" fill="url(#bowlGrad)"/>
+    <path d="M440 244 q30 22 60 0 q-2 8 -30 8 q-28 0 -30 -8 Z" fill="#8a5a20"/>
+    <ellipse cx="470" cy="242" rx="26" ry="6" fill="#cf9f5c" opacity="0.9"/>
+    <ellipse cx="463" cy="240" rx="8" ry="2.5" fill="#e8dcc6" opacity="0.6"/>
+  </g>
+
+  <!-- CANDLE HOLDER (chrome, thin) -->
+  <g>
+    <rect x="500" y="200" width="8" height="46" rx="3" fill="url(#chromeGrad)"/>
+    <ellipse cx="504" cy="246" rx="12" ry="4" fill="#9a968f"/>
+    <rect x="501" y="188" width="6" height="14" rx="3" fill="#faf7f2"/>
+    <path d="M504 178 q-4 6 0 12 q4 -6 0 -12 Z" fill="#cf9f5c"/>
+  </g>
+
+  <!-- POTTED PLANT (right) -->
+  <g>
+    <path d="M416 130 q-2 -46 8 -70" fill="none" stroke="#63654a" stroke-width="3"/>
+    <path d="M552 246 q-2 -40 6 -70" fill="none" stroke="#63654a" stroke-width="3"/>
+    <path d="M560 246 q4 -50 22 -78" fill="none" stroke="#7a7c5c" stroke-width="3"/>
+    <path d="M572 246 q18 -40 40 -56" fill="none" stroke="#7a7c5c" stroke-width="3"/>
+    <path d="M566 246 q0 -60 -2 -96" fill="none" stroke="#8a8c62" stroke-width="3"/>
+    <!-- leaves -->
+    <path d="M558 176 q-34 -8 -50 12 q34 12 50 -12 Z" fill="url(#leafA)"/>
+    <path d="M564 150 q-30 -16 -34 -44 q30 16 34 44 Z" fill="url(#leafB)"/>
+    <path d="M582 168 q26 -20 54 -16 q-18 30 -54 16 Z" fill="url(#leafA)"/>
+    <path d="M612 190 q30 -6 44 10 q-30 12 -44 -10 Z" fill="url(#leafB)"/>
+    <path d="M566 130 q-8 -30 6 -54 q18 24 -6 54 Z" fill="url(#leafA)"/>
+    <path d="M576 148 q22 -26 48 -28 q-8 34 -48 28 Z" fill="url(#leafB)"/>
+    <path d="M550 200 q-30 -2 -44 16 q30 10 44 -16 Z" fill="url(#leafB)"/>
+    <!-- pot -->
+    <ellipse cx="566" cy="246" rx="42" ry="9" fill="#1f1b16" opacity="0.10"/>
+    <path d="M528 210 l76 0 l-8 36 q-30 12 -60 0 Z" fill="url(#potGrad2)"/>
+    <ellipse cx="566" cy="210" rx="38" ry="9" fill="#f2ede3"/>
+    <ellipse cx="566" cy="210" rx="30" ry="6" fill="#5c4632" opacity="0.55"/>
+    <path d="M530 216 l72 0" stroke="#d4c6ab" stroke-width="2" opacity="0.7"/>
+  </g>
+
+  <!-- soft top highlight sweep -->
+  <path d="M150 250 q250 -8 500 0" fill="none" stroke="#fff6e6" stroke-width="2" opacity="0.35"/>
+</svg>
