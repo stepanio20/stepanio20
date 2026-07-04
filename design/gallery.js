@@ -1,82 +1,92 @@
-/* Галерея варианта: сначала РЕАЛЬНЫЕ фото (Pexels) из window.PHOTOS.
-   Если фото не подгрузилось — тихо убираем его. Если у варианта не осталось
-   ни одного фото, откатываемся на векторные тайлы (hero,a..j), затем на градиент. */
+/* Галерея варианта: блок «ДО → ПОСЛЕ» (реальное фото квартиры → рендер с мебелью
+   этого варианта), затем остальные ракурсы рендера. Ниже на странице — список
+   мебели и описание. Показываются только реальные изображения; битые убираются. */
 (function () {
   var path = location.pathname;
   var prefix = /recibidor/.test(path) ? 'recibidor' : /salon/.test(path) ? 'salon' : null;
   if (!prefix) return;
   var IMG = '../img/';
-  var SVG_SUF = ['hero', 'a', 'b', 'c', 'd', 'e', 'f', 'g'];
-  var PHOTOS = (window.PHOTOS && window.PHOTOS.variants) || {};
+  var P = window.PHOTOS || {};
+  var RENDERS = P.renders || {};
+  var STOCK = P.variants || {};
+  var BEFORE = (P.before || {})[prefix];
 
-  function openLb(src) {
-    var lb = document.querySelector('.lightbox');
-    if (!lb) {
-      lb = document.createElement('div');
-      lb.className = 'lightbox';
-      lb.innerHTML = '<img alt="">';
-      lb.addEventListener('click', function () { lb.classList.remove('on'); });
-      document.body.appendChild(lb);
+  function lb(src) {
+    var el = document.querySelector('.lightbox');
+    if (!el) {
+      el = document.createElement('div'); el.className = 'lightbox';
+      el.innerHTML = '<img alt="">';
+      el.addEventListener('click', function () { el.classList.remove('on'); });
+      document.body.appendChild(el);
     }
-    lb.querySelector('img').src = src;
-    lb.classList.add('on');
+    el.querySelector('img').src = src; el.classList.add('on');
+  }
+
+  function fig(src, label, cls) {
+    var f = document.createElement('figure');
+    f.className = 'ga-fig ' + (cls || '');
+    var im = new Image();
+    im.className = 'ga-img'; im.alt = label || ''; im.loading = 'lazy';
+    im.addEventListener('click', function () { lb(im.src); });
+    im.addEventListener('error', function () { f.remove(); });
+    im.src = src;
+    f.appendChild(im);
+    if (label) {
+      var c = document.createElement('figcaption'); c.className = 'ga-cap'; c.textContent = label;
+      f.appendChild(c);
+    }
+    return f;
   }
 
   document.querySelectorAll('article.variant').forEach(function (art) {
-    var vid = art.id;
-    if (!vid) return;
+    var vid = art.id; if (!vid) return;
     var id = prefix + '-' + vid;
     var vis = art.querySelector('.v-visual');
 
+    // список рендеров этого варианта (свой дом + мебель варианта)
+    var rv = RENDERS[id];
+    var renders = rv ? (typeof rv === 'string' ? [rv] : rv.slice()) : [];
+    // добавим доп. ракурсы real2/real3, если это одиночная строка
+    if (rv && typeof rv === 'string') {
+      ['-real2', '-real3'].forEach(function (suf) {
+        renders.push(id + suf + '.webp'); // проверятся onerror
+      });
+      // rv уже "id-real.webp"; убираем дубли
+    }
+    var renderUrls = renders.map(function (f) { return IMG + f; });
+
+    if (!renderUrls.length && !BEFORE) return;
+
     var g = document.createElement('div');
     g.className = 'v-gallery';
-    var grid = document.createElement('div');
-    grid.className = 'g-grid';
-    g.appendChild(grid);
+
+    // блок ДО → ПОСЛЕ
+    var ba = document.createElement('div');
+    ba.className = 'ba';
+    if (BEFORE) ba.appendChild(fig(IMG + BEFORE, 'До — ваша квартира сейчас', 'ba-before'));
+    if (renderUrls.length) ba.appendChild(fig(renderUrls[0], 'После — с мебелью этого варианта', 'ba-after'));
+    g.appendChild(ba);
+
+    // остальные ракурсы
+    var rest = renderUrls.slice(1);
+    if (rest.length) {
+      var grid = document.createElement('div'); grid.className = 'g-grid';
+      rest.forEach(function (u, i) {
+        var im = new Image();
+        im.className = 'g-cell'; im.alt = 'Ракурс'; im.loading = 'lazy'; im.style.order = i;
+        im.addEventListener('click', function () { lb(im.src); });
+        im.addEventListener('error', function () { im.remove(); });
+        im.src = u; grid.appendChild(im);
+      });
+      g.appendChild(grid);
+    }
+
     var cap = document.createElement('div');
     cap.className = 'g-caption';
-    cap.textContent = 'Первое фото — фотореалистичный рендер именно этой квартиры (Venice AI, по вашим фото). Далее — референсы. Нажмите, чтобы увеличить.';
+    cap.textContent = 'Слева — ваша квартира сейчас, справа и ниже — как будет с предложенной мебелью (рендеры Venice AI по вашим фото). Нажмите, чтобы увеличить.';
     g.appendChild(cap);
 
-    var state = { photos: 0, svg: 0 };
-
-    function addImg(src, order) {
-      var img = new Image();
-      img.className = 'g-cell';
-      img.alt = 'Визуализация';
-      img.loading = 'lazy';
-      img.style.order = order;
-      img.addEventListener('load', function () {
-        img.classList.add('on');
-        if (vis) vis.style.display = 'none';
-      });
-      img.addEventListener('click', function () { openLb(img.src); });
-      img.dataset.src = src;
-      return img;
-    }
-
-    var urls = (PHOTOS[id] || []).slice();
-    // Первым — фотореалистичный img2img-рендер именно этой квартиры (Venice),
-    // затем стоковые фото-референсы. Битые молча убираем.
-    var renders = (window.PHOTOS && window.PHOTOS.renders) || {};
-    var rv = renders[id];
-    if (rv) {
-      var list = (typeof rv === 'string') ? [rv] : rv.slice();
-      // добавляем в начало: -real первым, затем -real2, -real3
-      for (var k = list.length - 1; k >= 0; k--) urls.unshift(IMG + list[k]);
-    }
-    urls.forEach(function (u, i) {
-      var img = addImg(u, i);
-      img.addEventListener('load', function () { state.photos++; });
-      img.addEventListener('error', function () { img.remove(); });
-      img.src = u;
-      grid.appendChild(img);
-    });
-
-    // галерею вставляем только если есть что показывать
-    if (urls.length) {
-      if (vis) vis.insertAdjacentElement('beforebegin', g);
-      else art.appendChild(g);
-    }
+    if (vis) { vis.style.display = 'none'; vis.insertAdjacentElement('beforebegin', g); }
+    else art.appendChild(g);
   });
 })();

@@ -266,6 +266,19 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 
 /* галерея визуализаций варианта */
 .v-gallery { margin: 22px 26px 0; }
+/* блок ДО → ПОСЛЕ */
+.ba { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.ga-fig { margin: 0; position: relative; }
+.ga-img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+  border-radius: 12px; border: 1px solid var(--line); background: #efe9de; cursor: zoom-in;
+}
+.ga-cap {
+  position: absolute; left: 10px; top: 10px; font-size: .74rem; font-weight: 600;
+  color: #fff; background: rgba(20,17,13,.62); padding: 5px 11px; border-radius: 999px;
+  backdrop-filter: blur(3px);
+}
+.ba-after .ga-cap { background: rgba(154,107,46,.82); }
 .g-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 12px;
@@ -317,6 +330,8 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 
   .v-gallery { margin: 18px 16px 0; }
   .g-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .ba { grid-template-columns: 1fr; gap: 8px; }
+  .ga-cap { font-size: .7rem; }
 
   .mb-collage { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .mb-tile img { transform: none !important; margin-top: 0 !important; }
