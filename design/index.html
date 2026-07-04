@@ -46,7 +46,7 @@
   <div class="rooms-grid">
 
     <a class="room-card" href="rooms/recibidor.html">
-      <div class="room-cover ph-recibidor"><span class="ph-label">рендер скоро</span></div>
+      <div class="room-cover ph-recibidor" id="cover-recibidor"></div>
       <div class="room-body">
         <h3>Прихожая</h3>
         <p>Витрина для сумок как в бутике, обувь на 10–20 пар за закрытыми фасадами,
@@ -56,7 +56,7 @@
     </a>
 
     <a class="room-card" href="rooms/salon.html">
-      <div class="room-cover ph-salon"><span class="ph-label">рендер скоро</span></div>
+      <div class="room-cover ph-salon" id="cover-salon"></div>
       <div class="room-body">
         <h3>Гостиная</h3>
         <p>Главная стена перестаёт быть пустой, провода исчезают, шлемы F1 встают
@@ -93,5 +93,24 @@
   </div>
 </footer>
 
+<script src="photos.js"></script>
+<script>
+(function () {
+  function cover(id, list) {
+    var el = document.getElementById(id);
+    if (!el || !list || !list.length) return;
+    var img = new Image();
+    img.onload = function () {
+      el.style.backgroundImage = 'url("' + list[0] + '")';
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+    };
+    img.src = list[0];
+  }
+  var m = (window.PHOTOS && window.PHOTOS.mood) || {};
+  cover('cover-salon', m.salon);
+  cover('cover-recibidor', m.recibidor);
+})();
+</script>
 </body>
 </html>

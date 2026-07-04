@@ -1,12 +1,13 @@
-/* Галерея визуализаций варианта: показывает ВСЕ найденные тайлы (hero, a..j)
-   в адаптивной сетке. Не зависит от наличия «главной» картинки — каждый тайл
-   независим. Если ни один не загрузился — остаётся градиент-заглушка. */
+/* Галерея варианта: сначала РЕАЛЬНЫЕ фото (Pexels) из window.PHOTOS.
+   Если фото не подгрузилось — тихо убираем его. Если у варианта не осталось
+   ни одного фото, откатываемся на векторные тайлы (hero,a..j), затем на градиент. */
 (function () {
   var path = location.pathname;
   var prefix = /recibidor/.test(path) ? 'recibidor' : /salon/.test(path) ? 'salon' : null;
   if (!prefix) return;
   var IMG = '../img/';
-  var SUF = ['hero', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+  var SVG_SUF = ['hero', 'a', 'b', 'c', 'd', 'e', 'f', 'g'];
+  var PHOTOS = (window.PHOTOS && window.PHOTOS.variants) || {};
 
   function openLb(src) {
     var lb = document.querySelector('.lightbox');
@@ -32,27 +33,54 @@
     var grid = document.createElement('div');
     grid.className = 'g-grid';
     g.appendChild(grid);
-
     var cap = document.createElement('div');
     cap.className = 'g-caption';
-    cap.textContent = 'Концепт-визуализации варианта (нажмите, чтобы увеличить).';
+    cap.textContent = 'Референс-фото в стиле варианта (нажмите, чтобы увеличить). Фото — Pexels.';
     g.appendChild(cap);
 
-    SUF.forEach(function (suf, idx) {
+    var state = { photos: 0, svg: 0 };
+
+    function addImg(src, order) {
       var img = new Image();
       img.className = 'g-cell';
       img.alt = 'Визуализация';
       img.loading = 'lazy';
-      img.style.order = idx;
+      img.style.order = order;
       img.addEventListener('load', function () {
         img.classList.add('on');
         if (vis) vis.style.display = 'none';
       });
-      img.addEventListener('error', function () { img.remove(); });
       img.addEventListener('click', function () { openLb(img.src); });
-      img.src = IMG + id + '-' + suf + '.svg';
-      grid.appendChild(img);
-    });
+      img.dataset.src = src;
+      return img;
+    }
+
+    var urls = PHOTOS[id] || [];
+    if (urls.length) {
+      urls.forEach(function (u, i) {
+        var img = addImg(u, i);
+        img.addEventListener('load', function () { state.photos++; });
+        img.addEventListener('error', function () {
+          img.remove();
+          // если реальных фото не осталось — подтягиваем вектор как запас
+          if (grid.querySelectorAll('img').length === 0) loadSvgFallback();
+        });
+        img.src = u;
+        grid.appendChild(img);
+      });
+    } else {
+      loadSvgFallback();
+    }
+
+    function loadSvgFallback() {
+      if (state.svg) return; state.svg = 1;
+      SVG_SUF.forEach(function (suf, i) {
+        var img = addImg(IMG + id + '-' + suf + '.svg', 100 + i);
+        img.addEventListener('error', function () { img.remove(); });
+        img.src = IMG + id + '-' + suf + '.svg';
+        grid.appendChild(img);
+      });
+    }
 
     if (vis) vis.insertAdjacentElement('beforebegin', g);
     else art.appendChild(g);

@@ -61,18 +61,25 @@
     '<div class="mb-head"><span class="mb-kicker">Референсы · концепт-борд</span>' +
     '<p class="mb-intro">' + d.intro + '</p></div>';
 
-  // коллаж
+  // коллаж — реальные фото (Pexels), с откатом на векторные тайлы
+  var photoUrls = (window.PHOTOS && window.PHOTOS.mood && window.PHOTOS.mood[prefix]) || [];
+  var sources = photoUrls.length ? photoUrls : d.tiles.map(function (t) { return IMG + t + '.svg'; });
   var collage = document.createElement('div');
   collage.className = 'mb-collage';
-  d.tiles.forEach(function (id, i) {
+  sources.forEach(function (src, i) {
     var fig = document.createElement('figure');
     fig.className = 'mb-tile mb-tile-' + (i % 5);
     var img = new Image();
     img.alt = 'Референс';
     img.loading = 'lazy';
-    img.src = IMG + id + '.svg';
-    img.addEventListener('error', function () { fig.style.display = 'none'; });
+    img.addEventListener('error', function () {
+      // если реальное фото не загрузилось — пробуем векторный тайл
+      var fb = d.tiles[i] ? IMG + d.tiles[i] + '.svg' : null;
+      if (fb && img.src.indexOf('.svg') === -1) { img.src = fb; }
+      else { fig.style.display = 'none'; }
+    });
     img.addEventListener('click', function () { openLb(img.src); });
+    img.src = src;
     fig.appendChild(img);
     collage.appendChild(fig);
   });
