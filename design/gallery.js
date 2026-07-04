@@ -56,33 +56,20 @@
     }
 
     var urls = PHOTOS[id] || [];
+    // Показываем ТОЛЬКО реальные фото. Битые — молча убираем. Если ни одно не
+    // загрузилось, остаётся чистый плейсхолдер (.v-visual) — без вектора.
+    urls.forEach(function (u, i) {
+      var img = addImg(u, i);
+      img.addEventListener('load', function () { state.photos++; });
+      img.addEventListener('error', function () { img.remove(); });
+      img.src = u;
+      grid.appendChild(img);
+    });
+
+    // галерею вставляем только если есть что показывать
     if (urls.length) {
-      urls.forEach(function (u, i) {
-        var img = addImg(u, i);
-        img.addEventListener('load', function () { state.photos++; });
-        img.addEventListener('error', function () {
-          img.remove();
-          // если реальных фото не осталось — подтягиваем вектор как запас
-          if (grid.querySelectorAll('img').length === 0) loadSvgFallback();
-        });
-        img.src = u;
-        grid.appendChild(img);
-      });
-    } else {
-      loadSvgFallback();
+      if (vis) vis.insertAdjacentElement('beforebegin', g);
+      else art.appendChild(g);
     }
-
-    function loadSvgFallback() {
-      if (state.svg) return; state.svg = 1;
-      SVG_SUF.forEach(function (suf, i) {
-        var img = addImg(IMG + id + '-' + suf + '.svg', 100 + i);
-        img.addEventListener('error', function () { img.remove(); });
-        img.src = IMG + id + '-' + suf + '.svg';
-        grid.appendChild(img);
-      });
-    }
-
-    if (vis) vis.insertAdjacentElement('beforebegin', g);
-    else art.appendChild(g);
   });
 })();
