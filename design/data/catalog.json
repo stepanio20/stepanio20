@@ -1584,7 +1584,7 @@
     },
     {
      "tier": "max",
-     "total_eur": 2441.98,
+     "total_eur": 2900.98,
      "items": [
       {
        "category": "sideboard",
@@ -1599,6 +1599,20 @@
        "verified": true,
        "image_url": "",
        "img": "img/products/p-5b95bc9bf0.webp"
+      },
+      {
+       "category": "shoe-storage",
+       "name": "Kave Home Beyla обувной шкаф 2 дверцы, массив дуба + шпон (апгрейд STÄLL)",
+       "shop": "Kave Home",
+       "url": "https://kavehome.com/en/en/p/beyla-2-door-shoe-rack-in-solid-oak-wood-and-oak-veneer-985cm-fsc-100",
+       "price_eur": 459,
+       "w_cm": 98.5,
+       "d_cm": 42.5,
+       "h_cm": 49.5,
+       "note": "Обувной шкаф остаётся и в максимуме — обувь всегда скрыта. 98.5x42.5x49.5 (карточка Kave). Глубина 42.5 ≤ 45 — проходит. Низкий (49.5) — верх работает как консоль для подноса/вазы. Рейчатые фасады — тёплое ретро. Стена 350 см у проёма.",
+       "verified": true,
+       "image_url": "",
+       "img": "img/products/p-125d29cdc9.webp"
       },
       {
        "category": "mirror",
