@@ -1,0 +1,371 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <!-- Ambient warm background wash -->
+    <radialGradient id="ambient" cx="42%" cy="30%" r="85%">
+      <stop offset="0%" stop-color="#f7f3ec"/>
+      <stop offset="42%" stop-color="#ece2cf"/>
+      <stop offset="78%" stop-color="#d8c7a8"/>
+      <stop offset="100%" stop-color="#b7a483"/>
+    </radialGradient>
+    <!-- Big soft directional light source -->
+    <radialGradient id="lightbeam" cx="40%" cy="18%" r="60%">
+      <stop offset="0%" stop-color="#fff8e8" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#f4e6c6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f4e6c6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wallLeft" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#efe6d4"/>
+      <stop offset="100%" stop-color="#d9caac"/>
+    </linearGradient>
+    <linearGradient id="wallShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9b791"/>
+      <stop offset="100%" stop-color="#9c8663"/>
+    </linearGradient>
+    <!-- Oak floor -->
+    <linearGradient id="oakFloor" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0%" stop-color="#d8c19a"/>
+      <stop offset="45%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakPlank" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cbb287"/>
+      <stop offset="50%" stop-color="#c19f72"/>
+      <stop offset="100%" stop-color="#b6935f"/>
+    </linearGradient>
+    <!-- Cabinet body / walnut base -->
+    <linearGradient id="walnutBase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6d5138"/>
+      <stop offset="55%" stop-color="#5c4632"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="walnutTop" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#7a5c3f"/>
+      <stop offset="100%" stop-color="#5c4632"/>
+    </linearGradient>
+    <!-- Chrome frame -->
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a968f"/>
+      <stop offset="22%" stop-color="#e3e1dc"/>
+      <stop offset="50%" stop-color="#c9c5be"/>
+      <stop offset="72%" stop-color="#f2f0eb"/>
+      <stop offset="100%" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="chromeV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e3e1dc"/>
+      <stop offset="50%" stop-color="#b4b0a9"/>
+      <stop offset="100%" stop-color="#e8e6e1"/>
+    </linearGradient>
+    <!-- Glass panel -->
+    <linearGradient id="glass" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#dce8ec" stop-opacity="0.55"/>
+      <stop offset="35%" stop-color="#b8cdd6" stop-opacity="0.28"/>
+      <stop offset="70%" stop-color="#cbd8d2" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#e3ddca" stop-opacity="0.34"/>
+    </linearGradient>
+    <linearGradient id="glassStreak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Warm LED interior glow -->
+    <radialGradient id="ledGlow" cx="50%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#fff2d4"/>
+      <stop offset="40%" stop-color="#f3dcab"/>
+      <stop offset="80%" stop-color="#e6c88f"/>
+      <stop offset="100%" stop-color="#cf9f5c"/>
+    </radialGradient>
+    <linearGradient id="ledStrip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff6e0"/>
+      <stop offset="100%" stop-color="#f0d59c" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Shelf glass -->
+    <linearGradient id="shelfGlass" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%" stop-color="#e8f0f0" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#cddedb" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#e8f0f0" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Tan handbag -->
+    <linearGradient id="tanBag" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#e2c191"/>
+      <stop offset="45%" stop-color="#cf9f5c"/>
+      <stop offset="100%" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="tanBagShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#8a5a20"/>
+    </linearGradient>
+    <!-- Black handbag -->
+    <linearGradient id="blackBag" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#4a453e"/>
+      <stop offset="45%" stop-color="#2a2724"/>
+      <stop offset="100%" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="blackSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a655c" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#3d3a36" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Olive handbag -->
+    <linearGradient id="oliveBag" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="45%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="oliveShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9aa06e"/>
+      <stop offset="100%" stop-color="#4e5038"/>
+    </linearGradient>
+    <!-- Gold hardware -->
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e9cd8e"/>
+      <stop offset="50%" stop-color="#cf9f5c"/>
+      <stop offset="100%" stop-color="#8a5a20"/>
+    </linearGradient>
+    <!-- Plant leaf -->
+    <linearGradient id="leaf" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="60%" stop-color="#63654a"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="leaf2" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#9aa06e"/>
+      <stop offset="100%" stop-color="#5b5d42"/>
+    </linearGradient>
+    <!-- Soft shadow blur -->
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="softer" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="vignette" cx="45%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="72%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2a2018" stop-opacity="0.42"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== BACKGROUND ===== -->
+  <rect width="600" height="750" fill="url(#ambient)"/>
+  <rect width="600" height="750" fill="url(#lightbeam)"/>
+
+  <!-- Wall planes for depth -->
+  <polygon points="0,0 250,0 250,560 0,600" fill="url(#wallLeft)" opacity="0.9"/>
+  <polygon points="250,0 600,0 600,560 250,560" fill="url(#wallShade)" opacity="0.55"/>
+  <!-- subtle wall panel seams -->
+  <line x1="250" y1="0" x2="250" y2="560" stroke="#a98f68" stroke-width="1.5" opacity="0.4"/>
+  <line x1="130" y1="0" x2="130" y2="580" stroke="#c4b28e" stroke-width="1" opacity="0.35"/>
+  <line x1="430" y1="0" x2="430" y2="560" stroke="#8f7952" stroke-width="1" opacity="0.3"/>
+
+  <!-- Diagonal light beam across wall -->
+  <polygon points="60,0 260,0 120,620 -40,560" fill="#fff5df" opacity="0.16" filter="url(#softer)"/>
+
+  <!-- ===== OAK FLOOR ===== -->
+  <polygon points="0,600 600,560 600,750 0,750" fill="url(#oakFloor)"/>
+  <!-- plank lines receding -->
+  <g opacity="0.5" stroke="#a5876a" stroke-width="1.4">
+    <line x1="0" y1="628" x2="600" y2="590"/>
+    <line x1="0" y1="662" x2="600" y2="626"/>
+    <line x1="0" y1="700" x2="600" y2="668"/>
+    <line x1="0" y1="742" x2="600" y2="716"/>
+  </g>
+  <g opacity="0.28" stroke="#7a5c3f" stroke-width="0.8">
+    <line x1="150" y1="592" x2="150" y2="750"/>
+    <line x1="330" y1="586" x2="330" y2="750"/>
+    <line x1="480" y1="580" x2="480" y2="750"/>
+  </g>
+  <!-- warm floor sheen under cabinet -->
+  <ellipse cx="300" cy="640" rx="230" ry="46" fill="#f0dcae" opacity="0.35" filter="url(#soft)"/>
+
+  <!-- ===== CABINET FLOOR SHADOW ===== -->
+  <ellipse cx="308" cy="628" rx="205" ry="34" fill="#3a2c1d" opacity="0.4" filter="url(#soft)"/>
+
+  <!-- ===== WALNUT BASE PLINTH ===== -->
+  <polygon points="118,608 500,592 500,636 118,652" fill="url(#walnutBase)"/>
+  <polygon points="118,608 500,592 500,600 118,616" fill="#7a5c3f" opacity="0.7"/>
+  <rect x="118" y="596" width="382" height="14" fill="url(#walnutTop)"/>
+  <!-- base reflection sliver -->
+  <polygon points="130,636 490,620 490,626 130,642" fill="#2f2318" opacity="0.6"/>
+
+  <!-- ===== CABINET INTERIOR (glowing box) ===== -->
+  <!-- outer LED halo -->
+  <rect x="150" y="150" width="300" height="452" rx="6" fill="#f6dfa8" opacity="0.55" filter="url(#glow)"/>
+  <!-- interior back -->
+  <rect x="168" y="168" width="264" height="430" rx="4" fill="url(#ledGlow)"/>
+  <!-- top LED strip -->
+  <rect x="172" y="170" width="256" height="46" fill="url(#ledStrip)" opacity="0.9"/>
+  <rect x="176" y="172" width="248" height="5" rx="2.5" fill="#fff7e2"/>
+  <!-- interior side shading for depth -->
+  <polygon points="168,168 200,190 200,578 168,598" fill="#c9964f" opacity="0.4"/>
+  <polygon points="432,168 400,190 400,578 432,598" fill="#8a5a20" opacity="0.45"/>
+  <polygon points="168,598 432,598 400,578 200,578" fill="#a5876a" opacity="0.55"/>
+
+  <!-- ===== GLASS SHELVES ===== -->
+  <g>
+    <rect x="184" y="322" width="232" height="9" rx="3" fill="url(#shelfGlass)"/>
+    <rect x="184" y="322" width="232" height="2.5" fill="#ffffff" opacity="0.7"/>
+    <rect x="184" y="470" width="232" height="9" rx="3" fill="url(#shelfGlass)"/>
+    <rect x="184" y="470" width="232" height="2.5" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- ================= HANDBAG 1: TAN (top shelf, hero) ================= -->
+  <g>
+    <!-- shelf shadow -->
+    <ellipse cx="298" cy="318" rx="62" ry="10" fill="#8a5a20" opacity="0.45" filter="url(#soft)"/>
+    <!-- body -->
+    <path d="M244,250 Q246,232 262,228 L334,228 Q350,232 352,250 L358,308 Q360,318 348,318 L248,318 Q236,318 238,308 Z" fill="url(#tanBag)"/>
+    <!-- flap -->
+    <path d="M244,250 Q298,238 352,250 L350,282 Q298,272 246,282 Z" fill="url(#tanBagShade)" opacity="0.85"/>
+    <path d="M244,250 Q298,238 352,250 L351,260 Q298,249 245,260 Z" fill="#e7c898" opacity="0.6"/>
+    <!-- stitch line -->
+    <path d="M250,256 Q298,246 346,256" fill="none" stroke="#8a5a20" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+    <!-- gold clasp -->
+    <rect x="290" y="278" width="16" height="12" rx="2" fill="url(#gold)"/>
+    <rect x="293" y="281" width="10" height="2" fill="#fff2cf" opacity="0.8"/>
+    <!-- handle -->
+    <path d="M270,228 Q272,196 298,196 Q324,196 326,228" fill="none" stroke="url(#gold)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M270,228 Q272,198 298,198 Q324,198 326,228" fill="none" stroke="#fff0cb" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+    <!-- side highlight -->
+    <path d="M250,252 L246,306 Q244,314 252,314" fill="none" stroke="#f2d9ac" stroke-width="2" opacity="0.55"/>
+  </g>
+
+  <!-- ================= HANDBAG 2: BLACK (mid shelf) ================= -->
+  <g>
+    <ellipse cx="298" cy="466" rx="70" ry="11" fill="#0f0d0a" opacity="0.5" filter="url(#soft)"/>
+    <!-- structured tote body -->
+    <path d="M238,384 L358,384 L366,452 Q368,466 354,466 L242,466 Q228,466 230,452 Z" fill="url(#blackBag)"/>
+    <!-- top sheen -->
+    <path d="M238,384 L358,384 L356,404 Q298,394 240,404 Z" fill="url(#blackSheen)"/>
+    <!-- vertical seam -->
+    <line x1="298" y1="384" x2="298" y2="466" stroke="#4a453e" stroke-width="1.2" opacity="0.6"/>
+    <!-- twin handles -->
+    <path d="M262,384 Q264,352 284,352 Q286,352 286,360" fill="none" stroke="#2a2724" stroke-width="5" stroke-linecap="round"/>
+    <path d="M334,384 Q332,352 312,352 Q310,352 310,360" fill="none" stroke="#2a2724" stroke-width="5" stroke-linecap="round"/>
+    <path d="M286,360 Q298,356 310,360" fill="none" stroke="#2a2724" stroke-width="4" stroke-linecap="round"/>
+    <!-- gold feet / plate -->
+    <rect x="288" y="446" width="20" height="8" rx="2" fill="url(#gold)"/>
+    <circle cx="248" cy="462" r="2.5" fill="#cf9f5c"/>
+    <circle cx="348" cy="462" r="2.5" fill="#cf9f5c"/>
+    <!-- glossy edge light -->
+    <path d="M240,392 L232,450 Q231,460 240,462" fill="none" stroke="#6a655c" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- ================= HANDBAG 3: OLIVE (bottom shelf) ================= -->
+  <g>
+    <ellipse cx="300" cy="574" rx="66" ry="11" fill="#3a3a26" opacity="0.5" filter="url(#soft)"/>
+    <!-- soft hobo body -->
+    <path d="M244,516 Q240,506 254,502 L342,502 Q356,506 354,518 Q360,552 340,566 Q300,580 258,566 Q238,552 244,516 Z" fill="url(#oliveBag)"/>
+    <!-- top gather -->
+    <path d="M254,502 Q300,494 342,502 Q300,510 254,502 Z" fill="url(#oliveShade)"/>
+    <!-- slouch folds -->
+    <path d="M262,522 Q280,548 300,552" fill="none" stroke="#4e5038" stroke-width="1.6" opacity="0.55"/>
+    <path d="M338,522 Q320,548 300,552" fill="none" stroke="#4e5038" stroke-width="1.6" opacity="0.5"/>
+    <path d="M300,510 L300,556" stroke="#5b5d42" stroke-width="1" opacity="0.4"/>
+    <!-- shoulder strap -->
+    <path d="M262,506 Q272,470 300,470 Q328,470 338,506" fill="none" stroke="url(#oliveShade)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M262,506 Q272,472 300,472 Q328,472 338,506" fill="none" stroke="#9aa06e" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/>
+    <!-- gold ring hardware -->
+    <circle cx="263" cy="508" r="5" fill="none" stroke="url(#gold)" stroke-width="3"/>
+    <circle cx="337" cy="508" r="5" fill="none" stroke="url(#gold)" stroke-width="3"/>
+    <!-- highlight -->
+    <path d="M254,516 Q252,540 266,558" fill="none" stroke="#b0b47e" stroke-width="2" opacity="0.5"/>
+  </g>
+
+  <!-- ===== CHROME CABINET FRAME (over interior) ===== -->
+  <g>
+    <!-- outer frame verticals -->
+    <rect x="148" y="150" width="14" height="452" rx="3" fill="url(#chromeV)"/>
+    <rect x="438" y="150" width="14" height="452" rx="3" fill="url(#chromeV)"/>
+    <!-- top & bottom rails -->
+    <rect x="148" y="150" width="304" height="15" rx="3" fill="url(#chrome)"/>
+    <rect x="148" y="588" width="304" height="15" rx="3" fill="url(#chrome)"/>
+    <!-- center mullion (glass door split) -->
+    <rect x="296" y="165" width="7" height="423" fill="url(#chromeV)" opacity="0.9"/>
+    <!-- frame highlights -->
+    <rect x="150" y="152" width="3" height="448" fill="#f6f4ef" opacity="0.7"/>
+    <rect x="440" y="152" width="2.5" height="448" fill="#f6f4ef" opacity="0.6"/>
+  </g>
+
+  <!-- ===== GLASS DOORS (semi-transparent over everything) ===== -->
+  <g>
+    <rect x="162" y="165" width="134" height="423" fill="url(#glass)"/>
+    <rect x="303" y="165" width="135" height="423" fill="url(#glass)"/>
+    <!-- big diagonal reflection streak on left door -->
+    <polygon points="180,168 250,168 200,585 168,585" fill="url(#glassStreak)" opacity="0.7"/>
+    <!-- window reflection on right door -->
+    <polygon points="360,175 405,175 405,300 360,320" fill="#ffffff" opacity="0.14"/>
+    <polygon points="360,330 405,330 405,430 360,440" fill="#ffffff" opacity="0.09"/>
+    <!-- soft rim reflection -->
+    <rect x="162" y="165" width="134" height="8" fill="#ffffff" opacity="0.25"/>
+    <rect x="303" y="165" width="135" height="8" fill="#ffffff" opacity="0.2"/>
+    <!-- door handles -->
+    <rect x="286" y="330" width="5" height="60" rx="2.5" fill="url(#chromeV)"/>
+    <rect x="309" y="330" width="5" height="60" rx="2.5" fill="url(#chromeV)"/>
+  </g>
+
+  <!-- warm reflected glow spilling onto floor -->
+  <ellipse cx="300" cy="612" rx="150" ry="24" fill="#f4dca6" opacity="0.4" filter="url(#soft)"/>
+
+  <!-- ===== SUPPORTING PROP: pedestal + vase left ===== -->
+  <g>
+    <ellipse cx="86" cy="646" rx="46" ry="12" fill="#3a2c1d" opacity="0.4" filter="url(#soft)"/>
+    <rect x="56" y="470" width="60" height="176" rx="3" fill="url(#walnutBase)"/>
+    <rect x="52" y="462" width="68" height="12" rx="3" fill="url(#walnutTop)"/>
+    <rect x="58" y="470" width="6" height="176" fill="#7a5c3f" opacity="0.5"/>
+    <rect x="108" y="470" width="6" height="176" fill="#3a2c1d" opacity="0.5"/>
+    <!-- ceramic vase -->
+    <path d="M70,412 Q66,462 86,470 Q106,462 102,412 Q96,398 86,398 Q76,398 70,412 Z" fill="#e8dcc6"/>
+    <path d="M70,412 Q68,448 80,468 Q78,440 76,412 Z" fill="#faf7f2" opacity="0.7"/>
+    <path d="M96,412 Q100,452 90,468 Q96,440 96,412 Z" fill="#c8b896" opacity="0.6"/>
+    <ellipse cx="86" cy="400" rx="15" ry="4" fill="#cbbfa4"/>
+  </g>
+
+  <!-- ===== PLANT LEAVES (foreground softening) ===== -->
+  <g filter="url(#soft)" opacity="0.96">
+    <!-- tall stem from vase -->
+    <path d="M86,398 Q78,320 62,262" fill="none" stroke="#5b5d42" stroke-width="3"/>
+    <path d="M62,262 Q30,250 20,208 Q48,214 66,244 Q70,254 62,262 Z" fill="url(#leaf)"/>
+    <path d="M62,262 Q30,250 20,208 Q40,232 62,258 Z" fill="url(#leaf2)" opacity="0.7"/>
+    <path d="M74,320 Q108,306 120,268 Q90,276 74,308 Q70,316 74,320 Z" fill="url(#leaf)"/>
+    <path d="M74,320 Q106,308 120,268 Q98,292 74,314 Z" fill="url(#leaf2)" opacity="0.6"/>
+    <path d="M80,352 Q46,344 34,304 Q64,312 80,344 Z" fill="url(#leaf)" opacity="0.92"/>
+  </g>
+
+  <!-- top-right foreground leaf, big and out of focus -->
+  <g filter="url(#softer)" opacity="0.85">
+    <path d="M600,60 Q520,70 470,140 Q540,150 600,120 Z" fill="url(#leaf)"/>
+    <path d="M600,60 Q540,74 470,140 Q548,120 600,90 Z" fill="url(#leaf2)" opacity="0.6"/>
+    <path d="M600,150 Q536,160 500,214 Q562,214 600,190 Z" fill="url(#leaf)" opacity="0.8"/>
+    <path d="M600,60 Q560,110 500,200" fill="none" stroke="#4a3624" stroke-width="2" opacity="0.5"/>
+  </g>
+
+  <!-- small styled prop: chrome tray bottom-right -->
+  <g>
+    <ellipse cx="500" cy="680" rx="70" ry="18" fill="#2f2318" opacity="0.35" filter="url(#soft)"/>
+    <ellipse cx="500" cy="672" rx="66" ry="16" fill="url(#chrome)"/>
+    <ellipse cx="500" cy="670" rx="52" ry="11" fill="#e8e6e1" opacity="0.6"/>
+    <ellipse cx="500" cy="669" rx="52" ry="11" fill="none" stroke="#9a968f" stroke-width="1.2"/>
+    <!-- little candle glass -->
+    <rect x="478" y="640" width="24" height="30" rx="3" fill="#f3dcab" opacity="0.55"/>
+    <ellipse cx="490" cy="640" rx="12" ry="4" fill="#fff2d4"/>
+    <circle cx="490" cy="636" r="5" fill="#ffcf7a" filter="url(#soft)"/>
+    <circle cx="490" cy="636" r="2" fill="#fff7e2"/>
+  </g>
+
+  <!-- floating dust / warm light motes -->
+  <g fill="#fff4d8">
+    <circle cx="120" cy="200" r="2.5" opacity="0.5"/>
+    <circle cx="410" cy="120" r="2" opacity="0.4"/>
+    <circle cx="180" cy="420" r="1.6" opacity="0.35"/>
+    <circle cx="470" cy="360" r="2.2" opacity="0.3"/>
+    <circle cx="90" cy="330" r="1.8" opacity="0.4"/>
+    <circle cx="520" cy="500" r="2" opacity="0.3"/>
+  </g>
+
+  <!-- ===== FINAL VIGNETTE & LIGHT WASH ===== -->
+  <rect width="600" height="750" fill="url(#vignette)"/>
+  <rect width="600" height="750" fill="url(#lightbeam)" opacity="0.35"/>
+</svg>
