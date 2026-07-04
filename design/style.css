@@ -5,8 +5,8 @@
   --ink: #1f1b16;
   --ink-soft: #6b6259;
   --line: #e8e1d6;
-  --accent: #c2452d;        /* терракота / гоночный красный приглушённый */
-  --accent-soft: #f3e0d8;
+  --accent: #9a6b2e;        /* карамель/охра — тёплый акцент без красного */
+  --accent-soft: #f1e7d4;
   --oak: #c8a87c;
   --olive: #7a7c5c;
   --radius: 16px;
@@ -182,7 +182,20 @@ a { color: inherit; }
 footer { border-top: 1px solid var(--line); padding: 34px 0 44px; margin-top: 60px; }
 footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 
+/* поэтажный план */
+.v-plan {
+  margin: 22px 26px 0; background: #fbf9f4;
+  border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 10px;
+}
+.floorplan { width: 100%; max-width: 640px; height: auto; display: block; margin: 0 auto; }
+.floorplan .fp-wall { fill: #8a8177; font-style: italic; }
+.floorplan .fp-keep { fill: #6b6259; }
+.floorplan .fp-new { fill: #8a5a20; font-weight: 600; }
+.floorplan .fp-zone { fill: #a49b8d; }
+.plan-legend { font-size: .78rem; color: var(--ink-soft); margin-top: 8px; text-align: center; }
+
 @media (max-width: 640px) {
+  .v-plan { margin: 18px 16px 0; }
   .p-row { flex-direction: column; align-items: flex-start; gap: 8px; }
   .p-side { width: 100%; justify-content: space-between; }
   .topnav { gap: 12px; font-size: .82rem; }
