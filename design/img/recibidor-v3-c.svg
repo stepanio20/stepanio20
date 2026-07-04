@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="mirrorGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6"/>
+      <stop offset="0.45" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="mirrorSheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="blackFrame" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="0.5" stop-color="#15130f"/>
+      <stop offset="1" stop-color="#3d3a36"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#15130f"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="shelf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="robotTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="amberGlass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <radialGradient id="chromeSphere" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.6" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- wall -->
+  <rect x="0" y="0" width="800" height="470" fill="url(#wall)"/>
+  <!-- floor -->
+  <rect x="0" y="440" width="800" height="160" fill="url(#floor)"/>
+  <rect x="0" y="440" width="800" height="10" fill="#a5876a" opacity="0.35"/>
+  <!-- floor plank hints -->
+  <rect x="60" y="470" width="680" height="2" fill="#a5876a" opacity="0.25"/>
+  <rect x="30" y="520" width="740" height="2" fill="#a5876a" opacity="0.22"/>
+  <rect x="120" y="562" width="600" height="2" fill="#a5876a" opacity="0.2"/>
+
+  <!-- subtle wall panel line -->
+  <rect x="0" y="120" width="800" height="1.5" fill="#d8c19a" opacity="0.4"/>
+
+  <!-- ===== MIRROR (left, full-height) ===== -->
+  <!-- floor shadow under mirror -->
+  <ellipse cx="240" cy="470" rx="150" ry="20" fill="#1f1b16" opacity="0.12"/>
+  <!-- outer black frame -->
+  <rect x="120" y="70" width="240" height="392" rx="10" fill="url(#blackFrame)"/>
+  <rect x="120" y="70" width="240" height="392" rx="10" fill="none" stroke="#15130f" stroke-width="2"/>
+  <!-- inner bevel -->
+  <rect x="136" y="86" width="208" height="360" rx="6" fill="#2a2724"/>
+  <!-- glass -->
+  <rect x="146" y="96" width="188" height="340" rx="5" fill="url(#mirrorGlass)"/>
+  <!-- reflected wall/floor split inside mirror -->
+  <rect x="146" y="360" width="188" height="76" rx="0" fill="#d8c19a" opacity="0.35"/>
+  <!-- reflection ghost of console -->
+  <rect x="250" y="300" width="70" height="90" rx="4" fill="#3d3a36" opacity="0.18"/>
+  <rect x="250" y="300" width="70" height="6" rx="2" fill="#cbb287" opacity="0.3"/>
+  <rect x="250" y="345" width="70" height="6" rx="2" fill="#cbb287" opacity="0.3"/>
+  <!-- diagonal sheen -->
+  <polygon points="146,96 226,96 176,436 146,436" fill="url(#mirrorSheen)" opacity="0.5"/>
+  <polygon points="270,96 300,96 200,436 170,436" fill="#ffffff" opacity="0.14"/>
+  <!-- frame highlight edge -->
+  <rect x="124" y="74" width="6" height="384" rx="3" fill="#3d3a36" opacity="0.6"/>
+
+  <!-- ===== CONSOLE (thin black steel, two-level) ===== -->
+  <!-- floor shadow -->
+  <ellipse cx="560" cy="472" rx="180" ry="18" fill="#1f1b16" opacity="0.12"/>
+
+  <!-- back legs -->
+  <rect x="424" y="250" width="7" height="210" rx="3" fill="url(#steel)"/>
+  <rect x="686" y="250" width="7" height="210" rx="3" fill="url(#steel)"/>
+  <!-- front legs -->
+  <rect x="444" y="250" width="8" height="212" rx="3" fill="#15130f"/>
+  <rect x="666" y="250" width="8" height="212" rx="3" fill="#15130f"/>
+
+  <!-- lower shelf (oak) -->
+  <rect x="430" y="382" width="256" height="16" rx="5" fill="url(#shelf)"/>
+  <rect x="430" y="382" width="256" height="5" rx="2.5" fill="#d8c19a" opacity="0.7"/>
+  <rect x="430" y="393" width="256" height="5" rx="2.5" fill="#a5876a" opacity="0.6"/>
+  <!-- lower steel rail -->
+  <rect x="424" y="378" width="269" height="5" rx="2.5" fill="#2a2724"/>
+
+  <!-- upper top (oak) -->
+  <rect x="418" y="242" width="280" height="18" rx="6" fill="url(#shelf)"/>
+  <rect x="418" y="242" width="280" height="6" rx="3" fill="#d8c19a" opacity="0.75"/>
+  <rect x="418" y="254" width="280" height="6" rx="3" fill="#a5876a" opacity="0.6"/>
+  <!-- top steel edge -->
+  <rect x="414" y="238" width="288" height="6" rx="3" fill="#15130f"/>
+
+  <!-- ===== objects on top of console ===== -->
+  <!-- amber glass vase -->
+  <ellipse cx="480" cy="240" rx="26" ry="6" fill="#1f1b16" opacity="0.15"/>
+  <path d="M462 238 Q460 205 472 190 Q476 184 470 176 L490 176 Q484 184 488 190 Q500 205 498 238 Z" fill="url(#amberGlass)"/>
+  <path d="M466 236 Q464 208 474 192 L478 192 Q470 210 472 236 Z" fill="#cf9f5c" opacity="0.6"/>
+  <rect x="468" y="170" width="24" height="8" rx="3" fill="#8a5a20"/>
+
+  <!-- chrome sphere ornament -->
+  <ellipse cx="640" cy="242" rx="20" ry="5" fill="#1f1b16" opacity="0.15"/>
+  <circle cx="640" cy="222" r="20" fill="url(#chromeSphere)"/>
+  <ellipse cx="633" cy="214" rx="6" ry="4" fill="#ffffff" opacity="0.8"/>
+
+  <!-- small tray with keys dish -->
+  <rect x="540" y="230" width="70" height="10" rx="4" fill="#5c4632"/>
+  <rect x="540" y="230" width="70" height="4" rx="2" fill="#6d5138"/>
+  <ellipse cx="560" cy="228" rx="10" ry="4" fill="#c9c5be"/>
+  <ellipse cx="588" cy="229" rx="8" ry="3.5" fill="#e3e1dc"/>
+
+  <!-- ===== object on lower shelf ===== -->
+  <!-- stacked books -->
+  <rect x="450" y="366" width="70" height="10" rx="2" fill="#7a7c5c"/>
+  <rect x="454" y="356" width="62" height="10" rx="2" fill="#8a8c62"/>
+  <rect x="458" y="347" width="54" height="9" rx="2" fill="#5c4632"/>
+  <rect x="450" y="374" width="70" height="2" fill="#3d3a36" opacity="0.4"/>
+
+  <!-- woven basket on lower shelf -->
+  <path d="M560 376 L570 350 L640 350 L650 376 Z" fill="#cbb287"/>
+  <path d="M560 376 L570 350 L640 350 L650 376 Z" fill="none" stroke="#a5876a" stroke-width="1.5"/>
+  <line x1="585" y1="350" x2="580" y2="376" stroke="#a5876a" stroke-width="1.2" opacity="0.7"/>
+  <line x1="605" y1="350" x2="605" y2="376" stroke="#a5876a" stroke-width="1.2" opacity="0.7"/>
+  <line x1="625" y1="350" x2="630" y2="376" stroke="#a5876a" stroke-width="1.2" opacity="0.7"/>
+
+  <!-- ===== ROBOT VACUUM DISC (parked under console) ===== -->
+  <ellipse cx="560" cy="452" rx="88" ry="20" fill="#1f1b16" opacity="0.14"/>
+  <!-- disc body -->
+  <ellipse cx="560" cy="440" rx="82" ry="26" fill="url(#robotTop)"/>
+  <ellipse cx="560" cy="435" rx="82" ry="24" fill="#2a2724"/>
+  <ellipse cx="560" cy="433" rx="80" ry="22" fill="#3d3a36"/>
+  <!-- top ring detail -->
+  <ellipse cx="560" cy="431" rx="60" ry="16" fill="#2a2724"/>
+  <!-- sensor turret -->
+  <ellipse cx="560" cy="428" rx="16" ry="7" fill="#15130f"/>
+  <ellipse cx="560" cy="426" rx="10" ry="4" fill="#5c4632" opacity="0.5"/>
+  <!-- amber status light -->
+  <circle cx="538" cy="430" r="4" fill="#cf9f5c"/>
+  <circle cx="538" cy="429" r="2" fill="#faf7f2" opacity="0.6"/>
+  <!-- chrome accent button -->
+  <circle cx="582" cy="429" r="4" fill="#c9c5be"/>
+  <!-- front bumper highlight -->
+  <path d="M482 438 Q560 456 638 438" fill="none" stroke="#5c4632" stroke-width="2" opacity="0.5"/>
+
+  <!-- ===== decor: framed art hint on wall right ===== -->
+  <rect x="730" y="130" width="6" height="150" rx="2" fill="#15130f" opacity="0.15"/>
+
+  <!-- small wall hook near mirror -->
+  <circle cx="400" cy="150" r="5" fill="#3d3a36"/>
+  <rect x="397" y="150" width="6" height="18" rx="3" fill="#2a2724"/>
+
+  <!-- soft warm light glow top-left -->
+  <ellipse cx="240" cy="60" rx="220" ry="90" fill="#ffffff" opacity="0.15"/>
+</svg>

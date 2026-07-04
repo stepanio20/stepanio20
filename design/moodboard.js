@@ -17,8 +17,10 @@
         { l: 'Ретро 70-х · орех + олива · Pinterest', u: 'https://www.pinterest.com/search/pins/?q=70s%20living%20room%20walnut%20olive%20green' },
         { l: 'Camaleonda styling · Pinterest', u: 'https://www.pinterest.com/search/pins/?q=camaleonda%20sofa%20interior' },
         { l: 'Гоночная арт-стена (F1) · Pinterest', u: 'https://www.pinterest.com/search/pins/?q=motorsport%20poster%20gallery%20wall%20interior' },
-        { l: 'Выпуклое зеркало-сфера · Pinterest', u: 'https://www.pinterest.com/search/pins/?q=convex%20bubble%20mirror%20interior' },
-        { l: 'Japandi · Unsplash', u: 'https://unsplash.com/s/photos/japandi-living-room' }
+        { l: 'F1 gallery-wall в чёрных рамах · Poster Store', u: 'https://posterstore.com/g/p/gallery-wall-inspiration/race-car-gallery-wall-with-photographs-and-illustrations-of-formula-1-cars-with-black-wood-frames-for-the-living-room/' },
+        { l: 'Camaleonda: 11 интерьеров · Elle Decoration', u: 'https://www.elledecoration.co.uk/inspiration/living-dining/a65087974/camaleonda-seating-ideas/' },
+        { l: 'Выпуклое зеркало-сфера · Pinterest', u: 'https://www.pinterest.com/search/pins/?q=convex%20bubble%20mirror%20interior%20akari%20lamp' },
+        { l: 'Japandi · Unsplash', u: 'https://unsplash.com/s/photos/japandi-interior' }
       ]
     },
     recibidor: {

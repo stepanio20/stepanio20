@@ -448,61 +448,6 @@
 
 <script src="../moodboard.js"></script>
 <script src="../gallery.js"></script>
-<script src="../plan.js"></script>
-<script>
-/* Гостиная ≈ 5,8 × 4,6 м, потолки 3 м. Окна слева, зеркальная лента сверху, проём в прихожую справа. */
-var SW = [
-  { side: 'left', type: 'window', from: 0.5, to: 4.1, l: 'окна · вид на город' },
-  { side: 'top', type: 'mirror', from: 1.1, to: 5.6, l: 'зеркальная лента' },
-  { side: 'right', type: 'opening', from: 3.3, to: 4.4, l: 'в прихожую' }
-];
-var SK = [
-  { x: 1.5, y: 0.35, w: 2.1, h: 0.95, l: 'стол The Masie' },
-  { x: 2.2, y: 2.0, w: 2.3, h: 1.05, l: 'диван боклé' },
-  { x: 2.75, y: 3.25, w: 1.15, h: 0.5, l: 'столик' },
-  { shape: 'circle', x: 0.85, y: 3.75, w: 0.9, l: 'кресло', fs: 9 },
-  { x: 2.3, y: 4.42, w: 1.5, h: 0.14, l: 'ТВ на стене', dy: -0.32, fs: 9 },
-  { shape: 'circle', x: 5.35, y: 0.5, w: 0.6, l: '🌿', fs: 12 },
-  { shape: 'circle', x: 0.5, y: 0.45, w: 0.55, l: '🌿', fs: 12 },
-  { x: 5.3, y: 2.55, w: 0.45, h: 0.35, l: 'LV', fs: 8.5 },
-  { x: 4.7, y: 0.5, w: 0.95, h: 0.7, l: '🐕 лежанка', fs: 9 }
-];
-function sSpec(items) {
-  return { w: 5.8, h: 4.6, walls: SW, items: SK.concat(items),
-    legend: 'Серое — остаётся · охра — купить · пунктир — ковёр · комната ≈ 5,8 × 4,6 м' };
-}
-var RUG = function (l) { return { t: 'zone', x: 1.95, y: 1.75, w: 2.9, h: 2.25, l: l, dy: -0.95 }; };
-drawPlan('v1', sSpec([ RUG('ковёр джут 200×300'),
-  { t: 'new', x: 1.9, y: 3.95, w: 1.95, h: 0.55, l: 'тумба Vedrana', fs: 9 },
-  { t: 'new', shape: 'circle', x: 2.55, y: 0.9, w: 0.32, l: '💡', fs: 10 } ]));
-drawPlan('v2', sSpec([ RUG('ковёр графит'),
-  { t: 'new', x: 4.95, y: 3.62, w: 0.8, h: 0.45, l: 'витрина', fs: 8.5 },
-  { t: 'new', x: 0.35, y: 3.95, w: 0.85, h: 0.5, l: 'винил', fs: 9 },
-  { t: 'new', x: 1.55, y: 4.42, w: 2.95, h: 0.14, l: 'галерея F1 + трек-споты', dy: -0.32, fs: 9 },
-  { t: 'new', shape: 'circle', x: 5.5, y: 4.25, w: 0.32, l: '🤖', fs: 10 },
-  { t: 'new', shape: 'circle', x: 1.5, y: 3.35, w: 0.3, l: '💡', fs: 10 } ]));
-drawPlan('v3', sSpec([
-  { t: 'new', x: 0.9, y: 4.1, w: 3.3, h: 0.4, l: 'String — винил и коллекция', fs: 9 },
-  { t: 'new', x: 5.2, y: 3.72, w: 0.42, h: 0.38, l: 'LED', fs: 8.5 },
-  { t: 'new', x: 5.42, y: 1.35, w: 0.34, h: 1.15, l: 'рамы', fs: 8.5 },
-  { t: 'new', shape: 'circle', x: 2.55, y: 0.9, w: 0.32, l: '💡', fs: 10 } ]));
-drawPlan('v4', sSpec([ RUG('джут премиум'),
-  { t: 'new', x: 1.2, y: 4.44, w: 3.6, h: 0.12, l: 'дубовые рейки на всю стену', dy: -0.32, fs: 9 },
-  { t: 'new', x: 1.7, y: 3.8, w: 2.0, h: 0.6, l: 'апарадор Lenon', fs: 9 },
-  { t: 'new', x: 0.32, y: 3.88, w: 0.8, h: 0.55, l: 'винил', fs: 9 },
-  { t: 'new', shape: 'circle', x: 4.75, y: 3.0, w: 0.35, l: '💡', fs: 10 } ]));
-drawPlan('v5', sSpec([ RUG('ковёр шерсть'),
-  { t: 'new', x: 2.0, y: 3.92, w: 1.8, h: 0.55, l: 'тумба Nadyria', fs: 9 },
-  { t: 'new', x: 5.12, y: 1.4, w: 0.58, h: 1.0, l: 'витрина', fs: 8.5 },
-  { t: 'new', shape: 'circle', x: 2.3, y: 0.85, w: 0.3, l: '💡', fs: 10 },
-  { t: 'new', shape: 'circle', x: 3.05, y: 0.85, w: 0.3, l: '💡', fs: 10 } ]));
-drawPlan('v6', sSpec([ RUG('ковёр шерсть беж'),
-  { t: 'new', x: 1.85, y: 3.9, w: 1.95, h: 0.52, l: 'сайдборд орех', fs: 9 },
-  { t: 'new', shape: 'circle', x: 5.35, y: 2.0, w: 0.55, l: 'сфера', fs: 8.5 },
-  { t: 'new', shape: 'circle', x: 1.35, y: 2.95, w: 0.42, l: 'хром', fs: 8.5 },
-  { t: 'new', shape: 'circle', x: 4.4, y: 3.0, w: 0.6, l: 'пуф', fs: 9 },
-  { t: 'new', shape: 'circle', x: 2.55, y: 0.9, w: 0.34, l: '💡', fs: 10 } ]));
-</script>
 
 <footer>
   <div class="wrap">

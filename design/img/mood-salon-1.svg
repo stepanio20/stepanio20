@@ -1,0 +1,371 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <!-- ambient warm room light -->
+    <radialGradient id="roomLight" cx="68%" cy="26%" r="85%">
+      <stop offset="0%" stop-color="#fbf6ec"/>
+      <stop offset="34%" stop-color="#f5efe3"/>
+      <stop offset="70%" stop-color="#ece3d2"/>
+      <stop offset="100%" stop-color="#ddd0ba"/>
+    </radialGradient>
+    <!-- big soft window light source -->
+    <radialGradient id="sunPool" cx="72%" cy="22%" r="55%">
+      <stop offset="0%" stop-color="#fff8ea" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#fbeecf" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fbeecf" stop-opacity="0"/>
+    </radialGradient>
+    <!-- cream wall vertical wash -->
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8f3ea"/>
+      <stop offset="55%" stop-color="#f3ecdd"/>
+      <stop offset="100%" stop-color="#e9dfcb"/>
+    </linearGradient>
+    <!-- wall corner shading (left recede) -->
+    <linearGradient id="wallShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d9ccb3" stop-opacity="0.85"/>
+      <stop offset="26%" stop-color="#e6dcc7" stop-opacity="0.25"/>
+      <stop offset="55%" stop-color="#f2ecdd" stop-opacity="0"/>
+    </linearGradient>
+    <!-- oak floor -->
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dcc59d"/>
+      <stop offset="40%" stop-color="#d3ba90"/>
+      <stop offset="100%" stop-color="#c1a578"/>
+    </linearGradient>
+    <linearGradient id="floorGlow" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%" stop-color="#b89a6e" stop-opacity="0"/>
+      <stop offset="60%" stop-color="#efdcb4" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#f7e9c9" stop-opacity="0.85"/>
+    </linearGradient>
+    <!-- bouclé sofa body -->
+    <radialGradient id="sofaBody" cx="40%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#f6f1e8"/>
+      <stop offset="100%" stop-color="#e2d8c7"/>
+    </radialGradient>
+    <linearGradient id="sofaShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#d3c8b4" stop-opacity="0.8"/>
+    </linearGradient>
+    <!-- linen cushion -->
+    <linearGradient id="cushion" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="55%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="cushionSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a9ab84" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#63654a" stop-opacity="0"/>
+    </linearGradient>
+    <!-- paper lantern glow -->
+    <radialGradient id="lanternGlow" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#fff7e4"/>
+      <stop offset="42%" stop-color="#fdeecb"/>
+      <stop offset="78%" stop-color="#f4dcae"/>
+      <stop offset="100%" stop-color="#e6c98f"/>
+    </radialGradient>
+    <radialGradient id="lanternHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff2d2" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#fbe6ba" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#fbe6ba" stop-opacity="0"/>
+    </radialGradient>
+    <!-- chrome floor-lamp stem -->
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a968f"/>
+      <stop offset="35%" stop-color="#e3e1dc"/>
+      <stop offset="55%" stop-color="#c9c5be"/>
+      <stop offset="100%" stop-color="#8f8b83"/>
+    </linearGradient>
+    <!-- plant leaf -->
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="60%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#5c5e42"/>
+    </linearGradient>
+    <linearGradient id="leafLit" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9ca07040" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#b6b985" stop-opacity="0.85"/>
+    </linearGradient>
+    <!-- walnut side table -->
+    <linearGradient id="walnut" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6d5138"/>
+      <stop offset="55%" stop-color="#5c4632"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="walnutTop" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0%" stop-color="#7a5b3e"/>
+      <stop offset="60%" stop-color="#6d5138"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <!-- ceramic vase -->
+    <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b98a4a"/>
+      <stop offset="40%" stop-color="#cf9f5c"/>
+      <stop offset="72%" stop-color="#e8dcc6"/>
+      <stop offset="100%" stop-color="#b98a4a"/>
+    </linearGradient>
+    <!-- glass tumbler -->
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8cdd6" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#dfeaef" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#b8cdd6" stop-opacity="0.6"/>
+    </linearGradient>
+    <!-- dust beam -->
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff4d8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fff4d8" stop-opacity="0"/>
+    </linearGradient>
+    <!-- soft rug -->
+    <radialGradient id="rug" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#efe6d4"/>
+      <stop offset="100%" stop-color="#ddceb2"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="tiny" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.4"/>
+    </filter>
+  </defs>
+
+  <!-- ===== BACKDROP ===== -->
+  <rect width="600" height="750" fill="url(#roomLight)"/>
+  <rect width="600" height="510" fill="url(#wall)"/>
+  <rect width="600" height="510" fill="url(#wallShade)"/>
+
+  <!-- corner seam of the two walls -->
+  <rect x="0" y="0" width="150" height="510" fill="#d8cbb2" opacity="0.35"/>
+  <line x1="150" y1="0" x2="150" y2="512" stroke="#cabc9f" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- window light pool on wall -->
+  <rect width="600" height="750" fill="url(#sunPool)"/>
+
+  <!-- soft window mullion shadows cast on wall -->
+  <g opacity="0.16" fill="#8f7f60">
+    <rect x="322" y="40" width="150" height="250" rx="4"/>
+    <rect x="360" y="40" width="4" height="250"/>
+    <rect x="430" y="40" width="4" height="250"/>
+    <rect x="322" y="150" width="150" height="4"/>
+  </g>
+
+  <!-- ===== FLOOR ===== -->
+  <rect x="0" y="500" width="600" height="250" fill="url(#floor)"/>
+  <rect x="0" y="500" width="600" height="250" fill="url(#floorGlow)"/>
+  <line x1="0" y1="503" x2="600" y2="503" stroke="#b49669" stroke-width="2" opacity="0.6"/>
+
+  <!-- oak floor planks -->
+  <g stroke="#b99c70" stroke-width="1.1" opacity="0.5">
+    <line x1="0" y1="540" x2="600" y2="540"/>
+    <line x1="0" y1="585" x2="600" y2="585"/>
+    <line x1="0" y1="635" x2="600" y2="635"/>
+    <line x1="0" y1="690" x2="600" y2="690"/>
+  </g>
+  <g stroke="#a5876a" stroke-width="0.7" opacity="0.3">
+    <line x1="0" y1="562" x2="600" y2="562"/>
+    <line x1="0" y1="610" x2="600" y2="610"/>
+    <line x1="0" y1="662" x2="600" y2="662"/>
+    <line x1="0" y1="720" x2="600" y2="720"/>
+  </g>
+  <!-- plank seams (vertical breaks) -->
+  <g stroke="#a5876a" stroke-width="0.9" opacity="0.35">
+    <line x1="180" y1="540" x2="180" y2="562"/>
+    <line x1="420" y1="540" x2="420" y2="562"/>
+    <line x1="90"  y1="585" x2="90"  y2="610"/>
+    <line x1="330" y1="585" x2="330" y2="610"/>
+    <line x1="500" y1="585" x2="500" y2="610"/>
+    <line x1="240" y1="635" x2="240" y2="662"/>
+    <line x1="470" y1="635" x2="470" y2="662"/>
+    <line x1="140" y1="690" x2="140" y2="720"/>
+    <line x1="380" y1="690" x2="380" y2="720"/>
+  </g>
+
+  <!-- soft rug under scene -->
+  <ellipse cx="300" cy="655" rx="270" ry="70" fill="url(#rug)" opacity="0.85"/>
+  <ellipse cx="300" cy="655" rx="270" ry="70" fill="none" stroke="#cbb98f" stroke-width="2" opacity="0.4"/>
+
+  <!-- ===== DUST-LIGHT BEAM (behind objects, from top-right) ===== -->
+  <g opacity="0.85">
+    <polygon points="600,30 600,210 250,700 150,700" fill="url(#beam)" filter="url(#softer)"/>
+    <polygon points="600,60 600,150 320,690 250,690" fill="#fff5da" opacity="0.25" filter="url(#soft)"/>
+  </g>
+
+  <!-- ===== PLANT (tall leaves, back-left) ===== -->
+  <g>
+    <rect x="90" y="470" width="10" height="60" fill="#6d5138" opacity="0.5"/>
+    <!-- long stems -->
+    <path d="M96 480 C 70 380 60 300 78 210" fill="none" stroke="#63654a" stroke-width="4"/>
+    <path d="M100 480 C 118 380 138 300 150 220" fill="none" stroke="#7a7c5c" stroke-width="4"/>
+    <path d="M98 480 C 96 400 96 340 92 300" fill="none" stroke="#5c5e42" stroke-width="4"/>
+    <!-- tall hero leaf -->
+    <path d="M78 210 C 30 180 20 90 60 30 C 96 96 104 168 88 214 Z" fill="url(#leaf)"/>
+    <path d="M78 210 C 44 180 36 100 62 44 C 74 108 78 168 82 208 Z" fill="url(#leafLit)"/>
+    <line x1="62" y1="44" x2="82" y2="208" stroke="#4a4c34" stroke-width="1.4" opacity="0.6"/>
+    <!-- second leaf -->
+    <path d="M150 220 C 200 190 214 118 182 66 C 146 118 138 176 142 222 Z" fill="url(#leaf)"/>
+    <path d="M150 220 C 184 194 196 130 176 82 C 158 132 152 178 150 220 Z" fill="#6d6f4f" opacity="0.7"/>
+    <line x1="176" y1="72" x2="148" y2="220" stroke="#4a4c34" stroke-width="1.2" opacity="0.6"/>
+    <!-- small curling leaf -->
+    <path d="M92 300 C 60 292 44 250 66 216 C 90 250 96 278 96 302 Z" fill="url(#leaf)" opacity="0.92"/>
+    <line x1="66" y1="222" x2="94" y2="300" stroke="#4a4c34" stroke-width="1" opacity="0.5"/>
+    <!-- ceramic planter -->
+    <path d="M74 468 L 122 468 L 116 528 Q 98 536 80 528 Z" fill="url(#ceramic)"/>
+    <path d="M74 468 L 122 468 L 120 480 Q 98 488 76 480 Z" fill="#e8dcc6" opacity="0.55"/>
+    <ellipse cx="98" cy="468" rx="24" ry="6" fill="#a5876a" opacity="0.7"/>
+    <ellipse cx="98" cy="468" rx="24" ry="6" fill="none" stroke="#7a5b3e" stroke-width="1" opacity="0.6"/>
+  </g>
+
+  <!-- ===== FLOOR LAMP + PAPER LANTERN (hero, off-center right) ===== -->
+  <g>
+    <!-- lamp cast shadow -->
+    <ellipse cx="430" cy="672" rx="72" ry="18" fill="#8f7147" opacity="0.35" filter="url(#soft)"/>
+    <!-- chrome base -->
+    <ellipse cx="428" cy="666" rx="46" ry="12" fill="url(#chrome)"/>
+    <ellipse cx="428" cy="662" rx="30" ry="8" fill="#e3e1dc" opacity="0.8"/>
+    <!-- chrome stem -->
+    <rect x="424" y="300" width="8" height="362" fill="url(#chrome)"/>
+    <rect x="425" y="300" width="2.4" height="362" fill="#f4f2ee" opacity="0.8"/>
+    <!-- lantern halo -->
+    <circle cx="428" cy="230" r="150" fill="url(#lanternHalo)"/>
+    <!-- paper globe -->
+    <circle cx="428" cy="230" r="92" fill="url(#lanternGlow)"/>
+    <!-- paper ribs -->
+    <g fill="none" stroke="#e4c58c" stroke-width="1.1" opacity="0.5">
+      <ellipse cx="428" cy="230" rx="30" ry="92"/>
+      <ellipse cx="428" cy="230" rx="60" ry="92"/>
+      <line x1="336" y1="230" x2="520" y2="230"/>
+      <line x1="342" y1="188" x2="514" y2="188"/>
+      <line x1="342" y1="272" x2="514" y2="272"/>
+    </g>
+    <!-- glow highlight -->
+    <circle cx="410" cy="208" r="40" fill="#fff8e8" opacity="0.6" filter="url(#soft)"/>
+    <!-- top + bottom caps -->
+    <ellipse cx="428" cy="140" rx="14" ry="5" fill="#cbb287"/>
+    <ellipse cx="428" cy="320" rx="14" ry="5" fill="#b98a4a"/>
+    <rect x="422" y="128" width="12" height="14" fill="url(#chrome)"/>
+  </g>
+
+  <!-- ===== WALNUT SIDE TABLE (mid-right, in front of lamp) ===== -->
+  <g>
+    <ellipse cx="470" cy="612" rx="66" ry="14" fill="#7a5f3f" opacity="0.4" filter="url(#soft)"/>
+    <!-- legs -->
+    <rect x="420" y="548" width="7" height="66" fill="url(#walnut)"/>
+    <rect x="512" y="548" width="7" height="66" fill="#4a3624"/>
+    <rect x="446" y="552" width="6" height="60" fill="#5c4632" opacity="0.8"/>
+    <!-- top -->
+    <ellipse cx="470" cy="548" rx="60" ry="16" fill="url(#walnutTop)"/>
+    <ellipse cx="470" cy="545" rx="60" ry="16" fill="#6d5138"/>
+    <ellipse cx="470" cy="543" rx="52" ry="12" fill="#7a5b3e" opacity="0.7"/>
+    <path d="M418 543 Q 470 533 522 543" fill="none" stroke="#8a6a48" stroke-width="1.4" opacity="0.6"/>
+
+    <!-- glass tumbler on table -->
+    <g>
+      <path d="M452 500 L 456 540 Q 468 545 480 540 L 484 500 Z" fill="url(#glass)" stroke="#cfe0e6" stroke-width="1" opacity="0.85"/>
+      <ellipse cx="468" cy="500" rx="16" ry="4.5" fill="#dfeaef" opacity="0.6"/>
+      <rect x="458" y="506" width="3" height="28" fill="#ffffff" opacity="0.5"/>
+      <ellipse cx="468" cy="522" rx="14" ry="6" fill="#cf9f5c" opacity="0.35"/>
+    </g>
+
+    <!-- small ceramic bud vase -->
+    <g>
+      <path d="M496 502 Q 490 528 500 536 Q 512 528 506 502 Z" fill="url(#ceramic)"/>
+      <ellipse cx="501" cy="502" rx="6" ry="2.4" fill="#8a5a20" opacity="0.7"/>
+      <path d="M501 502 C 496 480 490 466 486 452" fill="none" stroke="#7a7c5c" stroke-width="2.4"/>
+      <path d="M501 502 C 506 482 512 470 518 458" fill="none" stroke="#63654a" stroke-width="2.4"/>
+      <ellipse cx="486" cy="450" rx="7" ry="3.4" fill="#8a8c62" transform="rotate(-28 486 450)"/>
+      <ellipse cx="518" cy="456" rx="7" ry="3.4" fill="#7a7c5c" transform="rotate(30 518 456)"/>
+    </g>
+
+    <!-- stacked books -->
+    <g>
+      <rect x="416" y="530" width="52" height="9" rx="2" fill="#8a5a20"/>
+      <rect x="420" y="522" width="46" height="9" rx="2" fill="#e8dcc6"/>
+      <rect x="424" y="514" width="40" height="9" rx="2" fill="#63654a"/>
+      <line x1="418" y1="534" x2="466" y2="534" stroke="#5c3a12" stroke-width="0.6" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- ===== BOUCLÉ SOFA (edge, front-left, cropped by frame) ===== -->
+  <g>
+    <!-- sofa shadow on floor -->
+    <ellipse cx="180" cy="700" rx="220" ry="40" fill="#8f7147" opacity="0.28" filter="url(#soft)"/>
+
+    <!-- seat block -->
+    <path d="M-30 640 L 300 620 Q 320 620 320 646 L 320 760 L -30 760 Z" fill="url(#sofaBody)"/>
+    <path d="M-30 700 L 320 690 L 320 760 L -30 760 Z" fill="url(#sofaShade)"/>
+
+    <!-- backrest -->
+    <path d="M-30 470 Q -30 452 -10 452 L 250 452 Q 300 452 306 520 L 314 636 Q 316 650 296 650 L -30 660 Z" fill="url(#sofaBody)"/>
+    <path d="M-30 470 Q -30 452 -10 452 L 250 452 Q 300 452 306 520 L 308 560 L -30 566 Z" fill="#ffffff" opacity="0.4"/>
+
+    <!-- rolled arm (hero curve) -->
+    <path d="M230 470 Q 322 470 328 560 Q 332 636 300 648 Q 262 656 250 600 Q 244 520 230 470 Z" fill="url(#sofaBody)"/>
+    <path d="M250 486 Q 314 494 318 566 Q 320 616 296 636 Q 276 640 268 596 Q 262 534 250 486 Z" fill="#efe8db" opacity="0.7"/>
+    <ellipse cx="292" cy="540" rx="22" ry="30" fill="#ffffff" opacity="0.45" filter="url(#tiny)"/>
+
+    <!-- seat cushion divisions -->
+    <path d="M40 628 Q 42 700 44 758" stroke="#d8ccb8" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M170 622 Q 176 700 180 758" stroke="#d8ccb8" stroke-width="2" fill="none" opacity="0.6"/>
+
+    <!-- bouclé texture (little loops) -->
+    <g fill="#ffffff" opacity="0.55">
+      <circle cx="30" cy="500" r="3"/><circle cx="60" cy="490" r="3"/><circle cx="95" cy="498" r="3"/>
+      <circle cx="130" cy="486" r="3"/><circle cx="165" cy="500" r="3"/><circle cx="200" cy="490" r="3"/>
+      <circle cx="45" cy="540" r="3"/><circle cx="85" cy="536" r="3"/><circle cx="125" cy="544" r="3"/>
+      <circle cx="170" cy="534" r="3"/><circle cx="210" cy="546" r="3"/><circle cx="255" cy="540" r="3"/>
+      <circle cx="35" cy="586" r="3"/><circle cx="80" cy="592" r="3"/><circle cx="120" cy="584" r="3"/>
+      <circle cx="160" cy="596" r="3"/><circle cx="205" cy="586" r="3"/>
+      <circle cx="55" cy="700" r="3.4"/><circle cx="110" cy="712" r="3.4"/><circle cx="165" cy="702" r="3.4"/>
+      <circle cx="220" cy="716" r="3.4"/><circle cx="20" cy="724" r="3.4"/>
+    </g>
+    <g fill="#ddd2bf" opacity="0.5">
+      <circle cx="46" cy="516" r="2.4"/><circle cx="110" cy="510" r="2.4"/><circle cx="182" cy="516" r="2.4"/>
+      <circle cx="70" cy="566" r="2.4"/><circle cx="150" cy="562" r="2.4"/><circle cx="230" cy="566" r="2.4"/>
+      <circle cx="90" cy="676" r="2.8"/><circle cx="180" cy="684" r="2.8"/><circle cx="40" cy="654" r="2.8"/>
+    </g>
+
+    <!-- LINEN OLIVE CUSHION -->
+    <g transform="rotate(-8 150 560)">
+      <rect x="70" y="500" width="150" height="128" rx="26" fill="url(#cushion)"/>
+      <rect x="70" y="500" width="150" height="70" rx="26" fill="url(#cushionSheen)"/>
+      <!-- linen weave -->
+      <g stroke="#6d6f4f" stroke-width="0.7" opacity="0.4">
+        <line x1="80" y1="518" x2="212" y2="518"/><line x1="80" y1="536" x2="212" y2="536"/>
+        <line x1="80" y1="554" x2="212" y2="554"/><line x1="80" y1="572" x2="212" y2="572"/>
+        <line x1="80" y1="590" x2="212" y2="590"/><line x1="80" y1="608" x2="212" y2="608"/>
+      </g>
+      <g stroke="#8a8c62" stroke-width="0.7" opacity="0.4">
+        <line x1="98" y1="506" x2="98" y2="622"/><line x1="128" y1="506" x2="128" y2="622"/>
+        <line x1="158" y1="506" x2="158" y2="622"/><line x1="188" y1="506" x2="188" y2="622"/>
+      </g>
+      <!-- corner dimple + seam -->
+      <path d="M70 526 Q 76 500 96 502" fill="none" stroke="#9ca070" stroke-width="1.4" opacity="0.6"/>
+      <circle cx="145" cy="564" r="6" fill="#5c5e42" opacity="0.4"/>
+      <rect x="70" y="500" width="150" height="128" rx="26" fill="none" stroke="#5c5e42" stroke-width="1.5" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- ===== ATMOSPHERE OVERLAY ===== -->
+  <!-- dust motes in the beam -->
+  <g fill="#fff6df">
+    <circle cx="470" cy="180" r="2.2" opacity="0.8"/>
+    <circle cx="500" cy="260" r="1.6" opacity="0.7"/>
+    <circle cx="440" cy="330" r="2.6" opacity="0.6"/>
+    <circle cx="520" cy="360" r="1.4" opacity="0.7"/>
+    <circle cx="400" cy="410" r="1.8" opacity="0.55"/>
+    <circle cx="360" cy="300" r="1.5" opacity="0.6"/>
+    <circle cx="330" cy="470" r="2.2" opacity="0.5"/>
+    <circle cx="480" cy="470" r="1.6" opacity="0.55"/>
+    <circle cx="540" cy="200" r="1.3" opacity="0.6"/>
+    <circle cx="300" cy="380" r="1.7" opacity="0.45"/>
+  </g>
+
+  <!-- warm vignette to frame the vignette -->
+  <rect width="600" height="750" fill="url(#sunPool)" opacity="0.25"/>
+  <radialGradient id="vig" cx="50%" cy="46%" r="72%">
+    <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#4a3624" stop-opacity="0.26"/>
+  </radialGradient>
+  <rect width="600" height="750" fill="url(#vig)"/>
+</svg>
