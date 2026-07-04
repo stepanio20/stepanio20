@@ -14,7 +14,7 @@ for (const c of cat.catalogs || []) {
     const soft = /штор|гардин|текстил|плед|ковер|ковёр/i.test(it.category || '');
     if (!soft && it.h_cm > maxH) issues.push(`ВЫСОТА ${tag} — ${it.h_cm} см > лимита ${maxH} (потолок ${room.ceiling_cm})`);
     if (soft && it.h_cm > room.ceiling_cm) issues.push(`ТЕКСТИЛЬ ${tag} — ${it.h_cm} см длиннее потолка ${room.ceiling_cm}`);
-    if (c.room === 'recibidor' && maxD && it.d_cm > maxD && it.h_cm > 60)
+    if (c.room === 'recibidor' && maxD && it.d_cm > maxD && it.h_cm > 60 && it.along_corridor !== false)
       issues.push(`ГЛУБИНА ${tag} — ${it.d_cm} см > ${maxD} (узкий проход)`);
     if (c.room === 'recibidor' && it.w_cm > 350)
       issues.push(`ШИРИНА ${tag} — ${it.w_cm} см шире самой длинной стены (350)`);
