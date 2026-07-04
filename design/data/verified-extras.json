@@ -1,0 +1,9 @@
+{
+  "_updated": "2026-07-04",
+  "mushroom_lamp": {"name":"SKLUM Arleth/Alnair гриб-лампа, беж, 44см","url":"https://www.sklum.com/es/comprar-lamparas-de-sobremesa/99769-lampara-de-mesa-arleth.html","price_eur":25.95,"in_stock":true},
+  "sideboard_60s": {"name":"Pamono Wrighton — орех+латунь, 1960-е, 167×46×79","url":"https://www.pamono.es/aparador-britanico-mid-century-de-nogal-y-laton-de-wrighton-a-os-60-9","price_eur":1137,"in_stock":true,"note":"глубина 46 см — в прихожей впритык к лимиту 45"},
+  "doormat": {"name":"IKEA TRAMPA кокос 60×90","url":"https://www.ikea.com/es/es/p/trampa-felpudo-natural-20052187/","price_eur":7.99,"in_stock":true},
+  "key_tray": {"name":"Porssaut кожаный лоток, беж","url":"https://www.amazon.es/dp/B0DKXLF1LP","price_eur":19.14,"in_stock":true},
+  "oxted": {"name":"Beliani Oxted витрина зелёная","url":"https://www.beliani.es/vitrina-oxted-metal-80-cm-verde-729679.html","price_eur":329.99,"in_stock":false,"note":"поставка не раньше 30.12.2026 — только предзаказ"},
+  "ericson": {"name":"La Redoute Ericson сайдборд зелёный лак","url":"https://www.laredoute.es/ppdp/prod-351299355.aspx","price_eur":479.20,"in_stock":null,"note":"промо -20% с 599; наличие ES не подтверждается ботам, на CH распродан"}
+}
