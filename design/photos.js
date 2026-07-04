@@ -127,3 +127,5 @@ window.PHOTOS = {
   ]
  }
 };
+
+window.PHOTOS.renders = {"salon-v1": "salon-v1-real.webp", "salon-v2": "salon-v2-real.webp", "salon-v3": "salon-v3-real.webp", "salon-v4": "salon-v4-real.webp", "salon-v5": "salon-v5-real.webp", "salon-v6": "salon-v6-real.webp", "recibidor-v1": "recibidor-v1-real.webp", "recibidor-v2": "recibidor-v2-real.webp", "recibidor-v3": "recibidor-v3-real.webp", "recibidor-v4": "recibidor-v4-real.webp", "recibidor-v5": "recibidor-v5-real.webp", "recibidor-v6": "recibidor-v6-real.webp"};

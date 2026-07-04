@@ -35,7 +35,7 @@
     g.appendChild(grid);
     var cap = document.createElement('div');
     cap.className = 'g-caption';
-    cap.textContent = 'Референс-фото в стиле варианта (нажмите, чтобы увеличить). Фото — Pexels.';
+    cap.textContent = 'Первое фото — фотореалистичный рендер именно этой квартиры (Venice AI, по вашим фото). Далее — референсы. Нажмите, чтобы увеличить.';
     g.appendChild(cap);
 
     var state = { photos: 0, svg: 0 };
@@ -55,9 +55,11 @@
       return img;
     }
 
-    var urls = PHOTOS[id] || [];
-    // Показываем ТОЛЬКО реальные фото. Битые — молча убираем. Если ни одно не
-    // загрузилось, остаётся чистый плейсхолдер (.v-visual) — без вектора.
+    var urls = (PHOTOS[id] || []).slice();
+    // Первым — фотореалистичный img2img-рендер именно этой квартиры (Venice),
+    // затем стоковые фото-референсы. Битые молча убираем.
+    var renders = (window.PHOTOS && window.PHOTOS.renders) || {};
+    if (renders[id]) urls.unshift(IMG + renders[id]);
     urls.forEach(function (u, i) {
       var img = addImg(u, i);
       img.addEventListener('load', function () { state.photos++; });

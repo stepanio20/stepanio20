@@ -107,9 +107,11 @@
     };
     img.src = list[0];
   }
+  var r = (window.PHOTOS && window.PHOTOS.renders) || {};
   var m = (window.PHOTOS && window.PHOTOS.mood) || {};
-  cover('cover-salon', m.salon);
-  cover('cover-recibidor', m.recibidor);
+  // сначала пробуем фотореалистичный рендер квартиры, иначе — референс
+  cover('cover-salon', [r['salon-v1'] ? 'img/' + r['salon-v1'] : (m.salon || [])[0]].filter(Boolean));
+  cover('cover-recibidor', [r['recibidor-v2'] ? 'img/' + r['recibidor-v2'] : (m.recibidor || [])[0]].filter(Boolean));
 })();
 </script>
 </body>

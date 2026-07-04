@@ -42,14 +42,17 @@
     thumb.style.background = cols.length
       ? 'linear-gradient(135deg,' + cols.join(',') + ')'
       : '#e8e1d6';
-    var urls = photos[prefix + '-' + vid] || [];
-    if (urls.length) {
+    var renders = (window.PHOTOS && window.PHOTOS.renders) || {};
+    var thumbSrc = renders[prefix + '-' + vid]
+      ? '../img/' + renders[prefix + '-' + vid]
+      : (photos[prefix + '-' + vid] || [])[0];
+    if (thumbSrc) {
       var im = new Image();
       im.className = 'ov-thumb-img';
       im.alt = title;
       im.loading = 'lazy';
       im.addEventListener('load', function () { thumb.appendChild(im); });
-      im.src = urls[0];
+      im.src = thumbSrc;
     }
 
     var pals = '<div class="ov-pal">' + cols.map(function (c) {
