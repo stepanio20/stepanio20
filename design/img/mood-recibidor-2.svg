@@ -1,0 +1,416 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <radialGradient id="lightGlow" cx="72%" cy="20%" r="85%">
+      <stop offset="0%" stop-color="#fff6e6" stop-opacity="0.95"/>
+      <stop offset="34%" stop-color="#f7ecd8" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#e6d6bb" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#cbb287" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="oakTable" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#e6d3ae"/>
+      <stop offset="42%" stop-color="#d8c19a"/>
+      <stop offset="78%" stop-color="#cbb287"/>
+      <stop offset="100%" stop-color="#b99f76"/>
+    </linearGradient>
+    <linearGradient id="tableShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c4632" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#5c4632" stop-opacity="0.34"/>
+    </linearGradient>
+    <linearGradient id="veneerGrad" x1="0" y1="0" x2="1" y2="0.9">
+      <stop offset="0%" stop-color="#e2c99e"/>
+      <stop offset="45%" stop-color="#cbb287"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="veneerEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5876a"/>
+      <stop offset="100%" stop-color="#6d5138"/>
+    </linearGradient>
+    <linearGradient id="chromeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f2f0eb"/>
+      <stop offset="22%" stop-color="#e3e1dc"/>
+      <stop offset="48%" stop-color="#9a968f"/>
+      <stop offset="63%" stop-color="#c9c5be"/>
+      <stop offset="85%" stop-color="#e3e1dc"/>
+      <stop offset="100%" stop-color="#7f7b74"/>
+    </linearGradient>
+    <linearGradient id="chromeShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="leatherGrad" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#d8ac74"/>
+      <stop offset="40%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <radialGradient id="leatherWell" cx="45%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#a5876a"/>
+      <stop offset="70%" stop-color="#b99464"/>
+      <stop offset="100%" stop-color="#c8a87c"/>
+    </radialGradient>
+    <linearGradient id="juteGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8dcc6"/>
+      <stop offset="55%" stop-color="#d3c39c"/>
+      <stop offset="100%" stop-color="#b7a878"/>
+    </linearGradient>
+    <linearGradient id="ropeStrand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c8a87c"/>
+      <stop offset="50%" stop-color="#e6d3ae"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <radialGradient id="ropeCore" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#a5876a"/>
+      <stop offset="72%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#8a5a20" stop-opacity="0.4"/>
+    </radialGradient>
+    <linearGradient id="bambooGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c6b57e"/>
+      <stop offset="35%" stop-color="#dcc98f"/>
+      <stop offset="60%" stop-color="#e6d3a4"/>
+      <stop offset="100%" stop-color="#a58f5a"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="55%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="beamGrad" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#fff6e0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fff6e0" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="42%" r="72%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="76%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2a2724" stop-opacity="0.4"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="softer" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+    <filter id="grainTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <!-- table base -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#oakTable)"/>
+
+  <!-- oak grain lines -->
+  <g stroke-linecap="round" fill="none" opacity="0.5">
+    <path d="M-10 70 C 160 58, 420 92, 620 66" stroke="#b99f76" stroke-width="2.4"/>
+    <path d="M-10 118 C 190 104, 400 138, 620 112" stroke="#c1a87f" stroke-width="1.6"/>
+    <path d="M-10 176 C 150 168, 430 196, 620 172" stroke="#a5876a" stroke-width="2.8"/>
+    <path d="M-10 232 C 210 220, 380 252, 620 230" stroke="#bfa47a" stroke-width="1.4"/>
+    <path d="M-10 300 C 170 288, 420 320, 620 296" stroke="#b09873" stroke-width="2.2"/>
+    <path d="M-10 372 C 200 360, 400 396, 620 368" stroke="#a5876a" stroke-width="1.8"/>
+    <path d="M-10 452 C 160 440, 430 476, 620 448" stroke="#bfa47a" stroke-width="2.6"/>
+    <path d="M-10 540 C 210 528, 380 564, 620 536" stroke="#a5876a" stroke-width="1.6"/>
+    <path d="M-10 620 C 170 610, 420 646, 620 618" stroke="#b09873" stroke-width="2.4"/>
+    <path d="M-10 690 C 190 682, 400 712, 620 690" stroke="#a5876a" stroke-width="1.8"/>
+  </g>
+  <g stroke-linecap="round" fill="none" opacity="0.22">
+    <path d="M-10 96 C 200 86, 380 112, 620 92" stroke="#8a6f4e" stroke-width="0.8"/>
+    <path d="M-10 260 C 180 250, 420 278, 620 258" stroke="#8a6f4e" stroke-width="0.8"/>
+    <path d="M-10 500 C 210 490, 380 520, 620 500" stroke="#8a6f4e" stroke-width="0.8"/>
+    <path d="M-10 650 C 170 642, 430 672, 620 650" stroke="#8a6f4e" stroke-width="0.8"/>
+  </g>
+  <!-- plank seams -->
+  <line x1="0" y1="250" x2="600" y2="242" stroke="#8a6f4e" stroke-width="1.4" opacity="0.28"/>
+  <line x1="0" y1="512" x2="600" y2="520" stroke="#8a6f4e" stroke-width="1.4" opacity="0.28"/>
+
+  <!-- warm light wash -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#lightGlow)"/>
+
+  <!-- diagonal light beam -->
+  <polygon points="380,-20 620,-20 520,780 300,780" fill="url(#beamGrad)"/>
+  <polygon points="470,-20 560,-20 440,780 360,780" fill="url(#beamGrad)" opacity="0.5"/>
+
+  <!-- ============ JUTE MAT CORNER (back-left) ============ -->
+  <g>
+    <polygon points="-10,470 250,438 300,560 -10,610" fill="#4a3624" opacity="0.2" filter="url(#soft)"/>
+    <polygon points="-20,458 244,430 292,548 -20,596" fill="url(#juteGrad)"/>
+    <!-- weave -->
+    <g stroke="#b7a878" stroke-width="3" opacity="0.6">
+      <line x1="-20" y1="470" x2="250" y2="443"/>
+      <line x1="-20" y1="492" x2="256" y2="466"/>
+      <line x1="-20" y1="514" x2="262" y2="490"/>
+      <line x1="-20" y1="536" x2="268" y2="514"/>
+      <line x1="-20" y1="558" x2="274" y2="538"/>
+      <line x1="-20" y1="580" x2="280" y2="562"/>
+    </g>
+    <g stroke="#8a7a52" stroke-width="2.4" opacity="0.5">
+      <line x1="10" y1="452" x2="46" y2="600"/>
+      <line x1="70" y1="446" x2="104" y2="594"/>
+      <line x1="130" y1="440" x2="162" y2="586"/>
+      <line x1="190" y1="434" x2="220" y2="576"/>
+      <line x1="250" y1="430" x2="278" y2="566"/>
+    </g>
+    <g stroke="#e8dcc6" stroke-width="1" opacity="0.5">
+      <line x1="-20" y1="480" x2="253" y2="454"/>
+      <line x1="-20" y1="524" x2="265" y2="502"/>
+      <line x1="-20" y1="568" x2="277" y2="550"/>
+    </g>
+    <!-- frayed edge -->
+    <g stroke="#c6b57e" stroke-width="2" stroke-linecap="round" opacity="0.8">
+      <line x1="244" y1="432" x2="266" y2="428"/>
+      <line x1="255" y1="460" x2="278" y2="458"/>
+      <line x1="266" y1="490" x2="290" y2="490"/>
+      <line x1="276" y1="520" x2="300" y2="522"/>
+      <line x1="286" y1="548" x2="310" y2="552"/>
+    </g>
+  </g>
+
+  <!-- ============ OAK VENEER SAMPLE (hero, off-center) ============ -->
+  <g>
+    <rect x="196" y="126" width="240" height="330" rx="6" fill="#4a3624" opacity="0.32" filter="url(#soft)" transform="rotate(-7 316 291)"/>
+    <g transform="rotate(-7 316 291)">
+      <rect x="184" y="118" width="238" height="326" rx="7" fill="url(#veneerEdge)"/>
+      <rect x="184" y="118" width="238" height="316" rx="7" fill="url(#veneerGrad)"/>
+      <!-- flowing wood grain on veneer -->
+      <g fill="none" stroke-linecap="round" opacity="0.55">
+        <path d="M190 150 C 260 138, 330 160, 416 146" stroke="#a5876a" stroke-width="2.4"/>
+        <path d="M190 178 C 250 168, 340 192, 416 176" stroke="#8a6f4e" stroke-width="1.6"/>
+        <path d="M190 208 C 270 198, 320 222, 416 208" stroke="#a5876a" stroke-width="2.8"/>
+        <path d="M190 244 C 240 236, 350 260, 416 244" stroke="#9a7c58" stroke-width="1.4"/>
+        <path d="M190 282 C 280 272, 320 296, 416 282" stroke="#a5876a" stroke-width="2.2"/>
+        <path d="M190 322 C 250 314, 350 338, 416 322" stroke="#8a6f4e" stroke-width="1.8"/>
+        <path d="M190 362 C 270 354, 330 378, 416 360" stroke="#a5876a" stroke-width="2.6"/>
+        <path d="M190 402 C 240 394, 350 418, 416 400" stroke="#9a7c58" stroke-width="1.6"/>
+      </g>
+      <!-- cathedral figure -->
+      <path d="M300 118 C 288 210, 312 300, 300 434 C 296 300, 284 210, 300 118 Z" fill="#8a6f4e" opacity="0.28"/>
+      <path d="M300 118 C 296 210, 306 300, 300 434 C 298 300, 292 210, 300 118 Z" fill="#6d5138" opacity="0.22"/>
+      <!-- top light sheen -->
+      <rect x="184" y="118" width="238" height="70" rx="7" fill="url(#chromeShine)" opacity="0.25"/>
+      <!-- corner label notch -->
+      <circle cx="212" cy="146" r="7" fill="#faf7f2" opacity="0.85"/>
+      <circle cx="212" cy="146" r="7" fill="none" stroke="#a5876a" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- ============ BAMBOO STRIP (diagonal across veneer) ============ -->
+  <g transform="rotate(24 360 320)">
+    <rect x="300" y="150" width="34" height="360" rx="6" fill="#4a3624" opacity="0.28" filter="url(#soft)"/>
+    <rect x="296" y="146" width="34" height="356" rx="7" fill="url(#bambooGrad)"/>
+    <!-- bamboo nodes -->
+    <g stroke="#8a6f4e" stroke-width="2.2" opacity="0.7">
+      <line x1="296" y1="212" x2="330" y2="212"/>
+      <line x1="296" y1="292" x2="330" y2="292"/>
+      <line x1="296" y1="372" x2="330" y2="372"/>
+      <line x1="296" y1="452" x2="330" y2="452"/>
+    </g>
+    <g stroke="#f0e4c6" stroke-width="1.2" opacity="0.7">
+      <line x1="296" y1="216" x2="330" y2="216"/>
+      <line x1="296" y1="296" x2="330" y2="296"/>
+      <line x1="296" y1="376" x2="330" y2="376"/>
+    </g>
+    <!-- vertical fiber -->
+    <line x1="306" y1="146" x2="306" y2="502" stroke="#c6b57e" stroke-width="1" opacity="0.6"/>
+    <line x1="318" y1="146" x2="318" y2="502" stroke="#a58f5a" stroke-width="1" opacity="0.5"/>
+    <rect x="298" y="146" width="8" height="356" rx="4" fill="url(#chromeShine)" opacity="0.28"/>
+  </g>
+
+  <!-- ============ COIL OF NATURAL ROPE (bench seat, lower-right hero prop) ============ -->
+  <g transform="translate(432 548)">
+    <ellipse cx="4" cy="30" rx="118" ry="52" fill="#4a3624" opacity="0.32" filter="url(#soft)"/>
+    <ellipse cx="0" cy="0" rx="116" ry="96" fill="url(#ropeCore)"/>
+    <!-- concentric rope coils -->
+    <g fill="none" stroke-linecap="round">
+      <ellipse cx="0" cy="0" rx="112" ry="92" stroke="#8a5a20" stroke-width="18" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="112" ry="92" stroke="url(#ropeStrand)" stroke-width="15"/>
+      <ellipse cx="0" cy="0" rx="90" ry="74" stroke="#8a5a20" stroke-width="18" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="90" ry="74" stroke="url(#ropeStrand)" stroke-width="15"/>
+      <ellipse cx="0" cy="0" rx="68" ry="56" stroke="#8a5a20" stroke-width="18" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="68" ry="56" stroke="url(#ropeStrand)" stroke-width="15"/>
+      <ellipse cx="0" cy="0" rx="46" ry="38" stroke="#8a5a20" stroke-width="18" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="46" ry="38" stroke="url(#ropeStrand)" stroke-width="15"/>
+      <ellipse cx="0" cy="0" rx="24" ry="20" stroke="#8a5a20" stroke-width="16" opacity="0.5"/>
+      <ellipse cx="0" cy="0" rx="24" ry="20" stroke="url(#ropeStrand)" stroke-width="13"/>
+    </g>
+    <circle cx="0" cy="0" r="9" fill="#a5876a"/>
+    <circle cx="-2" cy="-2" r="5" fill="#6d5138"/>
+    <!-- twist hatching on outer coil -->
+    <g stroke="#8a5a20" stroke-width="1.6" opacity="0.45">
+      <line x1="-108" y1="-20" x2="-98" y2="-32"/>
+      <line x1="-96" y1="-52" x2="-84" y2="-62"/>
+      <line x1="-70" y1="-78" x2="-58" y2="-86"/>
+      <line x1="-36" y1="-90" x2="-26" y2="-98"/>
+      <line x1="4" y1="-94" x2="14" y2="-102"/>
+      <line x1="44" y1="-88" x2="54" y2="-96"/>
+      <line x1="78" y1="-72" x2="88" y2="-80"/>
+      <line x1="102" y1="-44" x2="112" y2="-52"/>
+      <line x1="108" y1="34" x2="118" y2="26"/>
+      <line x1="86" y1="66" x2="96" y2="58"/>
+      <line x1="44" y1="86" x2="54" y2="78"/>
+      <line x1="-40" y1="86" x2="-30" y2="94"/>
+      <line x1="-84" y1="64" x2="-74" y2="72"/>
+    </g>
+    <g stroke="#f0e0bc" stroke-width="1" opacity="0.5">
+      <line x1="-100" y1="-8" x2="-92" y2="-18"/>
+      <line x1="-58" y1="-70" x2="-50" y2="-78"/>
+      <line x1="20" y1="-92" x2="28" y2="-100"/>
+      <line x1="94" y1="-56" x2="102" y2="-64"/>
+    </g>
+    <!-- loose rope tail trailing off -->
+    <path d="M108 40 C 150 70, 176 108, 210 150" fill="none" stroke="#8a5a20" stroke-width="17" stroke-linecap="round" opacity="0.5"/>
+    <path d="M108 40 C 150 70, 176 108, 210 150" fill="none" stroke="url(#ropeStrand)" stroke-width="14" stroke-linecap="round"/>
+    <g stroke="#8a5a20" stroke-width="1.4" opacity="0.5">
+      <line x1="128" y1="52" x2="136" y2="42"/>
+      <line x1="150" y1="74" x2="158" y2="64"/>
+      <line x1="170" y1="98" x2="178" y2="88"/>
+      <line x1="190" y1="124" x2="198" y2="114"/>
+    </g>
+  </g>
+
+  <!-- ============ LEATHER KEY TRAY SWATCH (tan, front-left) ============ -->
+  <g transform="rotate(6 156 588)">
+    <rect x="66" y="536" width="196" height="150" rx="20" fill="#4a3624" opacity="0.3" filter="url(#soft)"/>
+    <rect x="60" y="528" width="196" height="148" rx="20" fill="url(#leatherGrad)"/>
+    <!-- inner well -->
+    <rect x="78" y="546" width="160" height="112" rx="16" fill="url(#leatherWell)"/>
+    <rect x="78" y="546" width="160" height="40" rx="16" fill="#8a6f4e" opacity="0.22"/>
+    <!-- corner pinch folds -->
+    <path d="M60 548 C 78 540, 86 548, 84 566" fill="none" stroke="#8a6f4e" stroke-width="2.4" opacity="0.6"/>
+    <path d="M256 548 C 238 540, 230 548, 232 566" fill="none" stroke="#8a6f4e" stroke-width="2.4" opacity="0.6"/>
+    <path d="M60 656 C 78 664, 86 656, 84 640" fill="none" stroke="#8a6f4e" stroke-width="2.4" opacity="0.6"/>
+    <path d="M256 656 C 238 664, 230 656, 232 640" fill="none" stroke="#8a6f4e" stroke-width="2.4" opacity="0.6"/>
+    <!-- stitch line -->
+    <rect x="70" y="538" width="176" height="128" rx="16" fill="none" stroke="#8a5a20" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.7"/>
+    <!-- leather grain speckle -->
+    <g fill="#8a6f4e" opacity="0.22">
+      <circle cx="110" cy="580" r="1.4"/>
+      <circle cx="150" cy="600" r="1.2"/>
+      <circle cx="190" cy="576" r="1.5"/>
+      <circle cx="130" cy="628" r="1.3"/>
+      <circle cx="200" cy="620" r="1.2"/>
+      <circle cx="96" cy="616" r="1.4"/>
+    </g>
+    <!-- rim highlight -->
+    <rect x="60" y="528" width="196" height="30" rx="20" fill="url(#chromeShine)" opacity="0.3"/>
+    <!-- a couple of keys resting -->
+    <g transform="rotate(-18 150 600)">
+      <rect x="132" y="592" width="52" height="9" rx="4.5" fill="url(#chromeGrad)"/>
+      <circle cx="132" cy="596" r="10" fill="url(#chromeGrad)"/>
+      <circle cx="132" cy="596" r="4" fill="#a5876a"/>
+      <rect x="176" y="588" width="10" height="5" fill="#9a968f"/>
+      <rect x="176" y="598" width="7" height="5" fill="#9a968f"/>
+    </g>
+  </g>
+
+  <!-- ============ BRUSHED-STEEL HOOK (upper-right) ============ -->
+  <g transform="translate(486 176)">
+    <path d="M6 8 C 6 60, 6 92, 6 112 C 6 150, 44 154, 52 122 C 56 106, 42 100, 36 112 C 32 124, 40 128, 44 122" fill="none" stroke="#4a3624" stroke-width="15" stroke-linecap="round" opacity="0.28" filter="url(#soft)" transform="translate(4 8)"/>
+    <!-- backplate -->
+    <ellipse cx="6" cy="6" rx="26" ry="30" fill="url(#chromeGrad)"/>
+    <ellipse cx="6" cy="6" rx="26" ry="30" fill="none" stroke="#7f7b74" stroke-width="1.4"/>
+    <circle cx="6" cy="6" r="6" fill="#9a968f"/>
+    <circle cx="6" cy="6" r="2.4" fill="#3d3a36"/>
+    <!-- hook body -->
+    <path d="M6 30 C 6 70, 6 96, 6 116 C 6 152, 46 156, 54 124 C 58 108, 42 102, 36 114 C 32 126, 42 130, 46 124" fill="none" stroke="url(#chromeGrad)" stroke-width="13" stroke-linecap="round"/>
+    <path d="M6 30 C 6 70, 6 96, 6 116 C 6 152, 46 156, 54 124 C 58 108, 42 102, 36 114 C 32 126, 42 130, 46 124" fill="none" stroke="url(#chromeShine)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <!-- brushed streaks -->
+    <g stroke="#f2f0eb" stroke-width="0.8" opacity="0.5">
+      <line x1="2" y1="40" x2="2" y2="110"/>
+      <line x1="10" y1="40" x2="10" y2="112"/>
+    </g>
+    <circle cx="6" cy="-6" r="4" fill="#ffffff" opacity="0.75"/>
+  </g>
+
+  <!-- ============ SMALL SUPPORTING SWATCH CHIPS (back edge) ============ -->
+  <g transform="rotate(-4 120 150)">
+    <rect x="60" y="96" width="120" height="86" rx="5" fill="#4a3624" opacity="0.28" filter="url(#soft)"/>
+    <rect x="56" y="92" width="120" height="82" rx="6" fill="#8a8c62"/>
+    <rect x="56" y="92" width="120" height="82" rx="6" fill="url(#leafGrad)" opacity="0.6"/>
+    <!-- velvet sheen -->
+    <rect x="56" y="92" width="120" height="30" rx="6" fill="#a7a97a" opacity="0.5"/>
+    <g stroke="#63654a" stroke-width="1" opacity="0.4">
+      <line x1="66" y1="110" x2="166" y2="110"/>
+      <line x1="66" y1="130" x2="166" y2="130"/>
+      <line x1="66" y1="150" x2="166" y2="150"/>
+    </g>
+    <rect x="56" y="92" width="120" height="82" rx="6" fill="none" stroke="#4a4c38" stroke-width="1" opacity="0.5"/>
+  </g>
+  <g transform="rotate(3 470 96)">
+    <rect x="416" y="52" width="104" height="74" rx="5" fill="#4a3624" opacity="0.26" filter="url(#soft)"/>
+    <rect x="412" y="48" width="104" height="72" rx="6" fill="#e8dcc6"/>
+    <!-- linen weave -->
+    <g stroke="#cbb287" stroke-width="1.4" opacity="0.55">
+      <line x1="412" y1="60" x2="516" y2="60"/>
+      <line x1="412" y1="72" x2="516" y2="72"/>
+      <line x1="412" y1="84" x2="516" y2="84"/>
+      <line x1="412" y1="96" x2="516" y2="96"/>
+      <line x1="412" y1="108" x2="516" y2="108"/>
+    </g>
+    <g stroke="#d8c19a" stroke-width="1.4" opacity="0.45">
+      <line x1="424" y1="48" x2="424" y2="120"/>
+      <line x1="440" y1="48" x2="440" y2="120"/>
+      <line x1="456" y1="48" x2="456" y2="120"/>
+      <line x1="472" y1="48" x2="472" y2="120"/>
+      <line x1="488" y1="48" x2="488" y2="120"/>
+      <line x1="504" y1="48" x2="504" y2="120"/>
+    </g>
+    <rect x="412" y="48" width="104" height="72" rx="6" fill="none" stroke="#cbb287" stroke-width="1" opacity="0.6"/>
+  </g>
+
+  <!-- ============ PLANT LEAVES (organic accents) ============ -->
+  <g opacity="0.95">
+    <path d="M540 470 C 470 456, 430 500, 402 560 C 470 548, 528 528, 560 476 Z" fill="url(#leafGrad)" transform="rotate(-6 480 512)"/>
+    <path d="M540 470 C 490 470, 456 502, 402 560" fill="none" stroke="#4a4c38" stroke-width="1.6" opacity="0.5" transform="rotate(-6 480 512)"/>
+    <g stroke="#63654a" stroke-width="0.9" opacity="0.45" transform="rotate(-6 480 512)">
+      <line x1="512" y1="486" x2="478" y2="512"/>
+      <line x1="490" y1="500" x2="458" y2="524"/>
+      <line x1="468" y1="514" x2="440" y2="538"/>
+    </g>
+    <path d="M566 500 C 520 512, 494 552, 484 604 C 540 584, 580 552, 592 508 Z" fill="#8a8c62" opacity="0.9" transform="rotate(4 540 552)"/>
+    <path d="M566 500 C 528 520, 508 556, 484 604" fill="none" stroke="#4a4c38" stroke-width="1.4" opacity="0.45" transform="rotate(4 540 552)"/>
+  </g>
+  <!-- small sprig near top-left -->
+  <g transform="translate(28 240) rotate(-30)">
+    <path d="M0 0 C 30 -8, 54 6, 70 34 C 40 32, 14 22, 0 0 Z" fill="url(#leafGrad)"/>
+    <line x1="4" y1="4" x2="66" y2="32" stroke="#4a4c38" stroke-width="1.2" opacity="0.5"/>
+  </g>
+
+  <!-- ============ SCATTER PROPS ============ -->
+  <!-- three small oak dowel offcuts -->
+  <g transform="rotate(-14 330 636)">
+    <rect x="286" y="628" width="120" height="16" rx="8" fill="#4a3624" opacity="0.25" filter="url(#soft)"/>
+    <rect x="284" y="622" width="120" height="15" rx="7.5" fill="url(#bambooGrad)"/>
+    <rect x="284" y="622" width="120" height="6" rx="3" fill="url(#chromeShine)" opacity="0.3"/>
+    <ellipse cx="284" cy="629" rx="4" ry="7.5" fill="#a5876a"/>
+  </g>
+  <g transform="rotate(-8 348 668)">
+    <rect x="300" y="662" width="104" height="14" rx="7" fill="#4a3624" opacity="0.22" filter="url(#soft)"/>
+    <rect x="298" y="656" width="104" height="13" rx="6.5" fill="#cbb287"/>
+    <ellipse cx="298" cy="662" rx="3.5" ry="6.5" fill="#a5876a"/>
+  </g>
+
+  <!-- brushed-steel small ring -->
+  <g transform="translate(198 500)">
+    <circle cx="4" cy="6" r="22" fill="#4a3624" opacity="0.22" filter="url(#soft)"/>
+    <circle cx="0" cy="0" r="22" fill="none" stroke="url(#chromeGrad)" stroke-width="7"/>
+    <circle cx="0" cy="0" r="22" fill="none" stroke="url(#chromeShine)" stroke-width="2" opacity="0.7"/>
+    <circle cx="-8" cy="-14" r="3" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- soft amber accent dabs (like resin drops) -->
+  <g opacity="0.6">
+    <circle cx="250" cy="222" r="6" fill="#cf9f5c"/>
+    <circle cx="250" cy="222" r="6" fill="url(#chromeShine)" opacity="0.4"/>
+    <circle cx="368" cy="120" r="5" fill="#b98a4a"/>
+  </g>
+
+  <!-- ============ ambient soft shadows tying objects together ============ -->
+  <ellipse cx="316" cy="470" rx="150" ry="24" fill="#5c4632" opacity="0.14" filter="url(#softer)"/>
+  <ellipse cx="150" cy="690" rx="120" ry="22" fill="#5c4632" opacity="0.14" filter="url(#softer)"/>
+
+  <!-- grain texture overlay -->
+  <rect x="0" y="0" width="600" height="750" filter="url(#grainTexture)" opacity="0.5"/>
+
+  <!-- bottom fade for depth -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#tableShade)"/>
+  <!-- vignette -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#vignette)"/>
+</svg>

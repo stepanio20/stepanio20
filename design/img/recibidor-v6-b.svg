@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="walnutTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3728"/>
+    </linearGradient>
+    <linearGradient id="walnutFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#463322"/>
+    </linearGradient>
+    <radialGradient id="chrome" cx="0.38" cy="0.32" r="0.85">
+      <stop offset="0" stop-color="#f7f3ec"/>
+      <stop offset="0.18" stop-color="#e3e1dc"/>
+      <stop offset="0.42" stop-color="#c9c5be"/>
+      <stop offset="0.62" stop-color="#b8cdd6"/>
+      <stop offset="0.78" stop-color="#8a8c62"/>
+      <stop offset="0.92" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </radialGradient>
+    <radialGradient id="chromeRim" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.86" stop-color="#3d3a36"/>
+      <stop offset="0.92" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </radialGradient>
+    <radialGradient id="hilite" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="0.5" stop-color="#b98a4a"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="vase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="0.5" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+
+  <!-- floor / lower band -->
+  <rect x="0" y="470" width="800" height="130" fill="url(#floorG)"/>
+  <rect x="0" y="470" width="800" height="6" fill="#a5876a"/>
+  <!-- floor plank hints -->
+  <rect x="70" y="482" width="200" height="3" rx="1.5" fill="#c8a87c" opacity="0.6"/>
+  <rect x="330" y="500" width="240" height="3" rx="1.5" fill="#c8a87c" opacity="0.6"/>
+  <rect x="560" y="525" width="200" height="3" rx="1.5" fill="#c8a87c" opacity="0.6"/>
+
+  <!-- retro 70s vertical wall stripes (olive/ochre, subtle) -->
+  <rect x="596" y="0" width="26" height="470" fill="#8a8c62" opacity="0.14"/>
+  <rect x="628" y="0" width="14" height="470" fill="#cf9f5c" opacity="0.12"/>
+  <rect x="150" y="0" width="20" height="470" fill="#8a8c62" opacity="0.10"/>
+
+  <!-- soft ambient light glow behind mirror -->
+  <ellipse cx="400" cy="215" rx="230" ry="200" fill="#ffffff" opacity="0.35"/>
+
+  <!-- ============ WALNUT CONSOLE TOP ============ -->
+  <!-- floor shadow of console -->
+  <ellipse cx="400" cy="486" rx="250" ry="20" fill="rgba(31,27,22,0.12)"/>
+  <!-- table top surface -->
+  <rect x="150" y="428" width="500" height="26" rx="8" fill="url(#walnutTop)"/>
+  <!-- top front edge -->
+  <rect x="150" y="450" width="500" height="20" rx="6" fill="url(#walnutFront)"/>
+  <!-- wood grain on top -->
+  <rect x="185" y="437" width="300" height="2.5" rx="1.2" fill="#6d5138" opacity="0.7"/>
+  <rect x="210" y="444" width="360" height="2.5" rx="1.2" fill="#4a3728" opacity="0.6"/>
+  <!-- legs -->
+  <rect x="180" y="468" width="16" height="18" rx="4" fill="#463322"/>
+  <rect x="604" y="468" width="16" height="18" rx="4" fill="#463322"/>
+  <!-- brass leg caps -->
+  <rect x="180" y="482" width="16" height="5" rx="2.5" fill="url(#brass)"/>
+  <rect x="604" y="482" width="16" height="5" rx="2.5" fill="url(#brass)"/>
+
+  <!-- ============ CONVEX MIRROR SPHERE ============ -->
+  <!-- wall shadow cast to lower-right -->
+  <ellipse cx="418" cy="238" rx="152" ry="150" fill="rgba(31,27,22,0.12)"/>
+  <!-- outer chrome rim ring -->
+  <circle cx="400" cy="222" r="150" fill="url(#chromeRim)"/>
+  <circle cx="400" cy="222" r="140" fill="#2a2724"/>
+  <!-- inner brass accent bezel -->
+  <circle cx="400" cy="222" r="138" fill="none" stroke="url(#brass)" stroke-width="4"/>
+  <!-- convex mirror face -->
+  <circle cx="400" cy="222" r="134" fill="url(#chrome)"/>
+  <!-- curved reflection band (horizon) -->
+  <path d="M 272 210 Q 400 250 528 210 L 528 236 Q 400 276 272 236 Z" fill="#e3e1dc" opacity="0.35"/>
+  <!-- reflected ceiling arc -->
+  <path d="M 300 128 Q 400 96 500 128" fill="none" stroke="#faf7f2" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+  <!-- distorted reflected wall stripe -->
+  <path d="M 470 108 Q 500 222 470 332" fill="none" stroke="#8a8c62" stroke-width="9" stroke-linecap="round" opacity="0.22"/>
+  <!-- primary specular highlight -->
+  <ellipse cx="352" cy="172" rx="46" ry="34" fill="url(#hilite)"/>
+  <!-- small secondary sparkle -->
+  <circle cx="336" cy="158" r="9" fill="#ffffff" opacity="0.85"/>
+  <!-- lower soft glass-blue reflection -->
+  <ellipse cx="430" cy="300" rx="60" ry="30" fill="#b8cdd6" opacity="0.30"/>
+  <!-- graphite hanging cord -->
+  <rect x="397" y="60" width="6" height="34" rx="3" fill="#3d3a36"/>
+  <circle cx="400" cy="60" r="6" fill="#c9c5be"/>
+
+  <!-- ============ TABLETOP OBJECTS ============ -->
+  <!-- object shadows on top -->
+  <ellipse cx="250" cy="432" rx="42" ry="7" fill="rgba(31,27,22,0.12)"/>
+  <ellipse cx="520" cy="432" rx="34" ry="6" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- olive ceramic vase (left) -->
+  <path d="M 224 434 Q 210 400 224 372 Q 232 358 250 358 Q 268 358 276 372 Q 290 400 276 434 Z" fill="url(#vase)"/>
+  <path d="M 250 358 Q 232 358 224 372 Q 236 372 250 372 Q 264 372 276 372 Q 268 358 250 358 Z" fill="#63654a"/>
+  <ellipse cx="250" cy="372" rx="26" ry="6" fill="#8a8c62"/>
+  <rect x="242" y="380" width="5" height="42" rx="2.5" fill="#5c4632" opacity="0.4"/>
+  <!-- dried stems from vase -->
+  <path d="M 248 372 Q 236 330 222 302" fill="none" stroke="#a5876a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 252 372 Q 258 328 268 300" fill="none" stroke="#8a5a20" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 250 372 Q 250 340 250 312" fill="none" stroke="#b98a4a" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="222" cy="300" rx="7" ry="4" fill="#8a8c62" transform="rotate(-30 222 300)"/>
+  <ellipse cx="268" cy="298" rx="7" ry="4" fill="#cf9f5c" transform="rotate(28 268 298)"/>
+  <ellipse cx="250" cy="310" rx="6" ry="4" fill="#7a7c5c"/>
+
+  <!-- brass key tray (right) -->
+  <ellipse cx="520" cy="428" rx="40" ry="12" fill="url(#brass)"/>
+  <ellipse cx="520" cy="425" rx="34" ry="9" fill="#8a5a20"/>
+  <ellipse cx="520" cy="423" rx="30" ry="7" fill="#b98a4a"/>
+  <!-- keys in tray -->
+  <circle cx="512" cy="422" r="5" fill="#c9c5be"/>
+  <rect x="514" y="421" width="16" height="3" rx="1.5" fill="#c9c5be"/>
+  <circle cx="528" cy="424" r="4" fill="#e3e1dc"/>
+
+  <!-- small chrome candlestick (far right of top) -->
+  <ellipse cx="588" cy="428" rx="14" ry="5" fill="rgba(31,27,22,0.12)"/>
+  <rect x="583" y="392" width="10" height="34" rx="3" fill="#c9c5be"/>
+  <ellipse cx="588" cy="392" rx="12" ry="4" fill="#e3e1dc"/>
+  <rect x="585" y="376" width="6" height="18" rx="3" fill="#cf9f5c"/>
+  <ellipse cx="588" cy="428" rx="14" ry="4.5" fill="#c9c5be"/>
+
+  <!-- framed abstract art hint on left wall (no red) -->
+  <rect x="60" y="150" width="96" height="120" rx="6" fill="#ffffff"/>
+  <rect x="68" y="158" width="80" height="104" rx="4" fill="#f7f3ec"/>
+  <circle cx="108" cy="196" r="22" fill="#cf9f5c" opacity="0.75"/>
+  <rect x="80" y="226" width="56" height="10" rx="5" fill="#7a7c5c" opacity="0.7"/>
+  <rect x="80" y="242" width="40" height="8" rx="4" fill="#a5876a" opacity="0.6"/>
+  <rect x="60" y="150" width="96" height="120" rx="6" fill="none" stroke="#a5876a" stroke-width="4"/>
+
+  <!-- small oak wall peg with hanging ring (right) -->
+  <circle cx="700" cy="200" r="8" fill="#cbb287"/>
+  <circle cx="700" cy="200" r="4" fill="#a5876a"/>
+  <circle cx="700" cy="232" r="14" fill="none" stroke="#c9c5be" stroke-width="4"/>
+</svg>
