@@ -43,8 +43,10 @@
       ? 'linear-gradient(135deg,' + cols.join(',') + ')'
       : '#e8e1d6';
     var renders = (window.PHOTOS && window.PHOTOS.renders) || {};
-    var thumbSrc = renders[prefix + '-' + vid]
-      ? '../img/' + renders[prefix + '-' + vid]
+    var rv = renders[prefix + '-' + vid];
+    var rvFirst = rv ? (typeof rv === 'string' ? rv : rv[0]) : null;
+    var thumbSrc = rvFirst
+      ? '../img/' + rvFirst
       : (photos[prefix + '-' + vid] || [])[0];
     if (thumbSrc) {
       var im = new Image();

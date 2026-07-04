@@ -59,7 +59,12 @@
     // Первым — фотореалистичный img2img-рендер именно этой квартиры (Venice),
     // затем стоковые фото-референсы. Битые молча убираем.
     var renders = (window.PHOTOS && window.PHOTOS.renders) || {};
-    if (renders[id]) urls.unshift(IMG + renders[id]);
+    var rv = renders[id];
+    if (rv) {
+      var list = (typeof rv === 'string') ? [rv] : rv.slice();
+      // добавляем в начало: -real первым, затем -real2, -real3
+      for (var k = list.length - 1; k >= 0; k--) urls.unshift(IMG + list[k]);
+    }
     urls.forEach(function (u, i) {
       var img = addImg(u, i);
       img.addEventListener('load', function () { state.photos++; });

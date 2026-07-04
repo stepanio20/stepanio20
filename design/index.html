@@ -109,9 +109,10 @@
   }
   var r = (window.PHOTOS && window.PHOTOS.renders) || {};
   var m = (window.PHOTOS && window.PHOTOS.mood) || {};
+  function first(v) { return v ? (typeof v === 'string' ? v : v[0]) : null; }
   // сначала пробуем фотореалистичный рендер квартиры, иначе — референс
-  cover('cover-salon', [r['salon-v1'] ? 'img/' + r['salon-v1'] : (m.salon || [])[0]].filter(Boolean));
-  cover('cover-recibidor', [r['recibidor-v2'] ? 'img/' + r['recibidor-v2'] : (m.recibidor || [])[0]].filter(Boolean));
+  cover('cover-salon', [first(r['salon-v1']) ? 'img/' + first(r['salon-v1']) : (m.salon || [])[0]].filter(Boolean));
+  cover('cover-recibidor', [first(r['recibidor-v2']) ? 'img/' + first(r['recibidor-v2']) : (m.recibidor || [])[0]].filter(Boolean));
 })();
 </script>
 </body>
