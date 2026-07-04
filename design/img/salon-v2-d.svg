@@ -1,0 +1,324 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f3ede2"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="woodDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="woodMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a5876a"/>
+      <stop offset="1" stop-color="#5c4632"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.45" stop-color="#c9c5be"/>
+      <stop offset="0.55" stop-color="#9a968f"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="chromeV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="anthracite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#e3e1dc" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="boucle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8dcc6"/>
+    </linearGradient>
+    <linearGradient id="velvetOlive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="rug" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="posterAmber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="posterGraphite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="softShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1f1b16" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#1f1b16" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="410" fill="url(#wall)"/>
+  <!-- FLOOR -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <!-- Skirting line -->
+  <rect x="0" y="404" width="800" height="10" fill="#f7f3ec"/>
+  <rect x="0" y="404" width="800" height="3" fill="#e8dcc6"/>
+  <rect x="0" y="412" width="800" height="2" fill="#a5876a" opacity="0.5"/>
+
+  <!-- Plank lines -->
+  <g stroke="#a5876a" stroke-width="1.4" opacity="0.35">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+  </g>
+  <g stroke="#b98a4a" stroke-width="1.1" opacity="0.28">
+    <line x1="120" y1="414" x2="120" y2="452"/>
+    <line x1="340" y1="414" x2="340" y2="452"/>
+    <line x1="560" y1="414" x2="560" y2="452"/>
+    <line x1="70" y1="452" x2="70" y2="500"/>
+    <line x1="300" y1="452" x2="300" y2="500"/>
+    <line x1="520" y1="452" x2="520" y2="500"/>
+    <line x1="700" y1="452" x2="700" y2="500"/>
+    <line x1="180" y1="500" x2="180" y2="552"/>
+    <line x1="430" y1="500" x2="430" y2="552"/>
+    <line x1="640" y1="500" x2="640" y2="552"/>
+    <line x1="250" y1="552" x2="250" y2="600"/>
+    <line x1="560" y1="552" x2="560" y2="600"/>
+  </g>
+
+  <!-- Warm light wash -->
+  <ellipse cx="240" cy="120" rx="300" ry="180" fill="#faf7f2" opacity="0.5"/>
+
+  <!-- ============ TRACK LIGHT RAIL ============ -->
+  <rect x="210" y="52" width="380" height="9" rx="4" fill="#15130f"/>
+  <rect x="210" y="52" width="380" height="3" rx="1.5" fill="#3d3a36"/>
+  <g fill="#2a2724">
+    <rect x="250" y="61" width="8" height="12" rx="3"/>
+    <rect x="396" y="61" width="8" height="12" rx="3"/>
+    <rect x="542" y="61" width="8" height="12" rx="3"/>
+  </g>
+  <g fill="#15130f">
+    <rect x="244" y="71" width="20" height="10" rx="5"/>
+    <rect x="390" y="71" width="20" height="10" rx="5"/>
+    <rect x="536" y="71" width="20" height="10" rx="5"/>
+  </g>
+  <!-- light cones -->
+  <polygon points="254,81 232,150 276,150" fill="url(#amberGlow)" opacity="0.6"/>
+  <polygon points="400,81 378,150 422,150" fill="url(#amberGlow)" opacity="0.6"/>
+  <polygon points="546,81 524,150 568,150" fill="url(#amberGlow)" opacity="0.6"/>
+
+  <!-- ============ THREE F1 POSTERS ============ -->
+  <!-- Poster 1 -->
+  <g>
+    <rect x="196" y="120" width="112" height="150" rx="4" fill="#15130f"/>
+    <rect x="204" y="128" width="96" height="134" rx="2" fill="url(#posterGraphite)"/>
+    <path d="M216 240 Q228 150 262 158 Q290 164 274 214 Q262 250 230 246 Z" fill="none" stroke="url(#posterAmber)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="252" cy="182" r="4" fill="#cf9f5c"/>
+    <rect x="212" y="246" width="80" height="4" rx="2" fill="#8a5a20" opacity="0.7"/>
+    <rect x="212" y="134" width="30" height="4" rx="2" fill="#cf9f5c" opacity="0.6"/>
+  </g>
+  <!-- Poster 2 -->
+  <g>
+    <rect x="342" y="120" width="112" height="150" rx="4" fill="#15130f"/>
+    <rect x="350" y="128" width="96" height="134" rx="2" fill="url(#posterGraphite)"/>
+    <path d="M362 150 L362 240 M362 195 L404 195 M404 150 L404 240" fill="none" stroke="url(#posterAmber)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="428" cy="168" r="12" fill="none" stroke="#cf9f5c" stroke-width="3"/>
+    <rect x="358" y="246" width="80" height="4" rx="2" fill="#8a5a20" opacity="0.7"/>
+    <rect x="358" y="134" width="44" height="4" rx="2" fill="#cf9f5c" opacity="0.55"/>
+  </g>
+  <!-- Poster 3 -->
+  <g>
+    <rect x="488" y="120" width="112" height="150" rx="4" fill="#15130f"/>
+    <rect x="496" y="128" width="96" height="134" rx="2" fill="url(#posterGraphite)"/>
+    <path d="M508 232 Q520 200 548 200 Q580 200 582 168 Q582 148 560 148" fill="none" stroke="url(#posterAmber)" stroke-width="4" stroke-linecap="round"/>
+    <rect x="504" y="240" width="26" height="10" rx="2" fill="#b98a4a"/>
+    <rect x="536" y="240" width="26" height="10" rx="2" fill="#8a5a20"/>
+    <rect x="568" y="240" width="20" height="10" rx="2" fill="#cf9f5c"/>
+    <rect x="504" y="134" width="30" height="4" rx="2" fill="#cf9f5c" opacity="0.6"/>
+  </g>
+
+  <!-- ============ DISPLAY CABINET (right) with helmet ============ -->
+  <g>
+    <!-- soft floor shadow -->
+    <ellipse cx="690" cy="418" rx="86" ry="18" fill="url(#softShadow)"/>
+    <!-- cabinet body -->
+    <rect x="624" y="150" width="132" height="262" rx="8" fill="url(#anthracite)"/>
+    <rect x="624" y="150" width="132" height="10" rx="5" fill="#3d3a36"/>
+    <!-- glass front -->
+    <rect x="636" y="166" width="108" height="196" rx="4" fill="url(#glass)"/>
+    <rect x="636" y="166" width="108" height="196" rx="4" fill="none" stroke="#9a968f" stroke-width="1.5" opacity="0.6"/>
+    <line x1="654" y1="172" x2="700" y2="300" stroke="#faf7f2" stroke-width="3" opacity="0.25"/>
+    <!-- shelf -->
+    <rect x="636" y="272" width="108" height="6" fill="#2a2724"/>
+    <!-- helmet display shelf pedestal -->
+    <rect x="666" y="238" width="48" height="8" rx="3" fill="#15130f"/>
+    <!-- HELMET white and olive -->
+    <g>
+      <ellipse cx="690" cy="248" rx="30" ry="6" fill="#1f1b16" opacity="0.2"/>
+      <path d="M662 224 Q662 192 690 192 Q718 192 718 224 Q718 240 706 244 L674 244 Q662 240 662 224 Z" fill="#ffffff"/>
+      <path d="M662 224 Q662 200 682 194 Q672 210 674 244 L674 244 Q662 240 662 224 Z" fill="#e8dcc6"/>
+      <path d="M666 208 Q690 200 714 210 L714 220 Q690 214 667 220 Z" fill="#7a7c5c"/>
+      <path d="M666 208 Q690 200 714 210 L714 214 Q690 206 667 214 Z" fill="#8a8c62"/>
+      <path d="M670 226 Q690 220 712 226 L712 236 Q690 230 670 236 Z" fill="#2a2724"/>
+      <path d="M670 226 Q690 220 712 226 L712 229 Q690 224 670 229 Z" fill="#3d3a36"/>
+      <rect x="686" y="196" width="8" height="6" rx="2" fill="#63654a"/>
+    </g>
+    <!-- lower storage -->
+    <rect x="636" y="286" width="108" height="70" rx="3" fill="#2a2724"/>
+    <line x1="690" y1="292" x2="690" y2="350" stroke="#15130f" stroke-width="2"/>
+    <circle cx="682" cy="320" r="3" fill="#9a968f"/>
+    <circle cx="698" cy="320" r="3" fill="#9a968f"/>
+    <!-- feet -->
+    <rect x="636" y="406" width="10" height="10" rx="2" fill="#15130f"/>
+    <rect x="734" y="406" width="10" height="10" rx="2" fill="#15130f"/>
+  </g>
+
+  <!-- ============ VINYL CABINET (left) with turntable ============ -->
+  <g>
+    <ellipse cx="118" cy="416" rx="96" ry="18" fill="url(#softShadow)"/>
+    <!-- cabinet body black steel -->
+    <rect x="34" y="330" width="168" height="82" rx="6" fill="#2a2724"/>
+    <rect x="34" y="330" width="168" height="10" rx="5" fill="#3d3a36"/>
+    <rect x="42" y="348" width="70" height="58" rx="3" fill="#15130f"/>
+    <rect x="122" y="348" width="72" height="58" rx="3" fill="#15130f"/>
+    <!-- vinyl spines -->
+    <g>
+      <rect x="46" y="352" width="6" height="50" rx="1" fill="#7a7c5c"/>
+      <rect x="53" y="352" width="6" height="50" rx="1" fill="#cf9f5c"/>
+      <rect x="60" y="352" width="6" height="50" rx="1" fill="#3d3a36"/>
+      <rect x="67" y="352" width="6" height="50" rx="1" fill="#8a8c62"/>
+      <rect x="74" y="352" width="6" height="50" rx="1" fill="#b98a4a"/>
+      <rect x="81" y="352" width="6" height="50" rx="1" fill="#5c4632"/>
+      <rect x="88" y="352" width="6" height="50" rx="1" fill="#9a968f"/>
+      <rect x="95" y="352" width="6" height="50" rx="1" fill="#63654a"/>
+      <rect x="102" y="352" width="6" height="50" rx="1" fill="#cbb287"/>
+    </g>
+    <!-- legs -->
+    <rect x="44" y="406" width="8" height="14" rx="2" fill="#15130f"/>
+    <rect x="184" y="406" width="8" height="14" rx="2" fill="#15130f"/>
+    <!-- TURNTABLE on top -->
+    <g>
+      <rect x="46" y="300" width="144" height="32" rx="4" fill="#3d3a36"/>
+      <rect x="46" y="300" width="144" height="6" rx="3" fill="#2a2724"/>
+      <ellipse cx="112" cy="316" rx="46" ry="14" fill="#15130f"/>
+      <ellipse cx="112" cy="315" rx="40" ry="12" fill="#2a2724"/>
+      <ellipse cx="112" cy="315" rx="24" ry="7" fill="#3d3a36"/>
+      <ellipse cx="112" cy="315" rx="8" ry="2.4" fill="#cf9f5c"/>
+      <circle cx="112" cy="315" r="1.6" fill="#e3e1dc"/>
+      <!-- tonearm -->
+      <circle cx="170" cy="306" r="5" fill="#9a968f"/>
+      <line x1="170" y1="306" x2="130" y2="318" stroke="#c9c5be" stroke-width="2.5"/>
+      <rect x="126" y="316" width="6" height="4" rx="1" fill="#e3e1dc"/>
+      <!-- controls -->
+      <circle cx="58" cy="322" r="3" fill="#c9c5be"/>
+      <circle cx="70" cy="322" r="3" fill="#cf9f5c"/>
+    </g>
+  </g>
+
+  <!-- ============ GRAPHITE WOOL RUG ============ -->
+  <g>
+    <ellipse cx="400" cy="530" rx="248" ry="52" fill="url(#rug)"/>
+    <ellipse cx="400" cy="530" rx="248" ry="52" fill="none" stroke="#4a4642" stroke-width="2" opacity="0.5"/>
+    <ellipse cx="400" cy="530" rx="214" ry="42" fill="none" stroke="#63654a" stroke-width="2" opacity="0.4"/>
+    <ellipse cx="400" cy="530" rx="176" ry="32" fill="none" stroke="#3d3a36" stroke-width="6" opacity="0.6"/>
+  </g>
+
+  <!-- ============ WHITE BOUCLE SOFA (centered hero) ============ -->
+  <g>
+    <ellipse cx="400" cy="512" rx="176" ry="26" fill="url(#softShadow)"/>
+    <!-- back cushions -->
+    <rect x="270" y="366" width="260" height="70" rx="26" fill="url(#boucle)"/>
+    <rect x="278" y="372" width="118" height="58" rx="22" fill="#ffffff"/>
+    <rect x="404" y="372" width="118" height="58" rx="22" fill="#faf7f2"/>
+    <!-- boucle texture dots -->
+    <g fill="#e8dcc6" opacity="0.55">
+      <circle cx="300" cy="392" r="2"/><circle cx="320" cy="404" r="2"/><circle cx="340" cy="388" r="2"/>
+      <circle cx="360" cy="410" r="2"/><circle cx="380" cy="396" r="2"/><circle cx="430" cy="392" r="2"/>
+      <circle cx="452" cy="406" r="2"/><circle cx="474" cy="390" r="2"/><circle cx="496" cy="408" r="2"/>
+      <circle cx="312" cy="418" r="2"/><circle cx="462" cy="418" r="2"/>
+    </g>
+    <!-- seat base -->
+    <rect x="256" y="422" width="288" height="66" rx="22" fill="url(#boucle)"/>
+    <!-- seat cushions -->
+    <rect x="266" y="428" width="132" height="40" rx="16" fill="#ffffff"/>
+    <rect x="402" y="428" width="132" height="40" rx="16" fill="#faf7f2"/>
+    <!-- armrests -->
+    <rect x="248" y="398" width="40" height="92" rx="18" fill="url(#boucle)"/>
+    <rect x="512" y="398" width="40" height="92" rx="18" fill="url(#boucle)"/>
+    <ellipse cx="268" cy="404" rx="18" ry="12" fill="#ffffff"/>
+    <ellipse cx="532" cy="404" rx="18" ry="12" fill="#ffffff"/>
+    <!-- olive throw cushion accent -->
+    <g>
+      <rect x="286" y="392" width="52" height="48" rx="12" fill="url(#velvetOlive)" transform="rotate(-8 312 416)"/>
+      <rect x="292" y="398" width="40" height="12" rx="6" fill="#8a8c62" transform="rotate(-8 312 416)" opacity="0.7"/>
+    </g>
+    <!-- wooden legs -->
+    <g fill="url(#woodDark)">
+      <rect x="266" y="484" width="10" height="22" rx="3"/>
+      <rect x="524" y="484" width="10" height="22" rx="3"/>
+      <rect x="330" y="486" width="9" height="20" rx="3"/>
+      <rect x="462" y="486" width="9" height="20" rx="3"/>
+    </g>
+  </g>
+
+  <!-- ============ SLIM BLACK FLOOR LAMP (right of sofa) ============ -->
+  <g>
+    <ellipse cx="586" cy="486" rx="34" ry="10" fill="url(#softShadow)"/>
+    <rect x="576" y="480" width="20" height="8" rx="4" fill="#15130f"/>
+    <rect x="583" y="196" width="4" height="288" fill="#2a2724"/>
+    <rect x="583" y="196" width="1.6" height="288" fill="#3d3a36"/>
+    <!-- head arm -->
+    <line x1="585" y1="200" x2="612" y2="176" stroke="#15130f" stroke-width="4" stroke-linecap="round"/>
+    <path d="M602 158 L636 158 L628 182 L610 182 Z" fill="#2a2724"/>
+    <path d="M604 160 L634 160 L631 166 L607 166 Z" fill="#3d3a36"/>
+    <ellipse cx="619" cy="181" rx="9" ry="3" fill="#cf9f5c" opacity="0.8"/>
+    <ellipse cx="619" cy="200" rx="26" ry="14" fill="url(#amberGlow)" opacity="0.4"/>
+  </g>
+
+  <!-- ============ PLANT (left of sofa) ============ -->
+  <g>
+    <ellipse cx="228" cy="486" rx="42" ry="11" fill="url(#softShadow)"/>
+    <path d="M210 440 L246 440 L242 486 L214 486 Z" fill="url(#woodMid)"/>
+    <path d="M210 440 L246 440 L245 450 L211 450 Z" fill="#a5876a"/>
+    <rect x="206" y="434" width="44" height="10" rx="4" fill="#cbb287"/>
+    <!-- foliage olive -->
+    <g fill="#7a7c5c">
+      <path d="M228 434 Q206 400 214 366 Q228 396 228 434 Z"/>
+      <path d="M228 434 Q250 402 244 368 Q230 398 228 434 Z"/>
+      <path d="M228 434 Q200 416 190 388 Q216 408 228 434 Z"/>
+      <path d="M228 434 Q256 416 266 390 Q240 410 228 434 Z"/>
+    </g>
+    <g fill="#8a8c62">
+      <path d="M228 434 Q224 392 236 360 Q232 400 228 434 Z"/>
+      <path d="M228 434 Q210 410 206 384 Q222 406 228 434 Z"/>
+    </g>
+    <g fill="#63654a" opacity="0.8">
+      <path d="M228 434 Q244 408 250 384 Q234 408 228 434 Z"/>
+    </g>
+  </g>
+
+  <!-- ============ ROBOT VACUUM DISC ============ -->
+  <g>
+    <ellipse cx="470" cy="560" rx="34" ry="11" fill="url(#softShadow)"/>
+    <ellipse cx="470" cy="554" rx="32" ry="12" fill="#3d3a36"/>
+    <ellipse cx="470" cy="551" rx="32" ry="12" fill="#2a2724"/>
+    <ellipse cx="470" cy="549" rx="24" ry="8.5" fill="#3d3a36"/>
+    <circle cx="470" cy="547" r="4" fill="#9a968f"/>
+    <circle cx="470" cy="547" r="1.8" fill="#b8cdd6"/>
+    <rect x="452" y="544" width="10" height="3" rx="1.5" fill="#cf9f5c" opacity="0.8"/>
+  </g>
+
+  <!-- subtle ambient corner shading -->
+  <rect x="0" y="0" width="60" height="410" fill="#3d3a36" opacity="0.05"/>
+  <rect x="760" y="0" width="40" height="410" fill="#3d3a36" opacity="0.05"/>
+</svg>

@@ -1,0 +1,307 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f2ece2"/>
+    </linearGradient>
+    <radialGradient id="wallGlow" cx="0.68" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#fbf6ec"/>
+      <stop offset="1" stop-color="#f2ece2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakGrain" x1="0" y1="0" x2="1" y2="0.12">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.45" stop-color="#cbb287"/>
+      <stop offset="0.75" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#bd9c6e"/>
+    </linearGradient>
+    <linearGradient id="oakGrain2" x1="0" y1="0" x2="1" y2="0.1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="0.5" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#b8975f"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2cfa8"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.45" stop-color="#c9c5be"/>
+      <stop offset="0.55" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="chromeV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a968f"/>
+      <stop offset="0.3" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <radialGradient id="globe" cx="0.4" cy="0.36" r="0.68">
+      <stop offset="0" stop-color="#fdf6e4"/>
+      <stop offset="0.6" stop-color="#f4e6c6"/>
+      <stop offset="1" stop-color="#e6cf9e"/>
+    </radialGradient>
+    <radialGradient id="globeHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fbedcb" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#fbedcb" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="linen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4eee2"/>
+      <stop offset="1" stop-color="#e2d7c2"/>
+    </linearGradient>
+    <linearGradient id="linenFold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="0.5" stop-color="#f6f1e7"/>
+      <stop offset="1" stop-color="#dccbb0"/>
+    </linearGradient>
+    <linearGradient id="boucle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ece6dc"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d4e2e7"/>
+      <stop offset="0.5" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#9fb8c1"/>
+    </linearGradient>
+    <linearGradient id="poster" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe4cf"/>
+      <stop offset="1" stop-color="#e0d0b2"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="leaf2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#5b5d44"/>
+    </linearGradient>
+    <linearGradient id="jute" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#d3c19a"/>
+    </linearGradient>
+    <radialGradient id="rake" cx="0.72" cy="0.32" r="0.85">
+      <stop offset="0" stop-color="#fff5df" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#fff5df" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="410" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="410" fill="url(#wallGlow)"/>
+
+  <!-- FLOOR band lower third -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <!-- skirting line -->
+  <rect x="0" y="402" width="800" height="10" fill="#e2cfa8"/>
+  <rect x="0" y="410" width="800" height="3" fill="#a5876a" opacity="0.5"/>
+  <!-- plank lines -->
+  <g stroke="#b8975f" stroke-width="1.4" opacity="0.4">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+  </g>
+  <g stroke="#bd9c6e" stroke-width="1" opacity="0.35">
+    <line x1="150" y1="413" x2="150" y2="452"/>
+    <line x1="420" y1="452" x2="420" y2="500"/>
+    <line x1="640" y1="413" x2="640" y2="452"/>
+    <line x1="300" y1="500" x2="300" y2="552"/>
+    <line x1="560" y1="500" x2="560" y2="552"/>
+    <line x1="230" y1="552" x2="230" y2="600"/>
+    <line x1="520" y1="552" x2="520" y2="600"/>
+  </g>
+
+  <!-- warm raking light wash -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#rake)"/>
+
+  <!-- ===== GLOWING RICE-PAPER GLOBE PENDANT (upper left) ===== -->
+  <circle cx="150" cy="120" r="120" fill="url(#globeHalo)"/>
+  <line x1="150" y1="0" x2="150" y2="52" stroke="#6d5138" stroke-width="3"/>
+  <ellipse cx="150" cy="120" rx="76" ry="74" fill="url(#globe)"/>
+  <g stroke="#e6cf9e" stroke-width="1" opacity="0.55" fill="none">
+    <path d="M92 88 q58 -22 116 0"/>
+    <path d="M82 110 q68 -14 136 0"/>
+    <path d="M82 132 q68 14 136 0"/>
+    <path d="M92 154 q58 22 116 0"/>
+  </g>
+  <g stroke="#d8bd88" stroke-width="0.8" opacity="0.4">
+    <line x1="112" y1="52" x2="98" y2="188"/>
+    <line x1="150" y1="46" x2="150" y2="194"/>
+    <line x1="188" y1="52" x2="202" y2="188"/>
+  </g>
+  <ellipse cx="126" cy="98" rx="24" ry="18" fill="#fef9ec" opacity="0.7"/>
+
+  <!-- ===== FRAMED SAND-TONE POSTER (upper right on wall) ===== -->
+  <rect x="556" y="70" width="150" height="196" rx="4" fill="#6d5138"/>
+  <rect x="562" y="76" width="138" height="184" rx="2" fill="#4a3624"/>
+  <rect x="570" y="84" width="122" height="168" rx="2" fill="url(#poster)"/>
+  <circle cx="631" cy="150" r="40" fill="#cf9f5c" opacity="0.55"/>
+  <path d="M570 210 q40 -30 80 -6 q22 12 42 2 v46 h-122 z" fill="#c8a87c" opacity="0.6"/>
+  <path d="M570 230 q34 -18 66 0 q28 14 56 2 v20 h-122 z" fill="#a5876a" opacity="0.5"/>
+
+  <!-- ===== FLOOR-TO-CEILING LINEN CURTAINS (right edge) ===== -->
+  <rect x="742" y="0" width="58" height="600" fill="url(#linen)"/>
+  <g>
+    <path d="M742 0 q6 300 0 600 h14 q-4 -300 4 -600 z" fill="url(#linenFold)" opacity="0.8"/>
+    <path d="M760 0 q8 300 0 600 h14 q-4 -300 2 -600 z" fill="url(#linenFold)" opacity="0.7"/>
+    <path d="M778 0 q6 300 -2 600 h20 v-600 z" fill="#efe7d6" opacity="0.8"/>
+  </g>
+  <g stroke="#d3c4a8" stroke-width="1.2" opacity="0.5">
+    <line x1="750" y1="0" x2="748" y2="600"/>
+    <line x1="768" y1="0" x2="764" y2="600"/>
+    <line x1="786" y1="0" x2="782" y2="600"/>
+  </g>
+
+  <!-- ===== LIGHT-OAK 3-DOOR TV SIDEBOARD (macro, center-left) ===== -->
+  <ellipse cx="360" cy="452" rx="250" ry="20" fill="#1f1b16" opacity="0.12"/>
+  <!-- carcass -->
+  <rect x="150" y="300" width="420" height="130" rx="8" fill="url(#oakGrain)"/>
+  <!-- top surface -->
+  <path d="M150 300 l16 -14 h404 l16 14 z" fill="url(#oakTop)"/>
+  <rect x="150" y="300" width="420" height="6" fill="#e2cfa8" opacity="0.7"/>
+  <!-- wood grain streaks on carcass -->
+  <g stroke="#b8975f" stroke-width="1" opacity="0.32" fill="none">
+    <path d="M158 320 q210 -6 404 2"/>
+    <path d="M158 342 q210 8 404 -2"/>
+    <path d="M158 366 q210 -8 404 4"/>
+    <path d="M158 390 q210 8 404 -4"/>
+    <path d="M158 412 q210 -4 404 3"/>
+  </g>
+  <g stroke="#a5876a" stroke-width="0.8" opacity="0.25" fill="none">
+    <path d="M158 331 q210 6 404 0"/>
+    <path d="M158 378 q210 -6 404 2"/>
+    <path d="M158 401 q210 6 404 -2"/>
+  </g>
+  <!-- three doors -->
+  <g>
+    <rect x="162" y="312" width="128" height="106" rx="4" fill="url(#oakGrain2)"/>
+    <rect x="298" y="312" width="128" height="106" rx="4" fill="url(#oakGrain)"/>
+    <rect x="434" y="312" width="124" height="106" rx="4" fill="url(#oakGrain2)"/>
+  </g>
+  <!-- door seams + grain -->
+  <g stroke="#a5876a" stroke-width="1.4" opacity="0.55">
+    <line x1="294" y1="316" x2="294" y2="414"/>
+    <line x1="430" y1="316" x2="430" y2="414"/>
+  </g>
+  <g stroke="#b8975f" stroke-width="0.8" opacity="0.3" fill="none">
+    <path d="M170 340 q56 -4 112 2"/>
+    <path d="M170 372 q56 4 112 -2"/>
+    <path d="M306 340 q56 4 112 -2"/>
+    <path d="M306 378 q56 -4 112 2"/>
+    <path d="M442 344 q52 -4 104 2"/>
+    <path d="M442 380 q52 4 104 -2"/>
+  </g>
+  <!-- chrome handles -->
+  <g>
+    <rect x="270" y="356" width="8" height="20" rx="4" fill="url(#chromeV)"/>
+    <rect x="406" y="356" width="8" height="20" rx="4" fill="url(#chromeV)"/>
+    <rect x="540" y="356" width="8" height="20" rx="4" fill="url(#chromeV)"/>
+  </g>
+  <!-- chrome legs -->
+  <g>
+    <rect x="176" y="424" width="10" height="26" rx="3" fill="url(#chrome)"/>
+    <rect x="360" y="424" width="10" height="26" rx="3" fill="url(#chrome)"/>
+    <rect x="536" y="424" width="10" height="26" rx="3" fill="url(#chrome)"/>
+    <ellipse cx="181" cy="450" rx="8" ry="3" fill="#1f1b16" opacity="0.18"/>
+    <ellipse cx="365" cy="450" rx="8" ry="3" fill="#1f1b16" opacity="0.18"/>
+    <ellipse cx="541" cy="450" rx="8" ry="3" fill="#1f1b16" opacity="0.18"/>
+  </g>
+
+  <!-- ===== WALL-MOUNTED TV (above sideboard) ===== -->
+  <rect x="236" y="150" width="248" height="132" rx="6" fill="#2a2724"/>
+  <rect x="244" y="158" width="232" height="116" rx="3" fill="#15130f"/>
+  <rect x="244" y="158" width="232" height="116" rx="3" fill="url(#glass)" opacity="0.16"/>
+  <path d="M244 158 l120 116 h-120 z" fill="#3d3a36" opacity="0.3"/>
+  <rect x="352" y="282" width="16" height="16" fill="#3d3a36"/>
+
+  <!-- ===== LEAFY PLANT (right of sideboard, macro leaves) ===== -->
+  <path d="M596 430 q-10 -26 -6 -50 h30 q6 26 -2 50 z" fill="#a5876a"/>
+  <path d="M596 388 q-16 -10 -20 6 q22 6 20 -6 z" fill="url(#leaf)"/>
+  <g>
+    <path d="M611 380 q-40 -30 -34 -86 q34 22 40 86 z" fill="url(#leaf)"/>
+    <path d="M611 378 q4 -50 40 -80 q10 44 -30 82 z" fill="url(#leaf2)"/>
+    <path d="M611 380 q-52 -8 -66 -52 q46 6 68 48 z" fill="url(#leaf2)"/>
+    <path d="M611 378 q52 -14 74 8 q-40 26 -74 -6 z" fill="url(#leaf)"/>
+    <path d="M611 376 q6 -64 22 -96 q22 48 -8 96 z" fill="#8a8c62"/>
+    <path d="M611 378 q-18 -60 -6 -100 q30 42 12 100 z" fill="#7a7c5c"/>
+  </g>
+  <g stroke="#4e503a" stroke-width="1" opacity="0.5" fill="none">
+    <path d="M611 378 q0 -46 20 -78"/>
+    <path d="M611 378 q-6 -40 0 -74"/>
+    <path d="M611 378 q40 -12 60 4"/>
+    <path d="M611 378 q-44 -18 -56 -40"/>
+  </g>
+
+  <!-- ===== WHITE BOUCLE SOFA (macro, front-left, textile hero) ===== -->
+  <ellipse cx="180" cy="560" rx="200" ry="28" fill="#1f1b16" opacity="0.12"/>
+  <!-- back cushion -->
+  <path d="M20 470 q0 -50 60 -50 h150 q60 0 60 50 v40 h-270 z" fill="url(#boucle)"/>
+  <!-- seat cushion -->
+  <rect x="10" y="500" width="300" height="90" rx="28" fill="url(#boucle)"/>
+  <!-- arm -->
+  <rect x="-10" y="478" width="70" height="118" rx="30" fill="url(#boucle)"/>
+  <path d="M-10 478 q0 -20 30 -18 v130 h-30 z" fill="#f4efe6"/>
+  <!-- seam shadows -->
+  <path d="M60 500 q100 -12 200 0" stroke="#dcd4c8" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M60 596 v-96" stroke="#dcd4c8" stroke-width="2" opacity="0.5"/>
+  <!-- boucle nub texture -->
+  <g fill="#ffffff" opacity="0.9">
+    <circle cx="70" cy="452" r="6"/><circle cx="92" cy="446" r="7"/><circle cx="116" cy="450" r="6"/>
+    <circle cx="140" cy="444" r="7"/><circle cx="164" cy="450" r="6"/><circle cx="188" cy="446" r="7"/>
+    <circle cx="212" cy="450" r="6"/><circle cx="236" cy="446" r="7"/><circle cx="260" cy="452" r="6"/>
+    <circle cx="82" cy="470" r="6"/><circle cx="106" cy="466" r="7"/><circle cx="130" cy="470" r="6"/>
+    <circle cx="154" cy="464" r="7"/><circle cx="178" cy="470" r="6"/><circle cx="202" cy="466" r="7"/>
+    <circle cx="226" cy="470" r="6"/><circle cx="250" cy="466" r="6"/>
+    <circle cx="40" cy="516" r="7"/><circle cx="64" cy="524" r="6"/><circle cx="90" cy="518" r="7"/>
+    <circle cx="116" cy="526" r="6"/><circle cx="142" cy="518" r="7"/><circle cx="168" cy="526" r="6"/>
+    <circle cx="194" cy="520" r="7"/><circle cx="220" cy="526" r="6"/><circle cx="246" cy="520" r="7"/>
+    <circle cx="272" cy="524" r="6"/>
+    <circle cx="52" cy="548" r="6"/><circle cx="80" cy="554" r="7"/><circle cx="108" cy="548" r="6"/>
+    <circle cx="136" cy="556" r="7"/><circle cx="164" cy="548" r="6"/><circle cx="192" cy="556" r="7"/>
+    <circle cx="220" cy="548" r="6"/><circle cx="248" cy="556" r="7"/>
+    <circle cx="14" cy="504" r="7"/><circle cx="16" cy="532" r="6"/><circle cx="18" cy="560" r="7"/>
+  </g>
+  <g fill="#e4ddd0" opacity="0.55">
+    <circle cx="81" cy="459" r="4"/><circle cx="129" cy="457" r="4"/><circle cx="177" cy="459" r="4"/>
+    <circle cx="225" cy="457" r="4"/><circle cx="103" cy="533" r="4"/><circle cx="155" cy="531" r="4"/>
+    <circle cx="207" cy="533" r="4"/><circle cx="67" cy="561" r="4"/><circle cx="150" cy="565" r="4"/>
+    <circle cx="234" cy="561" r="4"/>
+  </g>
+
+  <!-- ===== JUTE RUG (foreground floor, textile) ===== -->
+  <path d="M300 560 l420 -12 l70 52 h-560 z" fill="url(#jute)" opacity="0.95"/>
+  <g stroke="#c2ab7e" stroke-width="1" opacity="0.4">
+    <line x1="320" y1="566" x2="740" y2="556"/>
+    <line x1="330" y1="578" x2="756" y2="568"/>
+    <line x1="342" y1="592" x2="772" y2="582"/>
+  </g>
+  <g stroke="#d3c19a" stroke-width="1" opacity="0.5">
+    <line x1="400" y1="552" x2="420" y2="600"/>
+    <line x1="520" y1="549" x2="548" y2="600"/>
+    <line x1="640" y1="547" x2="676" y2="600"/>
+  </g>
+  <path d="M300 560 l420 -12" stroke="#a5876a" stroke-width="1.5" opacity="0.35" fill="none"/>
+
+  <!-- second small plant leaf accent on sideboard (glass vase) -->
+  <path d="M470 300 q-4 -20 4 -34 h18 q6 14 2 34 z" fill="url(#glass)" opacity="0.85"/>
+  <ellipse cx="481" cy="266" rx="11" ry="5" fill="#9fb8c1" opacity="0.7"/>
+  <path d="M481 268 q-20 -30 -8 -58 q22 24 8 58 z" fill="url(#leaf2)"/>
+  <path d="M481 268 q22 -26 40 -18 q-12 30 -40 18 z" fill="url(#leaf)"/>
+  <path d="M481 268 q2 -40 16 -56 q14 34 -16 56 z" fill="#8a8c62"/>
+
+  <!-- amber accent object on sideboard top -->
+  <ellipse cx="200" cy="296" rx="16" ry="6" fill="#8a5a20" opacity="0.5"/>
+  <path d="M186 296 q-2 -22 14 -26 q16 4 14 26 z" fill="#cf9f5c"/>
+  <path d="M186 296 q-2 -18 14 -22 q4 2 4 22 z" fill="#b98a4a"/>
+  <ellipse cx="195" cy="278" rx="9" ry="3" fill="#e0b877" opacity="0.8"/>
+
+  <!-- soft glass-blue book / object -->
+  <rect x="230" y="284" width="42" height="16" rx="2" fill="#b8cdd6"/>
+  <rect x="230" y="284" width="42" height="5" rx="2" fill="#d4e2e7"/>
+  <line x1="230" y1="292" x2="272" y2="292" stroke="#9fb8c1" stroke-width="1" opacity="0.6"/>
+
+  <!-- final raking highlight streak -->
+  <path d="M150 300 l16 -14 h120 l-90 144 h-46 z" fill="#fff5df" opacity="0.08"/>
+</svg>
