@@ -10,7 +10,10 @@ for (const c of cat.catalogs || []) {
   const maxD = room.constraints?.max_depth_along_corridor_cm;
   for (const t of c.tiers || []) for (const it of t.items || []) {
     const tag = `${c.room}/${c.style}/${t.tier}: ${it.name}`;
-    if (it.h_cm > maxH) issues.push(`ВЫСОТА ${tag} — ${it.h_cm} см > лимита ${maxH} (потолок ${room.ceiling_cm})`);
+    // шторы/текстиль вешаются под потолок — длина полотна не «высота мебели»
+    const soft = /штор|гардин|текстил|плед|ковер|ковёр/i.test(it.category || '');
+    if (!soft && it.h_cm > maxH) issues.push(`ВЫСОТА ${tag} — ${it.h_cm} см > лимита ${maxH} (потолок ${room.ceiling_cm})`);
+    if (soft && it.h_cm > room.ceiling_cm) issues.push(`ТЕКСТИЛЬ ${tag} — ${it.h_cm} см длиннее потолка ${room.ceiling_cm}`);
     if (c.room === 'recibidor' && maxD && it.d_cm > maxD && it.h_cm > 60)
       issues.push(`ГЛУБИНА ${tag} — ${it.d_cm} см > ${maxD} (узкий проход)`);
     if (c.room === 'recibidor' && it.w_cm > 350)
