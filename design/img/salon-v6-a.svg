@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="oakSurface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <radialGradient id="convex" cx="0.38" cy="0.32" r="0.85">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="0.18" stop-color="#e3e1dc"/>
+      <stop offset="0.42" stop-color="#c9c5be"/>
+      <stop offset="0.62" stop-color="#8a8c62"/>
+      <stop offset="0.78" stop-color="#5c4632"/>
+      <stop offset="0.92" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </radialGradient>
+    <radialGradient id="convexWarm" cx="0.3" cy="0.28" r="0.5">
+      <stop offset="0" stop-color="#faf7f2" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#cf9f5c" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#15130f"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <radialGradient id="floorReflect" cx="0.5" cy="0" r="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b98a4a"/>
+      <stop offset="0.5" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wall -->
+  <rect x="0" y="0" width="800" height="470" fill="url(#wall)"/>
+
+  <!-- Subtle wall paneling hints -->
+  <rect x="70" y="30" width="2" height="430" fill="#efe9df"/>
+  <rect x="720" y="30" width="2" height="430" fill="#efe9df"/>
+
+  <!-- Oak surface / shelf below -->
+  <rect x="0" y="470" width="800" height="130" fill="url(#oakSurface)"/>
+  <rect x="0" y="470" width="800" height="6" fill="#d8c19a"/>
+  <rect x="0" y="476" width="800" height="3" fill="#a5876a" opacity="0.5"/>
+  <!-- wood grain lines -->
+  <path d="M40 505 q200 -8 380 0 t340 4" stroke="#a5876a" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M20 540 q240 -6 420 2 t340 2" stroke="#6d5138" stroke-width="1.2" fill="none" opacity="0.3"/>
+  <path d="M60 570 q220 -5 360 1 t320 3" stroke="#a5876a" stroke-width="1.5" fill="none" opacity="0.35"/>
+
+  <!-- Soft shadow of mirror on wall -->
+  <ellipse cx="410" cy="250" rx="196" ry="196" fill="rgba(31,27,22,0.12)"/>
+  <ellipse cx="400" cy="300" rx="200" ry="200" fill="rgba(31,27,22,0.08)"/>
+
+  <!-- Thin dark rim (outer) -->
+  <circle cx="400" cy="240" r="182" fill="url(#rim)"/>
+  <circle cx="400" cy="240" r="176" fill="#15130f"/>
+
+  <!-- Convex chrome sphere -->
+  <circle cx="400" cy="240" r="172" fill="url(#convex)"/>
+
+  <!-- Warm reflection glow -->
+  <circle cx="400" cy="240" r="172" fill="url(#convexWarm)"/>
+
+  <!-- Curved reflected horizon lines (interior warping) -->
+  <path d="M243 175 q157 60 314 0" stroke="#e3e1dc" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M255 300 q145 -50 290 0" stroke="#7a7c5c" stroke-width="4" fill="none" opacity="0.45"/>
+  <path d="M262 340 q138 -40 276 0" stroke="#5c4632" stroke-width="5" fill="none" opacity="0.5"/>
+
+  <!-- Reflected warm ochre band (like a lamp/window warmth) -->
+  <path d="M248 210 q152 40 304 0 q-152 22 -304 0 z" fill="#cf9f5c" opacity="0.25"/>
+
+  <!-- Reflected suggested furniture blobs (soft, warped) -->
+  <ellipse cx="330" cy="290" rx="34" ry="60" fill="#6d5138" opacity="0.3"/>
+  <ellipse cx="470" cy="285" rx="30" ry="55" fill="#8a8c62" opacity="0.3"/>
+  <ellipse cx="400" cy="330" rx="70" ry="26" fill="#5c4632" opacity="0.28"/>
+
+  <!-- Bright specular highlight -->
+  <ellipse cx="345" cy="185" rx="46" ry="34" fill="#ffffff" opacity="0.85"/>
+  <ellipse cx="360" cy="200" rx="20" ry="14" fill="#ffffff" opacity="0.6"/>
+  <!-- secondary soft-glass-blue reflection sliver -->
+  <ellipse cx="470" cy="200" rx="24" ry="40" fill="#b8cdd6" opacity="0.35"/>
+
+  <!-- small crescent shine bottom-right -->
+  <path d="M500 320 a120 120 0 0 1 -60 60 a150 150 0 0 0 60 -60 z" fill="#e3e1dc" opacity="0.3"/>
+
+  <!-- Highlight rim ring (top-left catch light on the bezel) -->
+  <path d="M290 120 a172 172 0 0 1 130 -50" stroke="#c9c5be" stroke-width="3" fill="none" opacity="0.5"/>
+
+  <!-- Small decorative amber vase on oak surface, bottom-left, partial -->
+  <ellipse cx="150" cy="512" rx="46" ry="10" fill="rgba(31,27,22,0.12)"/>
+  <path d="M124 512 q-8 -46 26 -70 q34 24 26 70 q-26 12 -52 0 z" fill="url(#vase)"/>
+  <path d="M138 452 q12 -10 24 0 l-4 14 q-8 -6 -16 0 z" fill="#b98a4a"/>
+  <ellipse cx="139" cy="470" rx="6" ry="26" fill="#faf7f2" opacity="0.25"/>
+
+  <!-- Small chrome sphere paperweight, bottom-right, partial -->
+  <ellipse cx="655" cy="520" rx="42" ry="9" fill="rgba(31,27,22,0.12)"/>
+  <circle cx="655" cy="492" r="30" fill="url(#convex)"/>
+  <ellipse cx="646" cy="482" rx="9" ry="6" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Faint warm reflection on oak beneath the big mirror -->
+  <ellipse cx="400" cy="478" rx="150" ry="20" fill="url(#floorReflect)"/>
+</svg>

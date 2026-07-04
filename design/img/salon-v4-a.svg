@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="0.5" stop-color="#a5876a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3d3b3"/>
+      <stop offset="1" stop-color="#d8c19a"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+
+  <!-- warm light wash top-left -->
+  <ellipse cx="180" cy="120" rx="420" ry="300" fill="#faf7f2" opacity="0.5"/>
+
+  <!-- oak floor -->
+  <rect x="0" y="500" width="800" height="100" fill="url(#floor)"/>
+  <rect x="0" y="500" width="800" height="6" fill="#a5876a" opacity="0.5"/>
+  <line x1="120" y1="506" x2="80" y2="600" stroke="#a5876a" stroke-width="2" opacity="0.4"/>
+  <line x1="360" y1="506" x2="340" y2="600" stroke="#a5876a" stroke-width="2" opacity="0.4"/>
+  <line x1="600" y1="506" x2="620" y2="600" stroke="#a5876a" stroke-width="2" opacity="0.4"/>
+
+  <!-- soft floor shadow beneath panel wall -->
+  <ellipse cx="400" cy="512" rx="360" ry="20" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- ===== VERTICAL OAK SLAT WALL PANELS ===== -->
+  <!-- backing board -->
+  <rect x="60" y="70" width="680" height="435" rx="10" fill="#a5876a"/>
+  <rect x="60" y="70" width="680" height="435" rx="10" fill="#5c4632" opacity="0.15"/>
+
+  <!-- slats: alternating oak tones, 20 slats -->
+  <g>
+    <rect x="72" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="104" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="136" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="168" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="200" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="232" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="264" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="296" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="328" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="360" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="392" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="424" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="456" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="488" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="520" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="552" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="584" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="616" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="648" y="78" width="28" height="419" rx="4" fill="url(#oakA)"/>
+    <rect x="680" y="78" width="28" height="419" rx="4" fill="url(#oakB)"/>
+    <rect x="712" y="78" width="16" height="419" rx="4" fill="url(#oakA)"/>
+  </g>
+
+  <!-- slat highlight edges (left side catches light) -->
+  <g opacity="0.5">
+    <rect x="72" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="136" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="200" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="264" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="328" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="392" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="456" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="520" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="584" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="648" y="78" width="4" height="419" fill="#e3d3b3"/>
+    <rect x="712" y="78" width="3" height="419" fill="#e3d3b3"/>
+  </g>
+
+  <!-- slat groove shadows (right side of each gap) -->
+  <g opacity="0.35">
+    <rect x="100" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="164" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="228" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="292" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="356" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="420" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="484" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="548" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="612" y="78" width="4" height="419" fill="#5c4632"/>
+    <rect x="676" y="78" width="4" height="419" fill="#5c4632"/>
+  </g>
+
+  <!-- subtle wood grain streaks -->
+  <g opacity="0.18" stroke="#6d5138" stroke-width="1" fill="none">
+    <path d="M86 110 q3 80 -1 160 q2 90 0 200"/>
+    <path d="M150 130 q-2 90 2 170 q-1 80 0 180"/>
+    <path d="M214 120 q3 70 -1 150 q1 100 0 210"/>
+    <path d="M342 140 q-2 80 1 160 q1 90 0 190"/>
+    <path d="M470 115 q2 90 -1 170 q1 80 0 200"/>
+    <path d="M598 125 q-2 80 2 160 q-1 90 0 200"/>
+    <path d="M662 135 q3 80 -1 160 q1 90 0 190"/>
+  </g>
+
+  <!-- ===== THIN BLACK-EDGE TV MOUNTED ON PANELS ===== -->
+  <!-- drop shadow behind TV -->
+  <rect x="222" y="132" width="360" height="212" rx="8" fill="rgba(31,27,22,0.12)"/>
+  <!-- thin black bezel -->
+  <rect x="216" y="126" width="360" height="212" rx="7" fill="#15130f"/>
+  <rect x="216" y="126" width="360" height="212" rx="7" fill="#3d3a36" opacity="0.25"/>
+  <!-- screen -->
+  <rect x="222" y="132" width="348" height="200" rx="4" fill="url(#screen)"/>
+  <!-- screen reflection sheen -->
+  <path d="M222 132 h348 v40 l-348 90 z" fill="#b8cdd6" opacity="0.06"/>
+  <path d="M240 150 l120 -0 -160 150 -18 0 0 -40 z" fill="#c9c5be" opacity="0.05"/>
+  <!-- inner bezel highlight -->
+  <rect x="222" y="132" width="348" height="200" rx="4" fill="none" stroke="#3d3a36" stroke-width="1" opacity="0.6"/>
+
+  <!-- ===== OAK CONSOLE / SURFACE BELOW ===== -->
+  <rect x="150" y="440" width="500" height="70" rx="8" fill="url(#oakLight)"/>
+  <rect x="150" y="440" width="500" height="12" rx="6" fill="#e3d3b3"/>
+  <rect x="150" y="498" width="500" height="12" rx="6" fill="#a5876a" opacity="0.6"/>
+  <!-- console shadow -->
+  <ellipse cx="400" cy="514" rx="270" ry="14" fill="rgba(31,27,22,0.12)"/>
+  <!-- console drawer lines -->
+  <line x1="400" y1="452" x2="400" y2="498" stroke="#a5876a" stroke-width="2" opacity="0.5"/>
+  <circle cx="330" cy="475" r="4" fill="#c9c5be"/>
+  <circle cx="470" cy="475" r="4" fill="#c9c5be"/>
+  <!-- console legs (chrome) -->
+  <rect x="180" y="510" width="8" height="20" rx="2" fill="url(#chrome)"/>
+  <rect x="612" y="510" width="8" height="20" rx="2" fill="url(#chrome)"/>
+
+  <!-- ===== DECOR ON CONSOLE ===== -->
+  <!-- amber vase -->
+  <ellipse cx="235" cy="437" rx="20" ry="6" fill="rgba(31,27,22,0.12)"/>
+  <path d="M222 438 q-6 -34 13 -50 q19 16 13 50 z" fill="url(#amberGlow)"/>
+  <path d="M222 438 q-6 -34 13 -50 q4 8 4 25 q-1 15 3 25 z" fill="#8a5a20" opacity="0.3"/>
+  <ellipse cx="235" cy="388" rx="13" ry="4" fill="#b98a4a"/>
+
+  <!-- glass-blue small bottle -->
+  <ellipse cx="565" cy="437" rx="14" ry="5" fill="rgba(31,27,22,0.12)"/>
+  <rect x="554" y="402" width="22" height="34" rx="6" fill="url(#glass)"/>
+  <rect x="561" y="392" width="8" height="12" rx="2" fill="#c9c5be"/>
+  <rect x="557" y="408" width="5" height="22" rx="2" fill="#ffffff" opacity="0.4"/>
+
+  <!-- stacked books, olive + walnut -->
+  <rect x="292" y="420" width="70" height="9" rx="2" fill="#7a7c5c"/>
+  <rect x="296" y="411" width="66" height="9" rx="2" fill="#8a8c62"/>
+  <rect x="300" y="402" width="60" height="9" rx="2" fill="#5c4632"/>
+  <rect x="292" y="422" width="70" height="3" fill="#3d3a36" opacity="0.2"/>
+
+  <!-- ===== FRAMED SLIM ART on panel (right, no text) ===== -->
+  <rect x="612" y="150" width="96" height="150" rx="4" fill="#15130f"/>
+  <rect x="618" y="156" width="84" height="138" rx="2" fill="#faf7f2"/>
+  <path d="M624 280 q20 -70 42 -50 q22 -30 36 30 l0 20 -78 0 z" fill="#8a8c62" opacity="0.7"/>
+  <circle cx="642" cy="185" r="12" fill="#cf9f5c" opacity="0.75"/>
+
+  <!-- ===== HANGING GLASS PENDANT (top hint) ===== -->
+  <line x1="150" y1="70" x2="150" y2="118" stroke="#3d3a36" stroke-width="2"/>
+  <path d="M132 118 q18 30 36 0 z" fill="url(#glass)" opacity="0.85"/>
+  <ellipse cx="150" cy="118" rx="18" ry="5" fill="#c9c5be"/>
+  <circle cx="150" cy="132" r="5" fill="#cf9f5c" opacity="0.8"/>
+
+  <!-- gentle amber light glow near pendant -->
+  <ellipse cx="150" cy="140" rx="70" ry="50" fill="#cf9f5c" opacity="0.07"/>
+
+  <!-- baseboard -->
+  <rect x="0" y="494" width="800" height="8" fill="#e3d3b3" opacity="0.6"/>
+</svg>

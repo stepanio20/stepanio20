@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakDoor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakBench" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="rope" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <radialGradient id="robot" cx="0.4" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.6" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#3d3a36"/>
+    </radialGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#e3e1dc"/>
+    </linearGradient>
+    <linearGradient id="lightbeam" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- backdrop -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="432" width="800" height="168" fill="url(#floor)"/>
+  <rect x="0" y="426" width="800" height="10" fill="#a5876a"/>
+
+  <!-- floor plank seams -->
+  <g stroke="#a5876a" stroke-width="1.4" opacity="0.35">
+    <line x1="70" y1="432" x2="30" y2="600"/>
+    <line x1="240" y1="432" x2="220" y2="600"/>
+    <line x1="410" y1="432" x2="410" y2="600"/>
+    <line x1="580" y1="432" x2="600" y2="600"/>
+    <line x1="740" y1="432" x2="775" y2="600"/>
+  </g>
+
+  <!-- warm light beam from upper right -->
+  <polygon points="470,0 800,0 800,300 560,0" fill="url(#lightbeam)" opacity="0.7"/>
+
+  <!-- ================= LEFT SHOE CABINET ================= -->
+  <ellipse cx="150" cy="438" rx="120" ry="16" fill="#1f1b16" opacity="0.12"/>
+  <!-- body -->
+  <rect x="66" y="120" width="168" height="312" rx="10" fill="url(#oakV)"/>
+  <rect x="66" y="120" width="168" height="312" rx="10" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <!-- top surface highlight -->
+  <rect x="66" y="120" width="168" height="14" rx="7" fill="#faf7f2" opacity="0.5"/>
+  <!-- shadow gap side -->
+  <rect x="220" y="132" width="14" height="290" rx="6" fill="#a5876a" opacity="0.5"/>
+
+  <!-- flip-out front 1 (tilted open) -->
+  <g>
+    <polygon points="80,152 220,152 214,214 86,222" fill="url(#oakDoor)" stroke="#a5876a" stroke-width="1.5"/>
+    <polygon points="80,152 220,152 218,160 82,160" fill="#faf7f2" opacity="0.45"/>
+    <rect x="138" y="205" width="24" height="6" rx="3" fill="#5c4632"/>
+  </g>
+  <!-- flip-out front 2 -->
+  <g>
+    <polygon points="82,238 218,238 213,300 87,308" fill="url(#oakDoor)" stroke="#a5876a" stroke-width="1.5"/>
+    <polygon points="82,238 218,238 216,246 84,246" fill="#faf7f2" opacity="0.4"/>
+    <rect x="138" y="291" width="24" height="6" rx="3" fill="#5c4632"/>
+  </g>
+  <!-- flip-out front 3 (closed flat) -->
+  <g>
+    <rect x="82" y="324" width="136" height="70" rx="6" fill="url(#oakDoor)" stroke="#a5876a" stroke-width="1.5"/>
+    <rect x="82" y="324" width="136" height="8" rx="4" fill="#faf7f2" opacity="0.4"/>
+    <rect x="138" y="382" width="24" height="6" rx="3" fill="#5c4632"/>
+  </g>
+  <!-- slim legs -->
+  <rect x="82" y="416" width="12" height="20" rx="3" fill="url(#chrome)"/>
+  <rect x="206" y="416" width="12" height="20" rx="3" fill="url(#chrome)"/>
+
+  <!-- ================= RIGHT SHOE CABINET ================= -->
+  <ellipse cx="330" cy="438" rx="120" ry="16" fill="#1f1b16" opacity="0.12"/>
+  <rect x="246" y="120" width="168" height="312" rx="10" fill="url(#oakV)"/>
+  <rect x="246" y="120" width="168" height="312" rx="10" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <rect x="246" y="120" width="168" height="14" rx="7" fill="#faf7f2" opacity="0.5"/>
+  <rect x="400" y="132" width="14" height="290" rx="6" fill="#a5876a" opacity="0.5"/>
+
+  <!-- flip-out front 1 (open, showing shoe slot interior) -->
+  <g>
+    <polygon points="260,152 400,152 394,214 266,222" fill="url(#oakDoor)" stroke="#a5876a" stroke-width="1.5"/>
+    <polygon points="266,158 394,158 390,168 268,168" fill="#5c4632" opacity="0.35"/>
+    <rect x="318" y="205" width="24" height="6" rx="3" fill="#5c4632"/>
+  </g>
+  <!-- flip-out front 2 closed -->
+  <g>
+    <rect x="262" y="238" width="136" height="70" rx="6" fill="url(#oakDoor)" stroke="#a5876a" stroke-width="1.5"/>
+    <rect x="262" y="238" width="136" height="8" rx="4" fill="#faf7f2" opacity="0.4"/>
+    <rect x="318" y="296" width="24" height="6" rx="3" fill="#5c4632"/>
+  </g>
+  <!-- flip-out front 3 closed -->
+  <g>
+    <rect x="262" y="324" width="136" height="70" rx="6" fill="url(#oakDoor)" stroke="#a5876a" stroke-width="1.5"/>
+    <rect x="262" y="324" width="136" height="8" rx="4" fill="#faf7f2" opacity="0.4"/>
+    <rect x="318" y="382" width="24" height="6" rx="3" fill="#5c4632"/>
+  </g>
+  <rect x="262" y="416" width="12" height="20" rx="3" fill="url(#chrome)"/>
+  <rect x="386" y="416" width="12" height="20" rx="3" fill="url(#chrome)"/>
+
+  <!-- decor: small glass vase with olive stems on left cabinet top -->
+  <ellipse cx="150" cy="122" rx="34" ry="7" fill="#1f1b16" opacity="0.10"/>
+  <path d="M136 118 q-4 -26 6 -34 h16 q10 8 6 34 z" fill="url(#glass)" stroke="#b8cdd6" stroke-width="1"/>
+  <g stroke="#7a7c5c" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M148 88 q-8 -24 -18 -34"/>
+    <path d="M150 88 q2 -30 4 -42"/>
+    <path d="M152 88 q10 -22 22 -30"/>
+  </g>
+  <g fill="#8a8c62">
+    <ellipse cx="128" cy="54" rx="6" ry="10" transform="rotate(-30 128 54)"/>
+    <ellipse cx="154" cy="46" rx="6" ry="11"/>
+    <ellipse cx="176" cy="58" rx="6" ry="10" transform="rotate(28 176 58)"/>
+  </g>
+
+  <!-- decor: chrome tray + amber catchall on right cabinet top -->
+  <ellipse cx="330" cy="123" rx="40" ry="7" fill="#1f1b16" opacity="0.10"/>
+  <rect x="296" y="108" width="68" height="12" rx="6" fill="url(#chrome)" stroke="#c9c5be" stroke-width="1"/>
+  <ellipse cx="322" cy="110" rx="12" ry="5" fill="#cf9f5c"/>
+  <ellipse cx="322" cy="107" rx="12" ry="5" fill="#b98a4a"/>
+  <circle cx="348" cy="108" r="5" fill="#8a5a20"/>
+
+  <!-- ================= OAK BENCH with woven rope seat ================= -->
+  <ellipse cx="590" cy="500" rx="170" ry="22" fill="#1f1b16" opacity="0.12"/>
+  <!-- back legs -->
+  <rect x="470" y="360" width="16" height="140" rx="4" fill="#a5876a"/>
+  <rect x="694" y="360" width="16" height="140" rx="4" fill="#a5876a"/>
+  <!-- front legs -->
+  <rect x="480" y="372" width="18" height="128" rx="4" fill="url(#oakBench)"/>
+  <rect x="700" y="372" width="18" height="128" rx="4" fill="url(#oakBench)"/>
+  <!-- stretcher -->
+  <rect x="490" y="452" width="222" height="12" rx="6" fill="#a5876a"/>
+  <!-- seat frame -->
+  <rect x="458" y="344" width="272" height="34" rx="10" fill="url(#oakBench)"/>
+  <rect x="458" y="344" width="272" height="10" rx="5" fill="#d8c19a" opacity="0.7"/>
+  <!-- inner woven area -->
+  <rect x="474" y="350" width="240" height="22" rx="6" fill="#a5876a"/>
+  <!-- woven rope seat: crosshatch -->
+  <g opacity="0.95">
+    <g fill="url(#rope)">
+      <rect x="480" y="350" width="9" height="22" rx="3"/>
+      <rect x="497" y="350" width="9" height="22" rx="3"/>
+      <rect x="514" y="350" width="9" height="22" rx="3"/>
+      <rect x="531" y="350" width="9" height="22" rx="3"/>
+      <rect x="548" y="350" width="9" height="22" rx="3"/>
+      <rect x="565" y="350" width="9" height="22" rx="3"/>
+      <rect x="582" y="350" width="9" height="22" rx="3"/>
+      <rect x="599" y="350" width="9" height="22" rx="3"/>
+      <rect x="616" y="350" width="9" height="22" rx="3"/>
+      <rect x="633" y="350" width="9" height="22" rx="3"/>
+      <rect x="650" y="350" width="9" height="22" rx="3"/>
+      <rect x="667" y="350" width="9" height="22" rx="3"/>
+      <rect x="684" y="350" width="9" height="22" rx="3"/>
+      <rect x="701" y="350" width="9" height="22" rx="3"/>
+    </g>
+    <!-- horizontal weave bands over verticals -->
+    <g fill="#c8a87c">
+      <rect x="474" y="354" width="240" height="6" rx="3" opacity="0.85"/>
+      <rect x="474" y="366" width="240" height="6" rx="3" opacity="0.85"/>
+    </g>
+    <g fill="#d8c19a">
+      <rect x="474" y="350" width="240" height="4" rx="2" opacity="0.6"/>
+      <rect x="474" y="360" width="240" height="4" rx="2" opacity="0.6"/>
+    </g>
+  </g>
+  <!-- rope side wrap detail -->
+  <rect x="458" y="354" width="16" height="14" rx="4" fill="#cbb287"/>
+  <rect x="714" y="354" width="16" height="14" rx="4" fill="#cbb287"/>
+
+  <!-- folded throw over bench end (olive) -->
+  <path d="M462 344 q-10 4 -8 26 l0 30 q10 6 26 2 l0 -58 z" fill="#7a7c5c"/>
+  <path d="M462 344 q-10 4 -8 26 l0 6 q10 4 22 2 l0 -30 z" fill="#8a8c62"/>
+
+  <!-- ================= ROBOT VACUUM parked under bench ================= -->
+  <ellipse cx="600" cy="492" rx="78" ry="12" fill="#1f1b16" opacity="0.14"/>
+  <!-- disc body -->
+  <ellipse cx="600" cy="474" rx="76" ry="26" fill="#2a2724"/>
+  <ellipse cx="600" cy="468" rx="76" ry="26" fill="url(#robot)"/>
+  <ellipse cx="600" cy="466" rx="62" ry="19" fill="#3d3a36" opacity="0.55"/>
+  <!-- top plate seam -->
+  <ellipse cx="600" cy="466" rx="76" ry="26" fill="none" stroke="#15130f" stroke-width="1.5" opacity="0.4"/>
+  <!-- sensor turret -->
+  <ellipse cx="600" cy="458" rx="16" ry="7" fill="#15130f"/>
+  <ellipse cx="600" cy="456" rx="16" ry="7" fill="#3d3a36"/>
+  <circle cx="600" cy="455" r="4" fill="#b8cdd6" opacity="0.8"/>
+  <!-- status light -->
+  <ellipse cx="638" cy="462" rx="8" ry="4" fill="#cf9f5c"/>
+  <ellipse cx="638" cy="461" rx="4" ry="2" fill="#e3e1dc"/>
+  <!-- chrome trim ring -->
+  <path d="M528 472 a76 26 0 0 0 144 0" fill="none" stroke="url(#chrome)" stroke-width="3"/>
+
+  <!-- small oak framed hook rail hint on wall (upper left) -->
+  <rect x="70" y="70" width="150" height="12" rx="6" fill="url(#oakV)" stroke="#a5876a" stroke-width="1.5"/>
+  <g fill="#c9c5be">
+    <circle cx="100" cy="88" r="4"/>
+    <circle cx="145" cy="88" r="4"/>
+    <circle cx="190" cy="88" r="4"/>
+  </g>
+  <rect x="97" y="88" width="6" height="14" rx="3" fill="url(#chrome)"/>
+  <rect x="142" y="88" width="6" height="14" rx="3" fill="url(#chrome)"/>
+  <rect x="187" y="88" width="6" height="14" rx="3" fill="url(#chrome)"/>
+
+  <!-- pair of shoes tucked beside left cabinet -->
+  <g>
+    <ellipse cx="60" cy="450" rx="30" ry="8" fill="#1f1b16" opacity="0.10"/>
+    <path d="M34 448 q-6 -14 8 -18 q10 -2 14 8 q10 2 18 6 q6 4 -2 8 q-20 4 -38 -4 z" fill="#5c4632"/>
+    <path d="M40 440 q4 -8 12 -6 l4 8 z" fill="#6d5138"/>
+    <path d="M50 452 q-6 -12 6 -16 q10 -2 14 8 q10 2 18 6 q6 4 -2 8 q-20 4 -36 -6 z" fill="#6d5138" opacity="0.9"/>
+  </g>
+
+  <!-- soft wall shadow behind cabinets -->
+  <rect x="60" y="120" width="10" height="312" rx="5" fill="#a5876a" opacity="0.12"/>
+  <rect x="240" y="120" width="10" height="312" rx="5" fill="#a5876a" opacity="0.12"/>
+</svg>

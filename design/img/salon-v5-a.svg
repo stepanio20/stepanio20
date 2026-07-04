@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="oakFrame" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a5876a"/>
+      <stop offset="1" stop-color="#6d5138"/>
+    </linearGradient>
+    <linearGradient id="oakFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="glassDoor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.35"/>
+      <stop offset="0.45" stop-color="#e3e1dc" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="innerLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#faf7f2" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0.30"/>
+    </linearGradient>
+    <radialGradient id="shelfGlow" cx="0.5" cy="0.15" r="0.9">
+      <stop offset="0" stop-color="#faf7f2" stop-opacity="0.9"/>
+      <stop offset="0.6" stop-color="#cf9f5c" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="helmA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#8a8c62"/>
+    </linearGradient>
+    <linearGradient id="helmAvisor" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="helmB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.45" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="helmBvisor" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="chromeStrip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="470" fill="#faf7f2" opacity="0.5"/>
+
+  <!-- floor -->
+  <rect x="0" y="470" width="800" height="130" fill="url(#oakFloor)"/>
+  <rect x="0" y="470" width="800" height="6" fill="#a5876a" opacity="0.5"/>
+  <rect x="120" y="470" width="4" height="130" fill="#a5876a" opacity="0.25"/>
+  <rect x="360" y="470" width="4" height="130" fill="#a5876a" opacity="0.25"/>
+  <rect x="600" y="470" width="4" height="130" fill="#a5876a" opacity="0.25"/>
+
+  <!-- cabinet floor shadow -->
+  <ellipse cx="400" cy="512" rx="270" ry="26" fill="#1f1b16" opacity="0.12"/>
+
+  <!-- cabinet side (depth) -->
+  <rect x="560" y="60" width="34" height="428" rx="8" fill="url(#oakSide)"/>
+
+  <!-- cabinet outer frame -->
+  <rect x="180" y="52" width="392" height="440" rx="12" fill="url(#oakFrame)"/>
+  <rect x="180" y="52" width="392" height="440" rx="12" fill="none" stroke="#a5876a" stroke-width="2" opacity="0.5"/>
+
+  <!-- top cornice -->
+  <rect x="168" y="40" width="416" height="26" rx="10" fill="#cbb287"/>
+  <rect x="168" y="40" width="416" height="10" rx="8" fill="#d8c19a"/>
+  <rect x="168" y="60" width="416" height="6" rx="3" fill="#a5876a" opacity="0.7"/>
+
+  <!-- base plinth -->
+  <rect x="172" y="486" width="408" height="30" rx="8" fill="#a5876a"/>
+  <rect x="172" y="486" width="408" height="8" rx="6" fill="#cbb287"/>
+  <rect x="188" y="512" width="42" height="14" rx="4" fill="#6d5138"/>
+  <rect x="522" y="512" width="42" height="14" rx="4" fill="#6d5138"/>
+
+  <!-- interior back panel (glass cabinet cavity) -->
+  <rect x="204" y="78" width="344" height="356" rx="8" fill="#5c4632"/>
+  <rect x="204" y="78" width="344" height="356" rx="8" fill="url(#innerLight)" opacity="0.9"/>
+
+  <!-- warm inner light wash -->
+  <rect x="210" y="84" width="332" height="120" rx="8" fill="url(#shelfGlow)"/>
+  <rect x="210" y="248" width="332" height="120" rx="8" fill="url(#shelfGlow)"/>
+
+  <!-- upper glass shelf -->
+  <rect x="210" y="222" width="332" height="12" rx="4" fill="#b8cdd6" opacity="0.5"/>
+  <rect x="210" y="222" width="332" height="4" rx="2" fill="#e3e1dc" opacity="0.8"/>
+  <rect x="212" y="234" width="328" height="5" rx="2" fill="#cf9f5c" opacity="0.5"/>
+
+  <!-- lower glass shelf -->
+  <rect x="210" y="386" width="332" height="12" rx="4" fill="#b8cdd6" opacity="0.5"/>
+  <rect x="210" y="386" width="332" height="4" rx="2" fill="#e3e1dc" opacity="0.8"/>
+  <rect x="212" y="398" width="328" height="5" rx="2" fill="#cf9f5c" opacity="0.5"/>
+
+  <!-- light strip under top -->
+  <rect x="214" y="84" width="324" height="6" rx="3" fill="#cf9f5c" opacity="0.7"/>
+  <rect x="214" y="248" width="324" height="6" rx="3" fill="#cf9f5c" opacity="0.6"/>
+
+  <!-- ===== Helmet A (upper shelf, olive/chrome) ===== -->
+  <g>
+    <ellipse cx="376" cy="212" rx="70" ry="14" fill="#1f1b16" opacity="0.18"/>
+    <!-- shell -->
+    <path d="M312 178 Q312 118 376 118 Q440 118 440 178 L440 196 Q440 208 428 208 L324 208 Q312 208 312 196 Z" fill="url(#helmA)"/>
+    <!-- top tone step -->
+    <path d="M320 158 Q328 128 376 126 Q424 128 432 158 Q400 140 376 140 Q352 140 320 158 Z" fill="#e3e1dc" opacity="0.7"/>
+    <!-- chin bar -->
+    <path d="M312 190 Q312 210 336 214 L420 214 Q440 210 440 192 L440 200 Q440 210 424 210 L328 210 Q312 210 312 196 Z" fill="#7a7c5c"/>
+    <!-- visor -->
+    <path d="M326 158 Q326 148 340 148 L414 148 Q426 148 426 160 L426 184 Q426 192 414 192 L338 192 Q326 192 326 182 Z" fill="url(#helmAvisor)"/>
+    <path d="M334 156 Q334 152 342 152 L410 152 L414 158 Q392 154 372 154 Q350 154 334 162 Z" fill="#b8cdd6" opacity="0.35"/>
+    <!-- chrome trim strip -->
+    <path d="M314 172 Q376 160 438 172 L438 178 Q376 166 314 178 Z" fill="url(#chromeStrip)"/>
+    <!-- vents -->
+    <rect x="360" y="126" width="10" height="18" rx="3" fill="#3d3a36"/>
+    <rect x="382" y="126" width="10" height="18" rx="3" fill="#3d3a36"/>
+    <!-- amber accent -->
+    <path d="M320 196 Q328 200 340 200 L340 208 L324 208 Q316 206 320 196 Z" fill="#cf9f5c"/>
+  </g>
+
+  <!-- ===== Helmet B (lower shelf, amber/walnut) ===== -->
+  <g>
+    <ellipse cx="376" cy="376" rx="72" ry="14" fill="#1f1b16" opacity="0.18"/>
+    <!-- shell -->
+    <path d="M310 342 Q310 280 376 280 Q442 280 442 342 L442 360 Q442 372 430 372 L322 372 Q310 372 310 360 Z" fill="url(#helmB)"/>
+    <!-- top highlight -->
+    <path d="M318 320 Q328 290 376 288 Q424 290 434 320 Q400 302 376 302 Q352 302 318 320 Z" fill="#e3e1dc" opacity="0.55"/>
+    <!-- dark oak lower band -->
+    <path d="M310 350 Q310 372 334 376 L418 376 Q442 372 442 352 L442 362 Q442 372 426 372 L326 372 Q310 372 310 360 Z" fill="#8a5a20"/>
+    <!-- visor -->
+    <path d="M324 320 Q324 310 338 310 L414 310 Q426 310 426 322 L426 348 Q426 356 414 356 L336 356 Q324 356 324 346 Z" fill="url(#helmBvisor)"/>
+    <path d="M332 318 Q332 314 340 314 L408 314 L412 320 Q390 316 370 316 Q348 316 332 324 Z" fill="#b8cdd6" opacity="0.30"/>
+    <!-- chrome trim -->
+    <path d="M312 334 Q376 322 440 334 L440 340 Q376 328 312 340 Z" fill="url(#chromeStrip)"/>
+    <!-- center stripe -->
+    <path d="M370 282 Q376 281 382 282 L382 306 Q376 305 370 306 Z" fill="#faf7f2" opacity="0.6"/>
+    <!-- vents -->
+    <rect x="358" y="288" width="10" height="18" rx="3" fill="#2a2724"/>
+    <rect x="384" y="288" width="10" height="18" rx="3" fill="#2a2724"/>
+  </g>
+
+  <!-- ===== tempered glass doors ===== -->
+  <!-- left door -->
+  <rect x="204" y="78" width="170" height="356" rx="8" fill="url(#glassDoor)"/>
+  <rect x="204" y="78" width="170" height="356" rx="8" fill="none" stroke="#c9c5be" stroke-width="3" opacity="0.7"/>
+  <!-- right door -->
+  <rect x="378" y="78" width="170" height="356" rx="8" fill="url(#glassDoor)"/>
+  <rect x="378" y="78" width="170" height="356" rx="8" fill="none" stroke="#c9c5be" stroke-width="3" opacity="0.7"/>
+
+  <!-- glass reflection streaks -->
+  <path d="M232 92 L300 92 L250 420 L182 420 Z" fill="#ffffff" opacity="0.10"/>
+  <path d="M258 92 L280 92 L232 420 L210 420 Z" fill="#ffffff" opacity="0.08"/>
+  <path d="M410 92 L470 92 L420 420 L360 420 Z" fill="#ffffff" opacity="0.09"/>
+
+  <!-- door handles (chrome) -->
+  <rect x="360" y="230" width="7" height="60" rx="3.5" fill="url(#chromeStrip)"/>
+  <rect x="360" y="230" width="3" height="60" rx="1.5" fill="#e3e1dc"/>
+  <rect x="386" y="230" width="7" height="60" rx="3.5" fill="url(#chromeStrip)"/>
+  <rect x="390" y="230" width="3" height="60" rx="1.5" fill="#e3e1dc"/>
+
+  <!-- center seam -->
+  <rect x="374" y="78" width="6" height="356" fill="#a5876a" opacity="0.4"/>
+
+  <!-- soft ambient light on wall -->
+  <ellipse cx="400" cy="120" rx="300" ry="70" fill="#faf7f2" opacity="0.35"/>
+  <rect x="120" y="470" width="560" height="4" fill="#cf9f5c" opacity="0.2"/>
+</svg>

@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9c5be"/>
+      <stop offset="0.5" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="helmet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <radialGradient id="amber" cx="0.4" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </radialGradient>
+    <radialGradient id="boxInner" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="70" y="92" width="660" height="466" rx="14" fill="#efe7d9" opacity="0.45"/>
+
+  <!-- chrome side uprights -->
+  <g>
+    <rect x="84" y="104" width="12" height="440" rx="4" fill="url(#chrome)"/>
+    <rect x="86" y="104" width="3" height="440" fill="#e3e1dc" opacity="0.7"/>
+    <rect x="84" y="150" width="12" height="4" fill="#c9c5be"/>
+    <rect x="84" y="240" width="12" height="4" fill="#c9c5be"/>
+    <rect x="84" y="330" width="12" height="4" fill="#c9c5be"/>
+    <rect x="84" y="420" width="12" height="4" fill="#c9c5be"/>
+    <rect x="84" y="505" width="12" height="4" fill="#c9c5be"/>
+  </g>
+  <g>
+    <rect x="704" y="104" width="12" height="440" rx="4" fill="url(#chrome)"/>
+    <rect x="706" y="104" width="3" height="440" fill="#e3e1dc" opacity="0.7"/>
+    <rect x="704" y="150" width="12" height="4" fill="#c9c5be"/>
+    <rect x="704" y="240" width="12" height="4" fill="#c9c5be"/>
+    <rect x="704" y="330" width="12" height="4" fill="#c9c5be"/>
+    <rect x="704" y="420" width="12" height="4" fill="#c9c5be"/>
+    <rect x="704" y="505" width="12" height="4" fill="#c9c5be"/>
+  </g>
+
+  <!-- shelf cast shadows on wall -->
+  <rect x="100" y="173" width="600" height="7" fill="#1f1b16" opacity="0.07"/>
+  <rect x="100" y="348" width="600" height="7" fill="#1f1b16" opacity="0.07"/>
+  <rect x="100" y="523" width="600" height="7" fill="#1f1b16" opacity="0.07"/>
+
+  <!-- shelves -->
+  <g>
+    <rect x="98" y="155" width="604" height="18" rx="5" fill="url(#oakEdge)"/>
+    <rect x="98" y="155" width="604" height="6" rx="5" fill="url(#oakTop)"/>
+    <rect x="98" y="167" width="604" height="2" fill="#a5876a" opacity="0.5"/>
+  </g>
+  <g>
+    <rect x="98" y="330" width="604" height="18" rx="5" fill="url(#oakEdge)"/>
+    <rect x="98" y="330" width="604" height="6" rx="5" fill="url(#oakTop)"/>
+    <rect x="98" y="342" width="604" height="2" fill="#a5876a" opacity="0.5"/>
+  </g>
+  <g>
+    <rect x="98" y="505" width="604" height="18" rx="5" fill="url(#oakEdge)"/>
+    <rect x="98" y="505" width="604" height="6" rx="5" fill="url(#oakTop)"/>
+    <rect x="98" y="517" width="604" height="2" fill="#a5876a" opacity="0.5"/>
+  </g>
+
+  <!-- oak floor hint -->
+  <rect x="0" y="568" width="800" height="32" fill="url(#oakFloor)"/>
+  <rect x="0" y="568" width="800" height="3" fill="#d8c19a" opacity="0.6"/>
+
+  <!-- ===== TOP SHELF ===== -->
+  <ellipse cx="150" cy="157" rx="58" ry="8" fill="#1f1b16" opacity="0.12"/>
+  <g transform="rotate(-6 150 155)">
+    <rect x="118" y="85" width="68" height="70" rx="3" fill="#2a2724"/>
+    <rect x="126" y="83" width="68" height="72" rx="3" fill="#6d5138"/>
+    <rect x="134" y="81" width="68" height="74" rx="3" fill="#7a7c5c"/>
+    <rect x="134" y="81" width="68" height="6" rx="3" fill="#8a8c62"/>
+    <circle cx="168" cy="118" r="15" fill="url(#amber)"/>
+    <circle cx="168" cy="118" r="5" fill="#2a2724"/>
+    <circle cx="164" cy="114" r="4" fill="#faf7f2" opacity="0.5"/>
+  </g>
+
+  <!-- standing books -->
+  <ellipse cx="352" cy="157" rx="72" ry="7" fill="#1f1b16" opacity="0.12"/>
+  <rect x="300" y="52" width="26" height="103" rx="3" fill="#6d5138"/>
+  <rect x="300" y="58" width="26" height="4" fill="#a5876a" opacity="0.6"/>
+  <rect x="328" y="44" width="24" height="111" rx="3" fill="#8a8c62"/>
+  <rect x="328" y="50" width="24" height="4" fill="#a5b07c" opacity="0.5"/>
+  <rect x="354" y="58" width="26" height="97" rx="3" fill="#b98a4a"/>
+  <rect x="354" y="64" width="26" height="4" fill="#cf9f5c" opacity="0.7"/>
+  <g transform="rotate(6 392 155)">
+    <rect x="382" y="60" width="24" height="95" rx="3" fill="#3d3a36"/>
+    <rect x="382" y="66" width="24" height="4" fill="#5c4632" opacity="0.6"/>
+  </g>
+
+  <!-- flat books + olive car (top right) -->
+  <ellipse cx="608" cy="157" rx="72" ry="7" fill="#1f1b16" opacity="0.12"/>
+  <rect x="548" y="139" width="118" height="16" rx="3" fill="#6d5138"/>
+  <rect x="548" y="151" width="118" height="3" fill="#5c4632" opacity="0.6"/>
+  <rect x="554" y="125" width="106" height="14" rx="3" fill="#b98a4a"/>
+  <rect x="554" y="135" width="106" height="3" fill="#8a5a20" opacity="0.5"/>
+  <!-- olive car -->
+  <g>
+    <ellipse cx="600" cy="127" rx="48" ry="6" fill="#1f1b16" opacity="0.12"/>
+    <rect x="554" y="93" width="6" height="20" fill="#7a7c5c"/>
+    <rect x="548" y="91" width="20" height="5" rx="2" fill="#7a7c5c"/>
+    <rect x="562" y="105" width="80" height="12" rx="6" fill="#8a8c62"/>
+    <rect x="584" y="95" width="34" height="12" rx="6" fill="#7a7c5c"/>
+    <rect x="590" y="89" width="4" height="8" fill="#3d3a36"/>
+    <ellipse cx="590" cy="102" rx="6" ry="3" fill="#2a2724"/>
+    <rect x="562" y="109" width="80" height="4" fill="#cf9f5c"/>
+    <rect x="638" y="107" width="14" height="5" rx="2" fill="#7a7c5c"/>
+    <rect x="650" y="103" width="4" height="10" fill="#7a7c5c"/>
+    <circle cx="576" cy="117" r="11" fill="#2a2724"/>
+    <circle cx="576" cy="117" r="4.5" fill="#c9c5be"/>
+    <circle cx="630" cy="117" r="11" fill="#2a2724"/>
+    <circle cx="630" cy="117" r="4.5" fill="#c9c5be"/>
+  </g>
+
+  <!-- ===== MID SHELF : HERO BOX FRAME ===== -->
+  <!-- standing vinyl left of box -->
+  <ellipse cx="286" cy="332" rx="46" ry="7" fill="#1f1b16" opacity="0.12"/>
+  <g transform="rotate(-4 286 330)">
+    <rect x="252" y="272" width="56" height="58" rx="3" fill="#3d3a36"/>
+    <rect x="260" y="270" width="56" height="60" rx="3" fill="#7a7c5c"/>
+    <rect x="268" y="268" width="56" height="62" rx="3" fill="#faf7f2"/>
+    <circle cx="296" cy="299" r="13" fill="url(#amber)"/>
+    <circle cx="296" cy="299" r="4.5" fill="#2a2724"/>
+  </g>
+
+  <!-- box frame -->
+  <ellipse cx="400" cy="333" rx="86" ry="8" fill="#1f1b16" opacity="0.14"/>
+  <rect x="332" y="182" width="136" height="148" rx="6" fill="#15130f"/>
+  <rect x="340" y="190" width="120" height="132" rx="4" fill="#2a2724"/>
+  <rect x="348" y="198" width="104" height="116" rx="3" fill="url(#boxInner)"/>
+  <rect x="348" y="198" width="104" height="18" fill="#15130f" opacity="0.55"/>
+  <!-- helmet inside -->
+  <ellipse cx="400" cy="308" rx="38" ry="6" fill="#15130f" opacity="0.6"/>
+  <path d="M366 302 Q358 272 368 224 Q382 208 400 210 Q420 210 432 226 Q440 258 432 288 Q424 302 408 302 Z" fill="url(#helmet)"/>
+  <ellipse cx="382" cy="238" rx="12" ry="19" fill="#d8c19a" opacity="0.32"/>
+  <path d="M397 214 L405 214 L402 258 L399 258 Z" fill="#faf7f2" opacity="0.85"/>
+  <path d="M400 246 L436 250 Q441 260 438 272 L436 284 Q431 289 420 288 L404 286 Q397 268 400 246 Z" fill="#2a2724"/>
+  <path d="M404 250 L432 254 Q436 262 434 270 L410 266 Q405 258 404 250 Z" fill="url(#glass)" opacity="0.75"/>
+  <path d="M400 278 L436 275 L437 285 L403 288 Z" fill="#b98a4a"/>
+  <rect x="348" y="198" width="104" height="116" rx="3" fill="none" stroke="#3d3a36" stroke-width="2" opacity="0.5"/>
+
+  <!-- graphite car right of box -->
+  <g>
+    <ellipse cx="540" cy="332" rx="48" ry="6" fill="#1f1b16" opacity="0.12"/>
+    <rect x="494" y="298" width="6" height="20" fill="#2a2724"/>
+    <rect x="488" y="296" width="20" height="5" rx="2" fill="#2a2724"/>
+    <rect x="502" y="310" width="80" height="12" rx="6" fill="#3d3a36"/>
+    <rect x="524" y="300" width="34" height="12" rx="6" fill="#2a2724"/>
+    <rect x="530" y="294" width="4" height="8" fill="#15130f"/>
+    <ellipse cx="530" cy="307" rx="6" ry="3" fill="#15130f"/>
+    <rect x="502" y="314" width="80" height="4" fill="#cf9f5c"/>
+    <rect x="578" y="312" width="14" height="5" rx="2" fill="#2a2724"/>
+    <rect x="590" y="308" width="4" height="10" fill="#2a2724"/>
+    <circle cx="516" cy="322" r="11" fill="#15130f"/>
+    <circle cx="516" cy="322" r="4.5" fill="#c9c5be"/>
+    <circle cx="570" cy="322" r="11" fill="#15130f"/>
+    <circle cx="570" cy="322" r="4.5" fill="#c9c5be"/>
+  </g>
+  <!-- single leaning book far right -->
+  <g transform="rotate(8 628 330)">
+    <rect x="616" y="242" width="24" height="88" rx="3" fill="#8a8c62"/>
+    <rect x="616" y="248" width="24" height="4" fill="#a5b07c" opacity="0.5"/>
+  </g>
+
+  <!-- ===== LOW SHELF ===== -->
+  <!-- vinyl crate -->
+  <ellipse cx="185" cy="507" rx="82" ry="7" fill="#1f1b16" opacity="0.12"/>
+  <rect x="108" y="452" width="152" height="53" rx="4" fill="#a5876a"/>
+  <rect x="118" y="450" width="52" height="55" rx="2" fill="url(#amber)"/>
+  <circle cx="144" cy="478" r="14" fill="#2a2724"/>
+  <circle cx="144" cy="478" r="5" fill="#cf9f5c"/>
+  <rect x="172" y="452" width="11" height="52" fill="#7a7c5c"/>
+  <rect x="184" y="452" width="11" height="52" fill="#3d3a36"/>
+  <rect x="196" y="452" width="11" height="52" fill="#6d5138"/>
+  <rect x="208" y="452" width="11" height="52" fill="#faf7f2"/>
+  <rect x="220" y="452" width="11" height="52" fill="#8a8c62"/>
+  <rect x="232" y="452" width="11" height="52" fill="#b98a4a"/>
+  <rect x="108" y="495" width="152" height="14" rx="3" fill="url(#oakEdge)"/>
+
+  <!-- amber car center -->
+  <g>
+    <ellipse cx="440" cy="507" rx="48" ry="6" fill="#1f1b16" opacity="0.12"/>
+    <rect x="394" y="473" width="6" height="20" fill="#b98a4a"/>
+    <rect x="388" y="471" width="20" height="5" rx="2" fill="#b98a4a"/>
+    <rect x="402" y="485" width="80" height="12" rx="6" fill="#cf9f5c"/>
+    <rect x="424" y="475" width="34" height="12" rx="6" fill="#b98a4a"/>
+    <rect x="430" y="469" width="4" height="8" fill="#3d3a36"/>
+    <ellipse cx="430" cy="482" rx="6" ry="3" fill="#2a2724"/>
+    <rect x="402" y="489" width="80" height="4" fill="#3d3a36"/>
+    <rect x="478" y="487" width="14" height="5" rx="2" fill="#b98a4a"/>
+    <rect x="490" y="483" width="4" height="10" fill="#b98a4a"/>
+    <circle cx="416" cy="497" r="11" fill="#2a2724"/>
+    <circle cx="416" cy="497" r="4.5" fill="#c9c5be"/>
+    <circle cx="470" cy="497" r="11" fill="#2a2724"/>
+    <circle cx="470" cy="497" r="4.5" fill="#c9c5be"/>
+  </g>
+
+  <!-- stacked flat books right -->
+  <ellipse cx="625" cy="507" rx="72" ry="7" fill="#1f1b16" opacity="0.12"/>
+  <rect x="562" y="489" width="126" height="16" rx="3" fill="#6d5138"/>
+  <rect x="562" y="501" width="126" height="3" fill="#5c4632" opacity="0.6"/>
+  <rect x="568" y="474" width="118" height="15" rx="3" fill="#8a8c62"/>
+  <rect x="568" y="485" width="118" height="3" fill="#7a7c5c" opacity="0.6"/>
+  <rect x="574" y="460" width="108" height="14" rx="3" fill="#b98a4a"/>
+  <rect x="574" y="470" width="108" height="3" fill="#8a5a20" opacity="0.5"/>
+</svg>

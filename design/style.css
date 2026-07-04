@@ -182,6 +182,51 @@ a { color: inherit; }
 footer { border-top: 1px solid var(--line); padding: 34px 0 44px; margin-top: 60px; }
 footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 
+/* мудборд / концепт-борд */
+.moodboard { margin: 22px 0 8px; }
+.mb-head { margin-bottom: 18px; }
+.mb-kicker {
+  font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700;
+}
+.mb-intro { color: var(--ink-soft); font-size: .96rem; max-width: 720px; margin-top: 8px; }
+
+.mb-collage {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+  padding: 14px 6px 22px;
+}
+.mb-tile { margin: 0; }
+.mb-tile img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;
+  background: #efe9de; border-radius: 8px; padding: 6px;
+  border: 1px solid var(--line);
+  box-shadow: 0 6px 18px rgba(31,27,22,.12);
+  cursor: zoom-in; transition: transform .18s ease, box-shadow .18s ease;
+}
+/* лёгкий «приколотый» разворот тайлов, как на концепт-борде */
+.mb-tile-0 img { transform: rotate(-2.2deg); }
+.mb-tile-1 img { transform: rotate(1.6deg); margin-top: 14px; }
+.mb-tile-2 img { transform: rotate(-1deg); }
+.mb-tile-3 img { transform: rotate(2.4deg); margin-top: 10px; }
+.mb-tile-4 img { transform: rotate(-1.8deg); }
+.mb-tile img:hover { transform: rotate(0) scale(1.03); box-shadow: 0 12px 30px rgba(31,27,22,.2); z-index: 2; position: relative; }
+
+.mb-block { margin: 10px 0 6px; }
+.mb-block h4 { font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; }
+.mb-palette { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+.mb-swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 62px; }
+.mb-swatch i { width: 46px; height: 46px; border-radius: 12px; border: 1px solid rgba(0,0,0,.08); box-shadow: var(--shadow); }
+.mb-swatch span { font-size: .74rem; color: var(--ink-soft); }
+.mb-materials { display: flex; flex-wrap: wrap; gap: 8px; }
+.mb-chip { font-size: .78rem; padding: 5px 12px; border-radius: 999px; background: #f2eee6; color: var(--ink-soft); border: 1px solid var(--line); }
+.mb-refs { display: flex; flex-wrap: wrap; gap: 8px; }
+.mb-ref {
+  font-size: .82rem; text-decoration: none; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--bg-card); color: var(--ink);
+  transition: border-color .15s ease, color .15s ease;
+}
+.mb-ref:hover { border-color: var(--accent); color: var(--accent); }
+
 /* галерея визуализаций варианта */
 .v-gallery { margin: 22px 26px 0; }
 .g-hero {
@@ -220,8 +265,13 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .floorplan .fp-zone { fill: #a49b8d; }
 .plan-legend { font-size: .78rem; color: var(--ink-soft); margin-top: 8px; text-align: center; }
 
+@media (max-width: 900px) {
+  .mb-collage { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 640px) {
   .v-plan { margin: 18px 16px 0; }
+  .mb-collage { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .mb-tile img { transform: none !important; margin-top: 0 !important; }
   .p-row { flex-direction: column; align-items: flex-start; gap: 8px; }
   .p-side { width: 100%; justify-content: space-between; }
   .topnav { gap: 12px; font-size: .82rem; }

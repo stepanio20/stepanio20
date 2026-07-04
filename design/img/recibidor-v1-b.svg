@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="cabFrame" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3728"/>
+    </linearGradient>
+    <linearGradient id="cabInner" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="ledGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glassShelf" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.7"/>
+      <stop offset="0.5" stop-color="#e3e1dc" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#e3e1dc"/>
+    </linearGradient>
+    <linearGradient id="bagTan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.55" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="bagOlive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="0.55" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#5e6046"/>
+    </linearGradient>
+    <linearGradient id="bagBlack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.55" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <!-- floor / oak surface -->
+  <rect x="0" y="500" width="800" height="100" fill="url(#floor)"/>
+  <rect x="0" y="500" width="800" height="6" fill="#a5876a" opacity="0.4"/>
+
+  <!-- soft wall light pool -->
+  <ellipse cx="400" cy="250" rx="300" ry="230" fill="#ffffff" opacity="0.35"/>
+
+  <!-- cabinet floor shadow -->
+  <ellipse cx="400" cy="520" rx="185" ry="26" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- outer cabinet frame -->
+  <rect x="258" y="48" width="284" height="470" rx="12" fill="url(#cabFrame)"/>
+  <rect x="258" y="48" width="284" height="470" rx="12" fill="none" stroke="#4a3728" stroke-width="2"/>
+  <!-- frame highlight edge -->
+  <rect x="266" y="56" width="8" height="454" rx="4" fill="#a5876a" opacity="0.35"/>
+
+  <!-- inner dark backing -->
+  <rect x="284" y="72" width="232" height="422" rx="8" fill="url(#cabInner)"/>
+
+  <!-- top LED light bar -->
+  <rect x="292" y="80" width="216" height="10" rx="5" fill="#e3e1dc"/>
+  <rect x="296" y="82" width="208" height="5" rx="2.5" fill="#cf9f5c" opacity="0.85"/>
+  <!-- ambient led glow down the case -->
+  <rect x="284" y="90" width="232" height="404" fill="url(#ledGlow)" opacity="0.6"/>
+
+  <!-- ===== SHELF 1 (top) : TAN tote ===== -->
+  <rect x="292" y="196" width="216" height="7" rx="3.5" fill="url(#glassShelf)"/>
+  <rect x="292" y="203" width="216" height="4" rx="2" fill="#b8cdd6" opacity="0.35"/>
+  <!-- under-shelf LED strip -->
+  <rect x="300" y="99" width="200" height="4" rx="2" fill="#cf9f5c" opacity="0.7"/>
+  <!-- glow behind bag -->
+  <ellipse cx="400" cy="150" rx="95" ry="60" fill="#cf9f5c" opacity="0.15"/>
+  <!-- tan bag shadow on shelf -->
+  <ellipse cx="400" cy="194" rx="66" ry="9" fill="rgba(31,27,22,0.12)"/>
+  <!-- tan structured tote body -->
+  <path d="M344 118 h112 a10 10 0 0 1 10 10 v58 a6 6 0 0 1 -6 6 h-120 a6 6 0 0 1 -6 -6 v-58 a10 10 0 0 1 10 -10 z" fill="url(#bagTan)"/>
+  <!-- tan side/tone step -->
+  <path d="M344 118 h20 v74 h-14 a6 6 0 0 1 -6 -6 v-58 a10 10 0 0 1 0 -10 z" fill="#d8c19a" opacity="0.55"/>
+  <path d="M452 118 h4 a10 10 0 0 1 10 10 v58 a6 6 0 0 1 -6 6 h-8 z" fill="#a5876a" opacity="0.6"/>
+  <!-- center seam -->
+  <rect x="399" y="120" width="2" height="70" fill="#a5876a" opacity="0.4"/>
+  <!-- tan handles -->
+  <path d="M368 120 q0 -26 22 -26 q22 0 22 26" fill="none" stroke="#a5876a" stroke-width="6" stroke-linecap="round"/>
+  <path d="M368 120 q0 -22 22 -22 q22 0 22 22" fill="none" stroke="#c8a87c" stroke-width="3" stroke-linecap="round"/>
+  <!-- chrome clasp -->
+  <rect x="392" y="150" width="16" height="12" rx="3" fill="url(#chrome)"/>
+  <rect x="395" y="153" width="10" height="3" rx="1.5" fill="#e3e1dc"/>
+
+  <!-- ===== SHELF 2 (middle) : OLIVE crossbody ===== -->
+  <rect x="292" y="316" width="216" height="7" rx="3.5" fill="url(#glassShelf)"/>
+  <rect x="292" y="323" width="216" height="4" rx="2" fill="#b8cdd6" opacity="0.35"/>
+  <rect x="300" y="219" width="200" height="4" rx="2" fill="#cf9f5c" opacity="0.7"/>
+  <ellipse cx="400" cy="270" rx="95" ry="60" fill="#cf9f5c" opacity="0.15"/>
+  <ellipse cx="400" cy="314" rx="60" ry="9" fill="rgba(31,27,22,0.12)"/>
+  <!-- olive flap crossbody body -->
+  <path d="M352 258 h96 a8 8 0 0 1 8 8 v40 a6 6 0 0 1 -6 6 h-108 a6 6 0 0 1 -6 -6 v-40 a8 8 0 0 1 8 -8 z" fill="url(#bagOlive)"/>
+  <!-- tone step left -->
+  <path d="M352 258 h18 v54 h-12 a6 6 0 0 1 -6 -6 v-40 a8 8 0 0 1 0 -8 z" fill="#8a8c62" opacity="0.5"/>
+  <!-- olive flap -->
+  <path d="M348 258 h104 v22 a8 8 0 0 1 -8 8 h-88 a8 8 0 0 1 -8 -8 z" fill="#7a7c5c"/>
+  <path d="M348 258 h104 v6 h-104 z" fill="#8a8c62" opacity="0.7"/>
+  <!-- flap shadow line -->
+  <rect x="352" y="286" width="96" height="3" rx="1.5" fill="#5e6046" opacity="0.6"/>
+  <!-- chrome turn-lock -->
+  <circle cx="400" cy="288" r="8" fill="url(#chrome)"/>
+  <rect x="396" y="286" width="8" height="4" rx="2" fill="#c9c5be"/>
+  <!-- chain strap -->
+  <path d="M352 260 q-22 -34 -4 -56" fill="none" stroke="#c9c5be" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 4"/>
+  <path d="M448 260 q22 -34 4 -56" fill="none" stroke="#c9c5be" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 4"/>
+
+  <!-- ===== SHELF 3 (bottom) : BLACK top-handle ===== -->
+  <rect x="292" y="440" width="216" height="7" rx="3.5" fill="url(#glassShelf)"/>
+  <rect x="292" y="447" width="216" height="4" rx="2" fill="#b8cdd6" opacity="0.35"/>
+  <rect x="300" y="343" width="200" height="4" rx="2" fill="#cf9f5c" opacity="0.7"/>
+  <ellipse cx="400" cy="394" rx="95" ry="60" fill="#cf9f5c" opacity="0.12"/>
+  <ellipse cx="400" cy="438" rx="62" ry="9" fill="rgba(31,27,22,0.12)"/>
+  <!-- black top-handle body -->
+  <path d="M348 372 h104 a10 10 0 0 1 10 10 v42 a6 6 0 0 1 -6 6 h-112 a6 6 0 0 1 -6 -6 v-42 a10 10 0 0 1 10 -10 z" fill="url(#bagBlack)"/>
+  <!-- tone step -->
+  <path d="M348 372 h18 v58 h-12 a6 6 0 0 1 -6 -6 v-42 a10 10 0 0 1 0 -10 z" fill="#3d3a36" opacity="0.7"/>
+  <path d="M448 372 h4 a10 10 0 0 1 10 10 v42 a6 6 0 0 1 -6 6 h-8 z" fill="#15130f" opacity="0.7"/>
+  <!-- top rim highlight -->
+  <rect x="356" y="374" width="88" height="4" rx="2" fill="#3d3a36" opacity="0.6"/>
+  <!-- rigid top handle -->
+  <path d="M378 372 q0 -24 22 -24 q22 0 22 24" fill="none" stroke="#3d3a36" stroke-width="7" stroke-linecap="round"/>
+  <path d="M378 372 q0 -20 22 -20 q22 0 22 20" fill="none" stroke="#5c4632" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- chrome feet -->
+  <rect x="360" y="428" width="10" height="6" rx="2" fill="url(#chrome)"/>
+  <rect x="430" y="428" width="10" height="6" rx="2" fill="url(#chrome)"/>
+  <!-- chrome nameplate -->
+  <rect x="386" y="398" width="28" height="8" rx="2" fill="url(#chrome)"/>
+  <rect x="389" y="400" width="22" height="3" rx="1.5" fill="#e3e1dc"/>
+
+  <!-- glass front reflection sweep -->
+  <path d="M300 96 L360 96 L300 494 L284 494 Z" fill="#ffffff" opacity="0.06"/>
+  <path d="M470 96 L500 96 L440 494 L410 494 Z" fill="#ffffff" opacity="0.05"/>
+
+  <!-- base plinth -->
+  <rect x="270" y="494" width="260" height="24" rx="6" fill="#4a3728"/>
+  <rect x="270" y="494" width="260" height="6" rx="3" fill="#6d5138" opacity="0.7"/>
+
+  <!-- small wall accent shelf hint (left) -->
+  <rect x="150" y="300" width="70" height="10" rx="4" fill="#cbb287"/>
+  <ellipse cx="185" cy="316" rx="34" ry="6" fill="rgba(31,27,22,0.12)"/>
+  <!-- little vase silhouette -->
+  <path d="M176 268 q-6 16 4 30 h10 q10 -14 4 -30 q-9 4 -18 0 z" fill="#8a8c62"/>
+  <path d="M176 268 q-6 16 4 30 h4 q-6 -14 -2 -30 z" fill="#7a7c5c" opacity="0.7"/>
+
+  <!-- right wall subtle framed panel hint -->
+  <rect x="600" y="150" width="90" height="120" rx="6" fill="#faf7f2" stroke="#d8c19a" stroke-width="4"/>
+  <rect x="612" y="162" width="66" height="96" rx="4" fill="#f7f3ec"/>
+  <path d="M612 240 l24 -34 l18 24 l14 -18 l10 28 z" fill="#cbb287" opacity="0.5"/>
+  <circle cx="630" cy="182" r="7" fill="#cf9f5c" opacity="0.5"/>
+</svg>
