@@ -381,7 +381,7 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .vs-plan img { padding: 10px; }
 
 .tiers { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-.tier-tabs { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--line); }
+.tier-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border-bottom: 1px solid var(--line); }
 .tt { appearance: none; background: none; border: 0; border-right: 1px solid var(--line); padding: 12px 8px 10px; cursor: pointer; font-family: var(--font-body); text-align: center; color: var(--ink-soft); min-height: 56px; }
 .tt:last-child { border-right: 0; }
 .tt b { display: block; font-size: .92rem; color: inherit; }
