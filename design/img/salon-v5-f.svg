@@ -1,0 +1,265 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f2ece1"/>
+    </linearGradient>
+    <linearGradient id="wallLight" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#fdf6ea" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#faf7f2" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e0cba6"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="walnutG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="chromeG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="glassG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#e3e1dc" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.45"/>
+    </linearGradient>
+    <radialGradient id="globeG" cx="0.4" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#fdf3d8"/>
+      <stop offset="0.6" stop-color="#f2e3c0"/>
+      <stop offset="1" stop-color="#e0cba6"/>
+    </radialGradient>
+    <radialGradient id="globeGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fdeec0" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#fdeec0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vaseG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="0.5" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="ochreV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="0.5" stop-color="#b98a4a"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="bookA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="bookB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="bookC" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <radialGradient id="domeGlow" cx="0.5" cy="0.75" r="0.6">
+      <stop offset="0" stop-color="#fde9bc" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#fde9bc" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Wall -->
+  <rect x="0" y="0" width="800" height="420" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="420" fill="url(#wallLight)"/>
+  <!-- soft warm light pool -->
+  <ellipse cx="250" cy="150" rx="260" ry="200" fill="#fdf1d6" opacity="0.28"/>
+
+  <!-- Skirting -->
+  <rect x="0" y="404" width="800" height="16" fill="#efe6d4"/>
+  <rect x="0" y="404" width="800" height="4" fill="#e2d4ba"/>
+
+  <!-- Floor -->
+  <rect x="0" y="420" width="800" height="180" fill="url(#floor)"/>
+  <g stroke="#bda679" stroke-width="1.4" opacity="0.55">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+    <line x1="120" y1="420" x2="120" y2="452"/>
+    <line x1="360" y1="420" x2="360" y2="452"/>
+    <line x1="600" y1="420" x2="600" y2="452"/>
+    <line x1="240" y1="452" x2="240" y2="500"/>
+    <line x1="520" y1="452" x2="520" y2="500"/>
+    <line x1="180" y1="500" x2="180" y2="552"/>
+    <line x1="460" y1="500" x2="460" y2="552"/>
+    <line x1="690" y1="500" x2="690" y2="552"/>
+  </g>
+
+  <!-- ============ SIGNATURE PIECE: tall oak cabinet with glass upper doors ============ -->
+  <!-- ground shadow -->
+  <ellipse cx="400" cy="470" rx="300" ry="30" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- Cabinet body -->
+  <rect x="180" y="70" width="440" height="380" rx="10" fill="url(#oakV)"/>
+  <rect x="180" y="70" width="440" height="380" rx="10" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <!-- top cap -->
+  <rect x="170" y="60" width="460" height="20" rx="6" fill="url(#oakTop)"/>
+  <rect x="170" y="60" width="460" height="6" rx="3" fill="#e6d2ae"/>
+  <!-- inner side highlight -->
+  <rect x="186" y="80" width="10" height="360" fill="#e0cba6" opacity="0.5"/>
+  <rect x="604" y="80" width="10" height="360" fill="#a5876a" opacity="0.6"/>
+
+  <!-- Upper section: two glass doors with cabinet interior -->
+  <rect x="196" y="86" width="408" height="188" rx="6" fill="#4a3624"/>
+  <!-- interior back panel -->
+  <rect x="204" y="94" width="392" height="172" rx="4" fill="#5c4632"/>
+  <rect x="204" y="94" width="392" height="26" fill="#6d5138" opacity="0.7"/>
+  <!-- interior shelf -->
+  <rect x="204" y="182" width="392" height="8" fill="#4a3624"/>
+  <rect x="204" y="182" width="392" height="3" fill="#6d5138"/>
+
+  <!-- Helmet 1 (olive/oak racing helmet) -->
+  <g>
+    <ellipse cx="300" cy="176" rx="46" ry="10" fill="rgba(0,0,0,0.25)"/>
+    <path d="M258 150 a44 42 0 0 1 88 0 v10 a6 6 0 0 1 -6 6 h-14 v-8 a24 22 0 0 0 -48 0 v8 h-14 a6 6 0 0 1 -6 -6 z" fill="#7a7c5c"/>
+    <path d="M258 150 a44 42 0 0 1 88 0 v6 h-88 z" fill="#8a8c62"/>
+    <ellipse cx="290" cy="118" rx="20" ry="12" fill="#faf7f2" opacity="0.35"/>
+    <!-- visor -->
+    <path d="M262 138 q38 -20 76 0 v14 q-38 10 -76 0 z" fill="#3d3a36"/>
+    <path d="M266 140 q34 -15 68 0 v6 q-34 -8 -68 0 z" fill="#b8cdd6" opacity="0.6"/>
+    <rect x="272" y="128" width="56" height="4" rx="2" fill="#cf9f5c"/>
+  </g>
+
+  <!-- Helmet 2 (walnut/amber racing helmet) -->
+  <g>
+    <ellipse cx="500" cy="176" rx="46" ry="10" fill="rgba(0,0,0,0.25)"/>
+    <path d="M458 150 a44 42 0 0 1 88 0 v10 a6 6 0 0 1 -6 6 h-14 v-8 a24 22 0 0 0 -48 0 v8 h-14 a6 6 0 0 1 -6 -6 z" fill="#6d5138"/>
+    <path d="M458 150 a44 42 0 0 1 88 0 v6 h-88 z" fill="#8a5a20" opacity="0.85"/>
+    <ellipse cx="490" cy="118" rx="20" ry="12" fill="#faf7f2" opacity="0.3"/>
+    <path d="M462 138 q38 -20 76 0 v14 q-38 10 -76 0 z" fill="#2a2724"/>
+    <path d="M466 140 q34 -15 68 0 v6 q-34 -8 -68 0 z" fill="#b8cdd6" opacity="0.55"/>
+    <rect x="472" y="128" width="56" height="4" rx="2" fill="#b98a4a"/>
+  </g>
+
+  <!-- Tempered glass doors overlay -->
+  <rect x="196" y="86" width="204" height="188" rx="6" fill="url(#glassG)"/>
+  <rect x="400" y="86" width="204" height="188" rx="6" fill="url(#glassG)"/>
+  <!-- glass reflection streaks -->
+  <path d="M214 96 l40 0 -70 170 -40 0 z" fill="#ffffff" opacity="0.14"/>
+  <path d="M430 96 l30 0 -60 170 -30 0 z" fill="#ffffff" opacity="0.12"/>
+  <!-- glass door frames -->
+  <rect x="196" y="86" width="204" height="188" rx="6" fill="none" stroke="#3d3a36" stroke-width="4"/>
+  <rect x="400" y="86" width="204" height="188" rx="6" fill="none" stroke="#3d3a36" stroke-width="4"/>
+  <!-- chrome handles -->
+  <rect x="388" y="150" width="4" height="60" rx="2" fill="url(#chromeG)"/>
+  <rect x="408" y="150" width="4" height="60" rx="2" fill="url(#chromeG)"/>
+
+  <!-- Lower section: two oak doors -->
+  <rect x="196" y="286" width="204" height="150" rx="6" fill="url(#oakV)"/>
+  <rect x="400" y="286" width="204" height="150" rx="6" fill="url(#oakV)"/>
+  <rect x="196" y="286" width="204" height="150" rx="6" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <rect x="400" y="286" width="204" height="150" rx="6" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <!-- inset panels -->
+  <rect x="214" y="304" width="168" height="114" rx="5" fill="none" stroke="#b89b78" stroke-width="2"/>
+  <rect x="418" y="304" width="168" height="114" rx="5" fill="none" stroke="#b89b78" stroke-width="2"/>
+  <rect x="214" y="304" width="168" height="8" rx="4" fill="#e0cba6" opacity="0.5"/>
+  <rect x="418" y="304" width="168" height="8" rx="4" fill="#e0cba6" opacity="0.5"/>
+  <!-- wood grain hints -->
+  <g stroke="#b89b78" stroke-width="1" opacity="0.4">
+    <path d="M230 320 q80 6 150 0" fill="none"/>
+    <path d="M230 360 q80 -6 150 0" fill="none"/>
+    <path d="M230 400 q80 6 150 0" fill="none"/>
+    <path d="M434 320 q80 6 150 0" fill="none"/>
+    <path d="M434 360 q80 -6 150 0" fill="none"/>
+    <path d="M434 400 q80 6 150 0" fill="none"/>
+  </g>
+  <!-- chrome pulls -->
+  <rect x="386" y="352" width="6" height="34" rx="3" fill="url(#chromeG)"/>
+  <rect x="408" y="352" width="6" height="34" rx="3" fill="url(#chromeG)"/>
+
+  <!-- Cabinet legs (black steel) -->
+  <rect x="210" y="450" width="14" height="24" rx="3" fill="url(#steel)"/>
+  <rect x="576" y="450" width="14" height="24" rx="3" fill="url(#steel)"/>
+
+  <!-- ============ STYLING PROPS on cabinet top ============ -->
+  <!-- soft props shadow -->
+  <ellipse cx="400" cy="70" rx="180" ry="8" fill="rgba(31,27,22,0.10)"/>
+
+  <!-- Stacked books (left) -->
+  <g>
+    <rect x="232" y="42" width="96" height="14" rx="2" fill="url(#bookA)"/>
+    <rect x="232" y="42" width="96" height="4" rx="2" fill="#9a9c72"/>
+    <rect x="326" y="44" width="4" height="10" fill="#4a4c34"/>
+    <rect x="240" y="30" width="86" height="13" rx="2" fill="url(#bookB)"/>
+    <rect x="240" y="30" width="86" height="4" rx="2" fill="#7a5c40"/>
+    <rect x="322" y="32" width="4" height="9" fill="#3a2a1c"/>
+    <rect x="248" y="19" width="74" height="12" rx="2" fill="url(#bookC)"/>
+    <rect x="248" y="19" width="74" height="4" rx="2" fill="#f0e6d2"/>
+    <rect x="318" y="21" width="4" height="8" fill="#b89b78"/>
+  </g>
+
+  <!-- Olive vase with plant stems (center-left) -->
+  <g>
+    <ellipse cx="378" cy="58" rx="24" ry="6" fill="rgba(0,0,0,0.15)"/>
+    <path d="M360 58 q-4 -30 18 -34 q22 4 18 34 q-18 8 -36 0 z" fill="url(#vaseG)"/>
+    <path d="M362 30 q16 -6 32 0 q-2 6 -16 6 q-14 0 -16 -6 z" fill="#63654a"/>
+    <ellipse cx="378" cy="26" rx="16" ry="4" fill="#4a4c34"/>
+    <path d="M366 34 q-2 -4 4 -6" fill="none" stroke="#faf7f2" stroke-width="2" opacity="0.4"/>
+    <!-- stems -->
+    <path d="M378 26 q-6 -34 -22 -46" fill="none" stroke="#7a7c5c" stroke-width="3"/>
+    <path d="M378 26 q4 -30 16 -44" fill="none" stroke="#8a8c62" stroke-width="3"/>
+    <path d="M378 26 q0 -28 -2 -40" fill="none" stroke="#63654a" stroke-width="3"/>
+    <!-- leaves -->
+    <path d="M356 -20 q-16 -4 -20 -18 q16 2 20 18 z" fill="#7a7c5c"/>
+    <path d="M394 -18 q16 -6 22 -20 q-16 0 -22 20 z" fill="#8a8c62"/>
+    <path d="M376 -14 q-10 -14 -6 -26 q10 8 6 26 z" fill="#63654a"/>
+    <ellipse cx="382" cy="-30" rx="8" ry="12" fill="#8a8c62" transform="rotate(20 382 -30)"/>
+    <ellipse cx="362" cy="-8" rx="7" ry="11" fill="#7a7c5c" transform="rotate(-30 362 -8)"/>
+  </g>
+
+  <!-- Small ochre object / rounded box (right of vase) -->
+  <g>
+    <ellipse cx="446" cy="56" rx="20" ry="5" fill="rgba(0,0,0,0.12)"/>
+    <rect x="428" y="34" width="36" height="22" rx="6" fill="url(#ochreV)"/>
+    <rect x="428" y="34" width="36" height="7" rx="4" fill="#daae6c"/>
+    <rect x="440" y="28" width="12" height="8" rx="3" fill="#8a5a20"/>
+  </g>
+
+  <!-- Small chrome sphere object (far right) -->
+  <g>
+    <ellipse cx="512" cy="56" rx="18" ry="4" fill="rgba(0,0,0,0.14)"/>
+    <circle cx="512" cy="42" r="16" fill="url(#chromeG)"/>
+    <ellipse cx="506" cy="36" rx="6" ry="8" fill="#f2f0ec" opacity="0.7"/>
+    <path d="M500 48 q12 8 24 -2" fill="none" stroke="#9a968f" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- ============ Glowing rice-paper globe pendant (upper left) ============ -->
+  <line x1="120" y1="0" x2="120" y2="44" stroke="#3d3a36" stroke-width="2"/>
+  <circle cx="120" cy="88" r="60" fill="url(#globeGlow)"/>
+  <circle cx="120" cy="88" r="40" fill="url(#globeG)"/>
+  <ellipse cx="108" cy="76" rx="16" ry="20" fill="#fdf3d8" opacity="0.7"/>
+  <g stroke="#e0cba6" stroke-width="1" opacity="0.5">
+    <path d="M84 78 q36 -14 72 0" fill="none"/>
+    <path d="M82 90 q38 12 76 0" fill="none"/>
+    <path d="M88 102 q32 14 64 0" fill="none"/>
+  </g>
+
+  <!-- ============ Small black dome pendant, glowing (upper right) ============ -->
+  <line x1="680" y1="0" x2="680" y2="30" stroke="#2a2724" stroke-width="2"/>
+  <path d="M652 30 a28 22 0 0 1 56 0 z" fill="url(#steel)"/>
+  <path d="M652 30 a28 22 0 0 1 56 0 z" fill="none" stroke="#15130f" stroke-width="1.5"/>
+  <ellipse cx="668" cy="18" rx="8" ry="5" fill="#4a463f" opacity="0.6"/>
+  <ellipse cx="680" cy="32" rx="20" ry="5" fill="#fde9bc"/>
+  <ellipse cx="680" cy="48" rx="46" ry="34" fill="url(#domeGlow)"/>
+
+  <!-- warm side light wash over cabinet from left -->
+  <path d="M180 70 h140 v380 h-140 z" fill="#fdf1d6" opacity="0.10"/>
+</svg>

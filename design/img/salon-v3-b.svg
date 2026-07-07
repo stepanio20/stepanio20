@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="cabbody" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#15130f"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="cabside" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#b98a4a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#8a5a20" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="innerback" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.55" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <radialGradient id="ledpool" cx="0.5" cy="0.18" r="0.85">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.9"/>
+      <stop offset="0.45" stop-color="#b98a4a" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#8a5a20" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#e3e1dc" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="glassdoor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.22"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="helmet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="helmetdome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oaktop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="chromebase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background wall -->
+  <rect x="0" y="0" width="800" height="470" fill="url(#wall)"/>
+  <!-- subtle wall panel seam -->
+  <rect x="120" y="30" width="1.5" height="440" fill="#efe8dc" opacity="0.6"/>
+
+  <!-- oak floor -->
+  <rect x="0" y="470" width="800" height="130" fill="url(#floor)"/>
+  <rect x="0" y="470" width="800" height="4" fill="#a5876a" opacity="0.5"/>
+  <!-- floor plank lines -->
+  <rect x="0" y="512" width="800" height="1.5" fill="#a5876a" opacity="0.25"/>
+  <rect x="0" y="556" width="800" height="1.5" fill="#a5876a" opacity="0.25"/>
+  <rect x="210" y="474" width="1.5" height="38" fill="#a5876a" opacity="0.2"/>
+  <rect x="470" y="474" width="1.5" height="38" fill="#a5876a" opacity="0.2"/>
+  <rect x="340" y="513" width="1.5" height="43" fill="#a5876a" opacity="0.2"/>
+  <rect x="600" y="513" width="1.5" height="43" fill="#a5876a" opacity="0.2"/>
+
+  <!-- ambient warm glow on wall from cabinet -->
+  <ellipse cx="400" cy="250" rx="230" ry="240" fill="#cf9f5c" opacity="0.07"/>
+
+  <!-- cabinet floor shadow -->
+  <ellipse cx="400" cy="488" rx="185" ry="26" fill="#1f1b16" opacity="0.12"/>
+
+  <!-- ===== CABINET ===== -->
+  <!-- outer body -->
+  <rect x="288" y="60" width="224" height="428" rx="10" fill="url(#cabbody)"/>
+  <!-- left inner side panel -->
+  <rect x="300" y="72" width="18" height="404" fill="url(#cabside)"/>
+  <!-- right inner side panel -->
+  <rect x="482" y="72" width="18" height="404" fill="#15130f"/>
+  <!-- top edge highlight -->
+  <rect x="288" y="60" width="224" height="6" rx="3" fill="#3d3a36" opacity="0.8"/>
+  <!-- top crown -->
+  <rect x="282" y="52" width="236" height="16" rx="6" fill="#15130f"/>
+  <rect x="282" y="52" width="236" height="4" rx="2" fill="#3d3a36" opacity="0.7"/>
+  <!-- base plinth -->
+  <rect x="282" y="472" width="236" height="26" rx="6" fill="#15130f"/>
+  <rect x="282" y="472" width="236" height="4" fill="#3d3a36" opacity="0.6"/>
+
+  <!-- inner cavity back -->
+  <rect x="318" y="72" width="164" height="404" fill="url(#innerback)"/>
+  <!-- LED glow pool from top -->
+  <rect x="318" y="72" width="164" height="404" fill="url(#glow)" opacity="0.7"/>
+  <ellipse cx="400" cy="150" rx="120" ry="150" fill="url(#ledpool)"/>
+  <!-- top LED strip -->
+  <rect x="322" y="76" width="156" height="7" rx="3" fill="#cf9f5c" opacity="0.9"/>
+  <rect x="322" y="76" width="156" height="3" rx="1.5" fill="#e3e1dc" opacity="0.7"/>
+
+  <!-- glass shelf (upper) -->
+  <rect x="318" y="300" width="164" height="9" rx="2" fill="url(#glass)"/>
+  <rect x="318" y="300" width="164" height="2.5" fill="#ffffff" opacity="0.5"/>
+  <rect x="318" y="308" width="164" height="2" fill="#5c4632" opacity="0.35"/>
+  <!-- shelf front glint -->
+  <rect x="340" y="301" width="60" height="1.5" fill="#e3e1dc" opacity="0.6"/>
+
+  <!-- ===== HELMET on shelf ===== -->
+  <!-- helmet shadow on shelf -->
+  <ellipse cx="400" cy="300" rx="66" ry="9" fill="#8a5a20" opacity="0.3"/>
+  <!-- helmet stand base (chrome) -->
+  <rect x="388" y="278" width="24" height="22" rx="3" fill="url(#chromebase)"/>
+  <ellipse cx="400" cy="300" rx="30" ry="7" fill="url(#chromebase)"/>
+  <ellipse cx="400" cy="300" rx="30" ry="7" fill="#a5876a" opacity="0.2"/>
+
+  <!-- helmet dome -->
+  <path d="M338 250 C338 195 372 168 400 168 C428 168 462 195 462 250 C462 262 458 272 452 280 L348 280 C342 272 338 262 338 250 Z" fill="url(#helmetdome)"/>
+  <!-- dome top tone step -->
+  <path d="M348 232 C350 196 375 174 400 174 C420 174 438 188 448 210 C430 200 410 200 390 210 C368 222 354 232 348 232 Z" fill="#e3e1dc" opacity="0.5"/>
+  <!-- helmet cheek / lower band -->
+  <path d="M344 262 L456 262 C452 274 444 284 432 288 L368 288 C356 284 348 274 344 262 Z" fill="#a5876a"/>
+  <!-- brow ridge / visor slit -->
+  <path d="M362 240 C380 232 420 232 438 240 L438 250 C420 244 380 244 362 250 Z" fill="#2a2724"/>
+  <rect x="362" y="244" width="76" height="4" rx="2" fill="#15130f"/>
+  <!-- vertical nose bar -->
+  <rect x="397" y="240" width="6" height="44" rx="2" fill="#5c4632"/>
+  <rect x="398.5" y="240" width="1.5" height="44" fill="#cbb287" opacity="0.6"/>
+  <!-- crest ridge on top -->
+  <path d="M400 168 C404 170 406 176 406 186 L394 186 C394 176 396 170 400 168 Z" fill="#8a5a20"/>
+  <rect x="398" y="170" width="4" height="118" fill="#5c4632" opacity="0.4"/>
+  <!-- dome specular highlight -->
+  <ellipse cx="378" cy="210" rx="14" ry="28" fill="#ffffff" opacity="0.35"/>
+  <!-- rivets -->
+  <circle cx="356" cy="270" r="3" fill="#8a5a20"/>
+  <circle cx="444" cy="270" r="3" fill="#8a5a20"/>
+  <circle cx="356" cy="270" r="1.2" fill="#cbb287"/>
+  <circle cx="444" cy="270" r="1.2" fill="#cbb287"/>
+
+  <!-- lower shelf (empty, glass) -->
+  <rect x="318" y="410" width="164" height="9" rx="2" fill="url(#glass)"/>
+  <rect x="318" y="410" width="164" height="2.5" fill="#ffffff" opacity="0.4"/>
+  <rect x="318" y="418" width="164" height="2" fill="#5c4632" opacity="0.3"/>
+  <!-- soft reflection of helmet glow on lower area -->
+  <ellipse cx="400" cy="395" rx="90" ry="40" fill="#cf9f5c" opacity="0.12"/>
+
+  <!-- ===== GLASS DOOR overlay ===== -->
+  <rect x="318" y="72" width="164" height="404" fill="url(#glassdoor)"/>
+  <!-- diagonal glass reflection streak -->
+  <path d="M330 72 L392 72 L340 476 L318 476 L318 300 Z" fill="#ffffff" opacity="0.06"/>
+  <path d="M420 72 L448 72 L400 476 L376 476 Z" fill="#b8cdd6" opacity="0.07"/>
+  <!-- door frame outline -->
+  <rect x="316" y="70" width="168" height="408" rx="4" fill="none" stroke="#3d3a36" stroke-width="2"/>
+  <!-- door handle (chrome) -->
+  <rect x="470" y="250" width="6" height="70" rx="3" fill="url(#chromebase)"/>
+  <rect x="471" y="252" width="2" height="66" fill="#e3e1dc" opacity="0.7"/>
+
+  <!-- cabinet body vertical edge highlights -->
+  <rect x="290" y="66" width="3" height="416" fill="#3d3a36" opacity="0.5"/>
+  <rect x="507" y="66" width="3" height="416" fill="#000000" opacity="0.4"/>
+
+  <!-- small oak side table hint bottom-left -->
+  <rect x="40" y="452" width="150" height="18" rx="6" fill="url(#oaktop)"/>
+  <rect x="40" y="452" width="150" height="4" rx="2" fill="#faf7f2" opacity="0.4"/>
+  <rect x="54" y="470" width="10" height="40" rx="3" fill="#c8a87c"/>
+  <rect x="166" y="470" width="10" height="40" rx="3" fill="#a5876a"/>
+  <ellipse cx="110" cy="512" rx="90" ry="10" fill="#1f1b16" opacity="0.1"/>
+
+  <!-- amber pot on side table -->
+  <path d="M92 452 C92 434 100 424 110 424 C120 424 128 434 128 452 Z" fill="#cf9f5c"/>
+  <path d="M92 452 C92 440 96 432 102 428 C100 436 100 444 102 452 Z" fill="#b98a4a" opacity="0.7"/>
+  <ellipse cx="110" cy="424" rx="18" ry="4" fill="#8a5a20"/>
+
+  <!-- soft framed piece hint top-left on wall -->
+  <rect x="44" y="90" width="60" height="80" rx="4" fill="#ffffff"/>
+  <rect x="44" y="90" width="60" height="80" rx="4" fill="none" stroke="#cbb287" stroke-width="4"/>
+  <rect x="54" y="100" width="40" height="60" fill="#8a8c62" opacity="0.5"/>
+  <path d="M54 148 L70 122 L82 138 L94 118 L94 160 L54 160 Z" fill="#7a7c5c" opacity="0.6"/>
+</svg>

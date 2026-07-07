@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="oakSurf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="railGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="chromeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="coneAmber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#cf9f5c" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="posterBg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="posterBg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="posterBg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f0eadf"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="glassSheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Wall background -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="452" fill="#faf7f2"/>
+
+  <!-- Oak surface / floor below -->
+  <rect x="0" y="452" width="800" height="148" fill="url(#oakSurf)"/>
+  <rect x="0" y="452" width="800" height="6" fill="#a5876a" opacity="0.5"/>
+  <rect x="0" y="452" width="800" height="3" fill="#d8c19a" opacity="0.7"/>
+  <!-- oak plank seams -->
+  <g stroke="#a5876a" stroke-width="1.4" opacity="0.35">
+    <line x1="150" y1="452" x2="150" y2="600"/>
+    <line x1="360" y1="452" x2="360" y2="600"/>
+    <line x1="560" y1="452" x2="560" y2="600"/>
+    <line x1="710" y1="452" x2="710" y2="600"/>
+  </g>
+  <g stroke="#d8c19a" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="510" x2="800" y2="510"/>
+    <line x1="0" y1="560" x2="800" y2="560"/>
+  </g>
+
+  <!-- Track-light rail -->
+  <rect x="90" y="66" width="620" height="18" rx="6" fill="url(#railGrad)"/>
+  <rect x="90" y="66" width="620" height="4" rx="2" fill="#3d3a36" opacity="0.8"/>
+  <!-- rail end caps -->
+  <rect x="86" y="62" width="14" height="26" rx="5" fill="#15130f"/>
+  <rect x="700" y="62" width="14" height="26" rx="5" fill="#15130f"/>
+
+  <!-- Track light heads (3) -->
+  <g>
+    <!-- head 1 -->
+    <rect x="196" y="84" width="8" height="16" fill="#2a2724"/>
+    <ellipse cx="200" cy="104" rx="16" ry="10" fill="#15130f"/>
+    <ellipse cx="200" cy="102" rx="12" ry="6.5" fill="#3d3a36"/>
+    <ellipse cx="200" cy="101" rx="7" ry="4" fill="#cf9f5c" opacity="0.85"/>
+    <!-- head 2 -->
+    <rect x="396" y="84" width="8" height="16" fill="#2a2724"/>
+    <ellipse cx="400" cy="104" rx="16" ry="10" fill="#15130f"/>
+    <ellipse cx="400" cy="102" rx="12" ry="6.5" fill="#3d3a36"/>
+    <ellipse cx="400" cy="101" rx="7" ry="4" fill="#cf9f5c" opacity="0.85"/>
+    <!-- head 3 -->
+    <rect x="596" y="84" width="8" height="16" fill="#2a2724"/>
+    <ellipse cx="600" cy="104" rx="16" ry="10" fill="#15130f"/>
+    <ellipse cx="600" cy="102" rx="12" ry="6.5" fill="#3d3a36"/>
+    <ellipse cx="600" cy="101" rx="7" ry="4" fill="#cf9f5c" opacity="0.85"/>
+  </g>
+
+  <!-- Amber light cones -->
+  <polygon points="200,106 128,300 272,300" fill="url(#coneAmber)"/>
+  <polygon points="400,106 328,300 472,300" fill="url(#coneAmber)"/>
+  <polygon points="600,106 528,300 672,300" fill="url(#coneAmber)"/>
+
+  <!-- ===================== POSTER 1 (light bg, amber circuit) ===================== -->
+  <g>
+    <ellipse cx="200" cy="392" rx="88" ry="12" fill="rgba(31,27,22,0.12)"/>
+    <!-- frame -->
+    <rect x="128" y="150" width="144" height="216" rx="8" fill="url(#frameGrad)"/>
+    <rect x="122" y="146" width="152" height="6" rx="3" fill="#3d3a36" opacity="0.6"/>
+    <!-- mat / print -->
+    <rect x="142" y="164" width="116" height="188" rx="4" fill="url(#posterBg1)"/>
+    <!-- circuit line-art -->
+    <path d="M175 200 C160 210 158 232 174 240 C196 250 210 240 226 250 C244 261 240 288 222 296 C200 305 182 296 176 312 C170 328 184 340 200 338 C218 336 228 322 220 306" fill="none" stroke="#cf9f5c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M175 200 C160 210 158 232 174 240 C196 250 210 240 226 250 C244 261 240 288 222 296 C200 305 182 296 176 312 C170 328 184 340 200 338 C218 336 228 322 220 306" fill="none" stroke="#8a5a20" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+    <!-- start/finish tick -->
+    <line x1="168" y1="198" x2="182" y2="205" stroke="#3d3a36" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="220" cy="306" r="4" fill="#8a5a20"/>
+    <!-- glass sheen -->
+    <rect x="142" y="164" width="116" height="188" rx="4" fill="url(#glassSheen)"/>
+  </g>
+
+  <!-- ===================== POSTER 2 (dark bg, amber circuit) ===================== -->
+  <g>
+    <ellipse cx="400" cy="392" rx="88" ry="12" fill="rgba(31,27,22,0.12)"/>
+    <rect x="328" y="150" width="144" height="216" rx="8" fill="url(#frameGrad)"/>
+    <rect x="322" y="146" width="152" height="6" rx="3" fill="#3d3a36" opacity="0.6"/>
+    <rect x="342" y="164" width="116" height="188" rx="4" fill="url(#posterBg2)"/>
+    <!-- circuit line-art (amber on graphite) -->
+    <path d="M370 340 C360 320 372 300 392 300 C414 300 420 282 410 268 C400 254 380 258 372 244 C364 230 378 214 396 216 C416 218 426 234 420 250 C414 266 430 280 444 274" fill="none" stroke="#cf9f5c" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M370 340 C360 320 372 300 392 300 C414 300 420 282 410 268 C400 254 380 258 372 244 C364 230 378 214 396 216 C416 218 426 234 420 250 C414 266 430 280 444 274" fill="none" stroke="#b98a4a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+    <line x1="364" y1="336" x2="378" y2="344" stroke="#e3e1dc" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="444" cy="274" r="4" fill="#cf9f5c"/>
+    <rect x="342" y="164" width="116" height="188" rx="4" fill="url(#glassSheen)"/>
+  </g>
+
+  <!-- ===================== POSTER 3 (light bg, amber circuit) ===================== -->
+  <g>
+    <ellipse cx="600" cy="392" rx="88" ry="12" fill="rgba(31,27,22,0.12)"/>
+    <rect x="528" y="150" width="144" height="216" rx="8" fill="url(#frameGrad)"/>
+    <rect x="522" y="146" width="152" height="6" rx="3" fill="#3d3a36" opacity="0.6"/>
+    <rect x="542" y="164" width="116" height="188" rx="4" fill="url(#posterBg1)"/>
+    <!-- circuit line-art -->
+    <path d="M572 216 C590 208 606 220 604 238 C602 256 586 262 588 280 C590 298 610 300 622 290 C636 279 632 258 620 250 C606 241 596 256 582 250 C568 244 570 224 586 220" fill="none" stroke="#cf9f5c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M572 216 C590 208 606 220 604 238 C602 256 586 262 588 280 C590 298 610 300 622 290 C636 279 632 258 620 250 C606 241 596 256 582 250 C568 244 570 224 586 220" fill="none" stroke="#8a5a20" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+    <line x1="566" y1="214" x2="580" y2="221" stroke="#3d3a36" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="586" cy="220" r="4" fill="#8a5a20"/>
+    <rect x="542" y="164" width="116" height="188" rx="4" fill="url(#glassSheen)"/>
+  </g>
+
+  <!-- Soft amber glow pooling on wall behind posters -->
+  <ellipse cx="400" cy="270" rx="360" ry="150" fill="#cf9f5c" opacity="0.05"/>
+
+  <!-- Oak console hint below posters -->
+  <rect x="60" y="452" width="680" height="10" rx="4" fill="#cbb287" opacity="0.6"/>
+</svg>

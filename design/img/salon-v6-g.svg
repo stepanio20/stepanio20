@@ -1,0 +1,293 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f3ede2"/>
+    </linearGradient>
+    <linearGradient id="wallGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf6e6" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#f7f3ec" stop-opacity="0"/>
+      <stop offset="1" stop-color="#efe6d6" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="floorLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e6d3ac" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#c8a87c" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="chromeSphere" cx="0.38" cy="0.34" r="0.75">
+      <stop offset="0" stop-color="#faf9f6"/>
+      <stop offset="0.28" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#c9c5be"/>
+      <stop offset="0.8" stop-color="#9a968f"/>
+      <stop offset="1" stop-color="#6f6b64"/>
+    </radialGradient>
+    <linearGradient id="chromeBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eceae4"/>
+      <stop offset="0.45" stop-color="#c9c5be"/>
+      <stop offset="0.55" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+
+    <linearGradient id="walnut" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="walnutFace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a5c3f"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="walnutTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a6848"/>
+      <stop offset="1" stop-color="#6d5138"/>
+    </linearGradient>
+
+    <linearGradient id="chromeCyl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a968f"/>
+      <stop offset="0.2" stop-color="#e3e1dc"/>
+      <stop offset="0.42" stop-color="#c9c5be"/>
+      <stop offset="0.58" stop-color="#b8cdd6"/>
+      <stop offset="0.8" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#8f8b84"/>
+    </linearGradient>
+    <linearGradient id="chromeVase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8f8b84"/>
+      <stop offset="0.25" stop-color="#eceae4"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="0.72" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#807c76"/>
+    </linearGradient>
+
+    <radialGradient id="lampGlobe" cx="0.42" cy="0.36" r="0.7">
+      <stop offset="0" stop-color="#f7dca0"/>
+      <stop offset="0.5" stop-color="#e2ab5e"/>
+      <stop offset="0.85" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </radialGradient>
+    <radialGradient id="lampHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f7dca0" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#e2ab5e" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lampStem" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="0.5" stop-color="#e2ab5e"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+
+    <radialGradient id="pouf" cx="0.4" cy="0.32" r="0.8">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="0.6" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </radialGradient>
+    <radialGradient id="globePendant" cx="0.42" cy="0.38" r="0.72">
+      <stop offset="0" stop-color="#fdfaf3"/>
+      <stop offset="0.7" stop-color="#f2ebdc"/>
+      <stop offset="1" stop-color="#e0d4bf"/>
+    </radialGradient>
+
+    <linearGradient id="sofa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#efe9de"/>
+    </linearGradient>
+    <linearGradient id="rug" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#dccdb0"/>
+    </linearGradient>
+    <radialGradient id="velvetCush" cx="0.4" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </radialGradient>
+    <radialGradient id="softShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1f1b16" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#1f1b16" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="420" fill="url(#wallGlow)"/>
+
+  <!-- FLOOR band lower third -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <rect x="0" y="410" width="800" height="190" fill="url(#floorLight)"/>
+  <!-- skirting line -->
+  <rect x="0" y="404" width="800" height="10" fill="#efe6d6"/>
+  <rect x="0" y="410" width="800" height="3" fill="#a5876a" opacity="0.5"/>
+  <!-- plank lines -->
+  <g stroke="#a5876a" stroke-width="1.4" opacity="0.35">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+  </g>
+  <g stroke="#b8946a" stroke-width="1" opacity="0.3">
+    <line x1="150" y1="413" x2="150" y2="452"/>
+    <line x1="410" y1="452" x2="410" y2="500"/>
+    <line x1="640" y1="500" x2="640" y2="552"/>
+    <line x1="300" y1="552" x2="300" y2="600"/>
+  </g>
+
+  <!-- ===== CONVEX CHROME MIRROR SPHERE ===== -->
+  <ellipse cx="250" cy="150" rx="112" ry="30" fill="url(#softShadow)" opacity="0.5"/>
+  <circle cx="250" cy="140" r="108" fill="#8f8b84"/>
+  <circle cx="250" cy="140" r="104" fill="url(#chromeBand)"/>
+  <circle cx="250" cy="140" r="96" fill="url(#chromeSphere)"/>
+  <!-- reflected room in convex sphere -->
+  <path d="M154 140 a96 96 0 0 1 192 0 Z" fill="#eae6de" opacity="0.5"/>
+  <ellipse cx="250" cy="176" rx="86" ry="34" fill="#c8a87c" opacity="0.55"/>
+  <ellipse cx="250" cy="196" rx="70" ry="22" fill="#a5876a" opacity="0.4"/>
+  <ellipse cx="216" cy="108" rx="30" ry="42" fill="#fdfaf3" opacity="0.85"/>
+  <ellipse cx="288" cy="150" rx="14" ry="30" fill="#fdfaf3" opacity="0.35"/>
+  <ellipse cx="270" cy="118" rx="8" ry="14" fill="#ffffff" opacity="0.9"/>
+  <circle cx="250" cy="140" r="96" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.4"/>
+
+  <!-- ===== RICE-PAPER GLOBE PENDANT ===== -->
+  <line x1="600" y1="0" x2="600" y2="70" stroke="#3d3a36" stroke-width="2.4"/>
+  <ellipse cx="600" cy="126" rx="56" ry="8" fill="url(#softShadow)" opacity="0.3"/>
+  <circle cx="600" cy="118" r="52" fill="url(#globePendant)"/>
+  <g stroke="#e0d4bf" stroke-width="1" opacity="0.7" fill="none">
+    <path d="M552 106 q48 -14 96 0"/>
+    <path d="M550 118 q50 -6 100 0"/>
+    <path d="M552 130 q48 12 96 0"/>
+    <path d="M552 142 q48 20 96 0"/>
+  </g>
+  <ellipse cx="584" cy="102" rx="16" ry="20" fill="#ffffff" opacity="0.6"/>
+  <circle cx="600" cy="118" r="52" fill="none" stroke="#e0d4bf" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- ===== MATISSE-STYLE POSTER ===== -->
+  <g>
+    <rect x="452" y="150" width="118" height="150" rx="4" fill="#faf7f2" stroke="#cbb287" stroke-width="4"/>
+    <rect x="452" y="150" width="118" height="150" rx="4" fill="none" stroke="#a5876a" stroke-width="1" opacity="0.4"/>
+    <path d="M486 176 q-16 24 -2 44 q14 20 -4 40 q22 -6 30 -30 q8 -26 -6 -44 q-10 -14 -18 -10 Z" fill="#7a7c5c"/>
+    <path d="M520 200 q18 6 20 30 q2 26 -18 40 q10 -22 2 -38 q-8 -18 -4 -32 Z" fill="#8a8c62"/>
+    <circle cx="514" cy="188" r="10" fill="#63654a"/>
+    <path d="M470 250 q14 8 30 4" stroke="#7a7c5c" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== WALNUT SIDEBOARD on tapered legs ===== -->
+  <ellipse cx="248" cy="470" rx="196" ry="26" fill="url(#softShadow)"/>
+  <!-- tapered legs -->
+  <g fill="url(#walnut)">
+    <polygon points="98,420 110,420 122,470 112,470"/>
+    <polygon points="378,420 390,420 384,470 372,470"/>
+  </g>
+  <polygon points="112,470 122,470 118,472 112,472" fill="#4a3624"/>
+  <polygon points="372,470 384,470 380,472 372,472" fill="#4a3624"/>
+  <!-- body -->
+  <rect x="86" y="352" width="324" height="72" rx="8" fill="url(#walnutFace)"/>
+  <rect x="86" y="346" width="324" height="14" rx="6" fill="url(#walnutTop)"/>
+  <!-- drawer/door divisions -->
+  <g stroke="#3d2f20" stroke-width="1.6" opacity="0.7">
+    <line x1="194" y1="360" x2="194" y2="418"/>
+    <line x1="302" y1="360" x2="302" y2="418"/>
+  </g>
+  <!-- wood grain macro -->
+  <g stroke="#7a5c3f" stroke-width="0.9" opacity="0.4" fill="none">
+    <path d="M96 372 q50 -5 96 0"/>
+    <path d="M96 386 q50 6 96 -1"/>
+    <path d="M96 400 q50 -4 96 2"/>
+    <path d="M204 370 q46 5 92 -1"/>
+    <path d="M204 388 q46 -5 92 2"/>
+    <path d="M204 404 q46 6 92 -1"/>
+    <path d="M312 372 q44 -4 88 2"/>
+    <path d="M312 390 q44 6 88 -2"/>
+    <path d="M312 406 q44 -3 88 1"/>
+  </g>
+  <!-- brass-free chrome pulls -->
+  <g fill="#c9c5be">
+    <rect x="128" y="384" width="26" height="5" rx="2.5"/>
+    <rect x="236" y="384" width="26" height="5" rx="2.5"/>
+    <rect x="344" y="384" width="26" height="5" rx="2.5"/>
+  </g>
+
+  <!-- ===== AMBER MUSHROOM TABLE LAMP on sideboard ===== -->
+  <circle cx="150" cy="300" r="70" fill="url(#lampHalo)"/>
+  <ellipse cx="150" cy="348" rx="34" ry="8" fill="#a5876a" opacity="0.4"/>
+  <rect x="145" y="316" width="10" height="30" rx="4" fill="url(#lampStem)"/>
+  <ellipse cx="150" cy="348" rx="24" ry="7" fill="url(#lampStem)"/>
+  <path d="M108 316 a42 30 0 0 1 84 0 Z" fill="url(#lampGlobe)"/>
+  <ellipse cx="150" cy="316" rx="42" ry="8" fill="#cf9f5c"/>
+  <ellipse cx="134" cy="300" rx="16" ry="12" fill="#f7dca0" opacity="0.8"/>
+  <ellipse cx="128" cy="294" rx="6" ry="5" fill="#fef4dc"/>
+
+  <!-- ===== CHROME VASE on sideboard ===== -->
+  <ellipse cx="330" cy="350" rx="26" ry="6" fill="#a5876a" opacity="0.4"/>
+  <path d="M312 348 q-4 -44 18 -70 q22 26 18 70 Z" fill="url(#chromeVase)"/>
+  <ellipse cx="330" cy="348" rx="18" ry="5" fill="#9a968f"/>
+  <ellipse cx="330" cy="280" rx="10" ry="4" fill="#807c76"/>
+  <path d="M322 300 q4 -18 8 -22" stroke="#fdfaf3" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M338 320 q3 -14 0 -30" stroke="#b8cdd6" stroke-width="2" fill="none" opacity="0.6"/>
+
+  <!-- ===== CHROME CYLINDER DRUM SIDE TABLE ===== -->
+  <ellipse cx="500" cy="512" rx="66" ry="16" fill="url(#softShadow)"/>
+  <rect x="452" y="392" width="96" height="112" rx="6" fill="url(#chromeCyl)"/>
+  <ellipse cx="500" cy="392" rx="48" ry="13" fill="#eceae4"/>
+  <ellipse cx="500" cy="392" rx="48" ry="13" fill="none" stroke="#9a968f" stroke-width="1.2"/>
+  <ellipse cx="500" cy="504" rx="48" ry="13" fill="#8f8b84"/>
+  <!-- vertical chrome highlights -->
+  <g opacity="0.7">
+    <line x1="474" y1="398" x2="474" y2="498" stroke="#fdfaf3" stroke-width="3"/>
+    <line x1="520" y1="398" x2="520" y2="498" stroke="#b8cdd6" stroke-width="2"/>
+    <line x1="536" y1="398" x2="536" y2="498" stroke="#807c76" stroke-width="2"/>
+  </g>
+
+  <!-- ===== ROUND OLIVE-VELVET POUF ===== -->
+  <ellipse cx="330" cy="540" rx="80" ry="20" fill="url(#softShadow)"/>
+  <ellipse cx="330" cy="512" rx="72" ry="34" fill="url(#pouf)"/>
+  <path d="M258 512 a72 34 0 0 0 144 0 v14 a72 34 0 0 1 -144 0 Z" fill="#63654a"/>
+  <!-- tufting seams -->
+  <g stroke="#4f5139" stroke-width="1.4" opacity="0.6" fill="none">
+    <path d="M330 480 q-30 16 -30 32"/>
+    <path d="M330 480 q30 16 30 32"/>
+    <path d="M330 478 v34"/>
+    <path d="M282 496 q24 10 0 22"/>
+    <path d="M378 496 q-24 10 0 22"/>
+  </g>
+  <ellipse cx="308" cy="496" rx="24" ry="12" fill="#8a8c62" opacity="0.5"/>
+
+  <!-- ===== WHITE BOUCLE SOFA with olive cushions ===== -->
+  <ellipse cx="670" cy="540" rx="150" ry="26" fill="url(#softShadow)"/>
+  <!-- back -->
+  <rect x="556" y="404" width="230" height="70" rx="30" fill="url(#sofa)"/>
+  <!-- arms -->
+  <rect x="546" y="440" width="46" height="96" rx="22" fill="url(#sofa)"/>
+  <rect x="752" y="440" width="46" height="96" rx="22" fill="url(#sofa)"/>
+  <!-- seat -->
+  <rect x="576" y="470" width="196" height="66" rx="20" fill="#ffffff"/>
+  <rect x="576" y="470" width="196" height="66" rx="20" fill="url(#sofa)" opacity="0.6"/>
+  <!-- boucle texture dots -->
+  <g fill="#efe9de" opacity="0.85">
+    <circle cx="590" cy="426" r="3"/><circle cx="606" cy="418" r="2.6"/><circle cx="624" cy="430" r="3"/>
+    <circle cx="642" cy="420" r="2.8"/><circle cx="662" cy="432" r="3"/><circle cx="682" cy="422" r="2.6"/>
+    <circle cx="702" cy="430" r="3"/><circle cx="722" cy="420" r="2.8"/><circle cx="742" cy="430" r="3"/>
+    <circle cx="600" cy="500" r="3"/><circle cx="626" cy="512" r="2.8"/><circle cx="654" cy="498" r="3"/>
+    <circle cx="686" cy="512" r="2.8"/><circle cx="714" cy="500" r="3"/><circle cx="742" cy="510" r="2.8"/>
+    <circle cx="562" cy="470" r="2.8"/><circle cx="572" cy="486" r="2.6"/><circle cx="566" cy="504" r="2.8"/>
+    <circle cx="778" cy="470" r="2.8"/><circle cx="770" cy="488" r="2.6"/><circle cx="780" cy="506" r="2.8"/>
+  </g>
+  <!-- olive cushions -->
+  <g>
+    <rect x="592" y="438" width="66" height="60" rx="14" fill="url(#velvetCush)" transform="rotate(-6 625 468)"/>
+    <rect x="686" y="438" width="66" height="60" rx="14" fill="url(#velvetCush)" transform="rotate(5 719 468)"/>
+    <path d="M604 452 q20 20 42 -2" stroke="#4f5139" stroke-width="1.6" fill="none" opacity="0.5"/>
+    <path d="M698 452 q20 22 42 0" stroke="#4f5139" stroke-width="1.6" fill="none" opacity="0.5"/>
+  </g>
+
+  <!-- ===== BEIGE WOOL RUG ===== -->
+  <ellipse cx="440" cy="560" rx="330" ry="40" fill="url(#rug)" opacity="0.9"/>
+  <ellipse cx="440" cy="560" rx="330" ry="40" fill="none" stroke="#cbb287" stroke-width="2" opacity="0.6"/>
+  <g stroke="#dccdb0" stroke-width="1" opacity="0.5">
+    <line x1="200" y1="560" x2="680" y2="560"/>
+    <line x1="240" y1="548" x2="640" y2="548"/>
+    <line x1="240" y1="572" x2="640" y2="572"/>
+  </g>
+
+  <!-- warm raking light overlay -->
+  <path d="M0 0 L360 0 L120 600 L0 600 Z" fill="#fdf6e6" opacity="0.12"/>
+  <ellipse cx="150" cy="290" rx="240" ry="200" fill="#fdf6e6" opacity="0.1"/>
+</svg>

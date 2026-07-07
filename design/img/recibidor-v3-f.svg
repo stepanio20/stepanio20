@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f2ece1"/>
+    </linearGradient>
+    <radialGradient id="warmLight" cx="0.18" cy="0.28" r="0.9">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#cf9f5c" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f4eee4"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="skirtGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#e8dcc6"/>
+    </linearGradient>
+    <linearGradient id="steelGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="steelEdge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a968f"/>
+      <stop offset="0.4" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="glassFront" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6" stop-opacity="0.30"/>
+      <stop offset="0.5" stop-color="#e3e1dc" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="glassSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9aacb5" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#b8cdd6" stop-opacity="0.24"/>
+    </linearGradient>
+    <linearGradient id="glassTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef1f0" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#c9d6db" stop-opacity="0.30"/>
+    </linearGradient>
+    <radialGradient id="goldGrad" cx="0.36" cy="0.30" r="0.85">
+      <stop offset="0" stop-color="#e3bd7e"/>
+      <stop offset="0.5" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </radialGradient>
+    <linearGradient id="goldBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="oliveGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="plinthGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="vaseGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="0.5" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="bookOlive" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="bookOak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="bookBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#9aacb5"/>
+    </linearGradient>
+    <radialGradient id="softShadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1f1b16" stop-opacity="0.16"/>
+      <stop offset="0.7" stop-color="#1f1b16" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#1f1b16" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="404" fill="url(#wallGrad)"/>
+  <rect x="0" y="0" width="800" height="404" fill="url(#warmLight)"/>
+  <!-- editorial framing panel behind hero -->
+  <rect x="288" y="70" width="286" height="330" rx="16" fill="url(#panelGrad)"/>
+  <rect x="288" y="70" width="286" height="330" rx="16" fill="none" stroke="#e3ddd0" stroke-width="2"/>
+  <!-- thin black graphic accents on wall -->
+  <rect x="120" y="96" width="4" height="150" rx="2" fill="#2a2724" opacity="0.85"/>
+  <rect x="120" y="96" width="70" height="4" rx="2" fill="#2a2724" opacity="0.85"/>
+  <rect x="648" y="120" width="3" height="180" rx="1.5" fill="#3d3a36" opacity="0.7"/>
+
+  <!-- SKIRTING -->
+  <rect x="0" y="384" width="800" height="20" fill="url(#skirtGrad)"/>
+  <line x1="0" y1="404" x2="800" y2="404" stroke="#a5876a" stroke-width="2" opacity="0.55"/>
+
+  <!-- FLOOR -->
+  <rect x="0" y="404" width="800" height="196" fill="url(#floorGrad)"/>
+  <g stroke="#5c4632" stroke-opacity="0.16" stroke-width="1.5">
+    <line x1="0" y1="446" x2="800" y2="446"/>
+    <line x1="0" y1="496" x2="800" y2="496"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+  </g>
+  <g stroke="#5c4632" stroke-opacity="0.12" stroke-width="1.2">
+    <line x1="150" y1="404" x2="150" y2="446"/>
+    <line x1="470" y1="404" x2="470" y2="446"/>
+    <line x1="300" y1="446" x2="300" y2="496"/>
+    <line x1="620" y1="446" x2="620" y2="496"/>
+    <line x1="120" y1="496" x2="120" y2="552"/>
+    <line x1="520" y1="496" x2="520" y2="552"/>
+  </g>
+  <g stroke="#faf7f2" stroke-opacity="0.28" stroke-width="1">
+    <line x1="0" y1="447.5" x2="800" y2="447.5"/>
+    <line x1="0" y1="497.5" x2="800" y2="497.5"/>
+  </g>
+
+  <!-- CONTACT SHADOWS -->
+  <ellipse cx="440" cy="472" rx="150" ry="24" fill="url(#softShadow)"/>
+  <ellipse cx="196" cy="486" rx="96" ry="20" fill="url(#softShadow)"/>
+  <ellipse cx="238" cy="470" rx="40" ry="12" fill="url(#softShadow)"/>
+
+  <!-- ================= HERO: GLASS DISPLAY TOWER ================= -->
+  <!-- base slab -->
+  <path d="M348 456 L512 456 L540 440 L380 440 Z" fill="#3d3a36"/>
+  <rect x="348" y="456" width="164" height="16" rx="3" fill="url(#steelGrad)"/>
+  <path d="M512 456 L512 472 L540 456 L540 440 Z" fill="#15130f"/>
+
+  <!-- back glass (through view) -->
+  <path d="M378 134 L538 134 L538 439 L378 439 Z" fill="#b8cdd6" opacity="0.14"/>
+
+  <!-- interior plinth -->
+  <path d="M406 408 L470 408 L470 436 L406 436 Z" fill="url(#plinthGrad)"/>
+  <ellipse cx="438" cy="408" rx="32" ry="8" fill="#6d5138"/>
+  <ellipse cx="438" cy="406" rx="28" ry="6" fill="#a5876a" opacity="0.6"/>
+
+  <!-- HELMET gold-and-olive -->
+  <ellipse cx="438" cy="358" rx="52" ry="51" fill="url(#goldGrad)"/>
+  <path d="M392 344 Q438 300 484 344 Q472 336 438 334 Q404 336 392 344 Z" fill="#e3bd7e" opacity="0.7"/>
+  <!-- olive crest -->
+  <path d="M438 308 Q446 310 448 328 Q443 322 438 322 Q433 322 428 328 Q430 310 438 308 Z" fill="url(#oliveGrad)"/>
+  <!-- visor opening -->
+  <path d="M394 352 Q438 380 482 352 L478 372 Q438 398 398 372 Z" fill="#2a2724"/>
+  <path d="M400 356 Q438 378 476 356 L474 362 Q438 380 402 362 Z" fill="#63654a" opacity="0.85"/>
+  <!-- chin bar -->
+  <path d="M400 384 Q438 404 476 384 Q470 400 438 402 Q406 400 400 384 Z" fill="url(#goldBar)"/>
+  <!-- vents -->
+  <rect x="428" y="322" width="20" height="4" rx="2" fill="#8a5a20" opacity="0.7"/>
+  <line x1="410" y1="366" x2="404" y2="382" stroke="#8a5a20" stroke-width="2" opacity="0.6"/>
+  <line x1="466" y1="366" x2="472" y2="382" stroke="#8a5a20" stroke-width="2" opacity="0.6"/>
+  <!-- helmet highlight -->
+  <ellipse cx="416" cy="336" rx="14" ry="20" fill="#f2ddb8" opacity="0.45"/>
+
+  <!-- top glass face -->
+  <path d="M350 150 L510 150 L538 134 L378 134 Z" fill="url(#glassTop)"/>
+  <!-- right glass face -->
+  <path d="M510 150 L538 134 L538 439 L510 455 Z" fill="url(#glassSide)"/>
+  <!-- front glass face -->
+  <path d="M350 150 L510 150 L510 455 L350 455 Z" fill="url(#glassFront)"/>
+  <!-- front glass reflection streaks -->
+  <path d="M372 152 L398 152 L344 453 L318 453 Z" fill="#ffffff" opacity="0.14"/>
+  <path d="M446 152 L458 152 L410 453 L398 453 Z" fill="#ffffff" opacity="0.10"/>
+
+  <!-- steel frame: vertical posts -->
+  <rect x="345" y="146" width="8" height="311" rx="2" fill="url(#steelEdge)"/>
+  <rect x="507" y="146" width="8" height="311" rx="2" fill="url(#steelGrad)"/>
+  <path d="M535 132 L541 132 L541 441 L535 441 Z" fill="#15130f"/>
+  <path d="M375 130 L381 130 L381 155 L375 155 Z" fill="#3d3a36"/>
+  <!-- steel frame: horizontal rails -->
+  <rect x="345" y="146" width="170" height="8" rx="2" fill="url(#steelEdge)"/>
+  <rect x="345" y="449" width="170" height="8" rx="2" fill="url(#steelGrad)"/>
+  <path d="M350 150 L510 150 L538 134 L378 134 Z" fill="none" stroke="#2a2724" stroke-width="3"/>
+  <!-- top corner joints -->
+  <circle cx="349" cy="150" r="4" fill="#15130f"/>
+  <circle cx="511" cy="150" r="4" fill="#15130f"/>
+  <circle cx="511" cy="455" r="4" fill="#15130f"/>
+  <circle cx="349" cy="455" r="4" fill="#15130f"/>
+
+  <!-- ================= STYLING PROPS (left) ================= -->
+  <!-- stacked books -->
+  <g>
+    <rect x="132" y="430" width="128" height="20" rx="4" fill="url(#bookOlive)"/>
+    <rect x="132" y="430" width="128" height="5" rx="2.5" fill="#9a9c72" opacity="0.6"/>
+    <rect x="250" y="434" width="8" height="12" rx="2" fill="#faf7f2" opacity="0.85"/>
+    <rect x="146" y="410" width="120" height="20" rx="4" fill="url(#bookOak)"/>
+    <rect x="146" y="410" width="120" height="5" rx="2.5" fill="#e8dcc6" opacity="0.7"/>
+    <rect x="256" y="414" width="8" height="12" rx="2" fill="#faf7f2" opacity="0.85"/>
+    <rect x="140" y="392" width="112" height="18" rx="4" fill="url(#bookBlue)"/>
+    <rect x="140" y="392" width="112" height="5" rx="2.5" fill="#cdd9de" opacity="0.7"/>
+    <rect x="242" y="396" width="8" height="10" rx="2" fill="#faf7f2" opacity="0.85"/>
+  </g>
+
+  <!-- ceramic vase with plant on books -->
+  <ellipse cx="196" cy="392" rx="34" ry="8" fill="#1f1b16" opacity="0.10"/>
+  <path d="M176 392 Q170 348 182 306 L210 306 Q222 348 216 392 Q206 400 196 400 Q186 400 176 392 Z" fill="url(#vaseGrad)"/>
+  <ellipse cx="196" cy="306" rx="14" ry="5" fill="#cbb287"/>
+  <ellipse cx="196" cy="305" rx="11" ry="3.5" fill="#a5876a"/>
+  <path d="M182 340 Q184 372 190 390" fill="none" stroke="#cbb287" stroke-width="2" opacity="0.5"/>
+  <!-- olive branches (plant) -->
+  <g stroke="#63654a" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M196 306 Q188 262 172 232"/>
+    <path d="M196 306 Q202 258 214 224"/>
+    <path d="M196 306 Q198 270 196 244"/>
+  </g>
+  <g fill="url(#oliveGrad)">
+    <ellipse cx="176" cy="252" rx="10" ry="5" transform="rotate(-38 176 252)"/>
+    <ellipse cx="168" cy="234" rx="9" ry="4.5" transform="rotate(-30 168 234)"/>
+    <ellipse cx="188" cy="272" rx="10" ry="5" transform="rotate(-46 188 272)"/>
+    <ellipse cx="210" cy="246" rx="10" ry="5" transform="rotate(34 210 246)"/>
+    <ellipse cx="216" cy="228" rx="9" ry="4.5" transform="rotate(28 216 228)"/>
+    <ellipse cx="203" cy="266" rx="9.5" ry="5" transform="rotate(40 203 266)"/>
+    <ellipse cx="196" cy="250" rx="8.5" ry="4.5" transform="rotate(2 196 250)"/>
+    <ellipse cx="197" cy="272" rx="9" ry="4.5" transform="rotate(-4 197 272)"/>
+  </g>
+  <g fill="#8a8c62">
+    <ellipse cx="180" cy="256" rx="5" ry="2.6" transform="rotate(-38 180 256)"/>
+    <ellipse cx="208" cy="250" rx="5" ry="2.6" transform="rotate(34 208 250)"/>
+  </g>
+
+  <!-- small ceramic object -->
+  <ellipse cx="292" cy="466" rx="26" ry="7" fill="#1f1b16" opacity="0.10"/>
+  <path d="M270 462 Q270 446 292 446 Q314 446 314 462 Q314 470 292 470 Q270 470 270 462 Z" fill="url(#vaseGrad)"/>
+  <ellipse cx="292" cy="447" rx="15" ry="4" fill="#a5876a"/>
+  <ellipse cx="284" cy="455" rx="6" ry="9" fill="#faf7f2" opacity="0.35"/>
+
+  <!-- small amber sphere object -->
+  <circle cx="318" cy="440" r="12" fill="url(#goldGrad)"/>
+  <ellipse cx="314" cy="435" rx="4" ry="5" fill="#f2ddb8" opacity="0.55"/>
+
+  <!-- subtle warm side light wash over hero left -->
+  <path d="M288 70 L430 70 L430 400 L288 400 Z" fill="#cf9f5c" opacity="0.05"/>
+</svg>

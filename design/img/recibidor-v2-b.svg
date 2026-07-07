@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <radialGradient id="mirrorGlass" cx="0.38" cy="0.34" r="0.8">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#b8cdd6"/>
+    </radialGradient>
+    <linearGradient id="mirrorFrame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="0.5" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="vaseG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#f7f3ec"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="trayG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#5c4632"/>
+    </linearGradient>
+    <linearGradient id="chromeStem" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="452" width="800" height="148" fill="url(#floor)"/>
+  <rect x="0" y="448" width="800" height="6" fill="#a5876a" opacity="0.5"/>
+
+  <!-- wall panel hint -->
+  <rect x="60" y="40" width="680" height="420" rx="10" fill="#ffffff" opacity="0.35"/>
+  <line x1="60" y1="40" x2="60" y2="460" stroke="#d8c19a" stroke-width="2" opacity="0.4"/>
+  <line x1="740" y1="40" x2="740" y2="460" stroke="#d8c19a" stroke-width="2" opacity="0.4"/>
+
+  <!-- round oak mirror -->
+  <ellipse cx="400" cy="196" rx="150" ry="20" fill="rgba(31,27,22,0.10)"/>
+  <circle cx="400" cy="176" r="150" fill="url(#mirrorFrame)"/>
+  <circle cx="400" cy="176" r="150" fill="none" stroke="#a5876a" stroke-width="3" opacity="0.6"/>
+  <circle cx="400" cy="176" r="132" fill="#5c4632"/>
+  <circle cx="400" cy="176" r="126" fill="url(#mirrorGlass)"/>
+  <!-- mirror reflection streaks -->
+  <path d="M320 96 L392 250 L360 250 L292 108 Z" fill="#ffffff" opacity="0.35"/>
+  <path d="M356 92 L420 240 L404 240 L344 96 Z" fill="#ffffff" opacity="0.22"/>
+  <path d="M300 220 Q400 250 500 210 L500 260 L300 260 Z" fill="#b8cdd6" opacity="0.30"/>
+  <circle cx="452" cy="128" r="30" fill="#faf7f2" opacity="0.30"/>
+  <circle cx="400" cy="176" r="126" fill="none" stroke="#e3e1dc" stroke-width="2" opacity="0.5"/>
+
+  <!-- console table -->
+  <!-- soft shadow under console -->
+  <ellipse cx="400" cy="470" rx="250" ry="26" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- black steel legs (rear) -->
+  <rect x="196" y="410" width="9" height="52" rx="2" fill="#2a2724"/>
+  <rect x="595" y="410" width="9" height="52" rx="2" fill="#2a2724"/>
+  <!-- black steel legs (front) -->
+  <rect x="188" y="416" width="11" height="56" rx="2" fill="url(#steel)"/>
+  <rect x="601" y="416" width="11" height="56" rx="2" fill="url(#steel)"/>
+  <!-- angled cross braces -->
+  <rect x="193" y="414" width="9" height="54" rx="2" fill="#3d3a36" transform="rotate(6 197 440)"/>
+  <rect x="598" y="414" width="9" height="54" rx="2" fill="#3d3a36" transform="rotate(-6 602 440)"/>
+  <!-- lower stretcher -->
+  <rect x="196" y="452" width="408" height="7" rx="3" fill="url(#steel)"/>
+
+  <!-- oak top -->
+  <rect x="170" y="404" width="460" height="16" rx="6" fill="url(#oakEdge)"/>
+  <rect x="170" y="394" width="460" height="14" rx="6" fill="url(#oakTop)"/>
+  <rect x="182" y="397" width="200" height="3" rx="1.5" fill="#faf7f2" opacity="0.4"/>
+  <line x1="180" y1="411" x2="620" y2="411" stroke="#a5876a" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- leather tray on top -->
+  <ellipse cx="300" cy="392" rx="86" ry="16" fill="rgba(31,27,22,0.12)"/>
+  <rect x="220" y="372" width="160" height="18" rx="7" fill="url(#trayG)"/>
+  <rect x="222" y="366" width="156" height="12" rx="6" fill="#6d5138"/>
+  <rect x="228" y="368" width="144" height="6" rx="3" fill="#5c4632"/>
+  <rect x="230" y="369" width="120" height="2.5" rx="1" fill="#8a5a20" opacity="0.5"/>
+  <!-- stitch hint on tray -->
+  <line x1="234" y1="384" x2="366" y2="384" stroke="#a5876a" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+
+  <!-- small keys/objects in tray -->
+  <circle cx="262" cy="371" r="5" fill="#cf9f5c"/>
+  <circle cx="262" cy="371" r="2" fill="#8a5a20"/>
+  <rect x="272" y="368" width="24" height="4" rx="2" fill="#b98a4a"/>
+
+  <!-- ceramic vase on top -->
+  <ellipse cx="500" cy="392" rx="46" ry="12" fill="rgba(31,27,22,0.12)"/>
+  <path d="M474 388 Q470 340 484 312 Q492 296 500 296 Q508 296 516 312 Q530 340 526 388 Q513 398 500 398 Q487 398 474 388 Z" fill="url(#vaseG)"/>
+  <path d="M482 386 Q478 344 490 316 Q495 304 500 302 L500 396 Q490 396 482 386 Z" fill="#ffffff" opacity="0.5"/>
+  <path d="M516 388 Q524 350 512 318 Q508 308 502 304" fill="none" stroke="#cbb287" stroke-width="2" opacity="0.6"/>
+  <ellipse cx="500" cy="300" rx="16" ry="5" fill="#cbb287"/>
+  <ellipse cx="500" cy="299" rx="12" ry="3.5" fill="#a5876a"/>
+
+  <!-- dried stems in vase (olive) -->
+  <path d="M500 300 Q494 250 476 214" fill="none" stroke="#7a7c5c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M500 300 Q504 246 520 206" fill="none" stroke="#8a8c62" stroke-width="3" stroke-linecap="round"/>
+  <path d="M500 300 Q500 252 500 210" fill="none" stroke="#7a7c5c" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- leaves -->
+  <ellipse cx="476" cy="214" rx="7" ry="14" fill="#8a8c62" transform="rotate(-28 476 214)"/>
+  <ellipse cx="500" cy="210" rx="7" ry="16" fill="#7a7c5c"/>
+  <ellipse cx="520" cy="206" rx="7" ry="14" fill="#8a8c62" transform="rotate(24 520 206)"/>
+  <ellipse cx="486" cy="240" rx="5" ry="11" fill="#7a7c5c" transform="rotate(-20 486 240)"/>
+  <ellipse cx="514" cy="236" rx="5" ry="11" fill="#8a8c62" transform="rotate(18 514 236)"/>
+  <circle cx="476" cy="214" r="3" fill="#cf9f5c"/>
+  <circle cx="520" cy="206" r="3" fill="#b98a4a"/>
+
+  <!-- small chrome stem detail / catchall -->
+  <ellipse cx="560" cy="393" rx="24" ry="7" fill="rgba(31,27,22,0.10)"/>
+  <rect x="547" y="378" width="26" height="12" rx="6" fill="url(#chromeStem)"/>
+  <rect x="550" y="380" width="20" height="3" rx="1.5" fill="#ffffff" opacity="0.6"/>
+
+  <!-- floor grain hints -->
+  <line x1="120" y1="500" x2="360" y2="500" stroke="#a5876a" stroke-width="1.5" opacity="0.3"/>
+  <line x1="440" y1="520" x2="700" y2="520" stroke="#a5876a" stroke-width="1.5" opacity="0.3"/>
+  <line x1="240" y1="548" x2="560" y2="548" stroke="#a5876a" stroke-width="1.5" opacity="0.25"/>
+
+  <!-- warm light glow -->
+  <circle cx="300" cy="130" r="140" fill="#cf9f5c" opacity="0.05"/>
+</svg>

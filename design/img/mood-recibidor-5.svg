@@ -1,0 +1,317 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <!-- big soft warm side light -->
+    <radialGradient id="lightBeam" cx="18%" cy="26%" r="95%">
+      <stop offset="0%" stop-color="#fff7ea" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#f9efe0" stop-opacity="0.55"/>
+      <stop offset="62%" stop-color="#efe2cd" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#e3d3ba" stop-opacity="0"/>
+    </radialGradient>
+    <!-- cream wall vertical wash -->
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#faf7f2"/>
+      <stop offset="45%" stop-color="#f4eee3"/>
+      <stop offset="100%" stop-color="#e8ddc9"/>
+    </linearGradient>
+    <!-- linen weave subtle -->
+    <linearGradient id="wallShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff8ec" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#f2e9d9" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#d9c9ad" stop-opacity="0.5"/>
+    </linearGradient>
+    <!-- oak floor -->
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cbb287"/>
+      <stop offset="45%" stop-color="#c0a377"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <!-- oak rail wood grain -->
+    <linearGradient id="railWood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2cfa8"/>
+      <stop offset="35%" stop-color="#d8c19a"/>
+      <stop offset="70%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="railWoodDk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#8a6f52"/>
+    </linearGradient>
+    <!-- round hook bamboo/oak knob -->
+    <radialGradient id="hookKnob" cx="34%" cy="30%" r="78%">
+      <stop offset="0%" stop-color="#ecdcba"/>
+      <stop offset="42%" stop-color="#d8c19a"/>
+      <stop offset="78%" stop-color="#bd9d70"/>
+      <stop offset="100%" stop-color="#8f7150"/>
+    </radialGradient>
+    <radialGradient id="hookKnob2" cx="36%" cy="32%" r="78%">
+      <stop offset="0%" stop-color="#e7d4ae"/>
+      <stop offset="45%" stop-color="#cbb287"/>
+      <stop offset="80%" stop-color="#a98a62"/>
+      <stop offset="100%" stop-color="#7c6144"/>
+    </radialGradient>
+    <!-- beige coat velvet/wool sheen -->
+    <linearGradient id="coat" x1="0" y1="0" x2="1" y2="0.15">
+      <stop offset="0%" stop-color="#f0e6d2"/>
+      <stop offset="30%" stop-color="#e6d8bd"/>
+      <stop offset="62%" stop-color="#d8c6a4"/>
+      <stop offset="100%" stop-color="#c2ac86"/>
+    </linearGradient>
+    <linearGradient id="coatShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff8ea" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#e6d8bd" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#a89066" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- woven bag -->
+    <linearGradient id="bag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8dcc6"/>
+      <stop offset="50%" stop-color="#d6c39c"/>
+      <stop offset="100%" stop-color="#b2966c"/>
+    </linearGradient>
+    <!-- mirror glass -->
+    <linearGradient id="mirror" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8eef0"/>
+      <stop offset="30%" stop-color="#cdd9dd"/>
+      <stop offset="55%" stop-color="#b8cdd6"/>
+      <stop offset="80%" stop-color="#9fb2b8"/>
+      <stop offset="100%" stop-color="#c9d2d0"/>
+    </linearGradient>
+    <!-- chrome mirror frame -->
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a968f"/>
+      <stop offset="30%" stop-color="#e3e1dc"/>
+      <stop offset="55%" stop-color="#c9c5be"/>
+      <stop offset="100%" stop-color="#9a968f"/>
+    </linearGradient>
+    <!-- plant leaf -->
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="60%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="leaf2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#63654a"/>
+      <stop offset="100%" stop-color="#8a8c62"/>
+    </linearGradient>
+    <radialGradient id="floorGlow" cx="30%" cy="20%" r="90%">
+      <stop offset="0%" stop-color="#e6cfa0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#a5876a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="soft2" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="600" height="640" fill="url(#wall)"/>
+  <rect x="0" y="0" width="600" height="640" fill="url(#wallShade)"/>
+  <!-- faint linen weave verticals -->
+  <g stroke="#e9ddc9" stroke-width="1" opacity="0.25">
+    <line x1="70" y1="0" x2="70" y2="640"/>
+    <line x1="150" y1="0" x2="150" y2="640"/>
+    <line x1="230" y1="0" x2="230" y2="640"/>
+    <line x1="330" y1="0" x2="330" y2="640"/>
+    <line x1="430" y1="0" x2="430" y2="640"/>
+    <line x1="520" y1="0" x2="520" y2="640"/>
+  </g>
+  <g stroke="#efe4d1" stroke-width="1" opacity="0.18">
+    <line x1="0" y1="120" x2="600" y2="120"/>
+    <line x1="0" y1="260" x2="600" y2="260"/>
+    <line x1="0" y1="400" x2="600" y2="400"/>
+  </g>
+
+  <!-- FLOOR hint -->
+  <rect x="0" y="632" width="600" height="118" fill="url(#floor)"/>
+  <rect x="0" y="632" width="600" height="118" fill="url(#floorGlow)"/>
+  <!-- floor plank lines -->
+  <g stroke="#8a6f52" stroke-width="1.4" opacity="0.4">
+    <line x1="0" y1="672" x2="600" y2="668"/>
+    <line x1="0" y1="712" x2="600" y2="706"/>
+    <line x1="120" y1="632" x2="118" y2="750"/>
+    <line x1="300" y1="632" x2="304" y2="750"/>
+    <line x1="470" y1="632" x2="476" y2="750"/>
+  </g>
+  <rect x="0" y="628" width="600" height="8" fill="#b89a72" opacity="0.6"/>
+  <!-- baseboard -->
+  <rect x="0" y="618" width="600" height="16" fill="#efe6d5"/>
+  <rect x="0" y="618" width="600" height="4" fill="#fff8ec" opacity="0.8"/>
+
+  <!-- OAK RAIL for hooks -->
+  <g>
+    <rect x="60" y="196" width="470" height="34" rx="8" fill="url(#railWood)"/>
+    <rect x="60" y="196" width="470" height="9" rx="4" fill="#f0e0be" opacity="0.7"/>
+    <rect x="60" y="222" width="470" height="8" rx="4" fill="url(#railWoodDk)" opacity="0.8"/>
+    <!-- rail grain -->
+    <g stroke="#b89468" stroke-width="1" opacity="0.35">
+      <line x1="70" y1="208" x2="520" y2="209"/>
+      <line x1="80" y1="215" x2="510" y2="216"/>
+    </g>
+    <!-- rail cast shadow on wall -->
+    <rect x="66" y="232" width="464" height="16" rx="6" fill="#c9b48f" opacity="0.35" filter="url(#soft)"/>
+  </g>
+
+  <!-- ROW OF ROUND HOOKS -->
+  <g>
+    <!-- hook 1 -->
+    <g>
+      <ellipse cx="128" cy="238" rx="20" ry="8" fill="#b39a72" opacity="0.4" filter="url(#soft)"/>
+      <rect x="122" y="204" width="12" height="18" rx="5" fill="url(#railWoodDk)"/>
+      <circle cx="128" cy="200" r="20" fill="url(#hookKnob)"/>
+      <ellipse cx="121" cy="193" rx="7" ry="5" fill="#fff2d8" opacity="0.7"/>
+      <circle cx="128" cy="200" r="20" fill="none" stroke="#8f7150" stroke-width="1" opacity="0.5"/>
+    </g>
+    <!-- hook 2 (holds coat) -->
+    <g>
+      <ellipse cx="222" cy="238" rx="20" ry="8" fill="#b39a72" opacity="0.4" filter="url(#soft)"/>
+      <rect x="216" y="204" width="12" height="18" rx="5" fill="url(#railWoodDk)"/>
+      <circle cx="222" cy="200" r="21" fill="url(#hookKnob2)"/>
+      <ellipse cx="215" cy="192" rx="7" ry="5" fill="#fff2d8" opacity="0.7"/>
+      <circle cx="222" cy="200" r="21" fill="none" stroke="#8f7150" stroke-width="1" opacity="0.5"/>
+    </g>
+    <!-- hook 3 -->
+    <g>
+      <ellipse cx="316" cy="238" rx="20" ry="8" fill="#b39a72" opacity="0.4" filter="url(#soft)"/>
+      <rect x="310" y="204" width="12" height="18" rx="5" fill="url(#railWoodDk)"/>
+      <circle cx="316" cy="200" r="20" fill="url(#hookKnob)"/>
+      <ellipse cx="309" cy="193" rx="6" ry="5" fill="#fff2d8" opacity="0.65"/>
+      <circle cx="316" cy="200" r="20" fill="none" stroke="#8f7150" stroke-width="1" opacity="0.5"/>
+    </g>
+    <!-- hook 4 (holds bag) -->
+    <g>
+      <ellipse cx="410" cy="238" rx="20" ry="8" fill="#b39a72" opacity="0.4" filter="url(#soft)"/>
+      <rect x="404" y="204" width="12" height="18" rx="5" fill="url(#railWoodDk)"/>
+      <circle cx="410" cy="200" r="21" fill="url(#hookKnob2)"/>
+      <ellipse cx="403" cy="192" rx="7" ry="5" fill="#fff2d8" opacity="0.7"/>
+      <circle cx="410" cy="200" r="21" fill="none" stroke="#8f7150" stroke-width="1" opacity="0.5"/>
+    </g>
+    <!-- hook 5 -->
+    <g>
+      <ellipse cx="500" cy="238" rx="19" ry="8" fill="#b39a72" opacity="0.4" filter="url(#soft)"/>
+      <rect x="494" y="204" width="12" height="18" rx="5" fill="url(#railWoodDk)"/>
+      <circle cx="500" cy="200" r="19" fill="url(#hookKnob)"/>
+      <ellipse cx="494" cy="193" rx="6" ry="4" fill="#fff2d8" opacity="0.6"/>
+      <circle cx="500" cy="200" r="19" fill="none" stroke="#8f7150" stroke-width="1" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- BEIGE COAT on hook 2 -->
+  <g>
+    <!-- coat soft shadow on wall -->
+    <path d="M196 205 C168 300 176 470 210 585 C255 470 300 320 262 208 Z" fill="#c4ad86" opacity="0.32" filter="url(#soft2)" transform="translate(14,10)"/>
+    <!-- collar loop over knob -->
+    <path d="M214 202 C206 188 236 186 230 204" fill="none" stroke="#d0bd97" stroke-width="7" stroke-linecap="round"/>
+    <!-- coat body -->
+    <path d="M222 200
+             C200 214 186 250 182 300
+             C176 380 178 470 196 560
+             C210 590 250 592 262 562
+             C280 470 282 372 270 300
+             C262 250 246 214 222 200 Z" fill="url(#coat)"/>
+    <path d="M222 200 C200 214 186 250 182 300 C176 380 178 470 196 560 C210 590 250 592 262 562 C280 470 282 372 270 300 C262 250 246 214 222 200 Z" fill="url(#coatShade)"/>
+    <!-- lapel / opening fold -->
+    <path d="M222 214 C218 300 220 430 224 556" fill="none" stroke="#b39c76" stroke-width="2.5" opacity="0.6"/>
+    <path d="M222 214 C238 250 246 360 250 500" fill="none" stroke="#f3e9d4" stroke-width="2" opacity="0.5"/>
+    <!-- shoulder highlight -->
+    <path d="M204 226 C214 220 232 220 242 228" fill="none" stroke="#fdf5e4" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+    <!-- sleeve suggestion -->
+    <path d="M186 300 C170 340 168 400 178 452 C186 430 190 360 196 320 Z" fill="#d4c19e" opacity="0.8"/>
+    <path d="M270 300 C282 344 282 402 272 452 C266 428 262 358 258 320 Z" fill="#cbb794" opacity="0.85"/>
+    <!-- hem shadow -->
+    <path d="M196 556 C214 574 246 574 262 556 C250 574 210 574 196 556 Z" fill="#a89066" opacity="0.6"/>
+    <!-- fabric fold lines -->
+    <g stroke="#bfa87f" stroke-width="1.3" opacity="0.4" fill="none">
+      <path d="M206 320 C202 400 204 480 210 540"/>
+      <path d="M240 320 C244 400 242 480 238 540"/>
+    </g>
+    <!-- a button -->
+    <circle cx="223" cy="360" r="4" fill="#a5876a"/>
+    <circle cx="222" cy="359" r="1.5" fill="#e6d4b0"/>
+  </g>
+
+  <!-- WOVEN BAG on hook 4 -->
+  <g>
+    <!-- shadow -->
+    <ellipse cx="418" cy="430" rx="52" ry="70" fill="#b49a70" opacity="0.28" filter="url(#soft2)" transform="translate(12,8)"/>
+    <!-- straps over knob -->
+    <path d="M395 205 C388 260 384 300 392 340" fill="none" stroke="#c2a878" stroke-width="7" stroke-linecap="round"/>
+    <path d="M425 205 C432 260 436 300 428 340" fill="none" stroke="#b2966c" stroke-width="7" stroke-linecap="round"/>
+    <path d="M395 206 C389 258 386 300 393 338" fill="none" stroke="#e2cfa6" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <!-- bag body -->
+    <path d="M378 336 C372 400 376 470 410 486 C444 470 448 400 442 336 C432 328 388 328 378 336 Z" fill="url(#bag)"/>
+    <path d="M378 336 C388 330 432 330 442 336 L440 350 C430 344 390 344 380 350 Z" fill="#e8dcc6" opacity="0.7"/>
+    <!-- weave texture: diagonal hatch -->
+    <g stroke="#a5876a" stroke-width="1.1" opacity="0.45">
+      <line x1="384" y1="352" x2="436" y2="366"/>
+      <line x1="382" y1="368" x2="438" y2="384"/>
+      <line x1="380" y1="386" x2="440" y2="402"/>
+      <line x1="381" y1="404" x2="439" y2="420"/>
+      <line x1="384" y1="422" x2="436" y2="438"/>
+      <line x1="388" y1="440" x2="432" y2="454"/>
+      <line x1="394" y1="458" x2="426" y2="470"/>
+    </g>
+    <g stroke="#efe2c9" stroke-width="1" opacity="0.4">
+      <line x1="436" y1="352" x2="384" y2="366"/>
+      <line x1="438" y1="368" x2="382" y2="384"/>
+      <line x1="440" y1="386" x2="380" y2="402"/>
+      <line x1="439" y1="404" x2="381" y2="420"/>
+      <line x1="436" y1="422" x2="384" y2="438"/>
+    </g>
+    <!-- side sheen -->
+    <path d="M382 340 C376 400 380 466 408 484" fill="none" stroke="#f5ead2" stroke-width="3" opacity="0.4"/>
+    <path d="M440 340 C446 400 442 466 414 484" fill="none" stroke="#977c56" stroke-width="4" opacity="0.4"/>
+  </g>
+
+  <!-- SLIVER OF FULL-LENGTH MIRROR at right edge -->
+  <g>
+    <!-- shadow of mirror on wall -->
+    <rect x="536" y="70" width="30" height="620" fill="#c7b48f" opacity="0.35" filter="url(#soft)"/>
+    <!-- chrome frame -->
+    <rect x="552" y="60" width="48" height="640" fill="url(#chrome)"/>
+    <rect x="552" y="60" width="10" height="640" fill="#eeece7" opacity="0.7"/>
+    <!-- glass -->
+    <rect x="560" y="70" width="40" height="620" fill="url(#mirror)"/>
+    <!-- reflected warm room hints -->
+    <rect x="560" y="70" width="40" height="620" fill="url(#lightBeam)" opacity="0.5"/>
+    <path d="M566 120 L596 100 L596 260 L566 300 Z" fill="#e6d8bd" opacity="0.35"/>
+    <path d="M566 340 L596 320 L596 520 L566 560 Z" fill="#cbb287" opacity="0.28"/>
+    <!-- reflected coat sliver -->
+    <path d="M572 250 C568 330 570 460 578 560 C586 460 584 340 580 260 Z" fill="#ddccab" opacity="0.4"/>
+    <!-- streak of light on glass -->
+    <path d="M584 80 L596 76 L596 700 L584 700 Z" fill="#ffffff" opacity="0.18"/>
+    <line x1="568" y1="90" x2="568" y2="680" stroke="#f4f8f9" stroke-width="2" opacity="0.35"/>
+  </g>
+
+  <!-- PLANT LEAVES lower-left, depth prop -->
+  <g>
+    <path d="M40 750 C48 660 70 600 120 560 C86 620 78 690 84 750 Z" fill="url(#leaf)"/>
+    <path d="M40 750 C48 660 70 600 120 560" fill="none" stroke="#565839" stroke-width="1.5" opacity="0.6"/>
+    <path d="M70 750 C70 680 96 618 150 592 C110 650 104 700 112 750 Z" fill="url(#leaf2)" opacity="0.92"/>
+    <path d="M22 750 C30 690 40 650 74 620 C50 668 44 710 50 750 Z" fill="#8a8c62" opacity="0.8"/>
+    <!-- a single tall blade catching light -->
+    <path d="M100 750 C96 660 118 596 168 566 C126 628 128 700 138 750 Z" fill="#8a8c62" opacity="0.55"/>
+  </g>
+
+  <!-- small oak stool / bench hint bottom-left prop -->
+  <g opacity="0.95">
+    <ellipse cx="250" cy="716" rx="70" ry="10" fill="#8a6f52" opacity="0.4" filter="url(#soft)"/>
+    <rect x="196" y="678" width="108" height="20" rx="7" fill="url(#railWood)"/>
+    <rect x="196" y="678" width="108" height="6" rx="3" fill="#f0e0be" opacity="0.7"/>
+    <rect x="204" y="698" width="9" height="42" rx="3" fill="url(#railWoodDk)"/>
+    <rect x="288" y="698" width="9" height="42" rx="3" fill="url(#railWoodDk)"/>
+    <line x1="210" y1="702" x2="292" y2="702" stroke="#a5876a" stroke-width="5" opacity="0.7"/>
+  </g>
+
+  <!-- WARM DIRECTIONAL LIGHT overlay -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#lightBeam)"/>
+  <!-- soft beam diagonal from upper-left -->
+  <path d="M0 0 L250 0 L120 750 L0 750 Z" fill="#fff6e6" opacity="0.14"/>
+  <path d="M40 0 L150 0 L70 470 L20 470 Z" fill="#fffaf0" opacity="0.12" filter="url(#soft2)"/>
+
+  <!-- gentle vignette to seat the mood -->
+  <rect x="0" y="0" width="600" height="750" fill="none"/>
+  <path d="M0 0 L600 0 L600 750 L0 750 Z M60 60 L540 60 L540 690 L60 690 Z" fill="#2a2724" opacity="0.10" fill-rule="evenodd"/>
+  <rect x="0" y="600" width="600" height="150" fill="#4a3624" opacity="0.10"/>
+  <rect x="0" y="0" width="600" height="90" fill="#5c4632" opacity="0.06"/>
+</svg>

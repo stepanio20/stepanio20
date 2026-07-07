@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e0cdaa"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakSlim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#e3e1dc"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cfe0e6"/>
+      <stop offset="1" stop-color="#b8cdd6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.35" cy="0.25" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="800" height="440" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="440" fill="url(#glow)"/>
+  <rect x="0" y="428" width="800" height="172" fill="url(#floor)"/>
+
+  <!-- floor planks -->
+  <line x1="0" y1="470" x2="800" y2="470" stroke="#a5876a" stroke-width="2" opacity="0.35"/>
+  <line x1="0" y1="518" x2="800" y2="518" stroke="#a5876a" stroke-width="2" opacity="0.3"/>
+  <line x1="0" y1="566" x2="800" y2="566" stroke="#a5876a" stroke-width="2" opacity="0.3"/>
+  <line x1="250" y1="428" x2="250" y2="470" stroke="#a5876a" stroke-width="1.5" opacity="0.25"/>
+  <line x1="540" y1="470" x2="540" y2="518" stroke="#a5876a" stroke-width="1.5" opacity="0.25"/>
+
+  <!-- baseboard -->
+  <rect x="0" y="414" width="800" height="16" fill="#d8c19a"/>
+  <rect x="0" y="414" width="800" height="4" fill="#e0cdaa"/>
+  <rect x="0" y="426" width="800" height="4" fill="#a5876a" opacity="0.5"/>
+
+  <!-- wall mirror above shoe cabinet -->
+  <ellipse cx="256" cy="140" rx="66" ry="66" fill="#3d3a36" opacity="0.10"/>
+  <circle cx="253" cy="136" r="63" fill="url(#chrome)"/>
+  <circle cx="253" cy="136" r="54" fill="url(#glass)"/>
+  <path d="M215 165 L250 82 L268 82 L233 165 Z" fill="#ffffff" opacity="0.35"/>
+  <path d="M275 160 L292 118 L300 118 L283 160 Z" fill="#ffffff" opacity="0.22"/>
+  <circle cx="253" cy="136" r="54" fill="none" stroke="#a5876a" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- soft floor shadows -->
+  <ellipse cx="258" cy="432" rx="140" ry="18" fill="#1f1b16" opacity="0.12"/>
+  <ellipse cx="468" cy="432" rx="80" ry="15" fill="#1f1b16" opacity="0.12"/>
+
+  <!-- ===== SLIM OAK CABINET (right) ===== -->
+  <g>
+    <!-- feet -->
+    <rect x="418" y="406" width="10" height="20" rx="3" fill="url(#chrome)"/>
+    <rect x="502" y="406" width="10" height="20" rx="3" fill="url(#chrome)"/>
+    <!-- body -->
+    <rect x="410" y="150" width="110" height="262" rx="8" fill="url(#oakSlim)"/>
+    <rect x="410" y="150" width="110" height="262" rx="8" fill="none" stroke="#a5876a" stroke-width="2" opacity="0.4"/>
+    <!-- top overhang -->
+    <rect x="404" y="142" width="122" height="16" rx="6" fill="url(#oakTop)"/>
+    <rect x="404" y="142" width="122" height="5" rx="3" fill="#e6d4b2"/>
+    <!-- door seams -->
+    <line x1="416" y1="238" x2="514" y2="238" stroke="#a5876a" stroke-width="2" opacity="0.45"/>
+    <line x1="416" y1="326" x2="514" y2="326" stroke="#a5876a" stroke-width="2" opacity="0.45"/>
+    <!-- shading -->
+    <rect x="410" y="150" width="16" height="262" rx="8" fill="#d8c19a" opacity="0.55"/>
+    <rect x="504" y="150" width="16" height="262" rx="8" fill="#a5876a" opacity="0.28"/>
+    <!-- grain -->
+    <line x1="440" y1="170" x2="440" y2="404" stroke="#a5876a" stroke-width="1" opacity="0.18"/>
+    <line x1="470" y1="170" x2="470" y2="404" stroke="#c8a87c" stroke-width="1" opacity="0.3"/>
+    <line x1="492" y1="170" x2="492" y2="404" stroke="#a5876a" stroke-width="1" opacity="0.16"/>
+    <!-- vertical chrome handle -->
+    <rect x="425" y="182" width="6" height="200" rx="3" fill="url(#chrome)"/>
+    <rect x="426" y="182" width="2" height="200" rx="1" fill="#ffffff" opacity="0.6"/>
+  </g>
+
+  <!-- ===== SHOE CABINET with three flip fronts (left / focus) ===== -->
+  <g>
+    <!-- chrome feet -->
+    <rect x="164" y="404" width="12" height="22" rx="3" fill="url(#chrome)"/>
+    <rect x="338" y="404" width="12" height="22" rx="3" fill="url(#chrome)"/>
+    <!-- carcass -->
+    <rect x="150" y="200" width="214" height="208" rx="10" fill="url(#oakV)"/>
+    <rect x="150" y="200" width="214" height="208" rx="10" fill="none" stroke="#a5876a" stroke-width="2" opacity="0.4"/>
+    <!-- side shading -->
+    <rect x="150" y="200" width="20" height="208" rx="10" fill="#e0cdaa" opacity="0.5"/>
+    <rect x="346" y="200" width="18" height="208" rx="10" fill="#a5876a" opacity="0.3"/>
+    <!-- top surface overhang -->
+    <rect x="140" y="190" width="234" height="18" rx="8" fill="url(#oakTop)"/>
+    <rect x="140" y="190" width="234" height="5" rx="3" fill="#e6d4b2"/>
+    <rect x="140" y="203" width="234" height="5" rx="3" fill="#a5876a" opacity="0.4"/>
+
+    <!-- FLIP FRONT 1 -->
+    <path d="M160 212 L354 212 L350 268 L164 268 Z" fill="url(#oakV)"/>
+    <path d="M160 212 L354 212 L353 220 L161 220 Z" fill="#e0cdaa" opacity="0.7"/>
+    <path d="M164 262 L350 262 L350 268 L164 268 Z" fill="#a5876a" opacity="0.45"/>
+    <line x1="180" y1="228" x2="336" y2="228" stroke="#c8a87c" stroke-width="1" opacity="0.4"/>
+    <line x1="180" y1="244" x2="336" y2="244" stroke="#a5876a" stroke-width="1" opacity="0.2"/>
+    <rect x="230" y="214" width="56" height="6" rx="3" fill="#5c4632" opacity="0.55"/>
+
+    <!-- FLIP FRONT 2 -->
+    <path d="M164 274 L350 274 L347 330 L167 330 Z" fill="url(#oakV)"/>
+    <path d="M164 274 L350 274 L349 282 L165 282 Z" fill="#e0cdaa" opacity="0.7"/>
+    <path d="M167 324 L347 324 L347 330 L167 330 Z" fill="#a5876a" opacity="0.45"/>
+    <line x1="182" y1="290" x2="332" y2="290" stroke="#c8a87c" stroke-width="1" opacity="0.4"/>
+    <line x1="182" y1="306" x2="332" y2="306" stroke="#a5876a" stroke-width="1" opacity="0.2"/>
+    <rect x="228" y="276" width="56" height="6" rx="3" fill="#5c4632" opacity="0.55"/>
+
+    <!-- FLIP FRONT 3 -->
+    <path d="M167 336 L347 336 L344 392 L170 392 Z" fill="url(#oakV)"/>
+    <path d="M167 336 L347 336 L346 344 L168 344 Z" fill="#e0cdaa" opacity="0.7"/>
+    <path d="M170 386 L344 386 L344 392 L170 392 Z" fill="#a5876a" opacity="0.45"/>
+    <line x1="184" y1="352" x2="328" y2="352" stroke="#c8a87c" stroke-width="1" opacity="0.4"/>
+    <line x1="184" y1="368" x2="328" y2="368" stroke="#a5876a" stroke-width="1" opacity="0.2"/>
+    <rect x="226" y="338" width="56" height="6" rx="3" fill="#5c4632" opacity="0.55"/>
+  </g>
+
+  <!-- ===== TOP DECOR on shoe cabinet ===== -->
+  <!-- tray -->
+  <rect x="176" y="176" width="120" height="16" rx="6" fill="#3d3a36"/>
+  <rect x="176" y="176" width="120" height="6" rx="3" fill="#5c4632" opacity="0.7"/>
+  <!-- amber vase -->
+  <ellipse cx="212" cy="180" rx="20" ry="5" fill="#1f1b16" opacity="0.15"/>
+  <path d="M198 178 Q194 140 212 128 Q230 140 226 178 Z" fill="#cf9f5c"/>
+  <path d="M198 178 Q196 150 208 132 Q210 150 208 178 Z" fill="#b98a4a" opacity="0.7"/>
+  <ellipse cx="212" cy="128" rx="14" ry="5" fill="#8a5a20"/>
+  <!-- olive stems -->
+  <path d="M212 128 Q206 96 190 84" fill="none" stroke="#7a7c5c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M212 128 Q216 100 232 90" fill="none" stroke="#8a8c62" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="188" cy="84" rx="9" ry="4" fill="#7a7c5c" transform="rotate(-30 188 84)"/>
+  <ellipse cx="234" cy="90" rx="9" ry="4" fill="#8a8c62" transform="rotate(25 234 90)"/>
+  <ellipse cx="200" cy="100" rx="8" ry="4" fill="#7a7c5c" transform="rotate(-10 200 100)"/>
+
+  <!-- small glass-blue dish -->
+  <ellipse cx="270" cy="185" rx="22" ry="7" fill="url(#glass)"/>
+  <ellipse cx="270" cy="183" rx="16" ry="4" fill="#ffffff" opacity="0.4"/>
+  <!-- chrome keys in dish -->
+  <circle cx="264" cy="182" r="4" fill="none" stroke="#c9c5be" stroke-width="2"/>
+  <rect x="266" y="182" width="10" height="2.4" rx="1" fill="#c9c5be"/>
+
+  <!-- subtle wall shadow behind cabinets -->
+  <rect x="150" y="200" width="214" height="14" rx="8" fill="#1f1b16" opacity="0.05"/>
+</svg>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-тур (beta) — Квартира в Барселоне</title>
+<meta name="description" content="Экспериментальная 3D-модель гостиной с переключением вариантов интерьера.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏁</text></svg>">
+<style>
+  .stage {
+    margin: 26px auto 10px; max-width: 900px; height: 62vh; min-height: 400px;
+    perspective: 1500px; touch-action: none; cursor: grab; user-select: none;
+    background: radial-gradient(ellipse at 50% 40%, #efe9de 0%, #e3dccd 70%);
+    border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+  }
+  .stage:active { cursor: grabbing; }
+  .world {
+    position: absolute; left: 50%; top: 55%; width: 0; height: 0;
+    transform-style: preserve-3d;
+  }
+  .room, .furn, .box { position: absolute; transform-style: preserve-3d; }
+  .face { position: absolute; backface-visibility: visible; }
+  .vtabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 10px 0 4px; }
+  .vtabs button {
+    font: 600 .84rem var(--font-body); padding: 8px 15px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--bg-card); color: var(--ink-soft); cursor: pointer;
+  }
+  .vtabs button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .hint { text-align: center; color: var(--ink-soft); font-size: .82rem; padding: 6px 20px 0; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="logo" href="index.html">BCN·<b>Interior</b></a>
+    <nav class="topnav">
+      <a href="rooms/recibidor.html">Прихожая</a>
+      <a href="rooms/salon.html">Гостиная</a>
+      <a href="3d.html" class="active">3D β</a>
+    </nav>
+  </div>
+</header>
+
+<section class="room-hero wrap">
+  <div class="kicker">Экспериментально · MVP</div>
+  <h1>3D-модель гостиной</h1>
+  <p>Крути пальцем или мышкой, масштаб — колесо/щипок. Переключай варианты — мебель
+     перестраивается. Стены обрезаны по высоте, чтобы было видно интерьер; охра — новые
+     покупки, серое — то, что остаётся. Прихожая и остальные комнаты — в следующей итерации,
+     как и фотореалистичные текстуры.</p>
+</section>
+
+<div class="wrap">
+  <div class="vtabs" id="vtabs"></div>
+  <div class="stage" id="stage"><div class="world" id="world"></div></div>
+  <p class="hint">Вариант меняет набор мебели у стены с ТВ, витрины, свет и ковёр — как на планах в разделе «Гостиная».</p>
+</div>
+
+<footer><div class="wrap">MVP: габариты условные (комната ≈ 5,8 × 4,6 м, потолки 3 м).</div></footer>
+
+<script>
+(function () {
+  var S = 70, WALL_H = 1.35 * S, RW = 5.8 * S, RH = 4.6 * S;
+  var world = document.getElementById('world');
+  var stage = document.getElementById('stage');
+
+  function face(parent, w, h, css, transform) {
+    var f = document.createElement('div');
+    f.className = 'face';
+    f.style.width = w + 'px'; f.style.height = h + 'px';
+    for (var k in css) f.style[k] = css[k];
+    f.style.transform = transform;
+    parent.appendChild(f);
+    return f;
+  }
+
+  /* коробка: x,y (м) — угол, w,h (м) — след, z (м) — высота, c — цвет, l — подпись */
+  function box(parent, o) {
+    var b = document.createElement('div');
+    b.className = 'box';
+    var w = o.w * S, h = o.h * S, z = o.z * S;
+    b.style.left = o.x * S + 'px'; b.style.top = o.y * S + 'px';
+    b.style.width = w + 'px'; b.style.height = h + 'px';
+    var top = o.c, side = o.cs || o.c;
+    var t = face(b, w, h, { background: top, borderRadius: '3px' }, 'translateZ(' + z + 'px)');
+    if (o.l) {
+      t.innerHTML = '<span style="position:absolute;inset:0;display:flex;align-items:center;' +
+        'justify-content:center;font:600 9px Inter,sans-serif;color:' + (o.tc || '#5d5344') +
+        ';text-align:center;padding:2px;overflow:hidden">' + o.l + '</span>';
+    }
+    face(b, w, z, { background: side }, 'translate(0,-50%) translateY(' + (h) + 'px) translateZ(' + z / 2 + 'px) rotateX(90deg)');
+    face(b, w, z, { background: side }, 'translate(0,-50%) translateZ(' + z / 2 + 'px) rotateX(90deg)');
+    face(b, z, h, { background: side }, 'translate(-50%,0) translateX(' + w + 'px) translateZ(' + z / 2 + 'px) rotateY(90deg)');
+    face(b, z, h, { background: side }, 'translate(-50%,0) translateZ(' + z / 2 + 'px) rotateY(90deg)');
+    parent.appendChild(b);
+    return b;
+  }
+
+  var room = document.createElement('div');
+  room.className = 'room';
+  room.style.left = -RW / 2 + 'px'; room.style.top = -RH / 2 + 'px';
+  world.appendChild(room);
+
+  /* пол */
+  face(room, RW, RH, {
+    background: 'repeating-linear-gradient(90deg,#dcc49c 0 34px,#d3ba90 34px 36px)',
+    boxShadow: '0 0 60px rgba(0,0,0,.25)'
+  }, 'translateZ(0)');
+
+  /* стены (обрезанные): лево — окна, верх — зеркальная лента */
+  face(room, RW, WALL_H, { background: 'rgba(250,247,242,.9)', borderTop: '2px solid #cfc6b8' },
+    'translate(0,-50%) translateZ(' + WALL_H / 2 + 'px) rotateX(90deg)');                    /* север */
+  face(room, RW, WALL_H, { background: 'rgba(250,247,242,.55)' },
+    'translate(0,-50%) translateY(' + RH + 'px) translateZ(' + WALL_H / 2 + 'px) rotateX(90deg)'); /* юг: ТВ-стена */
+  face(room, WALL_H, RH, { background: 'linear-gradient(rgba(160,200,215,.45),rgba(160,200,215,.2))' },
+    'translate(-50%,0) translateZ(' + WALL_H / 2 + 'px) rotateY(90deg)');                    /* запад: окна */
+  face(room, WALL_H, RH, { background: 'rgba(250,247,242,.35)' },
+    'translate(-50%,0) translateX(' + RW + 'px) translateZ(' + WALL_H / 2 + 'px) rotateY(90deg)'); /* восток */
+
+  var furn = document.createElement('div');
+  furn.className = 'furn';
+  room.appendChild(furn);
+
+  var KEEP = '#d6cec1', KEEPS = '#bdb3a2', NEW = '#cf9f5c', NEWS = '#b3854a';
+  function K(x, y, w, h, z, l) { return { x: x, y: y, w: w, h: h, z: z, l: l, c: KEEP, cs: KEEPS }; }
+  function N(x, y, w, h, z, l) { return { x: x, y: y, w: w, h: h, z: z, l: l, c: NEW, cs: NEWS, tc: '#4c3a1e' }; }
+
+  var base = [
+    K(1.5, 0.35, 2.1, 0.95, 0.75, 'стол'),
+    K(2.2, 2.0, 2.3, 1.05, 0.72, 'диван'),
+    K(2.75, 3.3, 1.15, 0.5, 0.4, 'столик'),
+    K(0.55, 3.35, 0.85, 0.85, 0.7, 'кресло'),
+    K(4.7, 0.5, 0.95, 0.7, 0.25, '🐕'),
+    K(5.25, 2.5, 0.5, 0.4, 0.55, 'LV'),
+    { x: 2.3, y: 4.45, w: 1.5, h: 0.09, z: 1.15, l: 'ТВ', c: '#3a3733', cs: '#26241f', tc: '#eee' }
+  ];
+  function rug(l) { return { x: 1.95, y: 1.75, w: 2.9, h: 2.25, z: 0.02, l: l, c: '#e5d9c2', cs: '#d5c8ae' }; }
+  function rugDark(l) { return { x: 1.95, y: 1.75, w: 2.9, h: 2.25, z: 0.02, l: l, c: '#7c766d', cs: '#67615a', tc: '#eee' }; }
+
+  var variants = {
+    'В1 · Japandi': [rug('ковёр джут'), N(1.9, 3.95, 1.95, 0.55, 0.5, 'тумба Vedrana')],
+    'В2 · Гоночный лофт': [rugDark('ковёр графит'), N(4.95, 3.6, 0.8, 0.45, 1.5, 'витрина'),
+      N(0.35, 3.95, 0.85, 0.5, 0.85, 'винил'), N(5.35, 4.1, 0.35, 0.35, 0.12, '🤖')],
+    'В3 · Галерея': [N(0.9, 4.15, 3.3, 0.38, 1.9, 'String'), N(5.25, 3.7, 0.45, 0.4, 1.5, 'LED')],
+    'В4 · Дерево': [rug('джут премиум'), N(1.7, 3.82, 2.0, 0.6, 0.85, 'апарадор'),
+      N(0.32, 3.88, 0.8, 0.55, 0.6, 'винил'), N(1.2, 4.5, 3.6, 0.08, 1.35, 'рейки')],
+    'В5 · Люкс': [rug('ковёр шерсть'), N(2.0, 3.92, 1.8, 0.55, 0.5, 'Nadyria'),
+      N(5.15, 1.4, 0.58, 1.0, 1.74, 'витрина')],
+    'В6 · Ретро 70-х': [rug('ковёр беж'), N(1.85, 3.9, 1.95, 0.52, 0.78, 'сайдборд орех'),
+      N(1.3, 2.9, 0.42, 0.42, 0.5, 'хром'), N(4.35, 2.95, 0.6, 0.6, 0.42, 'пуф')]
+  };
+
+  function render(name) {
+    furn.innerHTML = '';
+    base.concat(variants[name]).forEach(function (o) { box(furn, o); });
+    document.querySelectorAll('.vtabs button').forEach(function (b) {
+      b.className = b.textContent === name ? 'on' : '';
+    });
+  }
+
+  var tabs = document.getElementById('vtabs');
+  Object.keys(variants).forEach(function (name) {
+    var b = document.createElement('button');
+    b.textContent = name;
+    b.onclick = function () { render(name); };
+    tabs.appendChild(b);
+  });
+
+  /* вращение и масштаб */
+  var rx = 62, rz = -32, sc = 1;
+  function apply() {
+    world.style.transform = 'scale(' + sc + ') rotateX(' + rx + 'deg) rotateZ(' + rz + 'deg)';
+  }
+  var drag = null, pinch = null;
+  stage.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, y: e.clientY }; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    rz += (e.clientX - drag.x) * 0.35;
+    rx = Math.max(15, Math.min(88, rx - (e.clientY - drag.y) * 0.25));
+    drag = { x: e.clientX, y: e.clientY };
+    apply();
+  });
+  stage.addEventListener('pointerup', function () { drag = null; });
+  stage.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    sc = Math.max(0.45, Math.min(2.2, sc * (e.deltaY > 0 ? 0.92 : 1.08)));
+    apply();
+  }, { passive: false });
+  stage.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 2) {
+      pinch = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    }
+  }, { passive: true });
+  stage.addEventListener('touchmove', function (e) {
+    if (e.touches.length === 2 && pinch) {
+      var d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      sc = Math.max(0.45, Math.min(2.2, sc * d / pinch));
+      pinch = d; drag = null; apply();
+    }
+  }, { passive: true });
+
+  render('В1 · Japandi');
+  apply();
+})();
+</script>
+
+</body>
+</html>

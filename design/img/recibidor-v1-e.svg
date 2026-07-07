@@ -1,0 +1,284 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wallE" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2ead9"/>
+      <stop offset="0.55" stop-color="#f7f3ec"/>
+      <stop offset="1" stop-color="#efe6d4"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#f3d9a6" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#e6c489" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e6c489" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warmPool" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#cf9f5c" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floorE" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#b89a6c"/>
+    </linearGradient>
+    <linearGradient id="oakV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="doorE" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="0.6" stop-color="#f0eadf" stop-opacity="1"/>
+      <stop offset="1" stop-color="#e6ded0"/>
+    </linearGradient>
+    <linearGradient id="doorPanel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f3ec"/>
+      <stop offset="1" stop-color="#e4dcce"/>
+    </linearGradient>
+    <linearGradient id="chromeE" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#9a968f"/>
+    </linearGradient>
+    <linearGradient id="mirrorE" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d5c9b4"/>
+      <stop offset="0.4" stop-color="#cbb287" stop-opacity="0.4"/>
+      <stop offset="0.6" stop-color="#e8dcc6" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#b89a6c"/>
+    </linearGradient>
+    <linearGradient id="glassCab" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8dcc6" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#f3d9a6" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="ledWarm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3d9a6" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="jute" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <radialGradient id="ropeSeat" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </radialGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wallE)"/>
+
+  <!-- ambient evening warm glow washes -->
+  <rect x="0" y="0" width="800" height="420" fill="url(#warmPool)"/>
+  <ellipse cx="600" cy="150" rx="230" ry="180" fill="url(#lampGlow)"/>
+  <ellipse cx="140" cy="120" rx="150" ry="150" fill="url(#lampGlow)" opacity="0.5"/>
+
+  <!-- FLOOR band lower third -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floorE)"/>
+  <!-- skirting line -->
+  <rect x="0" y="404" width="800" height="8" fill="#a5876a"/>
+  <rect x="0" y="410" width="800" height="3" fill="#8a6f52" opacity="0.5"/>
+  <!-- plank lines -->
+  <g stroke="#a5876a" stroke-width="1.5" opacity="0.35">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+  </g>
+  <g stroke="#9a7d5c" stroke-width="1" opacity="0.25">
+    <line x1="120" y1="413" x2="120" y2="452"/>
+    <line x1="340" y1="452" x2="340" y2="500"/>
+    <line x1="560" y1="500" x2="560" y2="552"/>
+    <line x1="250" y1="552" x2="250" y2="600"/>
+    <line x1="640" y1="413" x2="640" y2="452"/>
+  </g>
+  <!-- warm floor light pool -->
+  <ellipse cx="560" cy="470" rx="240" ry="70" fill="#cf9f5c" opacity="0.14"/>
+
+  <!-- FRONT DOOR at left -->
+  <g>
+    <rect x="40" y="70" width="150" height="335" fill="#d8c19a"/>
+    <rect x="46" y="76" width="138" height="329" fill="url(#doorE)"/>
+    <!-- door panels -->
+    <rect x="60" y="92" width="108" height="130" rx="6" fill="url(#doorPanel)" stroke="#d8c19a" stroke-width="2"/>
+    <rect x="60" y="238" width="108" height="150" rx="6" fill="url(#doorPanel)" stroke="#d8c19a" stroke-width="2"/>
+    <rect x="60" y="92" width="108" height="130" rx="6" fill="#cf9f5c" opacity="0.06"/>
+    <!-- handle chrome -->
+    <rect x="150" y="238" width="10" height="34" rx="5" fill="url(#chromeE)"/>
+    <circle cx="155" cy="238" r="6" fill="#c9c5be"/>
+    <!-- warm reflection on door -->
+    <rect x="70" y="100" width="20" height="280" fill="#f3d9a6" opacity="0.15"/>
+  </g>
+
+  <!-- JUTE DOORMAT in front of door -->
+  <g>
+    <ellipse cx="150" cy="480" rx="95" ry="14" fill="#1f1b16" opacity="0.12"/>
+    <rect x="70" y="452" width="165" height="34" rx="6" fill="url(#jute)"/>
+    <g stroke="#a5876a" stroke-width="1" opacity="0.5">
+      <line x1="70" y1="461" x2="235" y2="461"/>
+      <line x1="70" y1="470" x2="235" y2="470"/>
+      <line x1="70" y1="479" x2="235" y2="479"/>
+    </g>
+    <g stroke="#a5876a" stroke-width="1" opacity="0.3">
+      <line x1="100" y1="452" x2="100" y2="486"/>
+      <line x1="135" y1="452" x2="135" y2="486"/>
+      <line x1="170" y1="452" x2="170" y2="486"/>
+      <line x1="205" y1="452" x2="205" y2="486"/>
+    </g>
+  </g>
+
+  <!-- SHOE CABINET 1 (slim) -->
+  <g>
+    <ellipse cx="270" cy="410" rx="55" ry="12" fill="#1f1b16" opacity="0.12"/>
+    <rect x="222" y="250" width="90" height="158" rx="6" fill="url(#oakV)"/>
+    <rect x="228" y="256" width="78" height="70" rx="4" fill="url(#oakH)" stroke="#a5876a" stroke-width="1.5"/>
+    <rect x="228" y="332" width="78" height="70" rx="4" fill="url(#oakH)" stroke="#a5876a" stroke-width="1.5"/>
+    <circle cx="267" cy="291" r="4" fill="#5c4632"/>
+    <circle cx="267" cy="367" r="4" fill="#5c4632"/>
+    <rect x="232" y="258" width="8" height="140" fill="#f3d9a6" opacity="0.18"/>
+  </g>
+
+  <!-- SHOE CABINET 2 (slim) -->
+  <g>
+    <ellipse cx="360" cy="410" rx="52" ry="12" fill="#1f1b16" opacity="0.12"/>
+    <rect x="318" y="250" width="84" height="158" rx="6" fill="url(#oakV)"/>
+    <rect x="324" y="256" width="72" height="70" rx="4" fill="url(#oakH)" stroke="#a5876a" stroke-width="1.5"/>
+    <rect x="324" y="332" width="72" height="70" rx="4" fill="url(#oakH)" stroke="#a5876a" stroke-width="1.5"/>
+    <circle cx="360" cy="291" r="4" fill="#5c4632"/>
+    <circle cx="360" cy="367" r="4" fill="#5c4632"/>
+    <rect x="328" y="258" width="7" height="140" fill="#f3d9a6" opacity="0.18"/>
+  </g>
+
+  <!-- OAK BENCH with woven rope seat + robot vacuum -->
+  <g>
+    <ellipse cx="470" cy="472" rx="105" ry="16" fill="#1f1b16" opacity="0.12"/>
+    <!-- legs -->
+    <rect x="392" y="400" width="12" height="60" rx="3" fill="url(#oakDark)"/>
+    <rect x="536" y="400" width="12" height="60" rx="3" fill="url(#oakDark)"/>
+    <!-- robot vacuum disc parked under -->
+    <g>
+      <ellipse cx="470" cy="452" rx="42" ry="12" fill="#1f1b16" opacity="0.14"/>
+      <ellipse cx="470" cy="446" rx="40" ry="15" fill="#3d3a36"/>
+      <ellipse cx="470" cy="443" rx="40" ry="14" fill="#2a2724"/>
+      <ellipse cx="470" cy="441" rx="30" ry="9" fill="#3d3a36"/>
+      <circle cx="470" cy="441" r="6" fill="#63654a"/>
+      <ellipse cx="462" cy="438" rx="9" ry="3" fill="#9a968f" opacity="0.4"/>
+    </g>
+    <!-- seat frame -->
+    <rect x="385" y="388" width="170" height="20" rx="6" fill="url(#oakH)"/>
+    <!-- woven rope seat -->
+    <rect x="392" y="378" width="156" height="16" rx="5" fill="url(#ropeSeat)"/>
+    <g stroke="#a5876a" stroke-width="1.4" opacity="0.55">
+      <line x1="400" y1="378" x2="400" y2="394"/>
+      <line x1="412" y1="378" x2="412" y2="394"/>
+      <line x1="424" y1="378" x2="424" y2="394"/>
+      <line x1="436" y1="378" x2="436" y2="394"/>
+      <line x1="448" y1="378" x2="448" y2="394"/>
+      <line x1="460" y1="378" x2="460" y2="394"/>
+      <line x1="472" y1="378" x2="472" y2="394"/>
+      <line x1="484" y1="378" x2="484" y2="394"/>
+      <line x1="496" y1="378" x2="496" y2="394"/>
+      <line x1="508" y1="378" x2="508" y2="394"/>
+      <line x1="520" y1="378" x2="520" y2="394"/>
+      <line x1="532" y1="378" x2="532" y2="394"/>
+      <line x1="540" y1="378" x2="540" y2="394"/>
+    </g>
+    <rect x="392" y="382" width="156" height="4" fill="#f3d9a6" opacity="0.3"/>
+  </g>
+
+  <!-- TALL NARROW DISPLAY CABINET with warm LED + 3 handbags -->
+  <g>
+    <ellipse cx="640" cy="410" rx="60" ry="13" fill="#1f1b16" opacity="0.12"/>
+    <!-- frame -->
+    <rect x="592" y="120" width="96" height="288" rx="8" fill="url(#oakV)"/>
+    <rect x="600" y="128" width="80" height="272" rx="5" fill="#3d3a36"/>
+    <!-- warm glass with LED glow -->
+    <rect x="604" y="132" width="72" height="264" rx="4" fill="url(#glassCab)"/>
+    <rect x="604" y="132" width="72" height="60" fill="url(#ledWarm)" opacity="0.7"/>
+    <!-- LED strip -->
+    <rect x="606" y="134" width="68" height="4" rx="2" fill="#f3d9a6"/>
+    <rect x="606" y="215" width="68" height="4" rx="2" fill="#f3d9a6" opacity="0.85"/>
+    <rect x="606" y="300" width="68" height="4" rx="2" fill="#f3d9a6" opacity="0.7"/>
+    <!-- shelves -->
+    <rect x="604" y="212" width="72" height="6" fill="#5c4632" opacity="0.6"/>
+    <rect x="604" y="297" width="72" height="6" fill="#5c4632" opacity="0.6"/>
+    <!-- handbag tan (top) -->
+    <g>
+      <rect x="618" y="158" width="44" height="34" rx="8" fill="#c8a87c"/>
+      <rect x="618" y="158" width="44" height="14" rx="7" fill="#d8c19a"/>
+      <path d="M626 158 q14 -18 28 0" fill="none" stroke="#a5876a" stroke-width="3"/>
+      <ellipse cx="640" cy="188" rx="20" ry="4" fill="#1f1b16" opacity="0.12"/>
+    </g>
+    <!-- handbag olive (mid) -->
+    <g>
+      <rect x="616" y="244" width="48" height="36" rx="7" fill="#7a7c5c"/>
+      <rect x="616" y="244" width="48" height="12" rx="6" fill="#8a8c62"/>
+      <path d="M624 244 q16 -16 32 0" fill="none" stroke="#63654a" stroke-width="3"/>
+      <ellipse cx="640" cy="277" rx="22" ry="4" fill="#1f1b16" opacity="0.12"/>
+    </g>
+    <!-- handbag black (bottom) -->
+    <g>
+      <rect x="620" y="330" width="42" height="36" rx="8" fill="#2a2724"/>
+      <rect x="620" y="330" width="42" height="12" rx="6" fill="#3d3a36"/>
+      <path d="M628 330 q13 -16 26 0" fill="none" stroke="#15130f" stroke-width="3"/>
+      <ellipse cx="641" cy="363" rx="19" ry="4" fill="#1f1b16" opacity="0.14"/>
+    </g>
+    <!-- glass reflection -->
+    <rect x="610" y="134" width="14" height="260" fill="#e8dcc6" opacity="0.18"/>
+  </g>
+
+  <!-- FULL-HEIGHT OAK-FRAMED MIRROR -->
+  <g>
+    <ellipse cx="740" cy="410" rx="42" ry="11" fill="#1f1b16" opacity="0.12"/>
+    <rect x="708" y="150" width="70" height="258" rx="10" fill="url(#oakV)"/>
+    <rect x="718" y="160" width="50" height="238" rx="6" fill="url(#mirrorE)"/>
+    <!-- warm reflected light streaks -->
+    <rect x="724" y="168" width="10" height="222" fill="#f3d9a6" opacity="0.22"/>
+    <rect x="748" y="168" width="6" height="222" fill="#b8cdd6" opacity="0.2"/>
+    <rect x="718" y="300" width="50" height="98" fill="#cf9f5c" opacity="0.1"/>
+    <rect x="708" y="150" width="70" height="258" rx="10" fill="none" stroke="#a5876a" stroke-width="2"/>
+  </g>
+
+  <!-- BAMBOO WALL HOOKS with one beige coat -->
+  <g>
+    <!-- mounting rail -->
+    <rect x="380" y="120" width="180" height="10" rx="5" fill="url(#oakH)"/>
+    <!-- round hooks -->
+    <circle cx="400" cy="140" r="9" fill="#d8c19a" stroke="#a5876a" stroke-width="2"/>
+    <circle cx="400" cy="140" r="4" fill="#cbb287"/>
+    <circle cx="440" cy="140" r="9" fill="#d8c19a" stroke="#a5876a" stroke-width="2"/>
+    <circle cx="440" cy="140" r="4" fill="#cbb287"/>
+    <circle cx="480" cy="140" r="9" fill="#d8c19a" stroke="#a5876a" stroke-width="2"/>
+    <circle cx="480" cy="140" r="4" fill="#cbb287"/>
+    <circle cx="520" cy="140" r="9" fill="#d8c19a" stroke="#a5876a" stroke-width="2"/>
+    <circle cx="520" cy="140" r="4" fill="#cbb287"/>
+    <!-- beige coat on second hook -->
+    <g>
+      <path d="M440 140 q-6 6 -12 18 q-14 34 -18 96 q-2 34 6 60 l52 0 q8 -30 6 -64 q-2 -60 -16 -94 q-6 -12 -12 -16 z" fill="#e8dcc6"/>
+      <path d="M440 140 q-6 6 -12 18 q-8 20 -12 60 l14 0 q4 -46 10 -78 z" fill="#f2ead9" opacity="0.7"/>
+      <path d="M452 158 q10 30 12 90 q1 34 -5 64 l14 0 q8 -30 6 -64 q-2 -50 -13 -82 z" fill="#cbb287" opacity="0.5"/>
+      <!-- collar -->
+      <path d="M428 150 q12 -12 24 0 q-4 12 -12 16 q-8 -4 -12 -16 z" fill="#d8c19a"/>
+      <!-- warm light edge -->
+      <path d="M448 160 q10 30 11 88" fill="none" stroke="#f3d9a6" stroke-width="2" opacity="0.4"/>
+    </g>
+  </g>
+
+  <!-- EVENING TABLE LAMP glow accent near cabinet 2 (soft) -->
+  <g>
+    <ellipse cx="360" cy="250" rx="40" ry="30" fill="url(#lampGlow)" opacity="0.5"/>
+  </g>
+
+  <!-- soft floor reflections (evening) -->
+  <g opacity="0.12">
+    <rect x="592" y="410" width="96" height="40" fill="#cf9f5c"/>
+    <rect x="708" y="410" width="70" height="34" fill="#cbb287"/>
+  </g>
+
+  <!-- subtle warm vignette corners -->
+  <rect x="0" y="0" width="800" height="600" fill="#8a5a20" opacity="0.03"/>
+</svg>

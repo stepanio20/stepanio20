@@ -1,0 +1,31 @@
+{
+  "note": "Пул товаров для будущих страниц: спальня и терраса (25 этаж, ветер). Без красного.",
+  "dormitorio": [
+    {"category": "кровать", "name": "Kave Home Lenon — кровать, массив дуба, 160×200", "price_eur": 899, "approx": true, "url": "https://kavehome.com/en/en/p/lenon-oak-wood-and-veneer-bed-for-160-x-200-cm-mattress-fsc-mix-credit"},
+    {"category": "кровать", "name": "IKEA IDANÄS — мягкая кровать, беж, 160×200", "price_eur": 399, "approx": false, "url": "https://www.ikea.com/es/es/p/idanas-estructura-cama-tapizada-naggen-beige-50588069/"},
+    {"category": "тумбочка", "name": "Kave Home Vedrana — орех + сталь, push-to-open", "price_eur": 199, "approx": true, "url": "https://kavehome.com/en/en/p/vedrana-bedside-table-2-walnut-veneer-drawers-and-black-steel-legs-60-x-55-cm"},
+    {"category": "тумбочка", "name": "Kave Home Beyla — ясень/дуб с рейками", "price_eur": 229, "approx": true, "url": "https://kavehome.com/es/es/p/mesita-de-noche-beyla-de-madera-maciza-de-fresno-y-chapa-de-roble-53-x-62-cm-fsc-100"},
+    {"category": "бельё", "name": "Zara Home — стираный лён (олива/песок/белый)", "price_eur": 129, "approx": true, "url": "https://www.zarahome.com/es/funda-nordica-lino-lavado-160-gxm2-l46150088"},
+    {"category": "бельё", "name": "La Redoute Elina AM.PM — 100% лён", "price_eur": 76, "approx": true, "url": "https://www.laredoute.es/ppdp/prod-350048717.aspx"},
+    {"category": "шкаф", "name": "IKEA PAX/TONSTAD — дубовый шпон, 150×236", "price_eur": 700, "approx": true, "url": "https://www.ikea.com/es/es/p/pax-tonstad-combinacion-armario-blanco-chapa-roble-s59549002/"},
+    {"category": "свет", "name": "IKEA REGOLIT/HEMMA — бумажный шар Ø45", "price_eur": 18, "approx": true, "url": "https://www.ikea.com/es/es/p/regolit-hemma-lampara-techo-blanco-s19444083/"},
+    {"category": "свет", "name": "IKEA VINDKAST — облако Ø50", "price_eur": 25, "approx": true, "url": "https://www.ikea.com/es/es/p/vindkast-lampara-techo-blanco-20450520/"},
+    {"category": "свет", "name": "SKLUM Uvol — хром-бра с опаловым шаром (ретро)", "price_eur": 45, "approx": true, "url": "https://www.sklum.com/es/comprar-apliques-pared/198746-aplique-de-pared-en-acero-inoxidable-con-bola-de-cristal-uvol-traditional.html"},
+    {"category": "шторы", "name": "La Redoute Private AM.PM — лён blackout", "price_eur": 84, "approx": true, "url": "https://www.laredoute.es/ppdp/prod-351135807.aspx"},
+    {"category": "шторы", "name": "Leroy Merlin — пара штор под лён, беж", "price_eur": 35, "approx": true, "url": "https://www.leroymerlin.es/productos/cortinas-opacas-con-ojales-look-de-lino-2-pzas-beige-140x175-cm-97714278.html"}
+  ],
+  "terraza": [
+    {"category": "лаунж", "name": "SKLUM Sophie — диван + 2 кресла + столики, алюминий/шнур", "price_eur": 899, "approx": true, "url": "https://www.sklum.com/es/comprar-salones-de-jardin/170875-conjunto-de-jardin-con-sofa-de-2-plazas-2-sillones-y-mesas-de-centro-en-aluminio-y-cuerda-trenzada-sophie.html"},
+    {"category": "лаунж", "name": "Kave Home Cailin — диван 2 места, шнур беж, сталь", "price_eur": 550, "approx": true, "url": "https://www.manomano.es/p/kave-home-sof-cailin-2-plazas-cuerda-beige-patas-de-acero-galvanizado-blanco-150-cm-beige-69916968"},
+    {"category": "обеденный", "name": "IKEA ASKHOLMEN — стол + 4 стула, акация, складной", "price_eur": 250, "approx": true, "url": "https://www.ikea.com/es/es/p/askholmen-mesa-con-4-sillas-plegable-exterior-marron-oscuro-s79529102/"},
+    {"category": "обеденный", "name": "IKEA NÄMMARÖ — стол + 2 стула + подушки", "price_eur": 165, "approx": false, "url": "https://www.ikea.com/es/es/p/nammaro-mesa-2-sillas-plegables-exterior-plegable-tinte-marron-claro-kuddarna-beige-grisaceo-claro-s89581788/"},
+    {"category": "ковёр", "name": "SKLUM Ciana — уличный, УФ-стойкий", "price_eur": 110, "approx": true, "url": "https://www.sklum.com/es/comprar-alfombras-de-exterior/161572-alfombra-de-exterior-de-polipropileno-ciana.html"},
+    {"category": "свет", "name": "Maisons du Monde Paulo — фонари бамбук/металл ×2", "price_eur": 60, "approx": true, "url": "https://www.maisonsdumonde.com/ES/es/p/faroles-de-metal-negro-y-bambu-x2-paulo-200661.htm"},
+    {"category": "свет", "name": "Leroy Merlin — солнечная гирлянда 9,2 м IP44", "price_eur": 40, "approx": true, "url": "https://www.leroymerlin.es/productos/guirnalda-solar-exterior-25-bombillas-led-filamento-e10-ip44-9-2-metros-91242533.html"},
+    {"category": "кашпо", "name": "Leroy Merlin Hibiscus — тяжёлые кашпо ×3 (ветер!)", "price_eur": 170, "approx": true, "url": "https://www.leroymerlin.es/productos/macetas-altas-de-exterior-en-fibra-de-arcilla-marron-claro-set-3-piezas-hibiscus-89453351.html"},
+    {"category": "растения", "name": "Олива 156 см в кашпо", "price_eur": 140, "approx": true, "url": "https://www.leroymerlin.es/productos/jardin-y-terraza/macetas-y-jardineras/macetas-y-jardineras-para-exterior/macetas-de-barro/planta-de-olivo-con-maceta-negra-156h-cm-86148469.html"},
+    {"category": "растения", "name": "Стрелиция nicolai 9L", "price_eur": 45, "approx": true, "url": "https://verdecora.es/comprar-plantas-verdes/352117-strelitzia-nicolai-9l.html"},
+    {"category": "тень", "name": "BELVEO — антиветровой зонт 3×3 (до 80-90 км/ч)", "price_eur": 549, "approx": true, "url": "https://www.leroymerlin.es/productos/parasol-excentrico-cuadrado-antiviento-de-aluminio-belveo-gris-3-x-3-m-80055836.html"},
+    {"category": "тень", "name": "NATERIAL Aura — боковой зонт 281×386", "price_eur": 279, "approx": true, "url": "https://www.leroymerlin.es/productos/parasol-excentrico-de-aluminio-acero-naterial-aura-gris-281x386-5-cm-82232818.html"}
+  ]
+}

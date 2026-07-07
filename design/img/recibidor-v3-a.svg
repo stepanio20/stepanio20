@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <radialGradient id="wallGlow" cx="0.22" cy="0.12" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.55" stop-color="#cfccc6"/>
+      <stop offset="1" stop-color="#b0ada7"/>
+    </linearGradient>
+    <linearGradient id="frontGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#d5d2cc"/>
+      <stop offset="1" stop-color="#bdb9b2"/>
+    </linearGradient>
+    <linearGradient id="chromeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#e3e1dc"/>
+    </linearGradient>
+    <linearGradient id="interiorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="creamGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+  </defs>
+
+  <!-- wall -->
+  <rect x="0" y="0" width="800" height="500" fill="url(#wallGrad)"/>
+  <rect x="0" y="0" width="800" height="500" fill="url(#wallGlow)"/>
+  <rect x="70" y="0" width="120" height="500" rx="6" fill="#ffffff" opacity="0.12"/>
+
+  <!-- floor -->
+  <rect x="0" y="496" width="800" height="104" fill="url(#floorGrad)"/>
+  <rect x="0" y="496" width="800" height="5" fill="#a5876a" opacity="0.35"/>
+  <rect x="0" y="486" width="800" height="12" rx="4" fill="#e3e1dc" opacity="0.5"/>
+
+  <!-- cabinet ground shadow -->
+  <ellipse cx="404" cy="500" rx="196" ry="17" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- side / depth block -->
+  <rect x="266" y="82" width="296" height="418" rx="8" fill="#3d3a36"/>
+  <rect x="266" y="82" width="296" height="418" rx="8" fill="#2a2724" opacity="0.3"/>
+
+  <!-- main body -->
+  <rect x="252" y="76" width="296" height="420" rx="8" fill="url(#bodyGrad)"/>
+  <rect x="252" y="76" width="5" height="420" rx="3" fill="#ffffff" opacity="0.3"/>
+  <rect x="540" y="76" width="8" height="420" rx="3" fill="#3d3a36" opacity="0.16"/>
+
+  <!-- top face (perspective) + objects -->
+  <polygon points="264,88 536,88 526,76 274,76" fill="#d9d6d0"/>
+  <rect x="264" y="86.5" width="272" height="2" fill="#3d3a36" opacity="0.3"/>
+  <ellipse cx="322" cy="80" rx="42" ry="9" fill="url(#chromeGrad)"/>
+  <ellipse cx="322" cy="79" rx="34" ry="6" fill="#d5d2cc"/>
+  <ellipse cx="322" cy="77.5" rx="24" ry="3.5" fill="#e3e1dc"/>
+  <rect x="486" y="74" width="40" height="12" rx="3" fill="#b8cdd6"/>
+  <rect x="486" y="79" width="40" height="1.6" fill="#ffffff" opacity="0.4"/>
+  <ellipse cx="464" cy="86" rx="12" ry="3" fill="#3d3a36" opacity="0.15"/>
+  <rect x="452" y="58" width="24" height="28" rx="4" fill="url(#creamGrad)"/>
+  <ellipse cx="464" cy="58" rx="12" ry="3.5" fill="#ffffff"/>
+  <rect x="452" y="72" width="24" height="2" fill="#cbb287" opacity="0.3"/>
+
+  <!-- flip front 1 -->
+  <rect x="264" y="90" width="272" height="75" rx="7" fill="url(#frontGrad)"/>
+  <rect x="268" y="92" width="264" height="2.5" rx="1" fill="#eceae5" opacity="0.75"/>
+  <rect x="268" y="160" width="264" height="3" rx="1" fill="#3d3a36" opacity="0.18"/>
+  <rect x="355" y="99" width="90" height="6" rx="3" fill="#2a2724"/>
+  <rect x="355" y="104" width="90" height="1.6" fill="#e3e1dc" opacity="0.4"/>
+
+  <!-- flip front 2 -->
+  <rect x="264" y="170" width="272" height="75" rx="7" fill="url(#frontGrad)"/>
+  <rect x="268" y="172" width="264" height="2.5" rx="1" fill="#eceae5" opacity="0.75"/>
+  <rect x="268" y="240" width="264" height="3" rx="1" fill="#3d3a36" opacity="0.18"/>
+  <rect x="355" y="179" width="90" height="6" rx="3" fill="#2a2724"/>
+  <rect x="355" y="184" width="90" height="1.6" fill="#e3e1dc" opacity="0.4"/>
+
+  <!-- flip front 3 -->
+  <rect x="264" y="250" width="272" height="75" rx="7" fill="url(#frontGrad)"/>
+  <rect x="268" y="252" width="264" height="2.5" rx="1" fill="#eceae5" opacity="0.75"/>
+  <rect x="268" y="320" width="264" height="3" rx="1" fill="#3d3a36" opacity="0.18"/>
+  <rect x="355" y="259" width="90" height="6" rx="3" fill="#2a2724"/>
+  <rect x="355" y="264" width="90" height="1.6" fill="#e3e1dc" opacity="0.4"/>
+
+  <!-- flip front 4 (open) -->
+  <rect x="268" y="331" width="264" height="70" rx="6" fill="url(#interiorGrad)"/>
+  <rect x="268" y="331" width="264" height="12" rx="6" fill="#15130f" opacity="0.4"/>
+  <!-- shoe inside -->
+  <path d="M356,368 L452,368 L448,361 L360,361 Z" fill="#5c4632"/>
+  <path d="M362,361 C362,349 374,344 398,344 C424,344 442,350 446,361 Z" fill="url(#amberGrad)"/>
+  <path d="M362,361 C362,353 368,349 378,347 L380,361 Z" fill="#8a5a20" opacity="0.55"/>
+  <path d="M386,349 C398,347 414,349 430,356 L428,360 C414,354 400,352 388,353 Z" fill="#7a7c5c" opacity="0.8"/>
+  <path d="M410,362 C420,360 434,362 452,368 L442,368 C430,364 420,362 412,363 Z" fill="#c8a87c" opacity="0.7"/>
+  <!-- flap tilted forward -->
+  <polygon points="272,368 528,368 534,401 266,401" fill="url(#frontGrad)"/>
+  <rect x="276" y="369" width="248" height="2.5" rx="1" fill="#eceae5" opacity="0.7"/>
+  <rect x="370" y="373" width="60" height="5" rx="2.5" fill="#2a2724"/>
+  <polygon points="528,368 534,401 534,401 528,368" fill="#3d3a36" opacity="0.2"/>
+
+  <!-- flip front 5 -->
+  <rect x="264" y="408" width="272" height="75" rx="7" fill="url(#frontGrad)"/>
+  <rect x="268" y="410" width="264" height="2.5" rx="1" fill="#eceae5" opacity="0.75"/>
+  <rect x="268" y="478" width="264" height="3" rx="1" fill="#3d3a36" opacity="0.18"/>
+  <rect x="355" y="417" width="90" height="6" rx="3" fill="#2a2724"/>
+  <rect x="355" y="422" width="90" height="1.6" fill="#e3e1dc" opacity="0.4"/>
+
+  <!-- plinth / base rail -->
+  <rect x="256" y="484" width="288" height="12" rx="3" fill="#a9a5a0"/>
+  <rect x="256" y="484" width="288" height="2.5" fill="#3d3a36" opacity="0.25"/>
+
+  <!-- floor pair of shoes -->
+  <ellipse cx="650" cy="527" rx="72" ry="8" fill="rgba(31,27,22,0.12)"/>
+  <path d="M622,522 C620,512 632,507 652,507 C672,507 684,513 686,522 Z" fill="#c8a87c"/>
+  <path d="M620,522 L688,522 L686,528 L622,528 Z" fill="#6d5138"/>
+  <path d="M588,523 C586,512 598,507 620,507 C640,507 652,513 654,523 Z" fill="#7a7c5c"/>
+  <path d="M586,523 L656,523 L654,529 L588,529 Z" fill="#5c4632"/>
+  <path d="M600,512 C614,509 632,511 648,518 L646,522 C632,516 616,514 602,515 Z" fill="#8a8c62" opacity="0.7"/>
+</svg>

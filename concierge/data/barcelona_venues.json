@@ -1,0 +1,208 @@
+{
+  "_meta": {
+    "version": 1,
+    "city": "Barcelona",
+    "currency": "EUR",
+    "last_verified": "2026-06-15",
+    "disclaimer": "Information, not endorsements. Prices and addresses change — verify on the source URL before booking. All venues sourced from public listings cited per entry.",
+    "schema": "labs, wellness, food_delivery; each entry: name, kind, neighbourhood, address, lat, lon, url, booking_url, services[], price_est_eur, source_urls[]"
+  },
+
+  "labs": [
+    {
+      "id": "synlab_pg",
+      "name": "SYNLAB Anàlisis Clíniques",
+      "neighbourhood": "Eixample",
+      "address": "Passeig de Gràcia 50, 08007 Barcelona",
+      "lat": 41.391,
+      "lon": 2.165,
+      "url": "https://www.synlab.es",
+      "booking_url": "https://www.synlab.es",
+      "services": ["lipid_panel", "apob", "lpa", "liver", "hba1c", "vitamin_d", "b12", "ferritin", "thyroid", "hormones", "pgx_panels"],
+      "price_est_eur": {"lipid_panel": 35, "apob": 25, "lpa": 35, "comprehensive": 90},
+      "phone": "+34 932 160 095",
+      "hours": "Mon–Fri 07:00–20:00, Sat 07:00–17:00, Sun/holiday 08:00–15:00 (varies by branch)",
+      "source_urls": ["https://www.paginasamarillas.es/f/barcelona/synlab-analisis-cliniques_235732666_000000001.html"]
+    },
+    {
+      "id": "synlab_urgell",
+      "name": "SYNLAB — Urgell / Hospital Clínic",
+      "neighbourhood": "Eixample (Esquerra)",
+      "address": "C/ Urgell 161, 08036 Barcelona",
+      "lat": 41.387,
+      "lon": 2.155,
+      "url": "https://www.synlab.es",
+      "booking_url": "https://www.synlab.es",
+      "services": ["lipid_panel", "apob", "lpa", "liver", "hba1c", "vitamin_d", "b12", "ferritin", "thyroid"],
+      "price_est_eur": {"lipid_panel": 35, "comprehensive": 90},
+      "hours": "Mon–Fri 07:00–20:00, Sat 07:00–17:00, Sun/holiday 08:00–15:00",
+      "source_urls": ["https://laboratoriodeanalisisclinicos.com/centro/laboratorio-de-analisis-clinicos-barcelona-urgell-161/"]
+    },
+    {
+      "id": "echevarne_provenca",
+      "name": "Laboratorio Echevarne — Central",
+      "neighbourhood": "Eixample",
+      "address": "C/ Provença 312, 08037 Barcelona",
+      "lat": 41.394,
+      "lon": 2.158,
+      "url": "https://www.echevarne.com",
+      "booking_url": "https://www.echevarne.com",
+      "services": ["lipid_panel", "apob", "lpa", "liver", "hba1c", "vitamin_d", "b12", "ferritin", "thyroid", "hormones", "tumour_markers", "pgx_panels", "pathology"],
+      "price_est_eur": {"lipid_panel": 30, "apob": 20, "lpa": 30, "comprehensive": 100},
+      "phone": "+34 902 525 500",
+      "source_urls": ["https://www.doctoralia.es/clinicas/laboratorio-echevarne-central-barcelona-provenca", "https://laboratorioechevarne.com/en"]
+    },
+    {
+      "id": "cerba_paris",
+      "name": "Cerba Internacional — Barcelona París",
+      "neighbourhood": "Eixample",
+      "address": "C/ París 127, 08036 Barcelona",
+      "lat": 41.391,
+      "lon": 2.153,
+      "url": "https://cerba.com",
+      "booking_url": "https://cerba.com/en/home-analysis/",
+      "services": ["lipid_panel", "apob", "lpa", "liver", "hba1c", "vitamin_d", "b12", "ferritin", "thyroid", "tumour_markers"],
+      "price_est_eur": {"lipid_panel": 35, "comprehensive": 100},
+      "hours": "Mon–Fri 07:00–19:00, Sat 08:00–13:00, Sun 09:00–12:00",
+      "notes": "Also offers home blood draws.",
+      "source_urls": ["https://www.topdoctors.es/centro/laboratorio-cerba-barcelona/", "https://cerba.com/en/home-analysis/"]
+    }
+  ],
+
+  "wellness": [
+    {
+      "id": "ilo_studios",
+      "name": "ILO STUDIOS",
+      "kind": "sauna+icebath",
+      "neighbourhood": "Dreta de l'Eixample",
+      "address": "C/ Bailén 56, 08009 Barcelona",
+      "lat": 41.394,
+      "lon": 2.175,
+      "url": "https://ilo-studios.com/",
+      "booking_url": "https://urbansportsclub.com/en/venues/ilo-studios",
+      "services": ["sauna_session", "ice_bath", "contrast_therapy", "breathwork"],
+      "price_est_eur": {"drop_in": 32, "discovery_3pack": 45, "unlimited_month": 250},
+      "hours": "Mon–Fri 16:30–20:30, Sat 09:30–20:30, Sun 10:00–17:00",
+      "source_urls": ["https://ilo-studios.com/", "https://urbansportsclub.com/en/venues/ilo-studios", "https://classpass.com/studios/ilo-studios-barcelona"]
+    },
+    {
+      "id": "aire_ancient_baths",
+      "name": "AIRE Ancient Baths Barcelona",
+      "kind": "hammam+massage",
+      "neighbourhood": "El Born",
+      "address": "Passeig Picasso 22, 08003 Barcelona",
+      "lat": 41.387,
+      "lon": 2.184,
+      "url": "https://relax.beaire.com/en/aire-ancient-baths-barcelona",
+      "booking_url": "https://relax.beaire.com/en/aire-ancient-baths-barcelona",
+      "services": ["hammam", "thermal_baths", "massage", "aromatherapy"],
+      "price_est_eur": {"baths_only": 55, "baths_plus_15min_massage": 90, "baths_plus_60min_massage": 140},
+      "notes": "Appointment required. Premium spa, occasional treat — not weekly.",
+      "source_urls": ["https://relax.beaire.com/en/aire-ancient-baths-barcelona", "https://barcelonanavigator.com/aire-de-barcelona-spa-offer/"]
+    }
+  ],
+
+  "food_delivery": [
+    {
+      "id": "honest_greens_catalunya",
+      "name": "Honest Greens — Plaça Catalunya",
+      "neighbourhood": "Dreta de l'Eixample",
+      "address": "Passeig de Gràcia 1, 08007 Barcelona",
+      "lat": 41.387,
+      "lon": 2.170,
+      "url": "https://www.honestgreens.com/en/",
+      "booking_url": "https://www.ubereats.com/es-en/brand-city/barcelona-es-ct/honest-greens",
+      "delivery_platforms": ["uber_eats", "glovo"],
+      "categories": ["mediterranean", "bowls", "high_protein"],
+      "dish_matches": ["Grilled chicken bowl", "Salmon bowl", "Roast chicken + greens", "Garden bowl"],
+      "price_est_eur": {"average_main": 13, "average_order": 16},
+      "source_urls": ["https://www.honestgreens.com/en/restaurants/barceloneta-en/", "https://www.tripadvisor.com/Restaurant_Review-g187497-d15758248-Reviews-Honest_Greens_Placa_Catalunya-Barcelona_Catalonia.html"]
+    },
+    {
+      "id": "honest_greens_born",
+      "name": "Honest Greens — Born",
+      "neighbourhood": "El Born",
+      "address": "Pg. del Born 11, 08003 Barcelona",
+      "lat": 41.384,
+      "lon": 2.183,
+      "url": "https://www.honestgreens.com/en/",
+      "booking_url": "https://www.ubereats.com/es-en/brand-city/barcelona-es-ct/honest-greens",
+      "delivery_platforms": ["uber_eats", "glovo"],
+      "categories": ["mediterranean", "bowls", "high_protein"],
+      "dish_matches": ["Grilled chicken bowl", "Salmon bowl", "Garden bowl"],
+      "price_est_eur": {"average_main": 13, "average_order": 16},
+      "source_urls": ["https://www.honestgreens.com/en/"]
+    },
+    {
+      "id": "flax_kale_passatge",
+      "name": "Flax & Kale (Passatge / Tallers)",
+      "neighbourhood": "El Raval",
+      "address": "C/ Tallers 74B, 08001 Barcelona",
+      "lat": 41.385,
+      "lon": 2.169,
+      "url": "https://www.teresacarles.com/fk/",
+      "booking_url": "https://www.ubereats.com/es-en/brand-city/barcelona-es-ct/flax-kale",
+      "delivery_platforms": ["uber_eats", "glovo"],
+      "categories": ["vegetarian", "flexitarian", "mediterranean", "salads"],
+      "dish_matches": ["Tofu scramble", "Lentil + chickpea stew", "Falafel bowl", "Vegan poke"],
+      "price_est_eur": {"average_main": 14, "average_order": 17},
+      "notes": "80% plant-based, 20% fish. Teresa Carles family.",
+      "source_urls": ["https://www.happycow.net/reviews/flax-and-kale-barcelona-53077", "https://www.tripadvisor.com/Restaurant_Review-g187497-d6996799-Reviews-Flax_Kale-Barcelona_Catalonia.html"]
+    },
+    {
+      "id": "flax_kale_gracia",
+      "name": "Flax & Kale — Passeig de Gràcia",
+      "neighbourhood": "Eixample",
+      "address": "Passeig de Gràcia 11, 08002 Barcelona",
+      "lat": 41.388,
+      "lon": 2.169,
+      "url": "https://www.teresacarles.com/fk/",
+      "booking_url": "https://www.ubereats.com/es-en/brand-city/barcelona-es-ct/flax-kale",
+      "delivery_platforms": ["uber_eats", "glovo"],
+      "categories": ["vegetarian", "flexitarian", "salads"],
+      "dish_matches": ["Tofu scramble", "Falafel bowl", "Vegan poke"],
+      "price_est_eur": {"average_main": 14, "average_order": 17},
+      "source_urls": ["https://www.yelp.com/biz/flax-y-kale-barcelona-2"]
+    },
+    {
+      "id": "poke_house_diagonal",
+      "name": "Poke House — Diagonal",
+      "neighbourhood": "Sarrià-Sant Gervasi",
+      "address": "Avinguda Diagonal 564, 08021 Barcelona",
+      "lat": 41.395,
+      "lon": 2.144,
+      "url": "https://pokehouse.es/",
+      "booking_url": "https://www.ubereats.com/es-en/brand-city/barcelona-es-ct/poke-house",
+      "delivery_platforms": ["uber_eats", "glovo", "just_eat"],
+      "categories": ["poke", "rice_bowls", "fish"],
+      "dish_matches": ["Poke bowl (salmon, rice, edamame)", "Tuna poke"],
+      "price_est_eur": {"average_main": 13, "average_order": 15},
+      "source_urls": ["https://www.ubereats.com/es-en/brand-city/barcelona-es-ct/poke-house", "https://intravel.net/barcelona/restaurants-cafes/poke-house-diagonal"]
+    }
+  ],
+
+  "service_to_test_map": {
+    "_help": "Used by the recommendation engine to pick the right venue for a screening line item.",
+    "lipid_panel": ["echevarne_provenca", "synlab_pg", "cerba_paris", "synlab_urgell"],
+    "apob": ["echevarne_provenca", "synlab_pg", "cerba_paris"],
+    "lpa": ["echevarne_provenca", "synlab_pg", "cerba_paris"],
+    "hba1c": ["echevarne_provenca", "synlab_pg", "cerba_paris", "synlab_urgell"],
+    "vitamin_d": ["echevarne_provenca", "synlab_pg", "cerba_paris", "synlab_urgell"],
+    "b12": ["echevarne_provenca", "synlab_pg", "cerba_paris", "synlab_urgell"],
+    "thyroid": ["echevarne_provenca", "synlab_pg", "cerba_paris"],
+    "ferritin": ["echevarne_provenca", "synlab_pg", "cerba_paris", "synlab_urgell"]
+  },
+
+  "dish_to_venue_map": {
+    "_help": "Loose match between meal-library dish names and venues that serve a close equivalent. Used by the renderer to suggest 1-2 places per meal.",
+    "Poke bowl (salmon, rice, edamame)": ["poke_house_diagonal", "honest_greens_catalunya"],
+    "Grilled chicken, quinoa, roasted veg": ["honest_greens_catalunya", "honest_greens_born"],
+    "Baked salmon, sweet potato, broccoli": ["honest_greens_catalunya", "honest_greens_born"],
+    "Lentil + chickpea stew, brown rice": ["flax_kale_gracia", "flax_kale_passatge"],
+    "Falafel + hummus bowl, salad": ["flax_kale_gracia", "flax_kale_passatge"],
+    "Greek yogurt, berries, walnuts, honey": ["honest_greens_catalunya"],
+    "Tuna + white-bean salad, olive oil": ["honest_greens_catalunya", "flax_kale_gracia"],
+    "Turkey + veg stir-fry, jasmine rice": ["honest_greens_catalunya"],
+    "Tofu scramble, spinach, tomato, rye": ["flax_kale_gracia", "flax_kale_passatge"]
+  }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 504" font-family="Inter,system-ui,sans-serif">
+<rect width="100%" height="100%" fill="#faf7f2"/>
+<rect x="70" y="70" width="560.0" height="334.40000000000003" fill="#ffffff" stroke="#1f1b16" stroke-width="6"/>
+<line x1="262.0" y1="404.40000000000003" x2="422.0" y2="404.40000000000003" stroke="#faf7f2" stroke-width="10"/>
+<line x1="262.0" y1="404.40000000000003" x2="422.0" y2="404.40000000000003" stroke="#a49b8d" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="342.0" y="438.40000000000003" text-anchor="middle" font-size="17" fill="#6b6259">проём в гостиную</text>
+<line x1="70" y1="134.0" x2="70" y2="294.0" stroke="#faf7f2" stroke-width="10"/>
+<path d="M 70 134.0 A 160.0 160.0 0 0 1 230.0 294.0" fill="none" stroke="#a49b8d" stroke-width="1.5"/>
+<text x="86" y="124.4" font-size="15" fill="#6b6259">вход · дверь 100</text>
+<text x="350.0" y="54" text-anchor="middle" font-size="17" fill="#6b6259">стена 350 см</text>
+<text x="646.0" y="237.20000000000002" text-anchor="middle" font-size="17" fill="#6b6259" transform="rotate(90 646.0 237.20000000000002)">209 см</text>
+<rect x="556.4" y="78" width="68.8" height="86.4" rx="8" fill="none" stroke="#9a6b2e" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="590.4" y="178.4" text-anchor="middle" font-size="12" fill="#9a6b2e">🤖 43×54</text>
+<text x="80" y="392.40000000000003" font-size="13" fill="#8a8177">потолок 222 см (!) · дверь 86 в стене 182 · замер 04.07.2026</text>
+</svg>

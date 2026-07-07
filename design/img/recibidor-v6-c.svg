@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="poufTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <radialGradient id="poufSheen" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#9a9c70"/>
+      <stop offset="0.55" stop-color="#7a7c5c"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </radialGradient>
+    <linearGradient id="poufBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a6c50"/>
+      <stop offset="1" stop-color="#565840"/>
+    </linearGradient>
+    <linearGradient id="frameWood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a2724"/>
+      <stop offset="0.5" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="posterBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="legChrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9c5be"/>
+      <stop offset="0.5" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="baseboard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <radialGradient id="wallGlow" cx="0.5" cy="0.32" r="0.7">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#efe8dc"/>
+    </radialGradient>
+  </defs>
+
+  <!-- wall -->
+  <rect x="0" y="0" width="800" height="430" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="430" fill="url(#wallGlow)" opacity="0.5"/>
+
+  <!-- floor -->
+  <rect x="0" y="418" width="800" height="182" fill="url(#floor)"/>
+  <!-- baseboard -->
+  <rect x="0" y="410" width="800" height="16" fill="url(#baseboard)"/>
+  <rect x="0" y="410" width="800" height="4" fill="#e3e1dc" opacity="0.7"/>
+
+  <!-- oak floor planks -->
+  <g opacity="0.35" stroke="#a5876a" stroke-width="2">
+    <line x1="0" y1="470" x2="800" y2="470"/>
+    <line x1="0" y1="524" x2="800" y2="524"/>
+    <line x1="0" y1="580" x2="800" y2="580"/>
+  </g>
+  <g opacity="0.22" stroke="#a5876a" stroke-width="1.5">
+    <line x1="180" y1="426" x2="150" y2="470"/>
+    <line x1="480" y1="470" x2="440" y2="524"/>
+    <line x1="620" y1="426" x2="600" y2="470"/>
+    <line x1="300" y1="524" x2="260" y2="580"/>
+  </g>
+
+  <!-- ===== FRAMED PICASSO-STYLE LINE POSTER ===== -->
+  <g>
+    <!-- soft cast shadow on wall -->
+    <rect x="472" y="86" width="238" height="300" rx="8" fill="#a5876a" opacity="0.10"/>
+    <!-- thin black frame -->
+    <rect x="462" y="74" width="238" height="300" rx="6" fill="url(#frameWood)"/>
+    <rect x="468" y="80" width="226" height="288" rx="4" fill="#15130f"/>
+    <!-- cream mat / poster bg -->
+    <rect x="478" y="90" width="206" height="268" rx="3" fill="url(#posterBg)"/>
+    <!-- inner mat line -->
+    <rect x="494" y="106" width="174" height="236" rx="2" fill="none" stroke="#e3e1dc" stroke-width="1.5"/>
+
+    <!-- single continuous line face -->
+    <g fill="none" stroke="#15130f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M556 138
+               C596 132 632 158 636 202
+               C640 240 620 262 606 276
+               C620 288 630 306 622 322
+               C614 336 592 340 578 332
+               C568 344 548 348 536 338
+               C520 350 500 344 496 326
+               C492 306 506 292 520 288
+               C506 278 500 260 512 246
+               C500 240 496 224 506 212
+               C500 196 508 172 528 158
+               C540 148 548 142 556 138 Z"/>
+      <!-- nose profile -->
+      <path d="M574 196 C594 210 596 238 578 250 C570 256 560 254 556 248"/>
+      <!-- brow -->
+      <path d="M534 186 C548 178 566 178 580 184"/>
+      <!-- eye one -->
+      <path d="M540 204 C548 198 560 200 564 208"/>
+      <!-- eye two dot -->
+      <circle cx="600" cy="210" r="4.5" fill="#15130f" stroke="none"/>
+      <!-- lips -->
+      <path d="M538 300 C552 310 572 310 588 300"/>
+    </g>
+    <!-- small ochre accent dot (signature feel) -->
+    <circle cx="648" cy="330" r="5" fill="#cf9f5c" stroke="none"/>
+  </g>
+
+  <!-- ===== ROUND OLIVE VELVET POUF ===== -->
+  <!-- floor shadow -->
+  <ellipse cx="250" cy="470" rx="150" ry="34" fill="rgba(31,27,22,0.12)"/>
+
+  <g>
+    <!-- lower base band (dark tone step) -->
+    <ellipse cx="250" cy="438" rx="132" ry="52" fill="url(#poufBand)"/>
+    <rect x="118" y="392" width="264" height="48" fill="url(#poufBand)"/>
+    <!-- main body -->
+    <ellipse cx="250" cy="392" rx="132" ry="60" fill="url(#poufSheen)"/>
+    <!-- top cushion cap -->
+    <ellipse cx="250" cy="374" rx="132" ry="52" fill="url(#poufTop)"/>
+
+    <!-- tufted seam segments (velvet channels) -->
+    <g stroke="#565840" stroke-width="2.4" opacity="0.7" fill="none" stroke-linecap="round">
+      <path d="M250 328 C246 350 246 396 250 440"/>
+      <path d="M198 334 C186 356 186 398 200 436"/>
+      <path d="M150 350 C132 368 134 402 154 428"/>
+      <path d="M302 334 C314 356 314 398 300 436"/>
+      <path d="M350 350 C368 368 366 402 346 428"/>
+    </g>
+    <!-- highlight seams -->
+    <g stroke="#a4a678" stroke-width="1.6" opacity="0.55" fill="none" stroke-linecap="round">
+      <path d="M224 330 C216 352 216 398 224 440"/>
+      <path d="M276 330 C284 352 284 398 276 440"/>
+    </g>
+
+    <!-- top sheen highlight -->
+    <ellipse cx="216" cy="358" rx="66" ry="24" fill="#a4a678" opacity="0.45"/>
+    <!-- center button tuft -->
+    <circle cx="250" cy="374" r="8" fill="#565840"/>
+    <circle cx="248" cy="372" r="3" fill="#6a6c50"/>
+
+    <!-- little chrome feet -->
+    <g>
+      <rect x="150" y="450" width="10" height="22" rx="4" fill="url(#legChrome)"/>
+      <rect x="340" y="450" width="10" height="22" rx="4" fill="url(#legChrome)"/>
+      <rect x="244" y="458" width="12" height="20" rx="4" fill="url(#legChrome)"/>
+      <ellipse cx="155" cy="474" rx="8" ry="3" fill="rgba(31,27,22,0.12)"/>
+      <ellipse cx="345" cy="474" rx="8" ry="3" fill="rgba(31,27,22,0.12)"/>
+      <ellipse cx="250" cy="480" rx="9" ry="3" fill="rgba(31,27,22,0.12)"/>
+    </g>
+  </g>
+
+  <!-- ===== small retro accents ===== -->
+  <!-- slim oak side ledge under poster -->
+  <g>
+    <rect x="470" y="396" width="230" height="16" rx="5" fill="#c8a87c"/>
+    <rect x="470" y="396" width="230" height="5" rx="3" fill="#d8c19a"/>
+    <ellipse cx="585" cy="416" rx="118" ry="10" fill="rgba(31,27,22,0.12)"/>
+    <!-- small ochre vase on ledge -->
+    <path d="M560 396 C556 372 552 360 566 350 C580 360 576 372 572 396 Z" fill="#cf9f5c"/>
+    <path d="M566 396 C564 378 562 366 566 356 C570 366 570 378 568 396 Z" fill="#b98a4a" opacity="0.6"/>
+    <ellipse cx="566" cy="350" rx="9" ry="3" fill="#8a5a20"/>
+    <!-- olive stems -->
+    <g stroke="#7a7c5c" stroke-width="2.6" fill="none" stroke-linecap="round">
+      <path d="M566 352 C560 330 552 318 546 306"/>
+      <path d="M566 352 C572 332 580 322 588 312"/>
+    </g>
+    <circle cx="546" cy="304" r="6" fill="#8a8c62"/>
+    <circle cx="588" cy="310" r="5" fill="#8a8c62"/>
+  </g>
+
+  <!-- soft amber light pool on wall -->
+  <ellipse cx="250" cy="230" rx="150" ry="120" fill="#cf9f5c" opacity="0.06"/>
+</svg>

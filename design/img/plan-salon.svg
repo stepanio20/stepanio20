@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 812 695" font-family="Inter,system-ui,sans-serif">
+<rect width="100%" height="100%" fill="#faf7f2"/>
+<polygon points="175.0,70 637.0,70 742.0,595.0 70,595.0" fill="#ffffff" stroke="#1f1b16" stroke-width="6"/>
+<line x1="78" y1="595.0" x2="734.0" y2="595.0" stroke="#7fa8b8" stroke-width="10" opacity=".7"/>
+<text x="406.0" y="629.0" text-anchor="middle" font-size="17" fill="#6b6259">балкон · окна · 640 см</text>
+<text x="406.0" y="54" text-anchor="middle" font-size="17" fill="#6b6259">ТВ-стена · 440 см</text>
+<text x="56" y="332.5" text-anchor="middle" font-size="17" fill="#6b6259" transform="rotate(-90 56 332.5)">500 см</text>
+<rect x="592.9" y="280.0" width="94.5" height="220.5" rx="10" fill="#e9e3d8" stroke="#b3a894" stroke-width="2"/>
+<text x="640.15" y="390.25" text-anchor="middle" font-size="15" fill="#6b6259" transform="rotate(90 640.15 390.25)">стол 210×90</text>
+<rect x="238.0" y="259.0" width="241.5" height="110.25" rx="14" fill="#f3efe7" stroke="#b3a894" stroke-width="2"/>
+<text x="358.75" y="319.125" text-anchor="middle" font-size="15" fill="#6b6259">диван боклé 230</text>
+<rect x="269.5" y="73" width="157.5" height="8" fill="#15130f"/>
+<text x="348.25" y="98" text-anchor="middle" font-size="13" fill="#6b6259">ТВ</text>
+<text x="80" y="581.0" font-size="13" fill="#8a8177">потолок 300 см · замер 04.07.2026</text>
+</svg>

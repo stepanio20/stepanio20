@@ -1,0 +1,42 @@
+name: Deploy funnels to GitHub Pages
+
+# Publishes /funnels as a production static site on GitHub Pages.
+# Self-enables Pages on first run (configure-pages enablement) — no manual toggle.
+# Live URL appears in the run's "github-pages" environment + Settings → Pages.
+
+on:
+  # Manual-only until GitHub Pages is enabled once:
+  #   Settings → Pages → Build and deployment → Source: GitHub Actions
+  # Then run this workflow (Actions tab → Run workflow). After that you can
+  # re-add the push trigger for auto-deploy on every funnels change.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages (auto-enable)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload funnels as the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: funnels
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

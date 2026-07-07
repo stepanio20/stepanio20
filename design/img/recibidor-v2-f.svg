@@ -1,0 +1,315 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="wallLight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf9" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#faf7f2" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="oakV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakConsole" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="walnutG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#b8cdd6" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#e3e1dc" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="glassInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#eae4d8"/>
+    </linearGradient>
+    <linearGradient id="cabinetWhite" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e3e1dc"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#9a968f"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="ledGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4dd" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#fff4dd" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="steelBlack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="mirrorGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef1f0"/>
+      <stop offset="0.5" stop-color="#d3dbde"/>
+      <stop offset="1" stop-color="#c4cdd0"/>
+    </linearGradient>
+    <linearGradient id="bagAmber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="bagOlive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="bagWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e3e1dc"/>
+    </linearGradient>
+    <linearGradient id="leatherTray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="vaseG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="0.5" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="jute" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dcc6"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <radialGradient id="lightPool" cx="0.35" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#fff6e6" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#fff6e6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plantLeaf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#63654a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- WALL -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="420" fill="url(#wallLight)"/>
+  <ellipse cx="250" cy="150" rx="360" ry="260" fill="url(#lightPool)"/>
+
+  <!-- FLOOR -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <rect x="0" y="404" width="800" height="8" fill="#faf7f2"/>
+  <rect x="0" y="404" width="800" height="3" fill="#e8dcc6"/>
+  <g stroke="#a5876a" stroke-width="1.3" opacity="0.35">
+    <line x1="0" y1="452" x2="800" y2="452"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+    <line x1="0" y1="552" x2="800" y2="552"/>
+    <line x1="140" y1="412" x2="140" y2="452"/>
+    <line x1="380" y1="452" x2="380" y2="500"/>
+    <line x1="600" y1="412" x2="600" y2="452"/>
+    <line x1="250" y1="500" x2="250" y2="552"/>
+    <line x1="520" y1="500" x2="520" y2="552"/>
+    <line x1="90" y1="552" x2="90" y2="600"/>
+    <line x1="430" y1="552" x2="430" y2="600"/>
+    <line x1="680" y1="552" x2="680" y2="600"/>
+  </g>
+
+  <!-- ============ CONSOLE (signature piece) — styling close-up ============ -->
+  <!-- soft floor shadow under console -->
+  <ellipse cx="400" cy="512" rx="235" ry="26" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- large round oak mirror -->
+  <circle cx="400" cy="176" r="118" fill="#a5876a"/>
+  <circle cx="400" cy="176" r="118" fill="none" stroke="url(#oakDark)" stroke-width="16"/>
+  <circle cx="400" cy="176" r="106" fill="url(#mirrorGlass)"/>
+  <path d="M330 120 Q380 108 452 130 L410 250 Q350 240 316 210 Z" fill="#ffffff" opacity="0.28"/>
+  <path d="M360 250 Q430 262 470 226" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.22"/>
+  <circle cx="400" cy="176" r="112" fill="none" stroke="#c8a87c" stroke-width="2" opacity="0.6"/>
+
+  <!-- console table top -->
+  <rect x="205" y="352" width="390" height="20" rx="6" fill="url(#oakConsole)"/>
+  <rect x="205" y="352" width="390" height="6" rx="3" fill="#e8dcc6" opacity="0.7"/>
+  <rect x="205" y="366" width="390" height="6" rx="3" fill="#a5876a" opacity="0.5"/>
+
+  <!-- slim thin drawer band -->
+  <rect x="222" y="372" width="356" height="26" rx="4" fill="url(#oakDark)"/>
+  <line x1="222" y1="385" x2="578" y2="385" stroke="#a5876a" stroke-width="1" opacity="0.5"/>
+  <circle cx="340" cy="385" r="4" fill="#3d3a36"/>
+  <circle cx="460" cy="385" r="4" fill="#3d3a36"/>
+
+  <!-- black steel legs -->
+  <g fill="url(#steelBlack)">
+    <rect x="232" y="398" width="10" height="118" rx="3"/>
+    <rect x="558" y="398" width="10" height="118" rx="3"/>
+  </g>
+  <rect x="237" y="470" width="326" height="8" rx="3" fill="url(#steelBlack)"/>
+  <rect x="232" y="398" width="4" height="118" fill="#5c4632" opacity="0.3"/>
+
+  <!-- leather tray on console -->
+  <rect x="250" y="336" width="120" height="20" rx="6" fill="url(#leatherTray)"/>
+  <rect x="250" y="336" width="120" height="7" rx="4" fill="#6d5138"/>
+  <rect x="256" y="340" width="108" height="9" rx="4" fill="#4a3624"/>
+  <rect x="256" y="341" width="108" height="3" rx="2" fill="#2a2724" opacity="0.5"/>
+  <!-- small objects on tray -->
+  <circle cx="278" cy="332" r="7" fill="#cf9f5c"/>
+  <circle cx="278" cy="332" r="7" fill="none" stroke="#8a5a20" stroke-width="1.5"/>
+  <circle cx="296" cy="334" r="5" fill="#9a968f"/>
+  <rect x="316" y="326" width="40" height="10" rx="3" fill="#5c4632"/>
+  <rect x="316" y="326" width="40" height="4" rx="2" fill="#6d5138"/>
+
+  <!-- stacked books (props) -->
+  <g>
+    <rect x="388" y="338" width="86" height="12" rx="2" fill="#7a7c5c"/>
+    <rect x="388" y="338" width="86" height="4" rx="2" fill="#8a8c62"/>
+    <rect x="382" y="326" width="94" height="13" rx="2" fill="#b98a4a"/>
+    <rect x="382" y="326" width="94" height="4" rx="2" fill="#cf9f5c"/>
+    <rect x="393" y="314" width="76" height="13" rx="2" fill="#e3e1dc"/>
+    <rect x="393" y="314" width="76" height="4" rx="2" fill="#ffffff"/>
+    <line x1="386" y1="332" x2="472" y2="332" stroke="#8a5a20" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- ceramic vase with plant on books -->
+  <ellipse cx="431" cy="313" rx="20" ry="5" fill="rgba(31,27,22,0.10)"/>
+  <path d="M418 314 Q414 288 424 274 Q436 268 448 276 Q456 292 448 314 Z" fill="url(#vaseG)"/>
+  <path d="M418 314 Q416 300 421 286" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.5"/>
+  <path d="M448 314 Q450 298 445 282" fill="none" stroke="#a5876a" stroke-width="2" opacity="0.4"/>
+  <!-- plant stems -->
+  <g fill="url(#plantLeaf)">
+    <path d="M432 278 Q414 250 402 236 Q420 244 432 268 Z"/>
+    <path d="M432 278 Q452 244 466 232 Q450 246 436 272 Z"/>
+    <path d="M431 276 Q430 240 431 220 Q436 244 435 274 Z"/>
+    <path d="M430 276 Q416 262 406 258 Q420 266 430 272 Z"/>
+    <path d="M434 276 Q450 264 460 262 Q446 268 435 274 Z"/>
+  </g>
+  <path d="M431 276 Q430 246 431 226" fill="none" stroke="#63654a" stroke-width="2"/>
+
+  <!-- ceramic vase (tall) on console right side -->
+  <ellipse cx="530" cy="352" rx="22" ry="6" fill="rgba(31,27,22,0.10)"/>
+  <path d="M514 352 Q510 322 520 306 Q530 298 540 306 Q550 322 546 352 Z" fill="url(#vaseG)"/>
+  <ellipse cx="530" cy="306" rx="11" ry="4" fill="#e8dcc6"/>
+  <path d="M514 352 Q512 332 518 312" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.5"/>
+  <!-- pampas / dried stems -->
+  <g stroke="#cbb287" stroke-width="2" fill="none" opacity="0.85">
+    <path d="M530 306 Q524 262 516 236"/>
+    <path d="M530 306 Q534 268 540 242"/>
+    <path d="M530 306 Q530 258 529 224"/>
+  </g>
+  <g fill="#e8dcc6" opacity="0.9">
+    <ellipse cx="516" cy="234" rx="5" ry="10" transform="rotate(-16 516 234)"/>
+    <ellipse cx="540" cy="240" rx="5" ry="9" transform="rotate(14 540 240)"/>
+    <ellipse cx="529" cy="222" rx="5" ry="11"/>
+  </g>
+
+  <!-- small decorative object left of tray -->
+  <ellipse cx="243" cy="352" rx="14" ry="4" fill="rgba(31,27,22,0.10)"/>
+  <path d="M232 352 Q230 338 240 332 Q250 338 248 352 Z" fill="#b8cdd6"/>
+  <path d="M232 352 Q231 344 236 338" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+
+  <!-- ============ LEFT: white glass display cabinet (boutique) ============ -->
+  <ellipse cx="98" cy="512" rx="86" ry="20" fill="rgba(31,27,22,0.12)"/>
+  <rect x="24" y="96" width="150" height="416" rx="10" fill="url(#cabinetWhite)"/>
+  <rect x="24" y="96" width="150" height="416" rx="10" fill="none" stroke="#c9c5be" stroke-width="2"/>
+  <rect x="34" y="108" width="130" height="392" rx="6" fill="url(#glassInner)"/>
+  <!-- glass overlay -->
+  <rect x="34" y="108" width="130" height="392" rx="6" fill="url(#glass)"/>
+  <!-- LED strips + shelves -->
+  <g>
+    <rect x="36" y="120" width="126" height="4" rx="2" fill="url(#ledGlow)"/>
+    <rect x="36" y="118" width="126" height="2" fill="#fff4dd"/>
+    <rect x="34" y="228" width="130" height="7" fill="#e3e1dc"/>
+    <rect x="36" y="238" width="126" height="4" rx="2" fill="url(#ledGlow)"/>
+    <rect x="34" y="348" width="130" height="7" fill="#e3e1dc"/>
+    <rect x="36" y="358" width="126" height="4" rx="2" fill="url(#ledGlow)"/>
+  </g>
+  <!-- three luxury handbags -->
+  <!-- bag 1 amber -->
+  <g>
+    <ellipse cx="99" cy="222" rx="34" ry="6" fill="rgba(31,27,22,0.10)"/>
+    <path d="M72 176 h54 a6 6 0 0 1 6 6 v30 a8 8 0 0 1 -8 8 h-50 a8 8 0 0 1 -8 -8 v-30 a6 6 0 0 1 6 -6 z" fill="url(#bagAmber)"/>
+    <path d="M78 176 q21 -26 42 0" fill="none" stroke="#8a5a20" stroke-width="4"/>
+    <rect x="94" y="192" width="10" height="8" rx="2" fill="#e3e1dc"/>
+    <path d="M72 182 h60" stroke="#8a5a20" stroke-width="1.5" opacity="0.5"/>
+  </g>
+  <!-- bag 2 olive -->
+  <g>
+    <ellipse cx="99" cy="342" rx="36" ry="6" fill="rgba(31,27,22,0.10)"/>
+    <path d="M68 300 h62 a5 5 0 0 1 5 5 v26 a6 6 0 0 1 -6 6 h-60 a6 6 0 0 1 -6 -6 v-26 a5 5 0 0 1 5 -5 z" fill="url(#bagOlive)"/>
+    <path d="M76 300 q23 -22 46 0" fill="none" stroke="#4a3624" stroke-width="4"/>
+    <circle cx="99" cy="318" r="5" fill="#cf9f5c"/>
+    <path d="M68 320 h68" stroke="#4a3624" stroke-width="1.5" opacity="0.4"/>
+  </g>
+  <!-- bag 3 white -->
+  <g>
+    <ellipse cx="99" cy="464" rx="34" ry="6" fill="rgba(31,27,22,0.10)"/>
+    <path d="M72 420 h54 a6 6 0 0 1 6 6 v28 a7 7 0 0 1 -7 7 h-52 a7 7 0 0 1 -7 -7 v-28 a6 6 0 0 1 6 -6 z" fill="url(#bagWhite)"/>
+    <path d="M80 420 q19 -20 38 0" fill="none" stroke="#9a968f" stroke-width="3.5"/>
+    <rect x="94" y="434" width="10" height="7" rx="2" fill="#cf9f5c"/>
+  </g>
+  <!-- vertical glass highlight -->
+  <rect x="46" y="112" width="10" height="384" rx="5" fill="#ffffff" opacity="0.25"/>
+
+  <!-- ============ RIGHT: solid oak shoe cabinet ============ -->
+  <ellipse cx="700" cy="512" rx="96" ry="20" fill="rgba(31,27,22,0.12)"/>
+  <rect x="612" y="316" width="176" height="196" rx="8" fill="url(#oakV)"/>
+  <rect x="612" y="316" width="176" height="196" rx="8" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <rect x="612" y="316" width="176" height="10" rx="5" fill="#e8dcc6" opacity="0.6"/>
+  <!-- doors -->
+  <rect x="622" y="332" width="76" height="168" rx="5" fill="url(#oakDark)"/>
+  <rect x="702" y="332" width="76" height="168" rx="5" fill="url(#oakDark)"/>
+  <g stroke="#a5876a" stroke-width="1" opacity="0.4">
+    <line x1="640" y1="336" x2="640" y2="496"/>
+    <line x1="660" y1="336" x2="660" y2="496"/>
+    <line x1="722" y1="336" x2="722" y2="496"/>
+    <line x1="742" y1="336" x2="742" y2="496"/>
+  </g>
+  <rect x="686" y="404" width="6" height="26" rx="3" fill="#3d3a36"/>
+  <rect x="708" y="404" width="6" height="26" rx="3" fill="#3d3a36"/>
+  <!-- feet -->
+  <rect x="628" y="512" width="14" height="12" rx="3" fill="#5c4632"/>
+  <rect x="758" y="512" width="14" height="12" rx="3" fill="#5c4632"/>
+  <!-- decor on shoe cabinet top: small plant + object -->
+  <ellipse cx="662" cy="316" rx="18" ry="4" fill="rgba(31,27,22,0.10)"/>
+  <path d="M650 316 Q648 300 658 294 Q670 300 668 316 Z" fill="#7a7c5c"/>
+  <g fill="url(#plantLeaf)">
+    <path d="M659 294 Q646 272 638 262 Q652 272 660 288 Z"/>
+    <path d="M659 294 Q672 272 680 262 Q666 274 660 288 Z"/>
+    <path d="M659 294 Q659 268 659 254 Q663 272 660 290 Z"/>
+  </g>
+  <rect x="726" y="300" width="40" height="16" rx="3" fill="#5c4632"/>
+  <rect x="726" y="300" width="40" height="5" rx="2" fill="#6d5138"/>
+  <rect x="732" y="288" width="34" height="14" rx="3" fill="#b98a4a"/>
+
+  <!-- ============ black wall coat rack ============ -->
+  <rect x="618" y="150" width="164" height="12" rx="6" fill="url(#steelBlack)"/>
+  <rect x="618" y="150" width="164" height="4" rx="2" fill="#3d3a36"/>
+  <g fill="#15130f">
+    <circle cx="648" cy="176" r="6"/>
+    <rect x="645" y="162" width="6" height="16" rx="3"/>
+    <circle cx="700" cy="176" r="6"/>
+    <rect x="697" y="162" width="6" height="16" rx="3"/>
+    <circle cx="752" cy="176" r="6"/>
+    <rect x="749" y="162" width="6" height="16" rx="3"/>
+  </g>
+
+  <!-- ============ jute doormat ============ -->
+  <ellipse cx="330" cy="566" rx="130" ry="26" fill="rgba(31,27,22,0.10)"/>
+  <rect x="206" y="548" width="248" height="40" rx="8" fill="url(#jute)"/>
+  <rect x="206" y="548" width="248" height="40" rx="8" fill="none" stroke="#a5876a" stroke-width="2"/>
+  <g stroke="#a5876a" stroke-width="1" opacity="0.4">
+    <line x1="206" y1="560" x2="454" y2="560"/>
+    <line x1="206" y1="572" x2="454" y2="572"/>
+    <line x1="246" y1="548" x2="246" y2="588"/>
+    <line x1="290" y1="548" x2="290" y2="588"/>
+    <line x1="334" y1="548" x2="334" y2="588"/>
+    <line x1="378" y1="548" x2="378" y2="588"/>
+    <line x1="414" y1="548" x2="414" y2="588"/>
+  </g>
+  <rect x="212" y="552" width="236" height="6" rx="3" fill="#faf7f2" opacity="0.3"/>
+
+  <!-- warm side-light overlay on console area -->
+  <ellipse cx="360" cy="280" rx="260" ry="200" fill="url(#lightPool)" opacity="0.5"/>
+</svg>

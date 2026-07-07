@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/stepanio20/stepanio20/concierge/config.schema.json",
+  "title": "Concierge user config",
+  "description": "Preferences and integrations for the Concierge layer. Preferences ONLY — no medical data (that lives in the gitignored Health Graph). See PRODUCT_ARCHITECTURE.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "locale", "goals", "diet", "schedule", "budget", "integrations"],
+  "properties": {
+    "version": { "type": "integer", "const": 1 },
+
+    "locale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["city", "country", "timezone", "currency", "language"],
+      "properties": {
+        "city": { "type": "string", "examples": ["Barcelona"] },
+        "country": { "type": "string", "description": "ISO-3166-1 alpha-2", "examples": ["ES"] },
+        "neighbourhood": { "type": "string", "description": "Coarse area for nearby food/sessions; keep it district-level, not a street address.", "examples": ["Eixample"] },
+        "timezone": { "type": "string", "examples": ["Europe/Madrid"] },
+        "currency": { "type": "string", "examples": ["EUR"] },
+        "language": { "type": "string", "description": "Plan/report language (ISO-639-1)", "examples": ["ru", "en", "es"] }
+      }
+    },
+
+    "goals": {
+      "type": "array",
+      "description": "Ranked highest-first.",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["maintain", "lose_fat", "gain_muscle", "recomposition", "longevity", "energy", "sleep", "stress", "athletic_performance", "quit_nicotine", "lower_blood_pressure"]
+      }
+    },
+
+    "diet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pattern", "allergies", "dislikes", "meals_per_day"],
+      "properties": {
+        "pattern": { "type": "string", "enum": ["omnivore", "pescatarian", "vegetarian", "vegan", "mediterranean", "low_carb", "high_protein", "none"] },
+        "allergies": { "type": "array", "items": { "type": "string" }, "examples": [["lactose"]] },
+        "dislikes": { "type": "array", "items": { "type": "string" } },
+        "meals_per_day": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "cook_vs_order": { "type": "string", "enum": ["mostly_cook", "mixed", "mostly_order"], "default": "mixed" },
+        "protein_target_g_per_kg": { "type": ["number", "null"], "description": "Override; null = engine decides from goals + lean mass." }
+      }
+    },
+
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wake_time", "sleep_time", "training_days_per_week"],
+      "properties": {
+        "wake_time": { "type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$" },
+        "sleep_time": { "type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$" },
+        "training_days_per_week": { "type": "integer", "minimum": 0, "maximum": 7 },
+        "preferred_training_times": { "type": "array", "items": { "type": "string" } },
+        "no_go_slots": { "type": "array", "description": "Recurring busy blocks the planner must avoid.", "items": { "type": "string" } }
+      }
+    },
+
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["weekly_eur"],
+      "properties": {
+        "weekly_eur": { "type": "number", "minimum": 0, "description": "Total weekly discretionary budget for food orders + sessions + tests." },
+        "food_eur": { "type": ["number", "null"] },
+        "wellness_eur": { "type": ["number", "null"], "description": "sauna / massage / therapy" },
+        "tests_eur": { "type": ["number", "null"] }
+      }
+    },
+
+    "automation": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "How aggressive to be. Money + medical ALWAYS require the weekly Approve regardless of these (see product doc §9).",
+      "properties": {
+        "auto_book_when_api_available": { "type": "boolean", "default": true, "description": "On approve, place Rung-1 (full-API) bookings automatically." },
+        "max_auto_spend_eur_per_week": { "type": "number", "default": 0, "description": "Hard cap on auto-charged third-party spend before extra confirmation. 0 = confirm everything." },
+        "weekly_plan_dropday": { "type": "string", "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], "default": "mon" },
+        "weekly_plan_drophour": { "type": "integer", "minimum": 0, "maximum": 23, "default": 7 }
+      }
+    },
+
+    "integrations": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Which services are connected. Tokens/secrets are NOT stored here — they live in a gitignored secrets store.",
+      "properties": {
+        "whoop": { "$ref": "#/$defs/connection" },
+        "apple_health": { "$ref": "#/$defs/connection" },
+        "oura": { "$ref": "#/$defs/connection" },
+        "google_calendar": { "$ref": "#/$defs/connection" },
+        "dna_vendor": { "type": "string", "enum": ["23andme", "ancestry", "myheritage", "ftdna", "none"], "default": "none" },
+        "food_delivery": { "type": "string", "enum": ["uber_eats", "glovo", "none"], "default": "none", "description": "Glovo = hand-off only (no consumer API); Uber = hand-off until partner approval." },
+        "wellness_booking": { "type": "string", "enum": ["mindbody", "fresha", "vagaro", "manual", "none"], "default": "none" },
+        "lab": { "type": "string", "examples": ["synlab", "cerba", "echevarne", "catsalut", "manual"], "default": "manual" }
+      }
+    }
+  },
+
+  "$defs": {
+    "connection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connected": { "type": "boolean", "default": false },
+        "last_sync": { "type": ["string", "null"], "format": "date-time" }
+      }
+    }
+  }
+}

@@ -4,6 +4,12 @@ A personal instance of the architecture described in [`ARCHITECTURE.md`](./ARCHI
 an open-source pipeline that turns raw consumer-DNA data, blood panels, wearable
 exports, and other personal health data into structured reports and recommendations.
 
+On top of that pipeline (the **Knowledge Engine**), [`PRODUCT_ARCHITECTURE.md`](./PRODUCT_ARCHITECTURE.md)
+designs the **Concierge layer**: a closed weekly loop that turns your facts into a planned
+week (food, training, recovery, therapies, screening) and books/orders it after a single
+review-and-approve, syncing the result to Google Calendar. Scaffolding lives in
+[`concierge/`](./concierge/).
+
 ## Status
 
 **New repo, scaffolding only.** Directory layout is in place; pipeline code and
@@ -13,7 +19,10 @@ your own data go in next. See [`NEXT_STEPS.md`](./NEXT_STEPS.md).
 
 | Path | What it holds | In git? |
 |---|---|---|
-| `ARCHITECTURE.md` | Full design doc — read this first | yes |
+| `ARCHITECTURE.md` | Full design doc (Knowledge Engine) — read this first | yes |
+| `PRODUCT_ARCHITECTURE.md` | Concierge layer design (funnel → weekly plan → book/order) | yes |
+| `concierge/` | Concierge code scaffold + `config.schema.json` | yes |
+| `users/me/concierge.json` | Your preferences/integrations config (no medical data) | yes |
 | `NEXT_STEPS.md` | Onboarding checklist | yes |
 | `users/me/profile.json` | Your demographics + family history (you fill in) | yes |
 | `users/me/dna/raw/` | Raw DNA file from MyHeritage / 23andMe / Ancestry | **gitignored** |

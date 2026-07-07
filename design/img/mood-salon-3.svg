@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <!-- Ambient room wash -->
+    <radialGradient id="room" cx="62%" cy="32%" r="85%">
+      <stop offset="0%" stop-color="#faf7f2"/>
+      <stop offset="38%" stop-color="#efe6d5"/>
+      <stop offset="72%" stop-color="#d8c8ac"/>
+      <stop offset="100%" stop-color="#b09b78"/>
+    </radialGradient>
+    <!-- Warm spotlight beam -->
+    <radialGradient id="spot" cx="58%" cy="26%" r="55%">
+      <stop offset="0%" stop-color="#fff6e4" stop-opacity="0.95"/>
+      <stop offset="42%" stop-color="#f4e3c2" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#f4e3c2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#fff4dd" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fff4dd" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Back wall panel -->
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eadfca"/>
+      <stop offset="55%" stop-color="#e0d2b6"/>
+      <stop offset="100%" stop-color="#c9b593"/>
+    </linearGradient>
+    <!-- Oak plank faces -->
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2cba2"/>
+      <stop offset="50%" stop-color="#d8c19a"/>
+      <stop offset="100%" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cbb287"/>
+      <stop offset="55%" stop-color="#bd9f70"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="oakUnder" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a6f52"/>
+      <stop offset="100%" stop-color="#6d5138"/>
+    </linearGradient>
+    <linearGradient id="oakSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b89a6f"/>
+      <stop offset="100%" stop-color="#8f7250"/>
+    </linearGradient>
+    <!-- Record sleeves -->
+    <linearGradient id="slvOlive" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="55%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="slvGraph" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#4a463f"/>
+      <stop offset="55%" stop-color="#3d3a36"/>
+      <stop offset="100%" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="slvSand" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#f0e6cf"/>
+      <stop offset="55%" stop-color="#e8dcc6"/>
+      <stop offset="100%" stop-color="#d3c19d"/>
+    </linearGradient>
+    <linearGradient id="slvWalnut" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#6d5138"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <!-- Art book spines -->
+    <linearGradient id="bookA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e9dcc4"/>
+      <stop offset="100%" stop-color="#cbb890"/>
+    </linearGradient>
+    <linearGradient id="bookB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="bookC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6d5138"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <linearGradient id="bookD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3d3a36"/>
+      <stop offset="100%" stop-color="#2a2724"/>
+    </linearGradient>
+    <!-- Brass / chrome object -->
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6c98a"/>
+      <stop offset="40%" stop-color="#cf9f5c"/>
+      <stop offset="70%" stop-color="#b98a4a"/>
+      <stop offset="100%" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e3e1dc"/>
+      <stop offset="35%" stop-color="#c9c5be"/>
+      <stop offset="55%" stop-color="#9a968f"/>
+      <stop offset="75%" stop-color="#d4d0c9"/>
+      <stop offset="100%" stop-color="#b0aca5"/>
+    </linearGradient>
+    <!-- Model car bodies -->
+    <linearGradient id="carA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a463f"/>
+      <stop offset="100%" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="carB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a5a20"/>
+      <stop offset="100%" stop-color="#4a3624"/>
+    </linearGradient>
+    <!-- Ceramic pot -->
+    <linearGradient id="pot" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%" stop-color="#f2ead8"/>
+      <stop offset="55%" stop-color="#e2d0b2"/>
+      <stop offset="100%" stop-color="#c3a97f"/>
+    </linearGradient>
+    <!-- Glass vessel -->
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0%" stop-color="#d6e4ea" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#b8cdd6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#8ca6b0" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="72%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2a2018" stop-opacity="0.5"/>
+    </radialGradient>
+    <linearGradient id="softShadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a3624" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#4a3624" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== BACKDROP ===== -->
+  <rect width="600" height="750" fill="url(#room)"/>
+  <rect width="600" height="750" fill="url(#wall)" opacity="0.5"/>
+  <!-- Wall paneling seams -->
+  <g stroke="#b7a381" stroke-width="1" opacity="0.35">
+    <line x1="150" y1="0" x2="150" y2="750"/>
+    <line x1="330" y1="0" x2="330" y2="750"/>
+    <line x1="490" y1="0" x2="490" y2="750"/>
+  </g>
+  <g stroke="#fbf3e2" stroke-width="1" opacity="0.3">
+    <line x1="152" y1="0" x2="152" y2="750"/>
+    <line x1="332" y1="0" x2="332" y2="750"/>
+    <line x1="492" y1="0" x2="492" y2="750"/>
+  </g>
+
+  <!-- Spotlight beam from upper area -->
+  <polygon points="300,-20 470,-20 560,520 300,560" fill="url(#beam)"/>
+  <rect width="600" height="750" fill="url(#spot)"/>
+
+  <!-- ================= LOWER SHELF (foreground) ================= -->
+  <!-- shelf cast shadow on wall -->
+  <rect x="70" y="470" width="470" height="30" fill="url(#softShadow)"/>
+
+  <!-- Lower shelf slab -->
+  <polygon points="70,500 540,500 560,516 50,516" fill="url(#oakTop)"/>
+  <rect x="70" y="516" width="470" height="34" fill="url(#oakFront)"/>
+  <polygon points="70,550 540,550 540,556 70,556" fill="url(#oakUnder)"/>
+  <polygon points="540,500 560,516 560,550 540,550" fill="url(#oakSide)"/>
+  <!-- oak grain lines lower front -->
+  <g stroke="#9c7f5c" stroke-width="0.8" opacity="0.4">
+    <path d="M80 526 q230 -5 450 0"/>
+    <path d="M80 534 q230 4 450 -1"/>
+    <path d="M80 542 q230 -3 450 1"/>
+  </g>
+  <g stroke="#e0cba4" stroke-width="0.6" opacity="0.35">
+    <path d="M80 522 q230 -4 450 1"/>
+  </g>
+
+  <!-- ================= UPPER SHELF ================= -->
+  <rect x="70" y="150" width="450" height="26" fill="url(#softShadow)"/>
+  <polygon points="80,190 530,190 548,206 62,206" fill="url(#oakTop)"/>
+  <rect x="80" y="206" width="450" height="30" fill="url(#oakFront)"/>
+  <polygon points="80,236 530,236 530,241 80,241" fill="url(#oakUnder)"/>
+  <polygon points="530,190 548,206 548,236 530,236" fill="url(#oakSide)"/>
+  <g stroke="#9c7f5c" stroke-width="0.8" opacity="0.4">
+    <path d="M90 214 q215 -4 430 0"/>
+    <path d="M90 222 q215 4 430 -1"/>
+    <path d="M90 229 q215 -3 430 1"/>
+  </g>
+
+  <!-- Shelf side uprights -->
+  <rect x="60" y="150" width="16" height="410" fill="url(#oakSide)"/>
+  <rect x="60" y="150" width="4" height="410" fill="#b89a6f" opacity="0.6"/>
+  <rect x="530" y="150" width="16" height="360" fill="url(#oakSide)" opacity="0.9"/>
+
+  <!-- ================= UPPER SHELF STYLING ================= -->
+  <!-- soft contact shadows on upper shelf -->
+  <ellipse cx="180" cy="192" rx="95" ry="7" fill="#5c4632" opacity="0.22"/>
+  <ellipse cx="360" cy="192" rx="70" ry="6" fill="#5c4632" opacity="0.2"/>
+  <ellipse cx="470" cy="193" rx="34" ry="6" fill="#5c4632" opacity="0.2"/>
+
+  <!-- Upright vinyl record sleeves (leaning collector row) -->
+  <g>
+    <!-- sleeve 1 olive -->
+    <polygon points="112,66 176,66 176,190 112,190" fill="url(#slvOlive)"/>
+    <rect x="112" y="66" width="6" height="124" fill="#5a5c42" opacity="0.6"/>
+    <rect x="170" y="66" width="6" height="124" fill="#8f925f" opacity="0.5"/>
+    <circle cx="144" cy="120" r="20" fill="#63654a" opacity="0.55"/>
+    <circle cx="144" cy="120" r="6" fill="#3d3a36"/>
+    <!-- sleeve 2 sand -->
+    <polygon points="176,64 240,64 240,190 176,190" fill="url(#slvSand)"/>
+    <rect x="176" y="64" width="5" height="126" fill="#c9b48c" opacity="0.6"/>
+    <rect x="204" y="86" width="9" height="84" fill="#c9b48c" opacity="0.5"/>
+    <!-- sleeve 3 graphite -->
+    <polygon points="240,62 302,62 302,190 240,190" fill="url(#slvGraph)"/>
+    <rect x="240" y="62" width="5" height="128" fill="#2a2724" opacity="0.7"/>
+    <rect x="256" y="84" width="30" height="30" fill="#8a8c62" opacity="0.5"/>
+    <!-- sleeve 4 leaning walnut -->
+    <polygon points="302,68 356,60 366,186 312,192" fill="url(#slvWalnut)"/>
+    <polygon points="302,68 308,68 316,190 312,192" fill="#3a2a1c" opacity="0.6"/>
+  </g>
+
+  <!-- Stack of art books flat on upper shelf (right) -->
+  <g>
+    <rect x="392" y="170" width="118" height="20" rx="2" fill="url(#bookA)"/>
+    <rect x="392" y="170" width="118" height="4" fill="#f2e7cf" opacity="0.7"/>
+    <rect x="398" y="154" width="112" height="18" rx="2" fill="url(#bookB)"/>
+    <rect x="398" y="154" width="112" height="3" fill="#9a9c6e" opacity="0.6"/>
+    <rect x="404" y="140" width="104" height="16" rx="2" fill="url(#bookC)"/>
+    <rect x="404" y="140" width="104" height="3" fill="#856a4a" opacity="0.6"/>
+    <!-- brass object on top of book stack -->
+    <ellipse cx="452" cy="140" rx="20" ry="5" fill="#5c4632" opacity="0.25"/>
+    <path d="M440 140 q12 -34 24 0 z" fill="url(#brass)"/>
+    <ellipse cx="452" cy="140" rx="12" ry="3.4" fill="#e6c98a"/>
+    <rect x="450" y="104" width="4" height="8" rx="2" fill="#cf9f5c"/>
+    <circle cx="452" cy="102" r="4" fill="url(#brass)"/>
+  </g>
+
+  <!-- small glass vessel with a sprig, upper shelf far right -->
+  <g>
+    <ellipse cx="500" cy="190" rx="15" ry="4" fill="#5c4632" opacity="0.25"/>
+    <path d="M488 150 q0 36 12 38 q12 -2 12 -38 z" fill="url(#glass)"/>
+    <path d="M492 152 q1 26 8 32" stroke="#eef6f8" stroke-width="1.4" fill="none" opacity="0.6"/>
+    <path d="M500 152 q-6 -22 -14 -34" stroke="#7a7c5c" stroke-width="2" fill="none"/>
+    <path d="M500 150 q8 -20 18 -28" stroke="#8a8c62" stroke-width="2" fill="none"/>
+    <ellipse cx="484" cy="120" rx="6" ry="3" fill="url(#leaf)" transform="rotate(-32 484 120)"/>
+    <ellipse cx="520" cy="124" rx="6" ry="3" fill="url(#leaf)" transform="rotate(28 520 124)"/>
+  </g>
+
+  <!-- ================= LOWER SHELF STYLING (hero zone) ================= -->
+  <!-- broad contact shadows -->
+  <ellipse cx="180" cy="502" rx="110" ry="9" fill="#4a3624" opacity="0.26"/>
+  <ellipse cx="360" cy="502" rx="70" ry="8" fill="#4a3624" opacity="0.24"/>
+  <ellipse cx="470" cy="503" rx="55" ry="8" fill="#4a3624" opacity="0.22"/>
+
+  <!-- Hero: leaning record sleeves + framed row, lower left -->
+  <g>
+    <polygon points="96,340 168,340 168,500 96,500" fill="url(#slvGraph)"/>
+    <rect x="96" y="340" width="7" height="160" fill="#2a2724" opacity="0.7"/>
+    <circle cx="132" cy="418" r="30" fill="#8a8c62" opacity="0.4"/>
+    <circle cx="132" cy="418" r="9" fill="#3d3a36"/>
+    <!-- olive sleeve -->
+    <polygon points="168,336 244,336 244,500 168,500" fill="url(#slvOlive)"/>
+    <rect x="168" y="336" width="7" height="164" fill="#5a5c42" opacity="0.6"/>
+    <rect x="238" y="336" width="6" height="164" fill="#94975f" opacity="0.45"/>
+    <rect x="186" y="360" width="40" height="40" fill="#63654a" opacity="0.5"/>
+    <!-- sand sleeve leaning -->
+    <polygon points="244,340 320,330 332,494 256,500" fill="url(#slvSand)"/>
+    <polygon points="244,340 251,339 263,499 256,500" fill="#d0bd93" opacity="0.6"/>
+    <circle cx="290" cy="420" r="26" fill="#cbb287" opacity="0.55"/>
+    <circle cx="290" cy="420" r="7" fill="#a5876a"/>
+  </g>
+
+  <!-- Two model cars in silhouette (lower center-right) -->
+  <g>
+    <!-- car A dark -->
+    <ellipse cx="384" cy="500" rx="52" ry="8" fill="#15130f" opacity="0.3"/>
+    <path d="M336 496 q4 -20 24 -24 q10 -14 34 -14 q22 0 34 16 q16 2 20 22 z" fill="url(#carA)"/>
+    <path d="M366 460 q10 -8 26 -8 q16 0 24 8 l-4 12 l-44 0 z" fill="#3d3a36" opacity="0.85"/>
+    <path d="M370 462 q9 -6 22 -6 q13 0 20 6 l-2 8 l-38 0 z" fill="#63654a" opacity="0.5"/>
+    <circle cx="356" cy="494" r="12" fill="#15130f"/>
+    <circle cx="356" cy="494" r="5" fill="#3d3a36"/>
+    <circle cx="414" cy="494" r="12" fill="#15130f"/>
+    <circle cx="414" cy="494" r="5" fill="#3d3a36"/>
+    <path d="M340 480 q30 -8 60 0" stroke="#9a968f" stroke-width="1.2" fill="none" opacity="0.5"/>
+  </g>
+  <g>
+    <!-- car B walnut, smaller, behind/right -->
+    <ellipse cx="452" cy="500" rx="42" ry="7" fill="#15130f" opacity="0.28"/>
+    <path d="M414 497 q3 -16 20 -20 q9 -12 28 -12 q18 0 28 13 q13 2 16 19 z" fill="url(#carB)"/>
+    <path d="M438 468 q8 -6 22 -6 q13 0 18 6 l-3 10 l-36 0 z" fill="#5c4632" opacity="0.9"/>
+    <circle cx="431" cy="495" r="10" fill="#15130f"/>
+    <circle cx="431" cy="495" r="4" fill="#3d3a36"/>
+    <circle cx="481" cy="495" r="10" fill="#15130f"/>
+    <circle cx="481" cy="495" r="4" fill="#3d3a36"/>
+  </g>
+
+  <!-- Small chrome/brass sculptural object, lower shelf right -->
+  <g>
+    <ellipse cx="502" cy="500" rx="24" ry="6" fill="#4a3624" opacity="0.3"/>
+    <rect x="486" y="452" width="32" height="48" rx="3" fill="url(#chrome)"/>
+    <rect x="486" y="452" width="8" height="48" fill="#e3e1dc" opacity="0.7"/>
+    <rect x="510" y="452" width="8" height="48" fill="#9a968f" opacity="0.6"/>
+    <ellipse cx="502" cy="452" rx="16" ry="5" fill="#d4d0c9"/>
+    <ellipse cx="502" cy="452" rx="9" ry="3" fill="#9a968f"/>
+    <path d="M494 470 q8 20 16 0" stroke="#f2f0eb" stroke-width="1.4" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- Tiny potted plant, lower shelf, between books and cars -->
+  <g>
+    <ellipse cx="352" cy="500" rx="26" ry="6" fill="#4a3624" opacity="0.28"/>
+    <path d="M336 470 q16 34 32 0 z" fill="url(#pot)"/>
+    <ellipse cx="352" cy="470" rx="16" ry="4.5" fill="#e2d0b2"/>
+    <ellipse cx="352" cy="470" rx="16" ry="4.5" fill="none" stroke="#c3a97f" stroke-width="1"/>
+    <!-- leaves -->
+    <path d="M352 470 q-4 -34 -20 -46" stroke="#63654a" stroke-width="2" fill="none"/>
+    <path d="M352 470 q2 -40 4 -54" stroke="#7a7c5c" stroke-width="2" fill="none"/>
+    <path d="M352 470 q8 -32 24 -44" stroke="#63654a" stroke-width="2" fill="none"/>
+    <path d="M332 424 q-14 -6 -18 -20 q16 0 24 12 z" fill="url(#leaf)"/>
+    <path d="M356 416 q-2 -18 6 -30 q10 12 4 28 z" fill="#8a8c62"/>
+    <path d="M376 426 q14 -8 18 -22 q-16 0 -26 14 z" fill="url(#leaf)"/>
+    <path d="M348 440 q-10 -4 -14 -16 q12 0 18 10 z" fill="#8a8c62" opacity="0.85"/>
+  </g>
+
+  <!-- A single trailing plant leaf draping from upper shelf edge -->
+  <g opacity="0.95">
+    <path d="M108 190 q-24 40 -14 92 q6 26 22 40" stroke="#63654a" stroke-width="2.4" fill="none"/>
+    <path d="M100 230 q-22 4 -30 -8 q18 -12 34 2 z" fill="url(#leaf)"/>
+    <path d="M96 262 q-24 6 -32 -6 q18 -14 36 0 z" fill="#7a7c5c"/>
+    <path d="M104 296 q-22 10 -32 0 q16 -16 36 -6 z" fill="url(#leaf)"/>
+    <path d="M116 322 q-18 14 -30 8 q12 -18 34 -12 z" fill="#8a8c62" opacity="0.9"/>
+  </g>
+
+  <!-- ===== LIGHT & ATMOSPHERE OVERLAYS ===== -->
+  <!-- warm glow pooling on hero sleeves -->
+  <ellipse cx="220" cy="420" rx="150" ry="120" fill="#fff2d6" opacity="0.14"/>
+  <!-- soft top light on upper row -->
+  <ellipse cx="230" cy="120" rx="180" ry="90" fill="#fff4dd" opacity="0.12"/>
+  <!-- faint dust beam -->
+  <polygon points="330,0 400,0 470,470 380,500" fill="#fff6e4" opacity="0.06"/>
+
+  <rect width="600" height="750" fill="url(#vignette)"/>
+</svg>

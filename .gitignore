@@ -1,6 +1,7 @@
 # Secrets
 .env
 .env.*
+secrets.env
 *.password
 .topmed_password
 **/secrets/
@@ -44,6 +45,9 @@ users/*/bloods/*
 users/*/wearables/apple_export/*
 users/*/wearables/parsed/*
 
+# Concierge calendar exports (.ics — contain schedule + venue info)
+users/*/exports/*
+
 # Healthlake (contains personal medical text)
 users/*/healthlake/manifest/*
 users/*/healthlake/bronze/*
@@ -59,6 +63,9 @@ users/*/reports/**/*.md
 users/*/reports/**/*.pdf
 users/*/reports/**/*.png
 users/*/reports/**/*.json
+
+# Concierge PWA — local-only "real plan" copy users may render here
+concierge/app/plan.md
 
 # === Reference data (large, public, re-downloadable) ===
 shared/pgs_cache/*

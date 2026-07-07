@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <defs>
+    <!-- Wall ambient light -->
+    <radialGradient id="wallLight" cx="30%" cy="22%" r="95%">
+      <stop offset="0%" stop-color="#faf7f2"/>
+      <stop offset="42%" stop-color="#f4efe6"/>
+      <stop offset="78%" stop-color="#ece4d6"/>
+      <stop offset="100%" stop-color="#e2d8c6"/>
+    </radialGradient>
+    <!-- Warm side-light beam -->
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0.55">
+      <stop offset="0%" stop-color="#fff6e4" stop-opacity="0.85"/>
+      <stop offset="45%" stop-color="#f6ead2" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f0e4cf" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Chrome sphere body -->
+    <radialGradient id="chrome" cx="36%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="14%" stop-color="#f2f0ec"/>
+      <stop offset="34%" stop-color="#d8d4cd"/>
+      <stop offset="52%" stop-color="#b7b2a9"/>
+      <stop offset="70%" stop-color="#8f8a82"/>
+      <stop offset="86%" stop-color="#65605a"/>
+      <stop offset="100%" stop-color="#403c37"/>
+    </radialGradient>
+    <!-- Warm reflected environment band across sphere -->
+    <linearGradient id="chromeEnv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e7e3dc" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#e3c489" stop-opacity="0.55"/>
+      <stop offset="52%" stop-color="#cf9f5c" stop-opacity="0.65"/>
+      <stop offset="60%" stop-color="#8a5a20" stop-opacity="0.5"/>
+      <stop offset="68%" stop-color="#5c4632" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#2a2724" stop-opacity="0.15"/>
+    </linearGradient>
+    <!-- Cool glass-blue sky reflection at top of sphere -->
+    <linearGradient id="chromeSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dfeaef" stop-opacity="0.9"/>
+      <stop offset="30%" stop-color="#b8cdd6" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#b8cdd6" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Sphere contact shadow -->
+    <radialGradient id="sphereShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3d3a36" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#3d3a36" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3d3a36" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Poster paper -->
+    <linearGradient id="poster" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#faf7f2"/>
+      <stop offset="55%" stop-color="#f3ece0"/>
+      <stop offset="100%" stop-color="#e9dece"/>
+    </linearGradient>
+    <!-- Black frame profile -->
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d3a36"/>
+      <stop offset="45%" stop-color="#211f1c"/>
+      <stop offset="100%" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="frameInner" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#15130f"/>
+      <stop offset="100%" stop-color="#2a2724"/>
+    </linearGradient>
+    <!-- Ledge (black picture rail) -->
+    <linearGradient id="ledgeTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3733"/>
+      <stop offset="100%" stop-color="#211f1c"/>
+    </linearGradient>
+    <linearGradient id="ledgeFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#211f1c"/>
+      <stop offset="100%" stop-color="#100e0b"/>
+    </linearGradient>
+    <!-- Vase (amber ochre ceramic) -->
+    <linearGradient id="vase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8a5a20"/>
+      <stop offset="30%" stop-color="#b98a4a"/>
+      <stop offset="55%" stop-color="#cf9f5c"/>
+      <stop offset="78%" stop-color="#a9702f"/>
+      <stop offset="100%" stop-color="#6d4318"/>
+    </linearGradient>
+    <!-- Oak plinth / small object base -->
+    <linearGradient id="oak" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0%" stop-color="#d8c19a"/>
+      <stop offset="50%" stop-color="#c8a87c"/>
+      <stop offset="100%" stop-color="#a5876a"/>
+    </linearGradient>
+    <!-- Leaf gradients -->
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a8c62"/>
+      <stop offset="55%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#63654a"/>
+    </linearGradient>
+    <linearGradient id="leafDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7a7c5c"/>
+      <stop offset="100%" stop-color="#4f5138"/>
+    </linearGradient>
+    <!-- Floor / lower wall base -->
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e2d6c1"/>
+      <stop offset="100%" stop-color="#cdbb9d"/>
+    </linearGradient>
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="42%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="72%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2a2418" stop-opacity="0.26"/>
+    </radialGradient>
+    <clipPath id="sphereClip">
+      <circle cx="196" cy="250" r="118"/>
+    </clipPath>
+    <clipPath id="posterClip">
+      <rect x="356" y="150" width="176" height="248"/>
+    </clipPath>
+  </defs>
+
+  <!-- ============ WALL ============ -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#wallLight)"/>
+
+  <!-- subtle wall plaster tone patches -->
+  <g opacity="0.35">
+    <ellipse cx="120" cy="120" rx="220" ry="160" fill="#fbf8f3" opacity="0.5"/>
+    <ellipse cx="500" cy="560" rx="200" ry="180" fill="#e6dccb" opacity="0.4"/>
+    <ellipse cx="60" cy="600" rx="160" ry="200" fill="#e2d7c4" opacity="0.35"/>
+  </g>
+
+  <!-- warm directional light beam from upper-left -->
+  <polygon points="0,0 300,0 150,750 -60,750" fill="url(#beam)"/>
+  <polygon points="40,0 150,0 60,520 -40,470" fill="#fff6e4" opacity="0.18"/>
+
+  <!-- faint wall/floor break -->
+  <rect x="0" y="610" width="600" height="140" fill="url(#floor)" opacity="0.55"/>
+  <rect x="0" y="608" width="600" height="3" fill="#d8c9ae" opacity="0.6"/>
+
+  <!-- ============ SIDE PLANT (soft, out of focus foreground-left) ============ -->
+  <g opacity="0.9" transform="translate(20,470)">
+    <path d="M40,220 C10,150 4,90 30,20 C44,60 46,140 60,220 Z" fill="url(#leafDark)" opacity="0.85"/>
+    <path d="M60,225 C48,150 58,80 96,26 C92,80 84,160 84,228 Z" fill="url(#leaf)"/>
+    <path d="M84,228 C92,160 120,96 168,58 C146,120 118,180 108,232 Z" fill="url(#leaf)" opacity="0.92"/>
+    <path d="M52,224 C30,170 8,132 -22,110 C18,116 60,150 74,220 Z" fill="url(#leafDark)" opacity="0.8"/>
+    <path d="M70,120 L70,224" stroke="#4f5138" stroke-width="1.4" opacity="0.5"/>
+  </g>
+
+  <!-- ============ CHROME CONVEX MIRROR SPHERE (hero) ============ -->
+  <g>
+    <!-- contact shadow on wall -->
+    <ellipse cx="212" cy="366" rx="132" ry="34" fill="url(#sphereShadow)"/>
+    <!-- outer soft ring shadow behind sphere -->
+    <circle cx="196" cy="250" r="126" fill="#c9bfaf" opacity="0.4"/>
+    <circle cx="196" cy="250" r="121" fill="#ded4c2" opacity="0.5"/>
+
+    <!-- sphere body -->
+    <circle cx="196" cy="250" r="118" fill="url(#chrome)"/>
+
+    <!-- reflections clipped to sphere -->
+    <g clip-path="url(#sphereClip)">
+      <!-- reflected cool sky band -->
+      <rect x="78" y="132" width="236" height="120" fill="url(#chromeSky)"/>
+      <!-- warm room reflection band (mid) -->
+      <rect x="78" y="200" width="236" height="168" fill="url(#chromeEnv)"/>
+      <!-- distorted reflected window (warm) -->
+      <path d="M120,175 C160,150 210,150 250,178 C226,205 176,208 150,200 Z" fill="#fff3dc" opacity="0.55"/>
+      <path d="M132,182 L148,175 L150,205 L136,206 Z" fill="#fbecc9" opacity="0.6"/>
+      <path d="M152,174 L170,171 L172,203 L154,206 Z" fill="#f6e2b8" opacity="0.55"/>
+      <!-- reflected horizon line -->
+      <path d="M84,262 C130,250 262,250 308,264" stroke="#8a5a20" stroke-width="4" opacity="0.35" fill="none"/>
+      <path d="M84,270 C130,260 262,260 308,272" stroke="#5c4632" stroke-width="3" opacity="0.3" fill="none"/>
+      <!-- distorted reflection of amber vase (right side of room) -->
+      <path d="M236,286 C244,270 256,272 258,290 C260,308 250,320 240,318 C232,314 230,300 236,286 Z" fill="#cf9f5c" opacity="0.45"/>
+      <!-- dark reflected furniture at base -->
+      <path d="M96,320 C150,308 250,308 300,322 L300,372 L96,372 Z" fill="#4a3624" opacity="0.5"/>
+      <ellipse cx="196" cy="360" rx="120" ry="26" fill="#2a2724" opacity="0.4"/>
+      <!-- reflected olive plant sliver -->
+      <path d="M112,300 C104,286 108,270 122,262 C118,282 122,300 128,314 Z" fill="#63654a" opacity="0.4"/>
+    </g>
+
+    <!-- rim darkening -->
+    <circle cx="196" cy="250" r="118" fill="none" stroke="#2a2724" stroke-width="3" opacity="0.35"/>
+    <circle cx="196" cy="250" r="115" fill="none" stroke="#15130f" stroke-width="1.5" opacity="0.4"/>
+    <!-- bright chrome rim highlight upper-left -->
+    <path d="M104,196 A118,118 0 0 1 214,138" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.75" stroke-linecap="round"/>
+    <path d="M96,232 A118,118 0 0 1 132,166" fill="none" stroke="#f2f0ec" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+
+    <!-- specular hotspot -->
+    <ellipse cx="150" cy="196" rx="30" ry="22" fill="#ffffff" opacity="0.9"/>
+    <ellipse cx="150" cy="196" rx="14" ry="10" fill="#ffffff"/>
+    <circle cx="162" cy="188" r="4" fill="#ffffff"/>
+    <!-- small secondary glint lower-right -->
+    <ellipse cx="256" cy="308" rx="12" ry="9" fill="#fff6e4" opacity="0.5"/>
+  </g>
+
+  <!-- ============ BLACK-FRAMED MOTORSPORT LINE-ART POSTER ============ -->
+  <g>
+    <!-- frame drop shadow -->
+    <rect x="360" y="156" width="180" height="252" rx="3" fill="#3d3a36" opacity="0.22"/>
+    <!-- outer frame -->
+    <rect x="352" y="146" width="184" height="256" rx="3" fill="url(#frame)"/>
+    <!-- inner frame bevel -->
+    <rect x="360" y="154" width="168" height="240" fill="url(#frameInner)"/>
+    <!-- mat / paper -->
+    <rect x="356" y="150" width="176" height="248" fill="url(#poster)"/>
+    <rect x="356" y="150" width="176" height="248" fill="none" stroke="#ded2bf" stroke-width="1" opacity="0.6"/>
+
+    <!-- warm light gradient across glass -->
+    <rect x="356" y="150" width="176" height="248" fill="url(#beam)" opacity="0.4" clip-path="url(#posterClip)"/>
+
+    <!-- CIRCUIT LINE-ART (graphite + amber) -->
+    <g clip-path="url(#posterClip)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- main circuit loop, graphite -->
+      <path d="M400,230
+               C388,200 410,180 440,186
+               C470,192 466,220 484,224
+               C506,229 512,204 500,190
+               C486,174 464,178 452,166
+               C440,154 460,150 480,158
+               M400,230
+               C392,258 402,286 428,296
+               C454,306 448,330 470,338
+               C494,347 502,326 494,312
+               C486,298 466,300 458,286
+               C450,272 470,266 486,276"
+            stroke="#3d3a36" stroke-width="3"/>
+      <!-- secondary connecting track -->
+      <path d="M420,300 C398,312 396,340 418,352 C446,367 476,356 492,340"
+            stroke="#2a2724" stroke-width="3" opacity="0.85"/>
+      <!-- amber accent segment (start/finish sector) -->
+      <path d="M400,230 C388,200 410,180 440,186 C470,192 466,220 484,224"
+            stroke="#cf9f5c" stroke-width="3.4"/>
+      <path d="M418,352 C446,367 476,356 492,340"
+            stroke="#b98a4a" stroke-width="3.4"/>
+      <!-- start/finish tick -->
+      <line x1="440" y1="180" x2="440" y2="196" stroke="#8a5a20" stroke-width="4"/>
+      <!-- corner numbers as small ticks (abstract, no letters) -->
+      <circle cx="484" cy="224" r="3.2" fill="#cf9f5c" stroke="none"/>
+      <circle cx="470" cy="338" r="3.2" fill="#b98a4a" stroke="none"/>
+      <circle cx="418" cy="352" r="2.6" fill="#3d3a36" stroke="none"/>
+      <circle cx="440" cy="186" r="2.6" fill="#3d3a36" stroke="none"/>
+      <!-- subtle baseline rule -->
+      <line x1="386" y1="378" x2="502" y2="378" stroke="#c9bda8" stroke-width="1.4"/>
+      <line x1="386" y1="384" x2="452" y2="384" stroke="#d8ccb7" stroke-width="1.4"/>
+    </g>
+
+    <!-- glass sheen streak -->
+    <polygon points="360,154 396,154 372,394 360,394" fill="#ffffff" opacity="0.07"/>
+    <!-- inner frame highlight edge -->
+    <line x1="356" y1="150" x2="532" y2="150" stroke="#5c4632" stroke-width="1" opacity="0.4"/>
+    <line x1="356" y1="150" x2="356" y2="398" stroke="#6d5138" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- ============ SLIM BLACK PICTURE LEDGE ============ -->
+  <g>
+    <!-- ledge shadow on wall -->
+    <rect x="120" y="452" width="420" height="14" fill="#3d3a36" opacity="0.16"/>
+    <!-- top surface -->
+    <polygon points="128,456 540,456 548,462 136,462" fill="url(#ledgeTop)"/>
+    <!-- front face -->
+    <rect x="136" y="462" width="404" height="14" fill="url(#ledgeFace)"/>
+    <!-- front lip highlight -->
+    <line x1="136" y1="463" x2="540" y2="463" stroke="#4a4640" stroke-width="1" opacity="0.7"/>
+    <!-- bottom shadow -->
+    <rect x="136" y="476" width="404" height="7" fill="#0d0b08" opacity="0.5"/>
+    <!-- warm rim light catching left end of ledge -->
+    <rect x="136" y="462" width="60" height="14" fill="#cf9f5c" opacity="0.12"/>
+  </g>
+
+  <!-- ============ MINI OBJECT ON LEDGE (small amber vase + oak coaster) ============ -->
+  <g transform="translate(0,0)">
+    <!-- object shadow on ledge -->
+    <ellipse cx="418" cy="456" rx="34" ry="6" fill="#15130f" opacity="0.4"/>
+    <!-- small oak coaster/base -->
+    <ellipse cx="416" cy="454" rx="26" ry="6" fill="url(#oak)"/>
+    <ellipse cx="416" cy="452" rx="26" ry="6" fill="#e2cfa8"/>
+    <ellipse cx="416" cy="452" rx="26" ry="6" fill="none" stroke="#a5876a" stroke-width="1" opacity="0.6"/>
+    <!-- amber ceramic vase -->
+    <path d="M400,452
+             C398,438 396,424 402,414
+             C406,406 426,406 430,414
+             C436,424 434,438 432,452
+             C428,458 404,458 400,452 Z" fill="url(#vase)"/>
+    <!-- vase neck -->
+    <path d="M408,414 C406,406 404,400 410,398 L422,398 C428,400 426,406 424,414 Z" fill="#b98a4a"/>
+    <ellipse cx="416" cy="398" rx="8" ry="3" fill="#6d4318"/>
+    <!-- vase highlight -->
+    <path d="M406,448 C404,432 404,420 409,412" stroke="#f2d59a" stroke-width="2.5" opacity="0.7" fill="none" stroke-linecap="round"/>
+    <!-- single dried olive stem in vase -->
+    <path d="M416,398 C420,372 434,352 452,340" stroke="#63654a" stroke-width="2" fill="none"/>
+    <path d="M414,398 C408,374 400,356 388,346" stroke="#7a7c5c" stroke-width="2" fill="none"/>
+    <path d="M452,340 C446,338 442,342 446,348 C450,346 452,342 452,340 Z" fill="url(#leaf)"/>
+    <path d="M388,346 C394,343 398,347 394,353 C390,350 388,347 388,346 Z" fill="url(#leafDark)"/>
+    <ellipse cx="430" cy="360" rx="5" ry="3" fill="url(#leaf)" transform="rotate(-30 430 360)"/>
+    <ellipse cx="404" cy="366" rx="5" ry="3" fill="url(#leafDark)" transform="rotate(25 404 366)"/>
+  </g>
+
+  <!-- ============ SMALL PROP: brass/chrome pebble on ledge left ============ -->
+  <g>
+    <ellipse cx="196" cy="458" rx="22" ry="5" fill="#15130f" opacity="0.35"/>
+    <ellipse cx="194" cy="452" rx="20" ry="14" fill="url(#chrome)"/>
+    <ellipse cx="188" cy="446" rx="7" ry="4" fill="#ffffff" opacity="0.8"/>
+    <path d="M176,454 A20,14 0 0 1 210,448" stroke="#cf9f5c" stroke-width="2" opacity="0.4" fill="none"/>
+  </g>
+
+  <!-- ============ upper-right hanging leaf (depth) ============ -->
+  <g opacity="0.85" transform="translate(548,60) rotate(18)">
+    <path d="M0,0 C-24,20 -30,70 -12,120 C-4,80 4,40 18,10 Z" fill="url(#leafDark)"/>
+    <path d="M-8,110 L2,14" stroke="#4f5138" stroke-width="1.2" opacity="0.5"/>
+  </g>
+
+  <!-- ============ overall grade ============ -->
+  <rect x="0" y="0" width="600" height="750" fill="url(#vignette)"/>
+  <!-- soft top warm glow -->
+  <rect x="0" y="0" width="600" height="200" fill="#fff6e4" opacity="0.08"/>
+</svg>

@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="0.5" stop-color="#2a2724"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <linearGradient id="steelTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a4640"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="platter" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#15130f"/>
+    </linearGradient>
+    <radialGradient id="platterSheen" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#4a4640"/>
+      <stop offset="1" stop-color="#1c1a16"/>
+    </radialGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="chromeV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="glassBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8cdd6"/>
+      <stop offset="1" stop-color="#8a8c62"/>
+    </linearGradient>
+    <linearGradient id="olive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <linearGradient id="graphiteSleeve" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d3a36"/>
+      <stop offset="1" stop-color="#2a2724"/>
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background wall -->
+  <rect x="0" y="0" width="800" height="430" fill="url(#wall)"/>
+  <!-- floor -->
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <!-- floor plank lines -->
+  <line x1="0" y1="455" x2="800" y2="455" stroke="#c8a87c" stroke-width="2" opacity="0.6"/>
+  <line x1="0" y1="510" x2="800" y2="510" stroke="#c8a87c" stroke-width="2" opacity="0.6"/>
+  <line x1="0" y1="565" x2="800" y2="565" stroke="#c8a87c" stroke-width="2" opacity="0.6"/>
+  <line x1="220" y1="410" x2="220" y2="455" stroke="#c8a87c" stroke-width="1.5" opacity="0.5"/>
+  <line x1="560" y1="455" x2="560" y2="510" stroke="#c8a87c" stroke-width="1.5" opacity="0.5"/>
+  <line x1="380" y1="510" x2="380" y2="565" stroke="#c8a87c" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- warm light wash on wall -->
+  <ellipse cx="400" cy="150" rx="360" ry="150" fill="#ffffff" opacity="0.35"/>
+
+  <!-- wall art hint: framed geometric panel (olive/oak, no red) -->
+  <rect x="540" y="70" width="150" height="150" rx="6" fill="#faf7f2" stroke="#a5876a" stroke-width="4"/>
+  <rect x="558" y="88" width="114" height="114" rx="4" fill="#f7f3ec"/>
+  <circle cx="615" cy="145" r="38" fill="url(#amberGlow)" opacity="0.85"/>
+  <rect x="565" y="150" width="100" height="45" fill="url(#olive)" opacity="0.9"/>
+  <rect x="565" y="95" width="46" height="46" rx="4" fill="#cbb287"/>
+
+  <!-- soft floor shadow under cabinet -->
+  <ellipse cx="400" cy="465" rx="290" ry="34" fill="#1f1b16" opacity="0.12"/>
+
+  <!-- ===== LOW BLACK STEEL VINYL CABINET ===== -->
+  <!-- cabinet body -->
+  <rect x="150" y="300" width="500" height="150" rx="8" fill="url(#steel)"/>
+  <!-- cabinet top surface -->
+  <rect x="150" y="292" width="500" height="20" rx="6" fill="url(#steelTop)"/>
+  <!-- top highlight edge -->
+  <rect x="158" y="296" width="484" height="4" rx="2" fill="#5a5650" opacity="0.7"/>
+
+  <!-- left open cubby with record sleeves -->
+  <rect x="170" y="322" width="220" height="112" rx="6" fill="#15130f"/>
+  <rect x="170" y="322" width="220" height="112" rx="6" fill="none" stroke="#2a2724" stroke-width="2"/>
+
+  <!-- upright record sleeves (olive / graphite) -->
+  <g>
+    <!-- sleeve 1 olive -->
+    <rect x="182" y="330" width="24" height="100" rx="2" fill="url(#olive)"/>
+    <rect x="182" y="330" width="7" height="100" rx="2" fill="#7a7c5c"/>
+    <circle cx="196" cy="345" r="7" fill="#cbb287" opacity="0.7"/>
+    <!-- sleeve 2 graphite -->
+    <rect x="208" y="328" width="24" height="102" rx="2" fill="url(#graphiteSleeve)"/>
+    <rect x="208" y="328" width="7" height="102" rx="2" fill="#2a2724"/>
+    <rect x="219" y="342" width="14" height="4" fill="#cf9f5c" opacity="0.8"/>
+    <!-- sleeve 3 olive lighter -->
+    <rect x="234" y="332" width="24" height="98" rx="2" fill="#8a8c62"/>
+    <rect x="234" y="332" width="7" height="98" rx="2" fill="#7a7c5c"/>
+    <circle cx="248" cy="360" r="6" fill="#cf9f5c" opacity="0.6"/>
+    <!-- sleeve 4 graphite -->
+    <rect x="260" y="329" width="24" height="101" rx="2" fill="url(#graphiteSleeve)"/>
+    <rect x="260" y="329" width="7" height="101" rx="2" fill="#3d3a36"/>
+    <!-- sleeve 5 olive tilted -->
+    <rect x="288" y="331" width="24" height="99" rx="2" fill="url(#olive)" transform="rotate(4 300 380)"/>
+    <rect x="288" y="331" width="7" height="99" rx="2" fill="#7a7c5c" transform="rotate(4 300 380)"/>
+    <!-- sleeve 6 graphite tilted -->
+    <rect x="314" y="333" width="24" height="97" rx="2" fill="#3d3a36" transform="rotate(6 326 380)"/>
+    <rect x="314" y="333" width="7" height="97" rx="2" fill="#2a2724" transform="rotate(6 326 380)"/>
+    <!-- sleeve 7 olive leaning -->
+    <rect x="342" y="336" width="24" height="94" rx="2" fill="#8a8c62" transform="rotate(9 354 380)"/>
+    <rect x="342" y="336" width="7" height="94" rx="2" fill="#7a7c5c" transform="rotate(9 354 380)"/>
+    <rect x="349" y="352" width="12" height="4" fill="#cf9f5c" opacity="0.7" transform="rotate(9 354 380)"/>
+  </g>
+
+  <!-- right door with chrome handle -->
+  <rect x="410" y="322" width="220" height="112" rx="6" fill="url(#steel)"/>
+  <rect x="410" y="322" width="220" height="112" rx="6" fill="none" stroke="#3d3a36" stroke-width="2"/>
+  <rect x="420" y="332" width="200" height="92" rx="4" fill="none" stroke="#2a2724" stroke-width="1.5"/>
+  <rect x="600" y="360" width="8" height="36" rx="4" fill="url(#chromeV)"/>
+
+  <!-- cabinet legs (steel) -->
+  <rect x="176" y="450" width="14" height="34" rx="4" fill="#2a2724"/>
+  <rect x="610" y="450" width="14" height="34" rx="4" fill="#2a2724"/>
+  <rect x="178" y="452" width="4" height="30" rx="2" fill="#4a4640" opacity="0.6"/>
+  <rect x="612" y="452" width="4" height="30" rx="2" fill="#4a4640" opacity="0.6"/>
+
+  <!-- ===== TURNTABLE on top ===== -->
+  <!-- turntable base plinth -->
+  <rect x="245" y="238" width="290" height="62" rx="8" fill="url(#steelTop)"/>
+  <rect x="245" y="238" width="290" height="62" rx="8" fill="none" stroke="#15130f" stroke-width="2"/>
+  <rect x="253" y="243" width="274" height="6" rx="3" fill="#5a5650" opacity="0.5"/>
+  <!-- subtle base shadow on cabinet top -->
+  <ellipse cx="390" cy="302" rx="150" ry="10" fill="#15130f" opacity="0.35"/>
+
+  <!-- platter -->
+  <ellipse cx="360" cy="266" rx="86" ry="30" fill="url(#platter)"/>
+  <ellipse cx="360" cy="263" rx="86" ry="30" fill="url(#platterSheen)"/>
+  <ellipse cx="360" cy="263" rx="70" ry="24" fill="#2a2724"/>
+  <!-- vinyl grooves -->
+  <ellipse cx="360" cy="263" rx="58" ry="20" fill="none" stroke="#3d3a36" stroke-width="1"/>
+  <ellipse cx="360" cy="263" rx="46" ry="16" fill="none" stroke="#3d3a36" stroke-width="1"/>
+  <ellipse cx="360" cy="263" rx="34" ry="12" fill="none" stroke="#3d3a36" stroke-width="1"/>
+  <!-- record label (amber, not red) -->
+  <ellipse cx="360" cy="263" rx="20" ry="7" fill="url(#amberGlow)"/>
+  <ellipse cx="360" cy="263" rx="20" ry="7" fill="none" stroke="#8a5a20" stroke-width="1"/>
+  <!-- spindle -->
+  <ellipse cx="360" cy="262" rx="2.5" ry="1.2" fill="#e3e1dc"/>
+  <!-- platter light glint -->
+  <ellipse cx="330" cy="252" rx="26" ry="7" fill="#ffffff" opacity="0.08"/>
+
+  <!-- chrome tonearm hint -->
+  <!-- tonearm pivot base -->
+  <ellipse cx="492" cy="272" rx="14" ry="8" fill="url(#chromeV)"/>
+  <ellipse cx="492" cy="271" rx="14" ry="8" fill="none" stroke="#a5876a" stroke-width="1"/>
+  <circle cx="492" cy="269" r="5" fill="#e3e1dc"/>
+  <!-- counterweight -->
+  <ellipse cx="504" cy="266" rx="9" ry="6" fill="url(#chrome)"/>
+  <!-- tonearm tube -->
+  <path d="M 490 268 L 400 258" stroke="url(#chrome)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 490 268 L 400 258" stroke="#e3e1dc" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <!-- headshell -->
+  <path d="M 400 258 L 386 260 L 388 266 L 402 264 Z" fill="url(#chromeV)"/>
+  <ellipse cx="390" cy="264" rx="3" ry="2" fill="#15130f"/>
+
+  <!-- start/stop chrome button -->
+  <circle cx="270" cy="286" r="7" fill="url(#chromeV)"/>
+  <circle cx="270" cy="286" r="3" fill="#cf9f5c"/>
+  <!-- pitch slider -->
+  <rect x="290" y="284" width="34" height="5" rx="2.5" fill="#15130f"/>
+  <rect x="310" y="282" width="8" height="9" rx="2" fill="url(#chromeV)"/>
+
+  <!-- small potted greenery accent on cabinet top right (olive) -->
+  <ellipse cx="590" cy="300" rx="26" ry="6" fill="#15130f" opacity="0.3"/>
+  <path d="M 574 300 L 578 268 L 602 268 L 606 300 Z" fill="#8a5a20"/>
+  <path d="M 576 284 L 604 284 L 602 300 L 578 300 Z" fill="#b98a4a"/>
+  <ellipse cx="590" cy="268" rx="15" ry="4" fill="#6d5138"/>
+  <path d="M 590 268 C 574 250 570 232 582 224 C 586 244 590 256 590 268 Z" fill="#7a7c5c"/>
+  <path d="M 590 268 C 606 248 612 230 600 222 C 594 244 590 256 590 268 Z" fill="#8a8c62"/>
+  <path d="M 590 268 C 588 244 590 228 596 220 C 596 244 594 258 590 268 Z" fill="#7a7c5c"/>
+
+  <!-- a couple flat-lying records leaning against cabinet base, left -->
+  <ellipse cx="120" cy="470" rx="46" ry="10" fill="#15130f" opacity="0.15"/>
+  <g transform="rotate(-14 120 430)">
+    <rect x="86" y="372" width="70" height="70" rx="3" fill="url(#olive)"/>
+    <rect x="86" y="372" width="70" height="70" rx="3" fill="none" stroke="#7a7c5c" stroke-width="2"/>
+    <circle cx="121" cy="407" r="16" fill="#15130f"/>
+    <circle cx="121" cy="407" r="6" fill="#cf9f5c"/>
+  </g>
+  <g transform="rotate(-11 130 434)">
+    <rect x="98" y="380" width="70" height="70" rx="3" fill="url(#graphiteSleeve)"/>
+    <rect x="98" y="380" width="70" height="70" rx="3" fill="none" stroke="#3d3a36" stroke-width="2"/>
+    <circle cx="133" cy="415" r="16" fill="#2a2724"/>
+    <circle cx="133" cy="415" r="6" fill="#b8cdd6" opacity="0.7"/>
+  </g>
+
+  <!-- soft warm glow overlay top -->
+  <rect x="0" y="0" width="800" height="140" fill="#ffffff" opacity="0.12"/>
+</svg>

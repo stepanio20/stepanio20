@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/stepanio20/stepanio20/concierge/recommend/health_graph.schema.json",
+  "title": "Health Graph (concierge facts subset)",
+  "description": "Canonical facts the recommendation engine reads. In production this is materialised from healthlake/gold + the domain bundles. A user's REAL graph lives at users/<user>/bundles/health_graph.json (gitignored). This schema documents the subset the weekly-plan engine uses.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["weight_kg"],
+  "properties": {
+    "weight_kg": { "type": "number" },
+    "height_cm": { "type": ["number", "null"] },
+    "age": { "type": ["integer", "null"] },
+    "sex": { "type": "string", "enum": ["XY", "XX"] },
+    "lean_mass_kg": { "type": ["number", "null"], "description": "Drives Katch-McArdle BMR (most accurate when known)." },
+    "body_fat_pct": { "type": ["number", "null"] },
+    "training_days": { "type": "integer", "minimum": 0, "maximum": 7 },
+
+    "bloods": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Analyte values (most recent). Keys the engine reads:",
+      "properties": {
+        "drawn_date": { "type": "string", "format": "date" },
+        "vitamin_d_ng_ml": { "type": "number" },
+        "b12_pg_ml": { "type": "number" },
+        "ferritin_ng_ml": { "type": "number" },
+        "ldl_mg_dl": { "type": "number" },
+        "hdl_mg_dl": { "type": "number" },
+        "triglycerides_mg_dl": { "type": "number" },
+        "hba1c_pct": { "type": "number" },
+        "ggt_u_l": { "type": "number" },
+        "apob_mg_dl": { "type": "number" },
+        "lpa_nmol_l": { "type": "number" }
+      }
+    },
+
+    "last_tests": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "format": "date" },
+      "description": "Date of last each test, e.g. {\"lipid_panel\": \"2025-01-29\"}."
+    },
+
+    "lifestyle": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "nicotine": { "type": ["string", "null"] },
+        "alcohol_units_per_week": { "type": ["number", "null"] },
+        "bp_systolic": { "type": ["number", "null"] },
+        "bp_diastolic": { "type": ["number", "null"] }
+      }
+    },
+
+    "wearable": {
+      "type": ["object", "null"],
+      "description": "Presence enables recovery-aware training notes. Null/absent = not connected."
+    }
+  }
+}

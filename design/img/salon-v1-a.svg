@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="oakTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.55" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="oakEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <linearGradient id="vaseG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="bookA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <linearGradient id="bookB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <linearGradient id="runnerG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <linearGradient id="potG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a5876a"/>
+      <stop offset="0.5" stop-color="#c8a87c"/>
+      <stop offset="1" stop-color="#a5876a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.35" cy="0.25" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- wall -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="600" fill="url(#glow)"/>
+
+  <!-- sideboard body -->
+  <!-- top surface -->
+  <rect x="70" y="352" width="660" height="34" rx="8" fill="url(#oakTop)"/>
+  <rect x="70" y="352" width="660" height="10" rx="6" fill="#e3e1dc" opacity="0.18"/>
+  <!-- front face with doors -->
+  <rect x="78" y="384" width="644" height="150" rx="10" fill="url(#oakFace)"/>
+  <!-- door split lines -->
+  <line x1="290" y1="392" x2="290" y2="526" stroke="#a5876a" stroke-width="2" opacity="0.7"/>
+  <line x1="510" y1="392" x2="510" y2="526" stroke="#a5876a" stroke-width="2" opacity="0.7"/>
+  <!-- door panels subtle -->
+  <rect x="92" y="396" width="188" height="128" rx="6" fill="#d8c19a" opacity="0.35"/>
+  <rect x="300" y="396" width="200" height="128" rx="6" fill="#d8c19a" opacity="0.35"/>
+  <rect x="520" y="396" width="190" height="128" rx="6" fill="#d8c19a" opacity="0.35"/>
+  <!-- door pulls (chrome) -->
+  <rect x="270" y="452" width="6" height="26" rx="3" fill="#c9c5be"/>
+  <rect x="304" y="452" width="6" height="26" rx="3" fill="#c9c5be"/>
+  <rect x="490" y="452" width="6" height="26" rx="3" fill="#c9c5be"/>
+  <rect x="524" y="452" width="6" height="26" rx="3" fill="#c9c5be"/>
+  <!-- edge under top -->
+  <rect x="78" y="384" width="644" height="8" fill="url(#oakEdge)" opacity="0.5"/>
+  <!-- legs -->
+  <rect x="110" y="534" width="16" height="30" rx="3" fill="#a5876a"/>
+  <rect x="674" y="534" width="16" height="30" rx="3" fill="#a5876a"/>
+
+  <!-- floor hint -->
+  <rect x="0" y="560" width="800" height="40" fill="url(#floor)" opacity="0.5"/>
+  <ellipse cx="400" cy="566" rx="300" ry="10" fill="#1f1b16" opacity="0.10"/>
+
+  <!-- ===== styled objects on top (baseline ~352) ===== -->
+
+  <!-- folded olive linen runner (center-left, laid flat) -->
+  <ellipse cx="300" cy="356" rx="150" ry="12" fill="#1f1b16" opacity="0.10"/>
+  <rect x="168" y="336" width="270" height="22" rx="5" fill="url(#runnerG)"/>
+  <rect x="168" y="336" width="270" height="7" rx="4" fill="#8a8c62" opacity="0.7"/>
+  <rect x="180" y="330" width="246" height="12" rx="4" fill="#7a7c5c"/>
+  <rect x="180" y="330" width="246" height="4" rx="2" fill="#8a8c62"/>
+  <line x1="176" y1="349" x2="430" y2="349" stroke="#5c4632" stroke-width="1" opacity="0.25"/>
+
+  <!-- stack of 2 books (left) -->
+  <ellipse cx="200" cy="332" rx="76" ry="9" fill="#1f1b16" opacity="0.10"/>
+  <!-- lower book (ochre) -->
+  <rect x="132" y="312" width="140" height="20" rx="4" fill="url(#bookB)"/>
+  <rect x="132" y="312" width="140" height="6" rx="4" fill="#cf9f5c"/>
+  <rect x="136" y="316" width="132" height="3" fill="#8a5a20" opacity="0.35"/>
+  <rect x="264" y="314" width="6" height="16" fill="#faf7f2" opacity="0.7"/>
+  <!-- upper book (olive) -->
+  <rect x="146" y="294" width="118" height="18" rx="4" fill="url(#bookA)"/>
+  <rect x="146" y="294" width="118" height="5" rx="4" fill="#8a8c62"/>
+  <rect x="256" y="296" width="6" height="14" fill="#faf7f2" opacity="0.7"/>
+  <rect x="150" y="298" width="110" height="2" fill="#5c4632" opacity="0.3"/>
+
+  <!-- ceramic vase (on the books, small) -->
+  <ellipse cx="205" cy="292" rx="30" ry="6" fill="#1f1b16" opacity="0.10"/>
+  <path d="M186 232 q-6 30 4 52 q4 8 15 8 q11 0 15 -8 q10 -22 4 -52 q-3 -8 -19 -8 q-16 0 -19 8 Z" fill="url(#vaseG)"/>
+  <path d="M186 232 q3 -8 19 -8 q16 0 19 8 q2 6 2 12 q-21 8 -42 0 q0 -6 2 -12 Z" fill="#ffffff" opacity="0.6"/>
+  <ellipse cx="205" cy="230" rx="19" ry="6" fill="#e3e1dc"/>
+  <ellipse cx="205" cy="230" rx="13" ry="4" fill="#c9c5be"/>
+  <path d="M198 244 q-3 20 2 38" stroke="#c9c5be" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- trailing plant (right side, in oak pot) -->
+  <ellipse cx="600" cy="358" rx="92" ry="12" fill="#1f1b16" opacity="0.10"/>
+  <!-- pot -->
+  <path d="M562 300 l76 0 l-9 54 q-2 6 -8 6 l-42 0 q-6 0 -8 -6 Z" fill="url(#potG)"/>
+  <ellipse cx="600" cy="300" rx="38" ry="9" fill="#d8c19a"/>
+  <ellipse cx="600" cy="300" rx="30" ry="6" fill="#6d5138"/>
+  <ellipse cx="600" cy="300" rx="30" ry="6" fill="#5c4632" opacity="0.6"/>
+  <!-- foliage upright -->
+  <path d="M600 300 q-6 -50 -28 -78" stroke="#7a7c5c" stroke-width="3" fill="none"/>
+  <path d="M600 300 q4 -46 18 -74" stroke="#8a8c62" stroke-width="3" fill="none"/>
+  <path d="M600 300 q-2 -40 -4 -66" stroke="#7a7c5c" stroke-width="3" fill="none"/>
+  <ellipse cx="572" cy="224" rx="10" ry="20" fill="#7a7c5c" transform="rotate(-28 572 224)"/>
+  <ellipse cx="596" cy="238" rx="9" ry="19" fill="#8a8c62" transform="rotate(-6 596 238)"/>
+  <ellipse cx="620" cy="228" rx="10" ry="20" fill="#7a7c5c" transform="rotate(22 620 228)"/>
+  <ellipse cx="584" cy="252" rx="8" ry="16" fill="#8a8c62" transform="rotate(-18 584 252)"/>
+  <ellipse cx="612" cy="250" rx="8" ry="17" fill="#7a7c5c" transform="rotate(14 612 250)"/>
+  <!-- trailing vines over the edge -->
+  <path d="M566 306 q-24 24 -30 60 q-4 24 4 46" stroke="#7a7c5c" stroke-width="3" fill="none"/>
+  <ellipse cx="536" cy="342" rx="7" ry="12" fill="#8a8c62" transform="rotate(-40 536 342)"/>
+  <ellipse cx="532" cy="372" rx="7" ry="13" fill="#7a7c5c" transform="rotate(-20 532 372)"/>
+  <ellipse cx="538" cy="404" rx="6" ry="12" fill="#8a8c62" transform="rotate(10 538 404)"/>
+  <ellipse cx="544" cy="432" rx="6" ry="11" fill="#7a7c5c" transform="rotate(24 544 432)"/>
+  <path d="M634 308 q22 20 26 52 q3 20 -3 40" stroke="#8a8c62" stroke-width="3" fill="none"/>
+  <ellipse cx="662" cy="344" rx="7" ry="12" fill="#7a7c5c" transform="rotate(38 662 344)"/>
+  <ellipse cx="664" cy="376" rx="6" ry="12" fill="#8a8c62" transform="rotate(20 664 376)"/>
+  <ellipse cx="658" cy="404" rx="6" ry="11" fill="#7a7c5c" transform="rotate(4 658 404)"/>
+
+  <!-- small glass-blue catch dish (accent, sparing) -->
+  <ellipse cx="450" cy="348" rx="46" ry="10" fill="#b8cdd6" opacity="0.85"/>
+  <ellipse cx="450" cy="345" rx="46" ry="9" fill="#b8cdd6"/>
+  <ellipse cx="450" cy="344" rx="34" ry="6" fill="#e3e1dc" opacity="0.6"/>
+
+  <!-- warm top highlight streak -->
+  <rect x="90" y="354" width="620" height="4" rx="2" fill="#faf7f2" opacity="0.35"/>
+</svg>

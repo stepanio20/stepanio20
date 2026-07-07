@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.75">
+      <stop offset="0" stop-color="#f4e2bf"/>
+      <stop offset="0.45" stop-color="#e9cf9c"/>
+      <stop offset="1" stop-color="#cf9f5c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf1dc"/>
+      <stop offset="0.5" stop-color="#f0dcae"/>
+      <stop offset="1" stop-color="#cf9f5c"/>
+    </linearGradient>
+    <linearGradient id="shadeInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7e6c2"/>
+      <stop offset="1" stop-color="#e5c68a"/>
+    </linearGradient>
+    <linearGradient id="leg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6d5138"/>
+      <stop offset="0.5" stop-color="#5c4632"/>
+      <stop offset="1" stop-color="#3d3a36"/>
+    </linearGradient>
+    <linearGradient id="legLit" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a5876a"/>
+      <stop offset="0.5" stop-color="#6d5138"/>
+      <stop offset="1" stop-color="#5c4632"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="0.5" stop-color="#c9c5be"/>
+      <stop offset="1" stop-color="#a5a29b"/>
+    </linearGradient>
+    <linearGradient id="rug" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#b98a4a"/>
+    </linearGradient>
+    <radialGradient id="rugLight" cx="0.42" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#e9cf9c" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#b98a4a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- backdrop -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)"/>
+  <rect x="0" y="410" width="800" height="190" fill="url(#floor)"/>
+  <rect x="0" y="406" width="800" height="8" fill="#a5876a" opacity="0.35"/>
+
+  <!-- wall warm wash from lamp -->
+  <ellipse cx="300" cy="230" rx="300" ry="300" fill="url(#glow)" opacity="0.55"/>
+
+  <!-- floor plank seams -->
+  <rect x="0" y="470" width="800" height="2" fill="#a5876a" opacity="0.25"/>
+  <rect x="0" y="535" width="800" height="2" fill="#a5876a" opacity="0.22"/>
+  <rect x="180" y="410" width="2" height="190" fill="#a5876a" opacity="0.18"/>
+  <rect x="520" y="410" width="2" height="190" fill="#a5876a" opacity="0.18"/>
+
+  <!-- ============ JUTE RUG ============ -->
+  <ellipse cx="470" cy="560" rx="320" ry="42" fill="#1f1b16" opacity="0.12"/>
+  <g>
+    <rect x="300" y="440" width="500" height="150" rx="10" fill="url(#rug)"/>
+    <rect x="300" y="440" width="500" height="150" rx="10" fill="url(#rugLight)"/>
+    <!-- braided border -->
+    <rect x="300" y="440" width="500" height="150" rx="10" fill="none" stroke="#8a5a20" stroke-width="6" opacity="0.5"/>
+    <rect x="314" y="454" width="472" height="122" rx="6" fill="none" stroke="#faf7f2" stroke-width="2" opacity="0.25"/>
+    <!-- jute weave: vertical strands -->
+    <g stroke="#8a5a20" stroke-width="1.4" opacity="0.35">
+      <line x1="330" y1="454" x2="330" y2="576"/>
+      <line x1="360" y1="454" x2="360" y2="576"/>
+      <line x1="390" y1="454" x2="390" y2="576"/>
+      <line x1="420" y1="454" x2="420" y2="576"/>
+      <line x1="450" y1="454" x2="450" y2="576"/>
+      <line x1="480" y1="454" x2="480" y2="576"/>
+      <line x1="510" y1="454" x2="510" y2="576"/>
+      <line x1="540" y1="454" x2="540" y2="576"/>
+      <line x1="570" y1="454" x2="570" y2="576"/>
+      <line x1="600" y1="454" x2="600" y2="576"/>
+      <line x1="630" y1="454" x2="630" y2="576"/>
+      <line x1="660" y1="454" x2="660" y2="576"/>
+      <line x1="690" y1="454" x2="690" y2="576"/>
+      <line x1="720" y1="454" x2="720" y2="576"/>
+      <line x1="750" y1="454" x2="750" y2="576"/>
+    </g>
+    <!-- jute weave: highlight strands -->
+    <g stroke="#f0dcae" stroke-width="1.2" opacity="0.4">
+      <line x1="345" y1="454" x2="345" y2="576"/>
+      <line x1="405" y1="454" x2="405" y2="576"/>
+      <line x1="465" y1="454" x2="465" y2="576"/>
+      <line x1="525" y1="454" x2="525" y2="576"/>
+      <line x1="585" y1="454" x2="585" y2="576"/>
+      <line x1="645" y1="454" x2="645" y2="576"/>
+      <line x1="705" y1="454" x2="705" y2="576"/>
+    </g>
+    <!-- horizontal weave rows -->
+    <g stroke="#6d5138" stroke-width="2" opacity="0.28" stroke-dasharray="10 8">
+      <line x1="314" y1="474" x2="786" y2="474"/>
+      <line x1="314" y1="494" x2="786" y2="494"/>
+      <line x1="314" y1="514" x2="786" y2="514"/>
+      <line x1="314" y1="534" x2="786" y2="534"/>
+      <line x1="314" y1="554" x2="786" y2="554"/>
+    </g>
+    <g stroke="#faf1dc" stroke-width="1" opacity="0.3" stroke-dasharray="8 10">
+      <line x1="318" y1="484" x2="786" y2="484"/>
+      <line x1="318" y1="504" x2="786" y2="504"/>
+      <line x1="318" y1="524" x2="786" y2="524"/>
+      <line x1="318" y1="544" x2="786" y2="544"/>
+      <line x1="318" y1="564" x2="786" y2="564"/>
+    </g>
+  </g>
+
+  <!-- ============ TRIPOD FLOOR LAMP ============ -->
+  <!-- lamp floor shadow -->
+  <ellipse cx="292" cy="520" rx="150" ry="26" fill="#1f1b16" opacity="0.12"/>
+
+  <!-- tripod legs -->
+  <g stroke-linecap="round">
+    <!-- back leg -->
+    <rect x="286" y="255" width="12" height="270" rx="6" fill="url(#leg)" transform="rotate(2 292 390)"/>
+    <!-- left leg -->
+    <rect x="286" y="255" width="13" height="272" rx="6" fill="url(#legLit)" transform="rotate(-26 292 300)"/>
+    <!-- right leg -->
+    <rect x="285" y="255" width="13" height="272" rx="6" fill="url(#leg)" transform="rotate(24 292 300)"/>
+    <!-- leg brass feet -->
+    <circle cx="188" cy="516" r="7" fill="#b98a4a"/>
+    <circle cx="292" cy="524" r="7" fill="#8a5a20"/>
+    <circle cx="396" cy="516" r="7" fill="#b98a4a"/>
+  </g>
+
+  <!-- tripod chrome collar -->
+  <path d="M270 268 L314 268 L306 300 L278 300 Z" fill="url(#chrome)"/>
+  <rect x="272" y="262" width="40" height="12" rx="4" fill="#c9c5be"/>
+  <rect x="272" y="262" width="40" height="4" rx="2" fill="#e3e1dc"/>
+
+  <!-- stem to shade -->
+  <rect x="286" y="205" width="12" height="66" rx="6" fill="url(#chrome)"/>
+
+  <!-- warm glow behind shade -->
+  <ellipse cx="292" cy="150" rx="185" ry="160" fill="url(#glow)" opacity="0.85"/>
+
+  <!-- linen shade -->
+  <path d="M212 210 L372 210 L350 96 L234 96 Z" fill="url(#shade)"/>
+  <path d="M212 210 L372 210 L350 96 L234 96 Z" fill="none" stroke="#cf9f5c" stroke-width="2" opacity="0.5"/>
+  <!-- shade inner lit lip -->
+  <path d="M215 205 L369 205 L366 198 L218 198 Z" fill="#f7e6c2"/>
+  <!-- shade top rim -->
+  <path d="M234 96 L350 96 L347 90 L237 90 Z" fill="#e5c68a"/>
+  <rect x="255" y="88" width="74" height="6" rx="3" fill="url(#shadeInner)"/>
+
+  <!-- linen vertical weave texture on shade -->
+  <g stroke="#e5c68a" stroke-width="1" opacity="0.45">
+    <line x1="242" y1="104" x2="224" y2="204"/>
+    <line x1="258" y1="100" x2="245" y2="204"/>
+    <line x1="274" y1="98" x2="266" y2="204"/>
+    <line x1="292" y1="97" x2="292" y2="204"/>
+    <line x1="310" y1="98" x2="318" y2="204"/>
+    <line x1="326" y1="100" x2="339" y2="204"/>
+    <line x1="342" y1="104" x2="360" y2="204"/>
+  </g>
+  <g stroke="#faf1dc" stroke-width="0.8" opacity="0.5">
+    <line x1="250" y1="102" x2="234" y2="204"/>
+    <line x1="283" y1="98" x2="279" y2="204"/>
+    <line x1="318" y1="99" x2="330" y2="204"/>
+  </g>
+  <!-- horizontal weave -->
+  <g stroke="#cf9f5c" stroke-width="0.7" opacity="0.3">
+    <line x1="228" y1="130" x2="356" y2="130"/>
+    <line x1="222" y1="160" x2="362" y2="160"/>
+    <line x1="217" y1="188" x2="367" y2="188"/>
+  </g>
+
+  <!-- soft light spill on wall edge -->
+  <path d="M372 210 Q470 170 460 90 L410 90 Q420 165 350 200 Z" fill="#f4e2bf" opacity="0.22"/>
+  <path d="M212 210 Q120 175 130 96 L178 96 Q170 165 235 200 Z" fill="#f4e2bf" opacity="0.18"/>
+
+  <!-- small ochre accent glow dot at bulb -->
+  <circle cx="292" cy="170" r="26" fill="#f7e6c2" opacity="0.55"/>
+</svg>

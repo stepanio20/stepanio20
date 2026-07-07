@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#f2ece1"/>
+    </linearGradient>
+    <linearGradient id="oakFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="1" stop-color="#cbb287"/>
+    </linearGradient>
+    <linearGradient id="jute" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#d8c19a"/>
+      <stop offset="0.5" stop-color="#cbb287"/>
+      <stop offset="1" stop-color="#c8a87c"/>
+    </linearGradient>
+    <linearGradient id="sofaBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f7f3ec"/>
+    </linearGradient>
+    <linearGradient id="sofaSeat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f2"/>
+      <stop offset="1" stop-color="#eee7db"/>
+    </linearGradient>
+    <linearGradient id="cushion" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <linearGradient id="basket" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf9f5c"/>
+      <stop offset="0.55" stop-color="#b98a4a"/>
+      <stop offset="1" stop-color="#8a5a20"/>
+    </linearGradient>
+    <linearGradient id="pot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e1dc"/>
+      <stop offset="1" stop-color="#c9c5be"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a8c62"/>
+      <stop offset="1" stop-color="#7a7c5c"/>
+    </linearGradient>
+    <radialGradient id="lightGlow" cx="0.32" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background wall -->
+  <rect x="0" y="0" width="800" height="430" fill="url(#wall)"/>
+  <rect x="0" y="0" width="800" height="430" fill="url(#lightGlow)"/>
+
+  <!-- Oak floor -->
+  <rect x="0" y="400" width="800" height="200" fill="url(#oakFloor)"/>
+  <rect x="0" y="400" width="800" height="10" fill="#a5876a" opacity="0.35"/>
+  <!-- floor plank seams -->
+  <line x1="120" y1="410" x2="90" y2="600" stroke="#a5876a" stroke-width="2" opacity="0.25"/>
+  <line x1="360" y1="410" x2="345" y2="600" stroke="#a5876a" stroke-width="2" opacity="0.25"/>
+  <line x1="600" y1="410" x2="620" y2="600" stroke="#a5876a" stroke-width="2" opacity="0.25"/>
+
+  <!-- Soft wall baseboard shadow -->
+  <rect x="0" y="392" width="800" height="14" fill="#e8e0d2" opacity="0.6"/>
+
+  <!-- Jute rug -->
+  <ellipse cx="400" cy="512" rx="360" ry="70" fill="rgba(31,27,22,0.12)"/>
+  <ellipse cx="400" cy="500" rx="355" ry="72" fill="url(#jute)"/>
+  <ellipse cx="400" cy="500" rx="355" ry="72" fill="none" stroke="#a5876a" stroke-width="3" opacity="0.4"/>
+  <ellipse cx="400" cy="500" rx="330" ry="60" fill="none" stroke="#faf7f2" stroke-width="2" opacity="0.35"/>
+  <!-- rug weave hints -->
+  <line x1="130" y1="490" x2="670" y2="490" stroke="#c8a87c" stroke-width="2" opacity="0.4"/>
+  <line x1="120" y1="512" x2="680" y2="512" stroke="#c8a87c" stroke-width="2" opacity="0.4"/>
+  <line x1="150" y1="533" x2="650" y2="533" stroke="#a5876a" stroke-width="2" opacity="0.3"/>
+
+  <!-- ===== SOFA (corner, right) ===== -->
+  <!-- sofa contact shadow -->
+  <ellipse cx="560" cy="470" rx="230" ry="46" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- back rest -->
+  <rect x="430" y="150" width="360" height="230" rx="30" fill="url(#sofaBody)"/>
+  <!-- back cushion left -->
+  <rect x="450" y="175" width="150" height="150" rx="24" fill="url(#sofaSeat)"/>
+  <rect x="450" y="175" width="150" height="150" rx="24" fill="none" stroke="#eee7db" stroke-width="3"/>
+  <!-- back cushion right -->
+  <rect x="612" y="175" width="160" height="150" rx="24" fill="url(#sofaSeat)"/>
+  <rect x="612" y="175" width="160" height="150" rx="24" fill="none" stroke="#eee7db" stroke-width="3"/>
+
+  <!-- boucle texture dots on backrest -->
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="480" cy="210" r="3"/><circle cx="510" cy="240" r="3"/><circle cx="470" cy="270" r="3"/>
+    <circle cx="540" cy="200" r="3"/><circle cx="560" cy="260" r="3"/><circle cx="520" cy="300" r="3"/>
+    <circle cx="650" cy="210" r="3"/><circle cx="690" cy="250" r="3"/><circle cx="660" cy="290" r="3"/>
+    <circle cx="720" cy="220" r="3"/><circle cx="710" cy="280" r="3"/><circle cx="740" cy="250" r="3"/>
+  </g>
+  <g fill="#eee7db" opacity="0.6">
+    <circle cx="495" cy="228" r="2.5"/><circle cx="525" cy="285" r="2.5"/><circle cx="555" cy="230" r="2.5"/>
+    <circle cx="675" cy="235" r="2.5"/><circle cx="700" cy="300" r="2.5"/><circle cx="730" cy="290" r="2.5"/>
+  </g>
+
+  <!-- left armrest -->
+  <rect x="410" y="250" width="90" height="180" rx="28" fill="url(#sofaBody)"/>
+  <ellipse cx="455" cy="262" rx="42" ry="24" fill="#ffffff"/>
+  <rect x="410" y="250" width="90" height="180" rx="28" fill="none" stroke="#f0e9dd" stroke-width="2"/>
+
+  <!-- seat cushion -->
+  <rect x="470" y="330" width="320" height="110" rx="26" fill="url(#sofaSeat)"/>
+  <rect x="470" y="330" width="320" height="110" rx="26" fill="none" stroke="#eee7db" stroke-width="3"/>
+  <line x1="630" y1="340" x2="630" y2="430" stroke="#eee7db" stroke-width="3" opacity="0.7"/>
+
+  <!-- boucle dots on seat -->
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="510" cy="370" r="3"/><circle cx="560" cy="400" r="3"/><circle cx="600" cy="360" r="3"/>
+    <circle cx="680" cy="380" r="3"/><circle cx="730" cy="400" r="3"/><circle cx="700" cy="360" r="3"/>
+  </g>
+
+  <!-- oak sofa legs -->
+  <rect x="486" y="432" width="16" height="30" rx="5" fill="#a5876a"/>
+  <rect x="486" y="432" width="7" height="30" rx="3" fill="#cbb287"/>
+  <rect x="756" y="432" width="16" height="30" rx="5" fill="#a5876a"/>
+  <rect x="756" y="432" width="7" height="30" rx="3" fill="#cbb287"/>
+
+  <!-- ===== OLIVE LINEN CUSHION ===== -->
+  <g transform="rotate(-8 545 355)">
+    <rect x="480" y="300" width="130" height="120" rx="20" fill="rgba(31,27,22,0.12)" transform="translate(4 6)"/>
+    <rect x="480" y="300" width="130" height="120" rx="20" fill="url(#cushion)"/>
+    <rect x="480" y="300" width="130" height="120" rx="20" fill="none" stroke="#6d6f4e" stroke-width="2" opacity="0.5"/>
+    <!-- linen weave lines -->
+    <line x1="492" y1="320" x2="600" y2="320" stroke="#8a8c62" stroke-width="1.5" opacity="0.5"/>
+    <line x1="492" y1="345" x2="600" y2="345" stroke="#6d6f4e" stroke-width="1.5" opacity="0.4"/>
+    <line x1="492" y1="370" x2="600" y2="370" stroke="#8a8c62" stroke-width="1.5" opacity="0.5"/>
+    <line x1="492" y1="395" x2="600" y2="395" stroke="#6d6f4e" stroke-width="1.5" opacity="0.4"/>
+    <!-- corner tuft highlight -->
+    <ellipse cx="510" cy="325" rx="30" ry="16" fill="#8a8c62" opacity="0.6"/>
+  </g>
+
+  <!-- ===== WOVEN BASKET PLANT (left) ===== -->
+  <!-- basket shadow -->
+  <ellipse cx="205" cy="510" rx="115" ry="30" fill="rgba(31,27,22,0.12)"/>
+
+  <!-- plant leaves behind -->
+  <g>
+    <path d="M205 300 C150 230 130 150 120 90 C170 160 195 240 205 300Z" fill="url(#leaf)"/>
+    <path d="M205 300 C260 230 285 150 300 95 C255 165 220 245 205 300Z" fill="#7a7c5c"/>
+    <path d="M205 310 C120 270 70 230 45 190 C120 240 175 285 205 310Z" fill="#8a8c62"/>
+    <path d="M205 310 C295 265 345 220 372 185 C295 235 240 285 205 310Z" fill="#7a7c5c"/>
+    <path d="M205 320 C160 250 150 200 148 150 C185 210 205 270 205 320Z" fill="#8a8c62"/>
+    <path d="M205 320 C250 250 262 200 268 155 C232 212 218 270 205 320Z" fill="#7a7c5c"/>
+    <path d="M205 330 C170 300 100 285 70 275 C130 285 185 315 205 330Z" fill="#7a7c5c"/>
+    <path d="M205 330 C245 300 315 288 345 280 C282 288 232 315 205 330Z" fill="#8a8c62"/>
+  </g>
+  <!-- leaf veins -->
+  <g stroke="#6d6f4e" stroke-width="1.5" opacity="0.5" fill="none">
+    <path d="M205 300 C170 230 150 165 128 105"/>
+    <path d="M205 300 C245 232 268 168 292 110"/>
+    <path d="M205 320 C185 255 175 210 168 165"/>
+  </g>
+
+  <!-- basket body -->
+  <path d="M120 360 Q120 350 132 350 L278 350 Q290 350 290 360 L275 490 Q273 500 262 500 L148 500 Q137 500 135 490 Z" fill="url(#basket)"/>
+  <!-- basket rim -->
+  <ellipse cx="205" cy="357" rx="85" ry="18" fill="#cf9f5c"/>
+  <ellipse cx="205" cy="357" rx="85" ry="18" fill="none" stroke="#8a5a20" stroke-width="3"/>
+  <ellipse cx="205" cy="353" rx="78" ry="13" fill="#5c4632" opacity="0.55"/>
+
+  <!-- basket weave verticals -->
+  <g stroke="#8a5a20" stroke-width="2.5" opacity="0.55">
+    <line x1="150" y1="370" x2="152" y2="490"/>
+    <line x1="178" y1="368" x2="178" y2="495"/>
+    <line x1="205" y1="367" x2="205" y2="497"/>
+    <line x1="232" y1="368" x2="232" y2="495"/>
+    <line x1="260" y1="370" x2="258" y2="490"/>
+  </g>
+  <!-- basket weave horizontals -->
+  <g stroke="#8a5a20" stroke-width="2.5" opacity="0.4" fill="none">
+    <path d="M128 388 Q205 400 282 388"/>
+    <path d="M126 420 Q205 434 284 420"/>
+    <path d="M126 452 Q205 466 284 452"/>
+    <path d="M130 480 Q205 492 280 480"/>
+  </g>
+  <!-- basket highlight -->
+  <path d="M132 365 Q150 460 152 488" stroke="#e3c48a" stroke-width="4" opacity="0.5" fill="none"/>
+
+</svg>

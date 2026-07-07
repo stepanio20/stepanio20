@@ -1,0 +1,28 @@
+{
+  "_source": "ручной замер владельцев, 2026-07-04 (IMG_0298)",
+  "recibidor": {
+    "ceiling_cm": 222,
+    "walls": [
+      { "id": "A", "len_cm": 350, "note": "основная стена; в ней проём в гостиную (дуга на чертеже)" },
+      { "id": "B", "len_cm": 182, "note": "стена напротив входной двери" },
+      { "id": "C", "len_cm": 209, "note": "уточняется: похоже, ширина прихожей" }
+    ],
+    "doors_cm": [100, 86],
+    "constraints": {
+      "max_furniture_h_cm": 210,
+      "max_depth_along_corridor_cm": 45,
+      "robot_dock_wdh_cm": [43, 54, 45]
+    }
+  },
+  "salon": {
+    "ceiling_cm": 300,
+    "shape": "trapezoid",
+    "sides_cm": { "tv_wall": 440, "balcony_wall": 640, "left": 500, "right": 500 },
+    "fixed_furniture": [
+      { "name": "стол The Masie", "w_cm": 210, "d_cm": 90, "pos": "в 200 см от стены, зазоры 30 и 52 см" },
+      { "name": "диван боклé", "w_cm": 230, "d_cm": 105 },
+      { "name": "ТВ", "note": "уже на стене" }
+    ],
+    "constraints": { "max_furniture_h_cm": 285, "keep_balcony_path_clear_cm": 80 }
+  }
+}
