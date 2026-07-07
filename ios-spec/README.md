@@ -13,6 +13,8 @@ can push to. **Ruslan: copy these files into the app and wire the 4 TODO hooks.*
 | `GenomeBuildView.swift` | **DNA processing UX** — real % progress (phase-based), ETA, "~2h, you can close the app" copy, auto-redirect to the report when ready, "Start onboarding again" button. |
 | `PushNotifications.swift` | **"Your DNA is ready" push** (APNs) + deep-link routing to the report. |
 | `OnboardingWebView.swift` | **Onboarding funnel** embedded (the 5 A/B variants) via WKWebView. |
+| `AppUpdateChecker.swift` | Detects a newer App Store version (iTunes Lookup API). |
+| `AppUpdateBanner.swift` | **Green "Please update your app" banner** at the top of the app when an update exists → tap opens the App Store. Also greens the version row in `MeView`. |
 
 ## The one backend dependency (required for real %)
 
@@ -39,6 +41,7 @@ and routes the user to the report.
 2. `OnboardingWebView` → your deployed funnel URL (`stepanio20.github.io/stepanio20/1..5` once GitHub Pages is on).
 3. `RootRouter.route(to:)` → your app's navigation (report screen, onboarding).
 4. `PushNotifications` → register the device token with your backend.
+5. `AppUpdateChecker.appStoreId` → your numeric App Store id (for the Update link).
 
 ## Contrast rule (the black-on-black bug)
 
