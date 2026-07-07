@@ -3131,6 +3131,67 @@
        "img": "img/products/p-9af0e908a8.webp"
       }
      ]
+    },
+    {
+     "tier": "alt",
+     "items": [
+      {
+       "category": "обувница",
+       "name": "KARE Design Caruso 5 запатеро, зелёный металл, 50×15×170",
+       "shop": "KARE España",
+       "url": "https://kare.es/p/zapatero-caruso-5-verde-mo",
+       "price_eur": 197.1,
+       "w_cm": 50,
+       "d_cm": 15,
+       "h_cm": 170,
+       "image_url": "https://cdn.wonderstatic.com/product-image/szafka-na-buty-stalowa-5-polek-kolor-zielony-50x170-cm-1-z88e0.jpg",
+       "note": "Твоя находка: 5 откидных секций (~10 пар), глубина всего 15 см. Живая цена kare.es 07.2026: 197,10 €, InStock, доставка 72 ч. Ставим у правого края стены.",
+       "verified": true,
+       "img": "img/products/p-12990444e8.webp"
+      },
+      {
+       "category": "шкаф",
+       "name": "SKLUM Michigan аparador 120x40, сталь, интенсивный оливковый",
+       "shop": "SKLUM",
+       "url": "https://www.sklum.com/es/comprar-aparadores/186440-aparador-en-acero-michigan.html?id_c=497573",
+       "price_eur": 319.95,
+       "w_cm": 120,
+       "d_cm": 42,
+       "h_cm": 80,
+       "note": "Полка-витрина для сумок: оливковая сталь SKLUM Michigan, сумки Ульяны сверху — как на витрине.",
+       "verified": true,
+       "image_url": "https://cdn.sklum.com/es/4333197-large_default/aparador-en-acero-michigan.jpg",
+       "img": "img/products/p-002813aa31.webp"
+      },
+      {
+       "category": "светильник",
+       "name": "SKLUM Jaliya настольная лампа-гриб, металл, цвет Amarillo Miel (янтарный)",
+       "shop": "SKLUM",
+       "url": "https://www.sklum.com/es/comprar-lamparas-de-sobremesa/146238-lampara-de-mesa-en-metal-jaliya.html",
+       "price_eur": 29.95,
+       "w_cm": 25,
+       "d_cm": 25,
+       "h_cm": 37.5,
+       "note": "Янтарная гриб-лампа НА полке с сумками — тёплое пятно света, добавляет вкуса.",
+       "verified": true,
+       "image_url": "https://cdn.sklum.com/es/2679674-large_default/lampara-de-mesa-en-metal-jaliya.jpg",
+       "img": "img/products/p-94cce00be4.webp"
+      },
+      {
+       "category": "вешалка",
+       "name": "IKEA ÄLGANÄS напольная вешалка, чёрный металл",
+       "shop": "IKEA ES",
+       "url": "https://www.ikea.com/es/es/p/alganas-perchero-negro-90585894/",
+       "price_eur": 24.99,
+       "w_cm": 33,
+       "d_cm": 33,
+       "h_cm": 173,
+       "note": "Чёрная стальная стойка под верхнюю одежду — куртки не прячем, вешаем у двери.",
+       "verified": true,
+       "image_url": "https://www.ikea.com/es/es/images/products/alganas-perchero-negro__1358349_pe953846_s5.jpg",
+       "img": "img/products/p-6c65d2f905.webp"
+      }
+     ]
     }
    ]
   },
