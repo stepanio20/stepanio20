@@ -1,0 +1,4 @@
+# → put at  fastlane/Appfile  in birinets/indaga-ios
+app_identifier(ENV["APP_IDENTIFIER"] || "ai.indaga.app")   # TODO: your bundle id
+# With the App Store Connect API key, apple_id/team_id are not required.
+# team_id("XXXXXXXXXX")   # optional: your Apple Developer Team ID

@@ -1,0 +1,6 @@
+# → put at  fastlane/Matchfile  in birinets/indaga-ios
+git_url(ENV["MATCH_GIT_URL"])          # e.g. https://github.com/birinets/ios-certs.git
+storage_mode("git")
+type("appstore")
+app_identifier([ENV["APP_IDENTIFIER"] || "ai.indaga.app"])   # TODO: your bundle id
+readonly(true)                         # CI only reads; run `fastlane match appstore` locally to (re)generate

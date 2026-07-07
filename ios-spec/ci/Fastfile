@@ -1,0 +1,36 @@
+# → put at  fastlane/Fastfile  in birinets/indaga-ios
+default_platform(:ios)
+
+APP_SCHEME = "Indaga"   # TODO: your Xcode scheme name
+
+platform :ios do
+  desc "Build and upload a new build to TestFlight"
+  lane :beta do
+    api_key = app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: "fastlane/keys/AuthKey.p8",
+      in_house: false
+    )
+
+    # Code signing — pulls the App Store cert + profile from the match repo (read-only in CI)
+    match(type: "appstore", readonly: true, api_key: api_key)
+
+    # Auto-bump build number to 1 above the latest TestFlight build
+    increment_build_number(
+      build_number: latest_testflight_build_number(api_key: api_key).to_i + 1
+    )
+
+    build_app(
+      scheme: APP_SCHEME,
+      export_method: "app-store",
+      clean: true
+    )
+
+    upload_to_testflight(
+      api_key: api_key,
+      skip_waiting_for_build_processing: true,   # don't block the CI run
+      distribute_external: false                 # internal testers get it automatically
+    )
+  end
+end

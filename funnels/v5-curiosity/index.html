@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12 things your DNA says about you — Indaga</title>
+<meta name="description" content="From why coffee hits different to whether you can digest milk. Read your 23andMe file the fun way.">
+<link rel="stylesheet" href="../shared/quiz.css">
+</head>
+<body data-variant="v5-curiosity" style="--accent:#ff7eb6;--accent-2:#c084fc">
+<div id="app"></div>
+<script src="../shared/config.js"></script>
+<script>
+window.FUNNEL = {
+  variant: 'v5-curiosity', brand: 'Indaga',
+  hero: {
+    eyebrow: 'Just for fun (with real science)',
+    headline: '12 surprising things<br><span class="grad">your DNA says about you.</span>',
+    sub: 'Why coffee hits you different. Whether you can digest milk. If you’re a “worrier” or a “warrior.” Read your 23andMe file the fun way.',
+    stats: [ {n:'12', l:'traits'}, {n:'2 min', l:'quiz'}, {n:'free', l:'preview'} ],
+    trust: ['🔒 DNA never sold', '🧬 23andMe · MyHeritage', '🎉 Actually fun'],
+    cta: 'Read my DNA →'
+  },
+  questions: [
+    { id:'guess_milk', q:'Guess: can you digest milk well?', hint:'Your DNA will tell us if you’re right.', type:'single',
+      options:[ {emoji:'🥛',label:'Yeah, no problem',value:'yes'}, {emoji:'😬',label:'Not really',value:'no'}, {emoji:'🤷',label:'No idea',value:'idk'} ] },
+    { id:'coffee', q:'How does coffee treat you?', type:'single',
+      options:[ {emoji:'😌',label:'Calm & focused',value:'calm'}, {emoji:'⚡',label:'Wired then crash',value:'crash'}, {emoji:'😬',label:'Jittery / anxious',value:'jitter'}, {emoji:'😴',label:'Barely feel it',value:'none'} ] },
+    { id:'stress', q:'Under pressure, you’re more…', type:'single',
+      options:[ {emoji:'🧘',label:'“Warrior” — calm & sharp',value:'warrior'}, {emoji:'🌀',label:'“Worrier” — overthink it',value:'worrier'}, {emoji:'🤷',label:'Depends',value:'depends'} ] },
+    { id:'test', q:'Which DNA test do you have?', type:'single',
+      options:[ {emoji:'🧬',label:'23andMe',value:'23andme'}, {emoji:'🌳',label:'MyHeritage',value:'myheritage'}, {emoji:'🔍',label:'AncestryDNA',value:'ancestry'}, {emoji:'🤔',label:'None yet',value:'none'} ] },
+    { id:'share', q:'Would you share your results with friends?', type:'single',
+      options:[ {emoji:'💯',label:'For sure',value:'yes'}, {emoji:'🤔',label:'Maybe',value:'maybe'}, {emoji:'🙊',label:'Keep it private',value:'no'} ] }
+  ],
+  analyzing: { title:'Reading the fun stuff…', lines:[
+    'Checking your milk gene…', 'Decoding your coffee reaction…', 'Warrior or worrier?…', 'Finding 9 more surprises…', 'Wrapping your DNA card…' ] },
+  result: {
+    eyebrow: 'Your DNA card', headline: 'You’re full of <span class="grad">genetic surprises.</span>',
+    sub: 'Here’s a taste. Your full card reveals all 12 — and you can share it.',
+    cards: [
+      { ic:'🥛', title:'The milk verdict', tag:'reveal', locked:true, teaser:'Your genes say you’re actually… (and whether your guess was right).' },
+      { ic:'☕', title:'Your coffee type', locked:true, teaser:'Fast burner, slow burner, or anxiety-prone — your two caffeine genes decide.' },
+      { ic:'🧠', title:'Warrior or worrier', locked:true, teaser:'Your COMT gene sets your stress style. You’re a…' },
+      { ic:'👅', title:'Supertaster?', locked:true, teaser:'Whether broccoli tastes bitter to you is literally in your DNA. You’re a…' },
+      { ic:'✅', title:'+ 8 more traits', locked:false, teaser:'Sleep, alcohol, appetite, iron and more — all in your card.' }
+    ],
+    cta: 'Reveal my full card →'
+  },
+  lead: { headline:'Where do we send your DNA card?', sub:'All 12 traits + a shareable version.', placeholder:'you@email.com', cta:'Continue →' },
+  offer: {
+    eyebrow:'Founding-member price', headline:'Unlock your full <span class="grad">DNA card</span>',
+    sub:'All 12 fun traits now — and it quietly grows into a real health report when you’re ready.',
+    priceOld:'€19', price:'€9', per:'/mo', guarantee:'7-day money-back guarantee',
+    perks:['All 12 trait reveals, shareable','The real science behind each','Grows into a full health report','Add bloods for the serious stuff','Your DNA is never sold'],
+    sources:['🧬 23andMe ✓','🌳 MyHeritage ✓'],
+    cta:'Unlock my DNA card →', uploadCta:'I have my DNA file ready ›', plan:'plus'
+  }
+};
+</script>
+<script src="../shared/analytics.js"></script>
+<script src="../shared/quiz.js"></script>
+</body>
+</html>

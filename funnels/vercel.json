@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/1", "destination": "/v1-unlock/index.html" },
+    { "source": "/2", "destination": "/v2-bioage/index.html" },
+    { "source": "/3", "destination": "/v3-symptoms/index.html" },
+    { "source": "/4", "destination": "/v4-multiomic/index.html" },
+    { "source": "/5", "destination": "/v5-curiosity/index.html" },
+    { "source": "/d", "destination": "/dashboard/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

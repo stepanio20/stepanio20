@@ -1,0 +1,14 @@
+{
+  "iteration": 6,
+  "completed": [
+    "barcelona_venue_catalog",
+    "wire_catalog_into_plan",
+    "restaurant_suggestions_per_meal",
+    "ics_calendar_export",
+    "pwa_shell",
+    "clinical_correctness_review"
+  ],
+  "loop_status": "complete",
+  "deployed_url": null,
+  "deploy_notes": "Vercel CLI requires interactive login the build sandbox cannot reach. One-command deploy in concierge/app/README.md."
+}
