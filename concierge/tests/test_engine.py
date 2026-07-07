@@ -51,19 +51,19 @@ def test_katch_mcardle_and_macros():
 
 def test_real_profile_branches():
     ctx = {
-        "weight_kg": 66.1, "lean_mass_kg": 55.26, "height_cm": 166, "age": 28, "sex": "XY",
+        "weight_kg": 72.0, "lean_mass_kg": 58.0, "height_cm": 178, "age": 35, "sex": "XY",
         "goals": ["quit_nicotine", "lower_blood_pressure", "recomposition", "longevity"],
         "training_days": 3,
-        "bloods": {"vitamin_d_ng_ml": 35, "b12_pg_ml": 390, "ggt_u_l": 35,
-                   "ldl_mg_dl": 91.6, "hdl_mg_dl": 88, "triglycerides_mg_dl": 72, "hba1c_pct": 5.2},
+        "bloods": {"vitamin_d_ng_ml": 33, "b12_pg_ml": 420, "ggt_u_l": 30,
+                   "ldl_mg_dl": 100, "hdl_mg_dl": 60, "triglycerides_mg_dl": 90, "hba1c_pct": 5.4},
         "last_tests": {"lipid_panel": "2025-01-29"},
-        "lifestyle": {"nicotine": "snus 10 mg, half-pack/day", "bp_systolic": None},
+        "lifestyle": {"nicotine": "nicotine pouches, daily", "bp_systolic": None},
         "wearable": None, "has_dna": True, "wellness_booking": "manual",
     }
     t = compute_targets(ctx, today=FIXED_TODAY)
-    assert t.bmr_kcal == 1564, t.bmr_kcal                       # 370 + 21.6*55.26
-    assert t.protein_g == 119                                    # round(1.8*66.1)
-    assert _has(t.supplements, "2000 IU")                       # vit D 35 in [30,40)
+    assert t.bmr_kcal == 1623, t.bmr_kcal                       # 370 + 21.6*58.0
+    assert t.protein_g == 130                                    # round(1.8*72.0)
+    assert _has(t.supplements, "2000 IU")                       # vit D 33 in [30,40)
     assert _has(t.supplements, "Magnesium")                     # lower_blood_pressure goal
     # clinical-framing check: thresholds + clinician phrasing present
     for sup in t.supplements:
@@ -88,7 +88,7 @@ def test_lose_fat_path():
 
 def test_barcelona_venues_attached():
     ctx = {
-        "weight_kg": 66.1, "lean_mass_kg": 55.26,
+        "weight_kg": 72.0, "lean_mass_kg": 58.0,
         "goals": ["lower_blood_pressure", "longevity"], "training_days": 3,
         "bloods": {}, "last_tests": {"lipid_panel": "2024-01-01"},
         "lifestyle": {"bp_systolic": None}, "wearable": None, "has_dna": True,
@@ -104,9 +104,9 @@ def test_barcelona_venues_attached():
 
 def test_weekly_plan_renders():
     ctx = {
-        "weight_kg": 66.1, "lean_mass_kg": 55.26, "goals": ["recomposition", "lower_blood_pressure"],
+        "weight_kg": 72.0, "lean_mass_kg": 58.0, "goals": ["recomposition", "lower_blood_pressure"],
         "training_days": 3, "bloods": {"vitamin_d_ng_ml": 35}, "last_tests": {},
-        "lifestyle": {"nicotine": "snus"}, "wearable": None, "has_dna": True, "city": "Barcelona",
+        "lifestyle": {"nicotine": "nicotine"}, "wearable": None, "has_dna": True, "city": "Barcelona",
     }
     t = compute_targets(ctx, today=FIXED_TODAY)
     prefs = {"diet": {"pattern": "mediterranean", "allergies": ["lactose"], "meals_per_day": 3},
@@ -152,7 +152,7 @@ def test_clinical_framing_guardrails():
 
 def test_shopping_list():
     ctx = {
-        "weight_kg": 66.1, "lean_mass_kg": 55.26,
+        "weight_kg": 72.0, "lean_mass_kg": 58.0,
         "goals": ["recomposition"], "training_days": 3,
         "bloods": {}, "last_tests": {}, "lifestyle": {},
         "wearable": None, "has_dna": True, "city": "Barcelona",
@@ -222,7 +222,7 @@ def test_wearable_summary_drops_session():
 
 def test_ics_export():
     ctx = {
-        "weight_kg": 66.1, "lean_mass_kg": 55.26,
+        "weight_kg": 72.0, "lean_mass_kg": 58.0,
         "goals": ["lower_blood_pressure"], "training_days": 3,
         "bloods": {}, "last_tests": {"lipid_panel": "2024-01-01"},
         "lifestyle": {"bp_systolic": None}, "wearable": None, "has_dna": True,
