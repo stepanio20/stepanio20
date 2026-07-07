@@ -408,9 +408,34 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 
 .room-cover-img { width: 100%; height: 220px; object-fit: cover; display: block; }
 
+/* пикер вариантов */
+.vpick { padding: 10px 0 6px; }
+.vpick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.vp-card { text-decoration: none; background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform .15s; }
+.vp-card:hover { transform: translateY(-2px); }
+.vp-card img { width: 100%; height: 96px; object-fit: cover; }
+.vp-body { padding: 8px 10px; font-size: .8rem; font-weight: 600; line-height: 1.3; }
+.vp-body b { color: var(--oak); margin-right: 4px; }
+.vp-body span { display: block; font-weight: 400; font-size: .74rem; color: var(--ink-soft); }
+.stylenav-in a.on { color: #fff; background: var(--ink); border-color: var(--ink); }
+/* липкие табы бюджета */
+.tier-tabs { position: sticky; top: 101px; z-index: 30; background: var(--bg-card); }
+/* лайтбокс */
+dialog.lb { border: 0; padding: 0; background: rgba(20,17,14,.92); max-width: 96vw; max-height: 96vh; border-radius: 12px; }
+dialog.lb::backdrop { background: rgba(20,17,14,.7); }
+dialog.lb img { max-width: 92vw; max-height: 90vh; display: block; }
+dialog.lb .lb-x { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,.5); color: #fff; border: 0; border-radius: 50%; width: 36px; height: 36px; font-size: 1rem; cursor: pointer; }
+/* наверх */
+.totop { position: fixed; right: 16px; bottom: 16px; z-index: 60; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-card); color: var(--ink); font-size: 1.1rem; box-shadow: var(--shadow); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.totop.show { opacity: 1; pointer-events: auto; }
+
 @media (max-width: 900px) {
   .vs-grid { grid-template-columns: 1fr; }
-  .vs-media { position: static; }
+  /* мобайл: медиа — горизонтальная свайп-галерея */
+  .vs-media { position: static; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .vs-media figure { flex: 0 0 84%; scroll-snap-align: center; }
+  .vp-card img { height: 84px; }
+  .tier-tabs { top: 93px; }
   .pc { grid-template-columns: 56px minmax(0, 1fr); }
   .pc-img { width: 56px; height: 56px; }
   .pc-right { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
