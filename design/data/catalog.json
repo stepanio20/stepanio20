@@ -1127,7 +1127,7 @@
        "h_cm": 91,
        "image_url": "",
        "verified": true,
-       "note": "Формат 24x36\" (2:3) = ровно под RÖDALM 61x91. При заказе выбрать монохром/графит без красного; печать в копицентре ~10-15€ отдельно.",
+       "note": "Формат 24x36\" (2:3) = ровно под RÖDALM 61x91. При заказе выбрать монохром/графит без красного; печать в копицентре ~10-15€ отдельно. Живой листинг (снапшот 01.2026): ~6 $ цифровой файл, печатаете сами.",
        "img": "img/products/p-222793de7b.webp"
       }
      ]
@@ -2554,7 +2554,7 @@
        "h_cm": 91,
        "image_url": "",
        "verified": true,
-       "note": "Минималистичный grid-постер F1 — печать локально, файл цифровой.",
+       "note": "Минималистичный grid-постер F1 — печать локально, файл цифровой. Живой листинг (снапшот 01.2026): ~6 $ цифровой файл, печатаете сами.",
        "img": "img/products/p-222793de7b.webp"
       },
       {
@@ -5319,16 +5319,17 @@
       },
       {
        "category": "текстиль",
-       "name": "Кружевная скатерть/салфетка винтаж (Etsy)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/market/vintage_lace_tablecloth",
-       "price_eur": 25,
+       "name": "Кружевная скатерть крючком, белый хлопок, 81 см",
+       "shop": "Todocoleccion",
+       "url": "https://www.todocoleccion.net/antiguedades/mantel-ganchillo~x68928741",
+       "price_eur": 18.0,
        "w_cm": 120,
        "d_cm": 120,
        "h_cm": 0,
-       "note": "Цена ориентировочная (страница за bot-защитой): типично 18–45€ за винтажное кружево с доставкой в Испанию.",
+       "note": "Проверено живьём: 18 €, «ананасовый» узор, не использовалась, отправка из Испании.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://cloud10.todocoleccion.online/antiguedades/tc/2016/12/10/19/68928741.jpg",
+       "img": "img/products/p-a9942e0663.webp"
       }
      ]
     },
@@ -5380,16 +5381,17 @@
       },
       {
        "category": "ковёр (стена)",
-       "name": "Винтажный турецкий ковёр ~120x180, коричнево-оливковый (Etsy)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/market/vintage_turkish_rug",
-       "price_eur": 150,
+       "name": "Oushak ковёр ручного плетения, шалфей/беж/коричневый (на стену)",
+       "shop": "Etsy / AntiqueModernRugs",
+       "url": "https://www.etsy.com/listing/4328810999/alive-green-oushak-rug-hand-knotted-wool",
+       "price_eur": 150.0,
        "w_cm": 120,
        "d_cm": 180,
        "h_cm": 1,
-       "note": "НА СТЕНУ. Цена и размер ориентировочные (типично 120–220€). Выбирать коричневый/оливковый/золотистый лот, НЕ красный.",
+       "note": "Живой лот, InStock; цена по размеру от ~48 € (малый) — на стену берите ~90×150. Красного нет (проверено по фото).",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://i.etsystatic.com/60425931/r/il/1b9914/7032291713/il_fullxfull.7032291713_5uuz.jpg",
+       "img": "img/products/p-370af08783.webp"
       },
       {
        "category": "торшер",
@@ -5435,16 +5437,17 @@
       },
       {
        "category": "хрусталь",
-       "name": "Графин «Grafin» СССР, стекло/хрусталь (Etsy vintage)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/listing/1654783489/vintage-glass-soviet-carafe-decanter",
-       "price_eur": 60,
+       "name": "Винтажный графин 60-х, резное стекло, Испания",
+       "shop": "Todocoleccion",
+       "url": "https://www.todocoleccion.net/antiguedades/botella-licorera-rectangular-cristal-tallado-anos-60-como-nueva~x672614435",
+       "price_eur": 4.0,
        "w_cm": 10,
        "d_cm": 10,
        "h_cm": 21,
-       "note": "Живой лот (21 см, эпоха Брежнева); цена ориентировочная 40–80€ — страница за bot-защитой, проверить при заказе.",
+       "note": "Проверено «в корзину» 07.07.2026: 4 € + 5,50 € доставка из Испании, состояние «как новый».",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://cloud10.todocoleccion.online/antiguedades/tc/2022/06/29/18/347938508.jpg",
+       "img": "img/products/p-9263a301cf.webp"
       }
      ]
     },
@@ -5454,16 +5457,17 @@
      "items": [
       {
        "category": "стенка/сервант",
-       "name": "Mid-century сервант/china cabinet с остеклением (Vinterior)",
+       "name": "Тиковый сервант mid-century с раздвижным стеклом (Vinterior)",
        "shop": "Vinterior",
-       "url": "https://www.vinterior.co/search?q=mid-century%20sideboard%20glass",
-       "price_eur": 450,
+       "url": "https://www.vinterior.co/furniture/storage/cabinets/a-vintage-mid-century-teak-display-cabinet-with-sliding-glass-doors-sku35157256",
+       "price_eur": 579.0,
        "w_cm": 160,
        "d_cm": 45,
        "h_cm": 190,
-       "note": "Витринный винтаж 300–600€ + доставка в Испанию; размеры ориентировочные. Тик/орех, полированный.",
+       "note": "Проверен живым 07.07.2026: £495 (~579 €), UK — доставку в Испанию запросить. Лоты Vinterior уходят быстро.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://imgproxy.vinterior.co/is/rs:fit:1600:1600:0:0/quality:80/plain/https%3A%2F%2Fassets-vinterior-2.vinterior.co%2Fuploads%2Flisting_image%2Fimage%2F19651374%2Fa-vintage-mid-century-teak-display-cabinet-with-sliding-glass-doors-sku35157256_0.jpg",
+       "img": "img/products/p-e574f63b7c.webp"
       },
       {
        "category": "витрина",
@@ -5523,16 +5527,17 @@
       },
       {
        "category": "торшер",
-       "name": "Викторианский торшер с бахромой, ручная работа (Etsy)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/market/victorian_fringe_floor_lamp",
-       "price_eur": 220,
+       "name": "Торшер 60-х, чёрная ковка, зелёно-бежевый абажур с бахромой",
+       "shop": "Todocoleccion / Vilalta Antic (Барселона!)",
+       "url": "https://en.todocoleccion.net/antiques/antigua-lampara-pie-grande-hierro-negro-plateado-pantalla-verde-beige-flecos-anos-60~x446956057",
+       "price_eur": 142.5,
        "w_cm": 35,
        "d_cm": 35,
        "h_cm": 160,
-       "note": "Цена ориентировочная (типично 150–320€ + доставка). Двухцветный шёлк, бахрома с кистями — «бабушкин» торшер. Размеры оценочные.",
+       "note": "Проверено 07.07.2026: 142,50 € (акция до 12.07), продавец в Барселоне (в отпуске до 13.07). Проводку заменить — продавец делает за доплату.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://cloud10.todocoleccion.online/antiguedades/tc/2023/11/16/20/446956057_tcimg_0A0C75C5.jpg",
+       "img": "img/products/p-66d70259ab.webp"
       },
       {
        "category": "тумба",
@@ -5563,14 +5568,14 @@
       },
       {
        "category": "хрусталь",
-       "name": "Хрустальный графин СССР + набор советского хрусталя (Etsy)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/listing/875276468/vintage-crystal-decanter-made-in-ussr",
-       "price_eur": 90,
+       "name": "Набор: хрустальный графин + рюмки, винтаж",
+       "shop": "Todocoleccion",
+       "url": "https://www.todocoleccion.net/vintage-decoracion/juego-licor-vintage-cristal-tallado~x426470767",
+       "price_eur": 110.0,
        "w_cm": 12,
        "d_cm": 12,
        "h_cm": 30,
-       "note": "Лот: свинцовый хрусталь >24%, ручная огранка. Цена ориентировочная 60–120€ за графин + рюмки; страница за bot-защитой.",
+       "note": "Живой лот: набор резного хрусталя (графин + рюмки), 110 €, доставка по Испании.",
        "verified": false,
        "image_url": ""
       },
@@ -5609,7 +5614,7 @@
        "w_cm": 30,
        "d_cm": 3,
        "h_cm": 20,
-       "note": "Ручная мозаика-тренкадис 30x20 см. Цена ориентировочная 70–120€; выбрать сине-зелёно-кремовую гамму, без красного.",
+       "note": "Ручная мозаика-тренкадис 30x20 см. Цена ориентировочная 70–120€; выбрать сине-зелёно-кремовую гамму, без красного. Магазин активен в индексе Etsy; цену уточнить при заказе. Гамма — сине-зелёная.",
        "verified": false,
        "image_url": ""
       },
@@ -5670,16 +5675,17 @@
       },
       {
        "category": "керамика",
-       "name": "Ваза с мозаикой тренкадис ручной работы (Etsy, Испания)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/listing/1847586602/vaso-ceramico-decorado-con-mosaico",
-       "price_eur": 45,
+       "name": "Фигура-тренкадис сине-белая (Barcino), декор",
+       "shop": "Etsy / CasaDeSouvenirs",
+       "url": "https://www.etsy.com/listing/1468183121/mosaic-blue-and-white-bull-statue-made",
+       "price_eur": 37.0,
        "w_cm": 15,
        "d_cm": 15,
        "h_cm": 20,
-       "note": "Живой лот испанского мастера; цена ориентировочная 35–60€, размеры оценочные. Сине-зелёная гамма.",
+       "note": "Замена вазы Somnes (в её мозаике доминирует красный). Отправка из Испании, InStock.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://i.etsystatic.com/33936226/r/il/6c3f42/5361059259/il_fullxfull.5361059259_91u2.jpg",
+       "img": "img/products/p-7bb811b0e3.webp"
       }
      ]
     },
@@ -5771,29 +5777,31 @@
       },
       {
        "category": "керамика",
-       "name": "Керамика ручной работы, Испания: вазы/блюда (Etsy)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/listing/1847586602/vaso-ceramico-decorado-con-mosaico",
-       "price_eur": 60,
+       "name": "Фигура-тренкадис сине-белая (Barcino), Испания",
+       "shop": "Etsy / CasaDeSouvenirs",
+       "url": "https://www.etsy.com/listing/1468183121/mosaic-blue-and-white-bull-statue-made",
+       "price_eur": 37.0,
        "w_cm": 20,
        "d_cm": 20,
        "h_cm": 25,
-       "note": "Ориентировочно 45–80€ за пару предметов; сине-зелёная органика.",
+       "note": "Отправка из Испании, InStock; размеры на выбор (~32–261 €). Прежняя ваза Somnes отклонена — в её мозаике много красного.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://i.etsystatic.com/33936226/r/il/6c3f42/5361059259/il_fullxfull.5361059259_91u2.jpg",
+       "img": "img/products/p-288120218a.webp"
       },
       {
        "category": "ковка",
-       "name": "Кованые чёрные свечники (Etsy, wrought iron)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/market/wrought_iron_candelabra",
-       "price_eur": 70,
+       "name": "Кованый канделябр 5 рожков, чёрный, винтаж",
+       "shop": "Etsy / DewberryDiscoveries",
+       "url": "https://www.etsy.com/listing/4376271430/vintage-wrought-iron-5-arm-candelabra",
+       "price_eur": 38.0,
        "w_cm": 25,
        "d_cm": 25,
        "h_cm": 45,
-       "note": "Цена и размеры ориентировочные (50–100€ за пару). Чёрная ковка — модернистская линия.",
+       "note": "InStock, ~38 €; продавец в США — доставку в ЕС уточнить. ЕС-вариант: французская ковка XIX в. на Vinterior (~438 €).",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://i.etsystatic.com/60074210/r/il/350e85/7231828990/il_1080xN.7231828990_mgwq.jpg",
+       "img": "img/products/p-6599b6cd93.webp"
       }
      ]
     },
@@ -5865,7 +5873,7 @@
        "w_cm": 45,
        "d_cm": 45,
        "h_cm": 55,
-       "note": "Цена и размеры ориентировочные (200–350€). Столешница-мозаика в сине-зелёной гамме, кованое основание.",
+       "note": "Цена и размеры ориентировочные (200–350€). Столешница-мозаика в сине-зелёной гамме, кованое основание. Проверенный живой лот: марокканский стол + 2 стула, зеллидж синий/зелёный/охра, ~1096 € за набор — если нужен только столик, ищите отдельно.",
        "verified": false,
        "image_url": ""
       },
@@ -5898,16 +5906,17 @@
       },
       {
        "category": "витраж",
-       "name": "Витражная панель ручной работы (Etsy, stained glass panel)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/market/stained_glass_panel",
-       "price_eur": 180,
+       "name": "Витражная панель «Аквамарин» 35×35, латунная рамка",
+       "shop": "Etsy / ArtGlassMaksav",
+       "url": "https://www.etsy.com/listing/1172688677/stained-glass-panel-square-aquamarine",
+       "price_eur": 160.0,
        "w_cm": 40,
        "d_cm": 1,
        "h_cm": 60,
-       "note": "Настоящий витраж на подвесе к окну (съёмно). Ориентировочно 120–250€. Синий/зелёный/янтарь.",
+       "note": "Живой листинг: аквамарин/бирюза/синий, вешается к окну на подвесе. Цена ориентир ~160 €.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://i.etsystatic.com/25450075/r/il/dd284a/6395011178/il_fullxfull.6395011178_7l1q.jpg",
+       "img": "img/products/p-963184d49b.webp"
       },
       {
        "category": "растение",
@@ -5925,16 +5934,17 @@
       },
       {
        "category": "керамика",
-       "name": "Набор керамики ручной работы, испанские мастера (Etsy España)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/es/market/ceramica_artesanal",
-       "price_eur": 90,
+       "name": "Чаша Fajalauza (Гранада), сине-зелёная полихромия, XIX век, Ø25",
+       "shop": "Todocoleccion",
+       "url": "https://www.todocoleccion.net/antiguedades/cuenco-ceramica-policromada-fajalauza-primera-mitad-s-xix~x423556369",
+       "price_eur": 40.0,
        "w_cm": 0,
        "d_cm": 0,
        "h_cm": 0,
-       "note": "Ориентировочно 70–120€ за 2–3 предмета; органические формы, крем/синий/зелёный.",
+       "note": "Проверено живьём: 40 € + 10 € доставка. Синий/зелёный на белом, без красного. Возрастные дефекты указаны продавцом.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://cloud10.todocoleccion.online/antiguedades/tc/2023/07/20/12/423556369_tcimg_D0C22A97.jpg",
+       "img": "img/products/p-3609eb0f9d.webp"
       }
      ]
     }
@@ -7296,22 +7306,23 @@
        "w_cm": 50,
        "d_cm": 3,
        "h_cm": 50,
-       "note": "Ручная мозаика trencadís от испанских мастеров; рынок 60–120 €, ориентировочно",
+       "note": "Ручная мозаика trencadís от испанских мастеров; рынок 60–120 €, ориентировочно Выбирайте лот строго в сине-зелёно-охровой гамме — красная плитка мимо.",
        "verified": false,
        "image_url": ""
       },
       {
        "category": "декор",
-       "name": "Керамическая чаша-ключница ручной работы, каталонская керамика",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/es/market/ceramica_catalana",
-       "price_eur": 25,
+       "name": "Чаша Fajalauza (Гранада), сине-зелёная, Ø25 — ключница",
+       "shop": "Todocoleccion",
+       "url": "https://www.todocoleccion.net/antiguedades/cuenco-ceramica-policromada-fajalauza-primera-mitad-s-xix~x423556369",
+       "price_eur": 40.0,
        "w_cm": 20,
        "d_cm": 20,
        "h_cm": 8,
-       "note": "Чаша для ключей в охристо-бирюзовой глазури; ориентировочно 20–35 €",
+       "note": "Живая, 40 € + 10 € доставка; синий/зелёный, без красного.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://cloud10.todocoleccion.online/antiguedades/tc/2023/07/20/12/423556369_tcimg_D0C22A97.jpg",
+       "img": "img/products/p-cbd538e207.webp"
       }
      ]
     },
@@ -7384,22 +7395,23 @@
        "w_cm": 60,
        "d_cm": 3,
        "h_cm": 60,
-       "note": "Мозаика trencadís ручной работы в духе парка Гюэль; рынок 120–200 €, ориентировочно",
+       "note": "Мозаика trencadís ручной работы в духе парка Гюэль; рынок 120–200 €, ориентировочно Выбирайте лот строго в сине-зелёно-охровой гамме — красная плитка мимо.",
        "verified": false,
        "image_url": ""
       },
       {
        "category": "декор",
-       "name": "Керамическая чаша ручной работы, бирюзовая глазурь",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/es/market/ceramica_catalana",
-       "price_eur": 35,
+       "name": "Чаша Fajalauza (Гранада), сине-зелёная, Ø25",
+       "shop": "Todocoleccion",
+       "url": "https://www.todocoleccion.net/antiguedades/cuenco-ceramica-policromada-fajalauza-primera-mitad-s-xix~x423556369",
+       "price_eur": 40.0,
        "w_cm": 22,
        "d_cm": 22,
        "h_cm": 9,
-       "note": "Чаша для мелочей на консоль; ориентировочно 25–45 €",
+       "note": "Живая, 40 € + 10 € доставка.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://cloud10.todocoleccion.online/antiguedades/tc/2023/07/20/12/423556369_tcimg_D0C22A97.jpg",
+       "img": "img/products/p-10c18c3996.webp"
       }
      ]
     },
@@ -7500,22 +7512,23 @@
        "w_cm": 70,
        "d_cm": 4,
        "h_cm": 90,
-       "note": "Крупная мозаика trencadís ручной работы над консолью; рынок 200–350 €, ориентировочно",
+       "note": "Крупная мозаика trencadís ручной работы над консолью; рынок 200–350 €, ориентировочно Выбирайте лот строго в сине-зелёно-охровой гамме — красная плитка мимо.",
        "verified": false,
        "image_url": ""
       },
       {
        "category": "декор",
-       "name": "Vaso cerámico decorado con mosaico trencadís (Gaudí, Barcelona)",
-       "shop": "Etsy",
-       "url": "https://www.etsy.com/listing/1847586602/vaso-ceramico-decorado-con-mosaico",
-       "price_eur": 45,
+       "name": "Фигура-тренкадис сине-белая (Barcino), декор",
+       "shop": "Etsy / CasaDeSouvenirs",
+       "url": "https://www.etsy.com/listing/1468183121/mosaic-blue-and-white-bull-statue-made",
+       "price_eur": 37.0,
        "w_cm": 15,
        "d_cm": 15,
        "h_cm": 25,
-       "note": "Живой листинг: ваза-кашпо с мозаикой тренкадис ручной работы; цена ориентировочная",
+       "note": "Отправка из Испании, InStock, сине-зелёная гамма.",
        "verified": false,
-       "image_url": ""
+       "image_url": "https://i.etsystatic.com/33936226/r/il/6c3f42/5361059259/il_fullxfull.5361059259_91u2.jpg",
+       "img": "img/products/p-7bb811b0e3.webp"
       },
       {
        "category": "декор",
