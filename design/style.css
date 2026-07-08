@@ -420,6 +420,14 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .stylenav-in a.on { color: #fff; background: var(--ink); border-color: var(--ink); }
 /* липкие табы бюджета */
 .tier-tabs { position: sticky; top: 101px; z-index: 30; background: var(--bg-card); }
+/* кому зайдёт */
+.who { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .02em; padding: 3px 9px; border-radius: 999px; vertical-align: middle; white-space: nowrap; }
+.who-s { background: #f1e7d4; color: #7a5a1e; }
+.who-u { background: #e4ecdd; color: #4c6b3c; }
+.who-b { background: #e8e1d6; color: #5b4a33; border: 1px dashed #b9a888; }
+.vp-body .who { margin-top: 5px; }
+h2 .who { font-family: var(--font-body); margin-left: 8px; }
+.who-legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
 /* до/после */
 .ba-wrap { position: relative; overflow: hidden; }
 .ba-after { width: 100%; display: block; }
