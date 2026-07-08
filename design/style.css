@@ -427,7 +427,14 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .who-b { background: #e8e1d6; color: #5b4a33; border: 1px dashed #b9a888; }
 .vp-body .who { margin-top: 5px; font-size: .8rem; }
 h2 .who { font-family: var(--font-body); margin-left: 8px; }
-.who-legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.who-legend { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+.who-legend button.who { font-family: var(--font-body); border: 1px solid transparent; cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.who-legend button.who-b { border: 1px dashed #b9a888; }
+.who-legend button.who:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.who-legend button.who.on { box-shadow: inset 0 0 0 2px currentColor; }
+.who-hint { font-size: .78rem; color: var(--ink-soft); }
+.vp-card.dim { opacity: .22; filter: grayscale(.7); }
+.vp-card { transition: transform .15s, opacity .25s, filter .25s; }
 /* до/после */
 .ba-wrap { position: relative; overflow: hidden; }
 .ba-after { width: 100%; display: block; }

@@ -42,48 +42,48 @@
   </div>
 </nav>
 
-<section class="wrap vpick"><div class="who-legend"><span class="who who-s">🏁 зайдёт Степану</span><span class="who who-u">💚 зайдёт Ульяне</span><span class="who who-b">🤝 компромисс для двоих</span></div><div class="vpick-grid">
-    <a class="vp-card" href="#racing">
+<section class="wrap vpick"><div class="who-legend"><button type="button" class="who who-s" data-wf="s">🏁 зайдёт Степану</button><button type="button" class="who who-u" data-wf="u">💚 зайдёт Ульяне</button><button type="button" class="who who-b" data-wf="b">🤝 компромисс для двоих</button><span class="who-hint">нажми — оставлю только эти варианты</span></div><div class="vpick-grid">
+    <a class="vp-card" href="#racing" data-who="s">
       <img src="../img/thumbs/v3-salon-racing-mid.webp" alt="Гонки" loading="lazy">
       <div class="vp-body"><b>01</b> Гонки<span>557 – 3 394 €</span><span class="who who-s">🏁 зайдёт Степану</span></div>
     </a>
-    <a class="vp-card" href="#retro70">
+    <a class="vp-card" href="#retro70" data-who="b">
       <img src="../img/thumbs/v3-salon-retro70-mid.webp" alt="Ретро 70-х" loading="lazy">
       <div class="vp-body"><b>02</b> Ретро 70-х<span>537 – 3 638 €</span><span class="who who-b">🤝 компромисс для двоих</span></div>
     </a>
-    <a class="vp-card" href="#japandi">
+    <a class="vp-card" href="#japandi" data-who="b">
       <img src="../img/thumbs/v3-salon-japandi-mid.webp" alt="Японский минимализм" loading="lazy">
       <div class="vp-body"><b>03</b> Японский минимализм<span>729 – 3 407 €</span><span class="who who-b">🤝 компромисс для двоих</span></div>
     </a>
-    <a class="vp-card" href="#metal">
+    <a class="vp-card" href="#metal" data-who="u">
       <img src="../img/thumbs/v3-salon-metal-mid.webp" alt="Цветной металл" loading="lazy">
       <div class="vp-body"><b>04</b> Цветной металл<span>232 – 1 074 €</span><span class="who who-u">💚 зайдёт Ульяне</span></div>
     </a>
-    <a class="vp-card" href="#boutique">
+    <a class="vp-card" href="#boutique" data-who="b">
       <img src="../img/thumbs/v3-salon-boutique-mid.webp" alt="Бутик-галерея" loading="lazy">
       <div class="vp-body"><b>05</b> Бутик-галерея<span>190 – 1 857 €</span><span class="who who-b">🤝 компромисс для двоих</span></div>
     </a>
-    <a class="vp-card" href="#vinyl">
+    <a class="vp-card" href="#vinyl" data-who="s">
       <img src="../img/thumbs/v3-salon-vinyl-mid.webp" alt="Винил и хром" loading="lazy">
       <div class="vp-body"><b>06</b> Винил и хром<span>505 – 2 253 €</span><span class="who who-s">🏁 зайдёт Степану</span></div>
     </a>
-    <a class="vp-card" href="#chrome">
+    <a class="vp-card" href="#chrome" data-who="s">
       <img src="../img/thumbs/v3-salon-chrome-mid.webp" alt="Тотальный хром" loading="lazy">
       <div class="vp-body"><b>07</b> Тотальный хром<span>327 – 1 584 €</span><span class="who who-s">🏁 зайдёт Степану</span></div>
     </a>
-    <a class="vp-card" href="#soviet">
+    <a class="vp-card" href="#soviet" data-who="s">
       <img src="../img/thumbs/v3-salon-soviet-mid.webp" alt="Советская квартира" loading="lazy">
       <div class="vp-body"><b>08</b> Советская квартира<span>497 – 2 458 €</span><span class="who who-s">🏁 зайдёт Степану</span></div>
     </a>
-    <a class="vp-card" href="#gaudi">
+    <a class="vp-card" href="#gaudi" data-who="u">
       <img src="../img/thumbs/v3-salon-gaudi-mid.webp" alt="Барселона-модернизм" loading="lazy">
       <div class="vp-body"><b>09</b> Барселона-модернизм<span>303 – 1 948 €</span><span class="who who-u">💚 зайдёт Ульяне</span></div>
     </a>
-    <a class="vp-card" href="#cyber">
+    <a class="vp-card" href="#cyber" data-who="s">
       <img src="../img/thumbs/v3-salon-cyber-mid.webp" alt="Киберпанк" loading="lazy">
       <div class="vp-body"><b>10</b> Киберпанк<span>347 – 1 271 €</span><span class="who who-s">🏁 зайдёт Степану</span></div>
     </a>
-    <a class="vp-card" href="#moon">
+    <a class="vp-card" href="#moon" data-who="b">
       <img src="../img/thumbs/v3-salon-moon-mid.webp" alt="Лунный отель 2054" loading="lazy">
       <div class="vp-body"><b>11</b> Лунный отель 2054<span>355 – 1 505 €</span><span class="who who-b">🤝 компромисс для двоих</span></div>
     </a>
@@ -3785,6 +3785,25 @@ document.querySelectorAll('.tiers').forEach(function (box) {
     });
   });
 });
+// фильтр пикера по «кому зайдёт»
+(function () {
+  var legend = document.querySelector('.who-legend');
+  if (!legend) return;
+  var grid = legend.parentElement.querySelector('.vpick-grid');
+  var btns = legend.querySelectorAll('button[data-wf]');
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var was = btn.classList.contains('on');
+      btns.forEach(function (b) { b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); });
+      grid.querySelectorAll('.vp-card').forEach(function (c) { c.classList.remove('dim'); });
+      if (was) return; // повторный тап — сброс
+      btn.classList.add('on'); btn.setAttribute('aria-pressed', 'true');
+      grid.querySelectorAll('.vp-card').forEach(function (c) {
+        c.classList.toggle('dim', c.dataset.who !== btn.dataset.wf);
+      });
+    });
+  });
+})();
 // scrollspy: подсветка активного варианта в навигации
 (function () {
   var links = document.querySelectorAll('.stylenav-in a[data-s]');
