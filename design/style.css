@@ -420,6 +420,16 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .stylenav-in a.on { color: #fff; background: var(--ink); border-color: var(--ink); }
 /* липкие табы бюджета */
 .tier-tabs { position: sticky; top: 101px; z-index: 30; background: var(--bg-card); }
+/* до/после */
+.ba-wrap { position: relative; overflow: hidden; }
+.ba-after { width: 100%; display: block; }
+.ba-before-w { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; }
+.ba-before { position: absolute; top: 0; left: 0; height: 100%; max-width: none; object-fit: cover; }
+.ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; box-shadow: 0 0 6px rgba(0,0,0,.45); pointer-events: none; }
+.ba-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #fff; color: var(--ink); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .95rem; box-shadow: 0 1px 6px rgba(0,0,0,.35); }
+.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; touch-action: none; }
+.ba-wrap::after { content: 'ДО'; position: absolute; top: 10px; left: 10px; background: rgba(20,17,14,.65); color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; border-radius: 999px; pointer-events: none; }
+.ba-wrap::before { content: 'ПОСЛЕ'; position: absolute; top: 10px; right: 10px; background: rgba(20,17,14,.65); color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; border-radius: 999px; pointer-events: none; z-index: 1; }
 /* лайтбокс */
 dialog.lb { border: 0; padding: 0; background: rgba(20,17,14,.92); max-width: 96vw; max-height: 96vh; border-radius: 12px; }
 dialog.lb::backdrop { background: rgba(20,17,14,.7); }
