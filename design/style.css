@@ -17,7 +17,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-html, body { overflow-x: hidden; max-width: 100%; }
+html, body { overflow-x: clip; max-width: 100%; }
 body {
   background: var(--bg);
   color: var(--ink);
@@ -385,7 +385,7 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .tt { appearance: none; background: none; border: 0; border-right: 1px solid var(--line); padding: 12px 8px 10px; cursor: pointer; font-family: var(--font-body); text-align: center; color: var(--ink-soft); min-height: 56px; }
 .tt:last-child { border-right: 0; }
 .tt b { display: block; font-size: .92rem; color: inherit; }
-.tt span { font-size: .74rem; }
+.tt span { font-size: .78rem; }
 .tt.is-on { background: var(--accent-soft); color: var(--ink); box-shadow: inset 0 -3px 0 var(--accent); }
 .fitnote { font-size: .78rem; color: var(--olive); padding: 9px 16px; border-bottom: 1px dashed var(--line); }
 .tier-panel { display: none; }
@@ -416,16 +416,16 @@ footer .wrap { color: var(--ink-soft); font-size: .84rem; }
 .vp-card img { width: 100%; height: 96px; object-fit: cover; }
 .vp-body { padding: 8px 10px; font-size: .8rem; font-weight: 600; line-height: 1.3; }
 .vp-body b { color: var(--oak); margin-right: 4px; }
-.vp-body span { display: block; font-weight: 400; font-size: .74rem; color: var(--ink-soft); }
+.vp-body span { display: block; font-weight: 400; font-size: .78rem; color: var(--ink-soft); }
 .stylenav-in a.on { color: #fff; background: var(--ink); border-color: var(--ink); }
 /* липкие табы бюджета */
 .tier-tabs { position: sticky; top: 101px; z-index: 30; background: var(--bg-card); }
 /* кому зайдёт */
-.who { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .02em; padding: 3px 9px; border-radius: 999px; vertical-align: middle; white-space: nowrap; }
+.who { display: inline-block; font-size: .84rem; font-weight: 700; letter-spacing: .02em; padding: 4px 10px; border-radius: 999px; vertical-align: middle; white-space: nowrap; }
 .who-s { background: #f1e7d4; color: #7a5a1e; }
 .who-u { background: #e4ecdd; color: #4c6b3c; }
 .who-b { background: #e8e1d6; color: #5b4a33; border: 1px dashed #b9a888; }
-.vp-body .who { margin-top: 5px; }
+.vp-body .who { margin-top: 5px; font-size: .8rem; }
 h2 .who { font-family: var(--font-body); margin-left: 8px; }
 .who-legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
 /* до/после */
@@ -450,7 +450,7 @@ dialog.lb .lb-x { position: absolute; top: 8px; right: 8px; background: rgba(0,0
 @media (max-width: 900px) {
   .vs-grid { grid-template-columns: 1fr; }
   /* мобайл: медиа — горизонтальная свайп-галерея */
-  .vs-media { position: static; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .vs-media { position: static; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 6px; scroll-margin-top: 104px; }
   .vs-media figure { flex: 0 0 84%; scroll-snap-align: center; }
   .vp-card img { height: 84px; }
   .tier-tabs { top: 93px; }
@@ -458,4 +458,6 @@ dialog.lb .lb-x { position: absolute; top: 8px; right: 8px; background: rgba(0,0
   .pc-img { width: 56px; height: 56px; }
   .pc-right { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
   .stylenav { top: 49px; }
+  .stylenav-in a { padding: 9px 14px; }
+  .topnav a { padding: 10px 6px; }
 }
