@@ -21,20 +21,27 @@
 
 <section class="hero wrap">
   <div class="kicker">Дизайн-проект · Барселона · 25 этаж</div>
-  <h1>Квартира с видом на город: шесть вариантов на выбор</h1>
+  <h1>Квартира с видом на город: 11 характеров на выбор</h1>
   <p class="lead">
-    Никакой беготни по магазинам. Для каждой комнаты — шесть готовых вариантов в трёх бюджетах: от гонок и ретро 70-х до цветного металла, винила и гардероба с подсветкой. Визуализации сделаны
+    Никакой беготни по магазинам. Для каждой комнаты — 11 готовых вариантов в трёх бюджетах: от гонок и ретро 70-х до цветного металла, киберпанка и лунного отеля. Визуализации сделаны
     по фотографиям вашей квартиры, а каждый предмет сверен с чертежом и проверен
     на наличие в испанских магазинах.
   </p>
   <div class="style-tags">
-    <span class="tag hot">🏁 Гонки</span>
-    <span class="tag">Ретро 70-х</span>
-    <span class="tag">Японский минимализм</span>
-    <span class="tag">Fit-check по чертежу</span>
-    <span class="tag">Без красного</span>
-    <span class="tag">Аренда: без покраски, сверлить можно</span>
+    <a class="tag hot" href="rooms/salon.html#racing">🏁 Гонки</a>
+    <a class="tag" href="rooms/salon.html#retro70">Ретро 70-х</a>
+    <a class="tag" href="rooms/salon.html#japandi">Японский минимализм</a>
+    <a class="tag" href="rooms/salon.html#metal">Цветной металл</a>
+    <a class="tag" href="rooms/salon.html#gaudi">Барселона-модернизм</a>
+    <a class="tag" href="rooms/salon.html#moon">Лунный отель 2054</a>
+    <a class="tag more" href="rooms/salon.html">все 11 →</a>
   </div>
+  <div class="style-tags">
+    <button type="button" class="tag info" data-tip="Каждый предмет прогнан через fit-check: ширина, глубина и высота сверены с чертежом квартиры — потолки 3,00 м в гостиной и 2,22 м в прихожей, узкий проход, простенки у двери. Что не влезает — в каталог не попадает.">Fit-check по чертежу ⓘ</button>
+    <button type="button" class="tag info" data-tip="Жёсткое правило проекта: ни одного красного предмета — ни в мебели, ни в текстиле, ни на постерах. Все 500+ позиций каталога и каждый рендер проверены на это отдельно.">Без красного ⓘ</button>
+    <button type="button" class="tag info" data-tip="Квартира съёмная, поэтому стены не красим и пол не трогаем — весь характер строится на мебели, свете и текстиле. Сверлить можно: дырки от дюбелей легко зашпаклевать при выезде.">Аренда: без покраски, сверлить можно ⓘ</button>
+  </div>
+  <p class="tag-tip" hidden></p>
 </section>
 
 <section class="wrap">
@@ -83,5 +90,18 @@
     Цены зафиксированы на дату проверки — финальная цена на сайте магазина. Все магазины доставляют в Барселону.
   </div>
 </footer>
+<script>
+(function () {
+  var tip = document.querySelector('.tag-tip');
+  document.querySelectorAll('button.tag.info').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var same = !tip.hidden && tip.textContent === btn.dataset.tip;
+      document.querySelectorAll('button.tag.info').forEach(function (b) { b.classList.remove('on'); });
+      if (same) { tip.hidden = true; tip.textContent = ''; return; }
+      tip.textContent = btn.dataset.tip; tip.hidden = false; btn.classList.add('on');
+    });
+  });
+})();
+</script>
 </body>
 </html>
