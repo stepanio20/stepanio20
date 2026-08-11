@@ -63,8 +63,8 @@ def score(demand: dict, listing: dict) -> float:
     if carat_c is None:
         return 0.0
 
-    # lab-grown must not satisfy a natural demand unless the demand also allows it
-    if "lab_grown" in (listing.get("flags") or "") and "lab_grown" not in (demand.get("flags") or ""):
+    # natural and lab-grown never cross-match — separate pools both directions
+    if ("lab_grown" in (listing.get("flags") or "")) != ("lab_grown" in (demand.get("flags") or "")):
         return 0.0
 
     weights = {"carat": 0.30, "color": 0.25, "clarity": 0.25, "shape": 0.10, "price": 0.10}
