@@ -210,6 +210,25 @@ def add_listing(stone: dict, tg_id: Optional[int] = None, source: str = "forward
         return _insert(con, "listings", _LISTING_COLS, v)
 
 
+def add_listings_bulk(stones: list[dict], tg_id: Optional[int] = None, source: str = "seed",
+                      source_group: str = "", ttl_days: int = 3650) -> int:
+    """Insert many listings on one connection (for seeding large inventories)."""
+    now = time.time()
+    rows = []
+    for stone in stones:
+        v = dict(stone)
+        v["flags"] = json.dumps(v.get("flags") or [])
+        v.update(tg_id=tg_id, source=source, source_group=source_group,
+                 status="active", created_at=now, expires_at=now + ttl_days * 86400,
+                 intent="have")
+        rows.append([v.get(c) for c in _LISTING_COLS])
+    placeholders = ",".join("?" for _ in _LISTING_COLS)
+    with _conn() as con:
+        con.executemany(
+            f"INSERT INTO listings({','.join(_LISTING_COLS)}) VALUES ({placeholders})", rows)
+    return len(rows)
+
+
 def add_demand(stone: dict, tg_id: Optional[int] = None, source: str = "manual",
                source_group: str = "") -> int:
     now = time.time()
@@ -227,6 +246,33 @@ def active_listings() -> list[dict]:
         rows = con.execute("SELECT * FROM listings WHERE status='active' AND expires_at>?",
                            (time.time(),)).fetchall()
         return [dict(r) for r in rows]
+
+
+def candidate_listings(demand: dict, limit: int = 1500) -> list[dict]:
+    """SQL pre-filter for matching: narrow a large inventory by shape, carat range
+    and growth pool before Python scoring. Falls back to broad if demand is vague."""
+    where = ["status='active'", "expires_at>?"]
+    params: list = [time.time()]
+    if demand.get("shape"):
+        where.append("(shape=? OR shape IS NULL)")
+        params.append(demand["shape"])
+    target = demand.get("carat")
+    lo, hi = demand.get("carat_min"), demand.get("carat_max")
+    if lo or hi:
+        where.append("(carat IS NULL OR carat BETWEEN ? AND ?)")
+        params += [(lo or 0) * 0.95, (hi or 99) * 1.05]
+    elif target:
+        where.append("(carat IS NULL OR carat BETWEEN ? AND ?)")
+        params += [target * 0.85, target * 1.15]
+    # keep natural and lab-grown in separate pools (matcher enforces it too)
+    if "lab_grown" in (demand.get("flags") or ""):
+        where.append("flags LIKE '%lab_grown%'")
+    else:
+        where.append("(flags IS NULL OR flags NOT LIKE '%lab_grown%')")
+    q = f"SELECT * FROM listings WHERE {' AND '.join(where)} LIMIT ?"
+    params.append(limit)
+    with _conn() as con:
+        return [dict(r) for r in con.execute(q, params).fetchall()]
 
 
 def active_demands() -> list[dict]:

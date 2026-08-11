@@ -59,7 +59,11 @@ _HEADER_MAP = {
     "shape": "shape",
     "weight": "carat", "carat": "carat", "caratweight": "carat", "cts": "carat",
     "carats": "carat", "size": "carat",
-    "color": "color", "colour": "color",
+    "color": "color", "colour": "color", "col": "color",
+    "clarity": "clarity", "cla": "clarity", "clar": "clarity",
+    "flr": "fluorescence", "flu": "fluorescence",
+    "pol": "polish", "sym": "symmetry",
+    "price": "price_per_carat", "wgt": "carat",
     "shadecolour": "fancy_color", "shadecolor": "fancy_color",
     "fancycolor": "fancy_color", "fancycolour": "fancy_color",
     "fancycolorintensity": "fancy_intensity", "fancycolourintensity": "fancy_intensity",
@@ -73,18 +77,37 @@ _HEADER_MAP = {
     "lab": "lab", "labname": "lab", "laboratory": "lab",
     "certificate": "cert_number", "certno": "cert_number", "certnumber": "cert_number",
     "reportnumber": "cert_number", "report": "cert_number", "reportno": "cert_number",
-    "treatment": "treatment", "growthtype": "growth", "growth": "growth",
+    "certification": "cert_number", "certificateno": "cert_number",
+    "treatment": "treatment", "growthtype": "growth", "growth": "growth", "type": "nature",
     "depth": "depth", "table": "table_pct",
     "cashprice": "total_price", "totalprice": "total_price", "amount": "total_price",
     "priceperct": "price_per_carat", "pricepercarat": "price_per_carat",
     "pricecrt": "price_per_carat", "pricect": "price_per_carat", "ppc": "price_per_carat",
     "rapnetdiscountpercent": "rap_discount", "discount": "rap_discount",
     "rapdiscount": "rap_discount", "rap": "rap_discount", "back": "rap_discount",
+    "off": "rap_discount", "offrap": "rap_discount",
     "diamondvideo": "video", "video": "video", "diamondimage": "image", "image": "image",
     "certfile": "cert_file",
 }
 
 _SHAPE_ALIAS = {v: canon for canon, variants in SHAPES.items() for v in variants}
+# extra dealer codes safe in a dedicated shape column (from the LuxeDiam alias map).
+# NB: RD=round (not radiant), OMB=Oval Modified Brilliant→oval, PS=pear, PR=princess.
+_SHAPE_ALIAS.update({
+    "rd": "round", "rbc": "round", "rnd": "round", "b": "round", "rb": "round",
+    "ov": "oval", "oc": "oval", "omb": "oval",
+    "ps": "pear", "psh": "pear", "pb": "pear", "pmb": "pear", "pe": "pear",
+    "mq": "marquise", "mqb": "marquise", "mc": "marquise",
+    "cu": "cushion", "cush": "cushion", "csh": "cushion", "cmb": "cushion",
+    "cb": "cushion", "cux": "cushion", "cm": "cushion", "cc": "cushion",
+    "pc": "princess", "prn": "princess", "prin": "princess", "pn": "princess",
+    "ec": "emerald", "em": "emerald", "sqe": "emerald", "sqem": "emerald",
+    "ac": "asscher", "css": "asscher", "cssc": "asscher",
+    "hs": "heart", "hrt": "heart", "ht": "heart", "he": "heart", "hc": "heart",
+    "rad": "radiant", "rdn": "radiant", "ra": "radiant", "rc": "radiant",
+    "bag": "baguette", "bg": "baguette",
+    "tr": "trilliant", "tril": "trilliant", "trill": "trilliant", "trillion": "trilliant",
+})
 _LABGROWN_TOKENS = ("cvd", "hpht", "lab", "labgrown", "lab grown", "synthetic", "created")
 
 
@@ -95,11 +118,16 @@ def _hkey(h: str) -> str:
 def _norm_shape(v: str):
     s = str(v).strip().lower().replace("-", " ")
     s = s.replace(" cut", "").replace(" shape", "").strip()
+    # dealer prefixes like "SQ EM", "LONG RADIANT", "SQ RADIANT" → base shape
+    for pre in ("sq ", "square ", "long ", "sqr "):
+        if s.startswith(pre):
+            s = s[len(pre):].strip()
     if s in _SHAPE_ALIAS:
         return _SHAPE_ALIAS[s]
-    first = s.split()[0] if s else ""
-    if first in _SHAPE_ALIAS:
-        return _SHAPE_ALIAS[first]
+    words = s.split()
+    for w in words:                       # e.g. "cushion modified brilliant" → cushion
+        if w in _SHAPE_ALIAS:
+            return _SHAPE_ALIAS[w]
     return s.title() or None
 
 

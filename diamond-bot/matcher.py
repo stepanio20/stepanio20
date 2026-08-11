@@ -52,11 +52,14 @@ def score(demand: dict, listing: dict) -> float:
     if demand.get("shape") and listing.get("shape") and demand["shape"] != listing["shape"]:
         return 0.0
 
-    # fancy vs white: a fancy demand needs a fancy listing (and color family must match)
+    # fancy vs white are separate channels (LuxeDiam rule):
+    #   fancy demand → listing must be fancy with the same hue
+    #   white demand → never surface a fancy stone
     d_fancy, l_fancy = demand.get("fancy_color"), listing.get("fancy_color")
-    if d_fancy and l_fancy and d_fancy != l_fancy:
-        return 0.0
-    if d_fancy and not l_fancy:
+    if d_fancy:
+        if not l_fancy or d_fancy != l_fancy:
+            return 0.0
+    elif l_fancy:
         return 0.0
 
     carat_c = _carat_ok(demand, listing)

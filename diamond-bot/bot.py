@@ -40,6 +40,8 @@ router = Router()
 # when those are present. In production (Railway) neither exists, so this is a no-op and
 # the default direct session is used.
 import os as _os
+from pathlib import Path as _Path
+_BRAND = _Path(__file__).resolve().parent / "branding"
 _CA = "/root/.ccr/ca-bundle.crt"
 if _os.path.exists(_CA) and not _os.environ.get("SSL_CERT_FILE"):
     _os.environ["SSL_CERT_FILE"] = _CA
@@ -186,25 +188,29 @@ async def _handle_stone_text(msg: Message, text: str, source: str,
     conf = res.get("confidence", 0)
 
     if kind == "demand":
-        # match this demand against active listings, best first
-        listings = db.active_listings()
+        # match this demand against candidate listings (SQL-prefiltered), best first
+        listings = db.candidate_listings(stone.to_dict())
         pairs = matcher.run_matching([{**stone.to_dict(), "id": res["id"]}], listings, threshold=0.6)
-        head = (f"📝 Logged your <b>request</b>: <b>{stone.key_summary()}</b> "
-                f"(confidence {conf:.0%}).\n")
+        summ = stone.key_summary()
         if not pairs:
-            await msg.reply(head + "No live match yet — I'll ping you the instant one appears. "
-                                   "You can also /subscribe to unlock full history.")
+            await msg.reply(
+                f"🔎 <b>Search:</b> {summ}\n\n"
+                "No match on the desk right now. I've <b>saved this search</b> — you'll get an instant "
+                "ping the moment a matching stone appears. Tap <b>⭐ Saved</b> to see your open searches.")
             return
-        lines = [head + f"⚡ <b>{len(pairs)} match(es) right now:</b>"]
+        n = len(pairs)
+        shown = pairs[:5]
+        lines = [f"✨ <b>{n} match{'es' if n != 1 else ''}</b> for <b>{summ}</b>", ""]
         kb_rows = []
-        for _d, lis, sc in pairs[:5]:
+        for i, (_d, lis, sc) in enumerate(shown, 1):
             db.record_match(res["id"], lis["id"], sc)
-            lines.append(f"• {_listing_line(lis)}  <b>{sc:.0%}</b>")
-            kb_rows.append([InlineKeyboardButton(
-                text=f"🤝 Connect · {lis.get('shape','?')} {lis.get('carat','')}ct ({sc:.0%})",
-                callback_data=f"connect:{lis['id']}")])
+            lines.append(_stone_block(i, lis, sc))
+            lines.append("")
+            kb_rows.append([InlineKeyboardButton(text=f"🤝 Connect #{i}", callback_data=f"connect:{lis['id']}")])
+        if n > len(shown):
+            lines.append(f"…and <b>{n - len(shown)}</b> more. Add colour / clarity / price to narrow it.")
         kb = InlineKeyboardMarkup(inline_keyboard=kb_rows)
-        await msg.reply("\n".join(lines), reply_markup=kb)
+        await msg.reply("\n".join(lines).rstrip(), reply_markup=kb)
     else:
         # a new listing: alert buyers whose demands it satisfies
         demands = db.active_demands()
@@ -226,14 +232,44 @@ async def _handle_stone_text(msg: Message, text: str, source: str,
         await _notify_new_matches(msg.bot)
 
 
+def _price_str(l: dict) -> str:
+    if l.get("price_per_carat"):
+        return f"${l['price_per_carat']:,.0f}/ct"
+    if l.get("total_price"):
+        return f"${l['total_price']:,.0f} total"
+    return "price on request"
+
+
+def _color_str(l: dict) -> str:
+    if l.get("fancy_color"):
+        return " ".join(x for x in [l.get("fancy_intensity"), l.get("fancy_color")] if x).title()
+    return str(l.get("color") or "").upper()
+
+
 def _listing_line(l: dict) -> str:
-    bits = [str(l.get("shape") or "").capitalize(), f"{l.get('carat')}ct" if l.get("carat") else "",
-            l.get("fancy_color") or l.get("color") or "", l.get("clarity") or "", l.get("lab") or ""]
+    bits = [str(l.get("shape") or "").capitalize(), f"{l.get('carat'):g}ct" if l.get("carat") else "",
+            _color_str(l), l.get("clarity") or "", l.get("lab") or ""]
     label = " ".join(b for b in bits if b)
-    price = (f"${l['price_per_carat']:,.0f}/ct" if l.get("price_per_carat")
-             else (f"${l['total_price']:,.0f}" if l.get("total_price") else "POR"))
     disc = f" · Rap {l['rap_discount']:+g}%" if l.get("rap_discount") is not None else ""
-    return f"{label} — {price}{disc}"
+    return f"{label} — {_price_str(l)}{disc}"
+
+
+def _stone_block(idx: int, l: dict, score: float) -> str:
+    """A clean multi-line stone entry for match lists (LuxeDiam-style)."""
+    shape = str(l.get("shape") or "Diamond").capitalize()
+    ct = f"{l['carat']:g}ct" if l.get("carat") else ""
+    head = " ".join(b for b in [f"{idx}.", shape, ct, _color_str(l), l.get("clarity") or ""] if b)
+    meta = " · ".join(b for b in [
+        l.get("lab"),
+        (f"Fluor {l['fluorescence']}" if l.get("fluorescence") and str(l['fluorescence']).lower() not in ("none", "nil", "n") else None),
+        (f"Rap {l['rap_discount']:+g}%" if l.get("rap_discount") is not None else None),
+        ("🌱 lab-grown" if "lab_grown" in (l.get("flags") or "") else None),
+    ] if b)
+    lines = [f"<b>{head}</b>   ·  {score:.0%} fit"]
+    if meta:
+        lines.append(f"    <i>{meta}</i>")
+    lines.append(f"    💰 <b>{_price_str(l)}</b>")
+    return "\n".join(lines)
 
 
 async def _notify_new_matches(bot: Bot) -> None:
@@ -271,13 +307,26 @@ async def _notify_new_matches(bot: Bot) -> None:
 
 # ─────────────────────────────── commands ────────────────────────────────────
 
+async def _send_branded(msg: Message, image: str, caption: str, reply_markup=None) -> None:
+    """Send a caption with a branding image on top; fall back to text if the image is missing."""
+    path = _BRAND / image
+    try:
+        with open(path, "rb") as f:
+            await msg.answer_photo(BufferedInputFile(f.read(), image), caption=caption,
+                                   reply_markup=reply_markup)
+    except Exception:  # noqa: BLE001
+        await msg.answer(caption, reply_markup=reply_markup)
+
+
 @router.message(CommandStart())
 async def start(msg: Message) -> None:
     db.upsert_user(msg.from_user.id, msg.from_user.username or "",
                    msg.from_user.full_name or "")
     db.log_event("start", msg.from_user.id)
     _MODE.pop(msg.from_user.id, None)
-    await msg.answer(WELCOME, reply_markup=main_kb())
+    live = db.counts().get("listings", 0)
+    caption = WELCOME + (f"\n\n📊 <b>{live:,}</b> stones are live on the desk right now." if live else "")
+    await _send_branded(msg, "promo_square.png", caption, reply_markup=main_kb())
 
 
 @router.message(Command("help"))
