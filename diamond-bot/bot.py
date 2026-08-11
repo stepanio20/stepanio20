@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from html import escape as _esc
 
 from aiogram import Bot, Dispatcher, F, Router
@@ -171,12 +172,16 @@ async def _limit_prompt(msg: Message) -> None:
 async def _handle_stone_text(msg: Message, text: str, source: str,
                              force_intent: str | None = None) -> None:
     uid = msg.from_user.id
-    _MODE.pop(uid, None)  # one-shot: an explicit Upload/Search mode applies to this message only
+    # mode is sticky (set by the Upload/Search buttons, cleared by any other button) so a whole
+    # paste-burst keeps one intent; explicit "looking for"/"available" wording still overrides it.
     if force_intent is not None:
         default_intent = force_intent
     else:
-        role = role_of(uid)
-        default_intent = {"seller": Intent.HAVE.value, "buyer": Intent.WANT.value}.get(role)
+        mode = _MODE.get(uid)
+        default_intent = {"upload": Intent.HAVE.value, "search": Intent.WANT.value}.get(mode)
+        if default_intent is None:
+            role = role_of(uid)
+            default_intent = {"seller": Intent.HAVE.value, "buyer": Intent.WANT.value}.get(role)
 
     # peek at the resolved intent so we enforce the stock cap on any path that stores a listing
     peek = parse_message(text, default_intent=default_intent)
@@ -369,7 +374,7 @@ async def start(msg: Message) -> None:
         payload = parts[1].strip()
     db.log_event("start", uid, {"payload": payload, "new_user": existing is None})
     # share-a-stone deep link: t.me/<bot>?start=stone_<id>
-    if payload.startswith("stone_") and payload[6:].isdigit():
+    if payload.startswith("stone_") and payload[6:].isdecimal():
         lis = db.get_listing(int(payload[6:]))
         if lis and lis.get("status") == "active":
             await _show_shared_stone(msg, lis)
@@ -442,7 +447,7 @@ async def publish_cmd(msg: Message) -> None:
     if not is_admin(msg.from_user.id):
         return
     parts = (msg.text or "").split()
-    if len(parts) < 2 or not parts[1].isdigit():
+    if len(parts) < 2 or not parts[1].isdecimal():
         await msg.answer("Usage: <code>/publish &lt;listing_id&gt;</code>")
         return
     lis = db.get_listing(int(parts[1]))
@@ -633,21 +638,20 @@ async def on_text(msg: Message) -> None:
                          "Describe the stone in plain words — I'll match it against all live stock.\n"
                          "<b>Example:</b> <code>2ct round D VS1 GIA under $18k/ct</code>")
         return
-    if t == BTN_MINE:
-        return await menu_mine(msg)
-    if t == BTN_SAVED:
-        return await menu_saved(msg)
-    if t == BTN_SOLD:
-        return await menu_sold(msg)
-    if t == BTN_SUBSCRIBE:
-        return await _show_subscription(msg)
-    if t == BTN_SUPPORT:
+    if t in (BTN_MINE, BTN_SAVED, BTN_SOLD, BTN_SUBSCRIBE, BTN_SUPPORT):
+        _MODE.pop(uid, None)  # leaving upload/search flow
+        if t == BTN_MINE:
+            return await menu_mine(msg)
+        if t == BTN_SAVED:
+            return await menu_saved(msg)
+        if t == BTN_SOLD:
+            return await menu_sold(msg)
+        if t == BTN_SUBSCRIBE:
+            return await _show_subscription(msg)
         return await menu_support(msg)
 
-    # otherwise it's a stone or a request — honor the current mode
-    mode = _MODE.get(uid)
-    force = {"upload": Intent.HAVE.value, "search": Intent.WANT.value}.get(mode)
-    await _handle_stone_text(msg, t, source="manual", force_intent=force)
+    # otherwise it's a stone or a request — _handle_stone_text honors the sticky mode
+    await _handle_stone_text(msg, t, source="manual")
 
 
 # ─────────────────────────────── callbacks ───────────────────────────────────
@@ -736,7 +740,10 @@ async def cb_connect(cb: CallbackQuery) -> None:
 
 @router.message(F.text.regexp(r"^/connect_\d+"))
 async def connect_cmd(msg: Message) -> None:
-    listing_id = int((msg.text or "").split("_", 1)[1].split()[0])
+    m = re.match(r"^/connect_(\d+)", msg.text or "")
+    if not m:
+        return
+    listing_id = int(m.group(1))
     text, ok, reachable = _reveal_text(listing_id)
     if ok:
         db.log_event("contact_revealed", msg.from_user.id, {"listing_id": listing_id, "seller_reachable": reachable})
