@@ -21,6 +21,7 @@ Flow:
 """
 from __future__ import annotations
 
+import hmac
 import json
 import logging
 from typing import Any, Optional
@@ -120,10 +121,11 @@ async def create_payment(tier: str, tg_id: int) -> Optional[dict]:
 # ─────────────────────────── webhook handling ────────────────────────────────
 
 def verify_webhook_auth(auth_header: str) -> bool:
-    """veym sends the shared secret in the `authorization` header (plain, not Bearer)."""
+    """veym sends the shared secret in the `authorization` header (plain, not Bearer).
+    Constant-time comparison; fails closed when no secret is configured."""
     if not settings.veym_webhook_secret:
         return False
-    return auth_header.strip() == settings.veym_webhook_secret.strip()
+    return hmac.compare_digest(auth_header.strip(), settings.veym_webhook_secret.strip())
 
 
 def _extract(event: dict) -> tuple[Optional[int], str, str, int, str]:
@@ -133,16 +135,25 @@ def _extract(event: dict) -> tuple[Optional[int], str, str, int, str]:
     meta = d.get("metadata") or event.get("metadata") or {}
     tg_raw = meta.get("tg_id") or meta.get("telegram_id")
     tg_id = int(tg_raw) if tg_raw and str(tg_raw).lstrip("-").isdigit() else None
-    tier = meta.get("tier") or "buyer"
     charge_id = str(d.get("id") or d.get("charge_id") or event.get("id") or "")
-    amount = int(float(d.get("amount_total") or d.get("amount") or 0))
+    try:
+        amount = int(float(d.get("amount_total") or d.get("amount") or 0))
+    except (TypeError, ValueError):
+        amount = 0
+    tier = meta.get("tier")
+    if tier not in settings.tiers:
+        # infer the tier from the paid amount (AED) when metadata is missing/garbled
+        tier = next((k for k in settings.paid_tiers if settings.tiers[k]["aed"] == amount), None)
     status = str(d.get("status") or event.get("status") or "").lower()
     return tg_id, tier, charge_id, amount, status
 
 
 def activate(tg_id: int, tier: str, charge_id: str, amount: int) -> str:
-    """Record a paid subscription. Returns the tier granted."""
-    t = settings.tiers.get(tier, settings.tiers["buyer"])
+    """Record a paid subscription (idempotent by charge_id). Returns the tier granted."""
+    if charge_id and db.subscription_by_charge(charge_id):
+        log.info("charge %s already processed — skipping duplicate activation", charge_id)
+        return tier
+    t = settings.tiers.get(tier) or settings.tiers["free"]
     db.add_subscription(tg_id, tier=tier, stars=amount, days=t["days"], charge_id=charge_id)
     db.log_event("subscription_paid", tg_id, {"tier": tier, "amount": amount,
                                               "charge_id": charge_id, "gateway": "veym"})
@@ -156,6 +167,9 @@ def handle_webhook_event(event: dict) -> Optional[tuple[int, str]]:
         return None
     if tg_id is None:
         log.warning("webhook success but no tg_id in metadata: %s", str(event)[:200])
+        return None
+    if tier not in settings.paid_tiers:
+        log.warning("webhook success but unknown tier (amount=%s) — not granting: %s", amount, str(event)[:200])
         return None
     activate(tg_id, tier, charge_id, amount)
     return tg_id, tier

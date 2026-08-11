@@ -212,27 +212,36 @@ def _map_row(row: dict) -> Optional[dict]:
     return out
 
 
-def _import_rows(rows, *, tg_id, source_group, source="csv") -> dict:
-    stored = skipped = 0
+def _import_rows(rows, *, tg_id, source_group, source="csv", remaining=None) -> dict:
+    """Map rows and bulk-insert (one connection). `remaining` caps how many are stored
+    (the rest are counted as limit_skipped) to enforce a subscriber's stock quota."""
+    keep: list[dict] = []
+    skipped = limit_skipped = 0
     for row in rows:
         norm = _map_row(row)
         if not norm:
             skipped += 1
             continue
-        db.add_listing(norm, tg_id=tg_id, source=source, source_group=source_group)
-        stored += 1
-    return {"stored": stored, "skipped": skipped}
+        if remaining is not None and len(keep) >= remaining:
+            limit_skipped += 1
+            continue
+        keep.append(norm)
+    if keep:
+        db.add_listings_bulk(keep, tg_id=tg_id, source=source, source_group=source_group, ttl_days=30)
+    return {"stored": len(keep), "skipped": skipped, "limit_skipped": limit_skipped}
 
 
-def import_csv(data: bytes, *, tg_id: Optional[int] = None, source_group: str = "") -> dict:
+def import_csv(data: bytes, *, tg_id: Optional[int] = None, source_group: str = "",
+               remaining: Optional[int] = None) -> dict:
     """Import a CSV supplier stock file."""
     text = data.decode("utf-8-sig", errors="replace")
     reader = csv.DictReader(io.StringIO(text))
-    return _import_rows(reader, tg_id=tg_id, source_group=source_group, source="csv")
+    return _import_rows(reader, tg_id=tg_id, source_group=source_group, source="csv", remaining=remaining)
 
 
-def import_xlsx(data: bytes, *, tg_id: Optional[int] = None, source_group: str = "") -> dict:
-    """Import an Excel (.xlsx) supplier stock file (first sheet; row 1 = headers)."""
+def import_xlsx(data: bytes, *, tg_id: Optional[int] = None, source_group: str = "",
+                remaining: Optional[int] = None) -> dict:
+    """Import an Excel (.xlsx) supplier stock file. Skips leading banner/blank rows."""
     try:
         import openpyxl
     except Exception as e:  # noqa: BLE001
@@ -240,21 +249,25 @@ def import_xlsx(data: bytes, *, tg_id: Optional[int] = None, source_group: str =
     wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
     ws = wb[wb.sheetnames[0]]
     it = ws.iter_rows(values_only=True)
-    try:
-        headers = [str(h).strip() if h is not None else "" for h in next(it)]
-    except StopIteration:
-        return {"stored": 0, "skipped": 0}
+    headers = None
+    for raw in it:                                   # first row with >=4 non-empty cells = header
+        cells = [str(h).strip() if h is not None else "" for h in raw]
+        if sum(bool(c) for c in cells) >= 4:
+            headers = cells
+            break
+    if not headers:
+        return {"stored": 0, "skipped": 0, "limit_skipped": 0}
     rows = (dict(zip(headers, r)) for r in it)
-    return _import_rows(rows, tg_id=tg_id, source_group=source_group, source="xlsx")
+    return _import_rows(rows, tg_id=tg_id, source_group=source_group, source="xlsx", remaining=remaining)
 
 
 def import_stock(data: bytes, filename: str = "", *, tg_id: Optional[int] = None,
-                 source_group: str = "") -> dict:
+                 source_group: str = "", remaining: Optional[int] = None) -> dict:
     """Dispatch by file extension: .xlsx/.xls → Excel, else CSV/TXT."""
     name = (filename or "").lower()
     if name.endswith((".xlsx", ".xlsm", ".xls")):
-        return import_xlsx(data, tg_id=tg_id, source_group=source_group)
-    return import_csv(data, tg_id=tg_id, source_group=source_group)
+        return import_xlsx(data, tg_id=tg_id, source_group=source_group, remaining=remaining)
+    return import_csv(data, tg_id=tg_id, source_group=source_group, remaining=remaining)
 
 
 # ─────────────────────── Telegram BYO-session reader ──────────────────────────

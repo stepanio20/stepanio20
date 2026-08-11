@@ -74,13 +74,16 @@ Subscriptions via the **veym** gateway (MamoPay-backed, **AED**) — the same ga
 Unit Bot. Charge is created on MamoPay (hosted checkout → pay link); veym relays the result to
 `/mamopay-webhook`, which activates the plan.
 
-| Tier | AED / 30d | ≈ USD | For |
-|---|---|---|---|
-| **Buyer** | AED 149 | ~$39/mo | small/private jewelers sourcing per-order |
-| **Broker** | AED 549 | ~$149/mo | brokers/sellers — highest willingness to pay |
+Priced by stock size (sellers pay to list more; buyers search free) — the LuxeDiam model:
 
-Contact reveal + full match history are gated to active subscribers. Adjust prices in `config.py`.
-`FREE_REVEAL=true` opens the paywall for demos (must be `false` in production).
+| Tier | Stock cap | AED / 30d | ≈ USD |
+|---|---|---|---|
+| **Free** | up to 500 stones | — | — |
+| **Grow** | up to 1,000 stones | AED 99 | ~$25/mo |
+| **Pro** | unlimited | AED 199 | ~$50/mo |
+
+Every plan includes auto-matching and instant alerts. Uploads/forwards/CSV are capped to the
+tier's stock limit (over-cap rows are skipped with an upgrade prompt). Adjust prices in `config.py`.
 
 ## Deal mechanics the service accounts for (and what it deliberately skips)
 

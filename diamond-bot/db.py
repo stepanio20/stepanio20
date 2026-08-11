@@ -97,6 +97,12 @@ CREATE TABLE IF NOT EXISTS events (
     data        TEXT,
     created_at  REAL
 );
+
+CREATE INDEX IF NOT EXISTS ix_listings_match ON listings(status, shape, carat);
+CREATE INDEX IF NOT EXISTS ix_listings_owner ON listings(tg_id, status);
+CREATE INDEX IF NOT EXISTS ix_demands_active ON demands(status, tg_id);
+CREATE INDEX IF NOT EXISTS ix_events        ON events(type, tg_id, created_at);
+CREATE INDEX IF NOT EXISTS ix_subs_charge   ON subscriptions(charge_id);
 """
 
 _LISTING_COLS = ["tg_id", "source", "source_group", "intent", "shape", "carat", "color",
@@ -112,8 +118,11 @@ _DEMAND_COLS = ["tg_id", "source", "source_group", "intent", "shape", "carat", "
 
 @contextmanager
 def _conn():
-    con = sqlite3.connect(settings.database_path)
+    con = sqlite3.connect(settings.database_path, timeout=5.0)
     con.row_factory = sqlite3.Row
+    con.execute("PRAGMA journal_mode=WAL")     # concurrent readers + one writer, no 'database is locked'
+    con.execute("PRAGMA busy_timeout=5000")
+    con.execute("PRAGMA synchronous=NORMAL")
     try:
         yield con
         con.commit()
@@ -179,6 +188,14 @@ def add_subscription(tg_id: int, tier: str, stars: int, days: int, charge_id: st
             "VALUES (?,?,?,?,?,?,?)",
             (tg_id, tier, "active", stars, charge_id, now, now + days * 86400),
         )
+
+
+def subscription_by_charge(charge_id: str) -> Optional[dict]:
+    if not charge_id:
+        return None
+    with _conn() as con:
+        row = con.execute("SELECT * FROM subscriptions WHERE charge_id=? LIMIT 1", (charge_id,)).fetchone()
+        return dict(row) if row else None
 
 
 def active_subscription(tg_id: int) -> Optional[dict]:
@@ -269,7 +286,12 @@ def candidate_listings(demand: dict, limit: int = 1500) -> list[dict]:
         where.append("flags LIKE '%lab_grown%'")
     else:
         where.append("(flags IS NULL OR flags NOT LIKE '%lab_grown%')")
-    q = f"SELECT * FROM listings WHERE {' AND '.join(where)} LIMIT ?"
+    # order by carat proximity to the target so LIMIT keeps the closest stones (not arbitrary rowids)
+    order = ""
+    if target:
+        order = " ORDER BY ABS(COALESCE(carat, ?) - ?)"
+        params += [target, target]
+    q = f"SELECT * FROM listings WHERE {' AND '.join(where)}{order} LIMIT ?"
     params.append(limit)
     with _conn() as con:
         return [dict(r) for r in con.execute(q, params).fetchall()]
@@ -328,12 +350,12 @@ def get_demand(demand_id: int) -> Optional[dict]:
 
 
 # ── matches ──
-def record_match(demand_id: int, listing_id: int, score: float) -> Optional[int]:
+def record_match(demand_id: int, listing_id: int, score: float, notified: int = 0) -> Optional[int]:
     with _conn() as con:
         try:
             cur = con.execute(
-                "INSERT INTO matches(demand_id, listing_id, score, created_at) VALUES (?,?,?,?)",
-                (demand_id, listing_id, score, time.time()),
+                "INSERT INTO matches(demand_id, listing_id, score, notified, created_at) VALUES (?,?,?,?,?)",
+                (demand_id, listing_id, score, notified, time.time()),
             )
             return cur.lastrowid
         except sqlite3.IntegrityError:
