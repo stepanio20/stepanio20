@@ -19,7 +19,7 @@ import csv
 import io
 from typing import Callable, Iterable, Optional
 
-from parser import parse_message, Intent
+from parser import parse_message, Intent, SHAPES, FANCY_COLORS, FANCY_INTENSITY, CLARITIES
 import db
 
 
@@ -45,56 +45,188 @@ def ingest_text(text: str, *, tg_id: Optional[int] = None, source: str = "forwar
                 "confidence": stone.confidence}
 
 
-# ─────────────────────────── CSV / stock file ────────────────────────────────
+# ─────────────────────────── stock file (CSV / Excel) ────────────────────────
+#
+# Real seller files (RapNet-ish, but messy) — headers map case-insensitively with
+# spaces/underscores/'#'/'%' stripped. Covers the columns dealers actually send:
+# Stock #, Availability, Shape, Weight, Color, shade colour, Fancy Color Intensity,
+# Clarity, Cut, Fluorescence Intensity, Measurements, Lab, Report #, Growth Type, …
 
-# Map common RapNet-style headers to our fields (case-insensitive, spaces stripped).
-_CSV_MAP = {
-    "shape": "shape", "weight": "carat", "carat": "carat", "caratweight": "carat",
-    "color": "color", "colour": "color", "clarity": "clarity", "cut": "cut",
-    "cutgrade": "cut", "lab": "lab", "labname": "lab",
-    "certificate": "cert_number", "certificate#": "cert_number", "certno": "cert_number",
-    "reportnumber": "cert_number", "report#": "cert_number", "stocknumber": "stock",
+_HEADER_MAP = {
+    "s": "nature", "type": "nature", "naturalorlabgrown": "nature",
+    "stock": "stock", "stockno": "stock", "stocknumber": "stock", "stockid": "stock",
+    "availability": "availability", "status": "availability", "avail": "availability",
+    "shape": "shape",
+    "weight": "carat", "carat": "carat", "caratweight": "carat", "cts": "carat",
+    "carats": "carat", "size": "carat",
+    "color": "color", "colour": "color",
+    "shadecolour": "fancy_color", "shadecolor": "fancy_color",
+    "fancycolor": "fancy_color", "fancycolour": "fancy_color",
+    "fancycolorintensity": "fancy_intensity", "fancycolourintensity": "fancy_intensity",
+    "fancyintensity": "fancy_intensity", "intensity": "fancy_intensity",
+    "clarity": "clarity",
+    "cut": "cut", "cutgrade": "cut",
+    "polish": "polish", "symmetry": "symmetry", "sym": "symmetry",
     "fluorescence": "fluorescence", "fluorescenceintensity": "fluorescence",
-    "cashprice": "total_price", "priceperct": "price_per_carat",
-    "rapnetdiscountpercent": "rap_discount", "discount%": "rap_discount",
+    "fluor": "fluorescence", "flo": "fluorescence",
+    "measurements": "measurements", "measurement": "measurements", "meas": "measurements",
+    "lab": "lab", "labname": "lab", "laboratory": "lab",
+    "certificate": "cert_number", "certno": "cert_number", "certnumber": "cert_number",
+    "reportnumber": "cert_number", "report": "cert_number", "reportno": "cert_number",
+    "treatment": "treatment", "growthtype": "growth", "growth": "growth",
+    "depth": "depth", "table": "table_pct",
+    "cashprice": "total_price", "totalprice": "total_price", "amount": "total_price",
+    "priceperct": "price_per_carat", "pricepercarat": "price_per_carat",
+    "pricecrt": "price_per_carat", "pricect": "price_per_carat", "ppc": "price_per_carat",
+    "rapnetdiscountpercent": "rap_discount", "discount": "rap_discount",
+    "rapdiscount": "rap_discount", "rap": "rap_discount", "back": "rap_discount",
+    "diamondvideo": "video", "video": "video", "diamondimage": "image", "image": "image",
+    "certfile": "cert_file",
 }
+
+_SHAPE_ALIAS = {v: canon for canon, variants in SHAPES.items() for v in variants}
+_LABGROWN_TOKENS = ("cvd", "hpht", "lab", "labgrown", "lab grown", "synthetic", "created")
+
+
+def _hkey(h: str) -> str:
+    return "".join(ch for ch in str(h).strip().lower() if ch.isalnum())
+
+
+def _norm_shape(v: str):
+    s = str(v).strip().lower().replace("-", " ")
+    s = s.replace(" cut", "").replace(" shape", "").strip()
+    if s in _SHAPE_ALIAS:
+        return _SHAPE_ALIAS[s]
+    first = s.split()[0] if s else ""
+    if first in _SHAPE_ALIAS:
+        return _SHAPE_ALIAS[first]
+    return s.title() or None
+
+
+def _norm_clarity(v: str):
+    c = str(v).upper().replace(" ", "")
+    return c if c.lower() in CLARITIES else None
+
+
+def _num(v):
+    try:
+        return float(str(v).replace(",", "").replace("%", "").strip())
+    except (ValueError, AttributeError):
+        return None
+
+
+def _map_row(row: dict) -> Optional[dict]:
+    """Map one raw stock row (header->value) to a stone dict, or None to skip."""
+    f: dict = {}
+    for k, v in row.items():
+        if k is None or v in (None, ""):
+            continue
+        dest = _HEADER_MAP.get(_hkey(k))
+        if dest:
+            f[dest] = str(v).strip() if isinstance(v, str) else v
+
+    # skip sold / not-available rows
+    avail = str(f.get("availability", "")).replace(" ", "").upper()
+    if avail in {"SOLD", "MEMO", "ONHOLD", "HOLD", "NOTAVAILABLE", "NA"}:
+        return None
+
+    out: dict = {}
+    flags: list[str] = []
+    if f.get("shape"):
+        out["shape"] = _norm_shape(f["shape"])
+    if f.get("carat") is not None:
+        out["carat"] = _num(f["carat"])
+    # color grade vs fancy color
+    col = str(f.get("color", "")).strip().upper()
+    if col and len(col) <= 2 and col[0].isalpha():
+        out["color"] = col
+    if f.get("fancy_color"):
+        fc = str(f["fancy_color"]).strip().lower()
+        out["fancy_color"] = fc if fc in FANCY_COLORS else fc
+    if f.get("fancy_intensity"):
+        fi = str(f["fancy_intensity"]).strip().lower()
+        out["fancy_intensity"] = next((it for it in FANCY_INTENSITY if it == fi), fi)
+    if f.get("clarity"):
+        out["clarity"] = _norm_clarity(f["clarity"]) or str(f["clarity"]).upper().replace(" ", "")
+    if f.get("cut"):
+        out["cut"] = {"excellent": "EX", "very good": "VG", "good": "GD"}.get(
+            str(f["cut"]).strip().lower(), str(f["cut"]).strip().upper()[:3])
+    if f.get("fluorescence"):
+        out["fluorescence"] = str(f["fluorescence"]).strip().title()
+    if f.get("lab"):
+        out["lab"] = str(f["lab"]).strip().upper()
+    if f.get("cert_number"):
+        out["cert_number"] = str(f["cert_number"]).strip()
+    for nk in ("price_per_carat", "total_price", "rap_discount"):
+        if f.get(nk) is not None:
+            n = _num(f[nk])
+            if n is not None:
+                out[nk] = n
+
+    # lab-grown detection (growth type / nature / treatment)
+    blob = " ".join(str(f.get(k, "")) for k in ("growth", "nature", "treatment")).lower()
+    if any(t in blob for t in _LABGROWN_TOKENS):
+        flags.append("lab_grown")
+    out["flags"] = flags
+
+    if not (out.get("shape") or out.get("carat")):
+        return None
+
+    # human-readable summary (also carries fields we don't have columns for)
+    bits = [f.get("stock"), out.get("shape"),
+            f"{out['carat']:g}ct" if out.get("carat") else None,
+            out.get("fancy_intensity"), out.get("fancy_color") or out.get("color"),
+            out.get("clarity"), out.get("lab"),
+            (f"#{out['cert_number']}" if out.get("cert_number") else None),
+            f.get("measurements"), ("LAB-GROWN" if "lab_grown" in flags else None)]
+    out["raw_text"] = " ".join(str(b) for b in bits if b)
+    out["confidence"] = 1.0
+    return out
+
+
+def _import_rows(rows, *, tg_id, source_group, source="csv") -> dict:
+    stored = skipped = 0
+    for row in rows:
+        norm = _map_row(row)
+        if not norm:
+            skipped += 1
+            continue
+        db.add_listing(norm, tg_id=tg_id, source=source, source_group=source_group)
+        stored += 1
+    return {"stored": stored, "skipped": skipped}
 
 
 def import_csv(data: bytes, *, tg_id: Optional[int] = None, source_group: str = "") -> dict:
-    """Import a supplier stock file. Returns counts."""
+    """Import a CSV supplier stock file."""
     text = data.decode("utf-8-sig", errors="replace")
     reader = csv.DictReader(io.StringIO(text))
-    stored = 0
-    skipped = 0
-    for row in reader:
-        norm = {}
-        for k, v in row.items():
-            if k is None:
-                continue
-            key = _CSV_MAP.get(k.strip().lower().replace(" ", "").replace("_", ""))
-            if key and v not in (None, ""):
-                norm[key] = v
-        # coerce numerics
-        for nk in ("carat", "price_per_carat", "total_price", "rap_discount"):
-            if nk in norm:
-                try:
-                    norm[nk] = float(str(norm[nk]).replace(",", ""))
-                except ValueError:
-                    norm.pop(nk, None)
-        if norm.get("color"):
-            norm["color"] = str(norm["color"]).upper()
-        if norm.get("clarity"):
-            norm["clarity"] = str(norm["clarity"]).upper()
-        if norm.get("lab"):
-            norm["lab"] = str(norm["lab"]).upper()
-        if not (norm.get("shape") or norm.get("carat")):
-            skipped += 1
-            continue
-        norm["raw_text"] = "; ".join(f"{k}={v}" for k, v in norm.items())
-        norm["confidence"] = 1.0
-        db.add_listing(norm, tg_id=tg_id, source="csv", source_group=source_group)
-        stored += 1
-    return {"stored": stored, "skipped": skipped}
+    return _import_rows(reader, tg_id=tg_id, source_group=source_group, source="csv")
+
+
+def import_xlsx(data: bytes, *, tg_id: Optional[int] = None, source_group: str = "") -> dict:
+    """Import an Excel (.xlsx) supplier stock file (first sheet; row 1 = headers)."""
+    try:
+        import openpyxl
+    except Exception as e:  # noqa: BLE001
+        raise RuntimeError("openpyxl required for Excel import: pip install openpyxl") from e
+    wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
+    ws = wb[wb.sheetnames[0]]
+    it = ws.iter_rows(values_only=True)
+    try:
+        headers = [str(h).strip() if h is not None else "" for h in next(it)]
+    except StopIteration:
+        return {"stored": 0, "skipped": 0}
+    rows = (dict(zip(headers, r)) for r in it)
+    return _import_rows(rows, tg_id=tg_id, source_group=source_group, source="xlsx")
+
+
+def import_stock(data: bytes, filename: str = "", *, tg_id: Optional[int] = None,
+                 source_group: str = "") -> dict:
+    """Dispatch by file extension: .xlsx/.xls → Excel, else CSV/TXT."""
+    name = (filename or "").lower()
+    if name.endswith((".xlsx", ".xlsm", ".xls")):
+        return import_xlsx(data, tg_id=tg_id, source_group=source_group)
+    return import_csv(data, tg_id=tg_id, source_group=source_group)
 
 
 # ─────────────────────── Telegram BYO-session reader ──────────────────────────

@@ -28,7 +28,7 @@ import payments
 from config import settings
 from dealcard import generate_caption, render_card, render_match_card, match_caption
 from enrich import verify_cert, cross_check
-from ingest import ingest_text, import_csv
+from ingest import ingest_text, import_stock
 from parser import parse_message, Intent
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -355,17 +355,24 @@ async def on_forward(msg: Message) -> None:
 @router.message(F.document)
 async def on_document(msg: Message) -> None:
     doc = msg.document
-    if not (doc.file_name or "").lower().endswith((".csv", ".txt")):
-        await msg.reply("Send a CSV stock file (RapNet-style headers) and I'll import it.")
+    name = (doc.file_name or "").lower()
+    if not name.endswith((".csv", ".txt", ".xlsx", ".xlsm", ".xls")):
+        await msg.reply("Send a stock file — <b>CSV or Excel</b> (RapNet-style columns: "
+                        "Shape, Weight, Color, Clarity, Cut, Lab, Report #, Price/ct…).")
         return
     if at_stock_limit(msg.from_user.id):
         await _limit_prompt(msg)
         return
     file = await msg.bot.get_file(doc.file_id)
     buf = await msg.bot.download_file(file.file_path)
-    res = import_csv(buf.read(), tg_id=msg.from_user.id)
-    await msg.reply(f"📥 Imported <b>{res['stored']}</b> stones ({res['skipped']} skipped). "
-                    "Running matches…")
+    try:
+        res = import_stock(buf.read(), doc.file_name or "", tg_id=msg.from_user.id)
+    except Exception as e:  # noqa: BLE001
+        log.warning("stock import failed: %s", e)
+        await msg.reply("⚠️ Couldn't read that file. Make sure row 1 is the column headers.")
+        return
+    await msg.reply(f"📥 Imported <b>{res['stored']}</b> stones ({res['skipped']} skipped "
+                    "— sold/blank rows). Running matches…")
     await _notify_new_matches(msg.bot)
 
 
