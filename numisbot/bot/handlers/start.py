@@ -8,7 +8,7 @@ from aiogram.filters import Command, CommandStart
 from aiogram.types import CallbackQuery, FSInputFile, Message
 
 from ..db import Database
-from ..keyboards import interests_kb, lang_kb, menu_kb
+from ..keyboards import interests_kb, lang_kb
 from ..texts import t
 from .auctions import send_lot_card
 
@@ -23,9 +23,17 @@ async def _lang(db: Database, user_id: int) -> str:
 
 
 @router.message(CommandStart())
-async def cmd_start(msg: Message, db: Database):
+async def cmd_start(msg: Message, db: Database, state=None):
+    if state is not None:
+        await state.clear()
     await db.upsert_user(msg.from_user.id, msg.from_user.username)
     await db.track(msg.from_user.id, "start")
+    row = await db.get_user(msg.from_user.id)
+    if row and row["interests"]:  # returning user — straight to the point
+        lang = row["lang"]
+        from ..keyboards import main_reply_kb
+        await msg.answer(t("welcome_back", lang), reply_markup=main_reply_kb(lang))
+        return
     if HERO.exists():
         try:
             await msg.answer_photo(FSInputFile(HERO), caption=t("choose_lang", "ru"),
@@ -37,11 +45,17 @@ async def cmd_start(msg: Message, db: Database):
 
 
 async def _edit(message: Message, text: str, kb=None) -> None:
-    """Edit either a text message or a photo caption (the /start hero)."""
-    if message.photo:
-        await message.edit_caption(caption=text, reply_markup=kb)
-    else:
-        await message.edit_text(text, reply_markup=kb)
+    """Edit either a text message or a photo caption (the /start hero).
+
+    Double-taps raise 'message is not modified' — swallow, the content is there.
+    """
+    try:
+        if message.photo:
+            await message.edit_caption(caption=text, reply_markup=kb)
+        else:
+            await message.edit_text(text, reply_markup=kb)
+    except Exception:
+        pass
 
 
 @router.callback_query(F.data.startswith("lang:"))
@@ -68,7 +82,8 @@ async def cb_interest(cb: CallbackQuery, db: Database):
             await cb.message.answer(t("onboarded_hits", lang).format(n=total))
             for lot in sample:
                 await send_lot_card(cb.message, lot, lang)
-        await cb.message.answer(t("menu", lang), reply_markup=menu_kb(lang))
+        from ..keyboards import main_reply_kb
+        await cb.message.answer(t("menu", lang), reply_markup=main_reply_kb(lang))
         await cb.answer()
         return
     selected.symmetric_difference_update({choice})
@@ -85,17 +100,13 @@ async def cmd_lang(msg: Message):
 @router.message(Command("help"))
 async def cmd_help(msg: Message, db: Database):
     lang = await _lang(db, msg.from_user.id)
-    await msg.answer(t("help", lang), reply_markup=menu_kb(lang))
-
-
-@router.message(Command("menu"))
-async def cmd_menu(msg: Message, db: Database):
-    lang = await _lang(db, msg.from_user.id)
-    await msg.answer(t("menu", lang), reply_markup=menu_kb(lang))
+    from ..keyboards import main_reply_kb
+    await msg.answer(t("help", lang), reply_markup=main_reply_kb(lang))
 
 
 @router.callback_query(F.data == "m:help")
 async def cb_help(cb: CallbackQuery, db: Database):
     lang = await _lang(db, cb.from_user.id)
-    await cb.message.answer(t("help", lang))
+    from ..keyboards import main_reply_kb
+    await cb.message.answer(t("help", lang), reply_markup=main_reply_kb(lang))
     await cb.answer()

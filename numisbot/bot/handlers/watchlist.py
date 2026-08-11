@@ -10,7 +10,7 @@ from aiogram.types import CallbackQuery, Message
 from ..config import Config
 from ..db import Database
 from ..keyboards import watchlist_kb
-from ..texts import t
+from ..texts import esc, t
 
 router = Router()
 
@@ -40,6 +40,13 @@ async def cmd_watch(msg: Message, command: CommandObject, db: Database, cfg: Con
         max_price = float(m.group(1).replace(",", "."))
         query = query[: m.start()].strip()
 
+    if len(query) < 3:
+        await msg.answer(t("watch_too_short", lang))
+        return
+    if await db.has_watch(msg.from_user.id, query):
+        await msg.answer(t("already_watching", lang))
+        return
+
     tier = await db.effective_tier(msg.from_user.id)
     used = len(await db.list_watches(msg.from_user.id))
     total = _slots(cfg, tier)
@@ -50,7 +57,7 @@ async def cmd_watch(msg: Message, command: CommandObject, db: Database, cfg: Con
     await db.add_watch(msg.from_user.id, query, max_price)
     await db.track(msg.from_user.id, "watch_add")
     cap = f" (&lt;{max_price:.0f})" if max_price else ""
-    await msg.answer(t("watch_added", lang).format(q=query, cap=cap, used=used + 1, total=total))
+    await msg.answer(t("watch_added", lang).format(q=esc(query), cap=cap, used=used + 1, total=total))
 
 
 @router.message(Command("watchlist"))
@@ -78,6 +85,9 @@ async def _show_watchlist(msg: Message, user_id: int, db: Database, cfg: Config)
 
 async def _try_add_watch(cb: CallbackQuery, db: Database, cfg: Config, query: str) -> None:
     lang = await _lang(db, cb.from_user.id)
+    if await db.has_watch(cb.from_user.id, query):
+        await cb.answer(t("already_watching", lang), show_alert=False)
+        return
     tier = await db.effective_tier(cb.from_user.id)
     used = len(await db.list_watches(cb.from_user.id))
     total = _slots(cfg, tier)
@@ -88,7 +98,7 @@ async def _try_add_watch(cb: CallbackQuery, db: Database, cfg: Config, query: st
     await db.add_watch(cb.from_user.id, query, None)
     await db.track(cb.from_user.id, "watch_add")
     await cb.message.answer(
-        t("watch_added", lang).format(q=query, cap="", used=used + 1, total=total)
+        t("watch_added", lang).format(q=esc(query), cap="", used=used + 1, total=total)
     )
     await cb.answer("🔭")
 
@@ -123,8 +133,11 @@ async def cb_unwatch(cb: CallbackQuery, db: Database, cfg: Config):
     tier = await db.effective_tier(cb.from_user.id)
     total = _slots(cfg, tier)
     header = t("watchlist_header", lang).format(used=len(watches), total=total)
-    if watches:
-        await cb.message.edit_text(header, reply_markup=watchlist_kb(watches, lang))
-    else:
-        await cb.message.edit_text(header + "\n" + t("watchlist_empty", lang))
+    try:
+        if watches:
+            await cb.message.edit_text(header, reply_markup=watchlist_kb(watches, lang))
+        else:
+            await cb.message.edit_text(header + "\n" + t("watchlist_empty", lang))
+    except Exception:
+        pass  # double-tap → "message is not modified"
     await cb.answer("🗑")

@@ -6,10 +6,12 @@ import logging
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
+import asyncio
+
 from ..config import Config
 from ..db import Database
 from ..keyboards import lot_kb
-from ..texts import lot_card, photo_url, t
+from ..texts import esc, lot_card, photo_url, t
 from .katz_parser import KatzParser
 
 log = logging.getLogger(__name__)
@@ -22,13 +24,14 @@ class SchedulerService:
         self.cfg = cfg
         self.parser = KatzParser(cfg.katz_base_url, cfg.http_timeout)
         self.scheduler = AsyncIOScheduler()
+        self._refresh_lock = asyncio.Lock()
 
     def start(self) -> None:
         self.scheduler.add_job(
             self.refresh_now, "interval",
             minutes=self.cfg.parse_interval_minutes, id="refresh",
         )
-        self.scheduler.add_job(self.closing_alerts, "interval", minutes=10, id="closing")
+        self.scheduler.add_job(self.closing_alerts, "interval", minutes=7, id="closing")
         self.scheduler.start()
 
     async def shutdown(self) -> None:
@@ -37,6 +40,12 @@ class SchedulerService:
 
     # -- jobs -------------------------------------------------------------
     async def refresh_now(self) -> str:
+        if self._refresh_lock.locked():
+            return "already running"
+        async with self._refresh_lock:
+            return await self._refresh_now_locked()
+
+    async def _refresh_now_locked(self) -> str:
         try:
             auctions = await self.parser.fetch_auctions()
         except Exception as e:
@@ -77,7 +86,7 @@ class SchedulerService:
     async def _send_lot_alert(self, user_id: int, header: str, lot, lang: str) -> None:
         """Photo card with buttons; text fallback on bad images."""
         caption = header + "\n\n" + lot_card(lot, lang)
-        kb = lot_kb(lot, lang)
+        kb = lot_kb(lot, lang, in_radar=True)  # it matched their radar already
         url = photo_url(lot)
         if url:
             try:
@@ -101,28 +110,34 @@ class SchedulerService:
                     continue
                 try:
                     await self._send_lot_alert(
-                        w["user_id"], t("alert_match", lang).format(q=w["query"]), lot, lang)
+                        w["user_id"], t("alert_match", lang).format(q=esc(w["query"])),
+                        lot, lang)
                     await self.db.mark_alert_sent(w["user_id"], lot["id"], "match")
                 except Exception as e:
                     log.debug("alert to %s failed: %s", w["user_id"], e)
 
     async def closing_alerts(self) -> None:
-        """Notify watchers ~1h before a matched lot closes (15 min for Pro)."""
-        lots = await self.db.closing_soon(within_minutes=70)
-        if not lots:
+        """~1h reminder for everyone; extra ~10-min sniper ping for Sniper+/Dealer."""
+        lots_1h = await self.db.closing_soon(within_minutes=70)
+        lots_10m = await self.db.closing_soon(within_minutes=12)
+        if not lots_1h and not lots_10m:
             return
         for w in await self.db.all_watches():
             q = w["query"].lower()
             user = await self.db.get_user(w["user_id"])
             lang = user["lang"] if user else "ru"
-            for lot in lots:
-                if q not in (lot["title"] or "").lower():
-                    continue
-                if await self.db.alert_already_sent(w["user_id"], lot["id"], "closing"):
-                    continue
-                try:
-                    await self._send_lot_alert(
-                        w["user_id"], t("alert_closing", lang), lot, lang)
-                    await self.db.mark_alert_sent(w["user_id"], lot["id"], "closing")
-                except Exception as e:
-                    log.debug("closing alert to %s failed: %s", w["user_id"], e)
+            tier = await self.db.effective_tier(w["user_id"])
+            plans = [("closing", lots_1h, t("alert_closing", lang))]
+            if tier in ("sniper", "dealer"):
+                plans.append(("closing10", lots_10m, t("alert_closing10", lang)))
+            for kind, lots, header in plans:
+                for lot in lots:
+                    if q not in (lot["title"] or "").lower():
+                        continue
+                    if await self.db.alert_already_sent(w["user_id"], lot["id"], kind):
+                        continue
+                    try:
+                        await self._send_lot_alert(w["user_id"], header, lot, lang)
+                        await self.db.mark_alert_sent(w["user_id"], lot["id"], kind)
+                    except Exception as e:
+                        log.debug("%s alert to %s failed: %s", kind, w["user_id"], e)

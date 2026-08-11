@@ -2,9 +2,11 @@
 /market — browse the showcase. Cert chain: see services/certs.py."""
 from __future__ import annotations
 
+import asyncio
 import json
 import re
 import time
+from collections import defaultdict
 
 from aiogram import F, Router
 from aiogram.filters import Command
@@ -14,14 +16,17 @@ from aiogram.types import CallbackQuery, Message
 
 from ..config import Config
 from ..db import Database
-from ..keyboards import (admin_verify_kb, listing_kb, market_more_kb,
+from ..keyboards import (admin_verify_kb, cancel_kb, listing_kb, market_more_kb,
                          publish_cert_kb, publish_price_kb)
 from ..services import certs
-from ..texts import esc, listing_card, t
+from ..texts import _money, esc, listing_card, t
 
 router = Router()
 
 LISTING_SLOTS = {"free": 1, "pro": 3, "sniper": 5, "dealer": 20}
+
+# album photos arrive as concurrent updates; serialize per-user state writes
+_photo_locks: defaultdict[int, asyncio.Lock] = defaultdict(asyncio.Lock)
 
 
 class PublishForm(StatesGroup):
@@ -49,7 +54,7 @@ async def cmd_publish(msg: Message, db: Database, state: FSMContext):
         return
     await state.set_state(PublishForm.photos)
     await state.update_data(photos=[])
-    await msg.answer(t("publish_start", lang))
+    await msg.answer(t("publish_start", lang), reply_markup=cancel_kb(lang))
     await db.track(msg.from_user.id, "publish_start")
 
 
@@ -65,7 +70,7 @@ async def cb_publish(cb: CallbackQuery, db: Database, state: FSMContext):
         return
     await state.set_state(PublishForm.photos)
     await state.update_data(photos=[])
-    await cb.message.answer(t("publish_start", lang))
+    await cb.message.answer(t("publish_start", lang), reply_markup=cancel_kb(lang))
     await db.track(cb.from_user.id, "publish_start")
     await cb.answer()
 
@@ -91,27 +96,33 @@ async def cb_market(cb: CallbackQuery, db: Database):
 @router.message(PublishForm.photos, F.photo)
 async def pub_photo(msg: Message, db: Database, state: FSMContext):
     lang = await _lang(db, msg.from_user.id)
-    data = await state.get_data()
-    photos: list[str] = data.get("photos", [])
-    photos.append(msg.photo[-1].file_id)  # best resolution
-    await state.update_data(photos=photos[:5])
-    if len(photos) == 1:
+    async with _photo_locks[msg.from_user.id]:
+        data = await state.get_data()
+        photos: list[str] = data.get("photos", [])
+        photos.append(msg.photo[-1].file_id)  # best resolution
+        await state.update_data(photos=photos[:5])
+        first = len(photos) == 1
+    if first:
         await msg.answer(t("publish_photo_ok", lang))
         await state.set_state(PublishForm.description)
 
 
-@router.message(PublishForm.photos)
+@router.message(PublishForm.photos, F.text)
 async def pub_photo_missing(msg: Message, db: Database):
     lang = await _lang(db, msg.from_user.id)
-    await msg.answer(t("publish_need_photo", lang))
+    await msg.answer(t("publish_need_photo", lang), reply_markup=cancel_kb(lang))
 
 
 @router.message(PublishForm.description, F.photo)
-async def pub_more_photos(msg: Message, state: FSMContext):
-    data = await state.get_data()
-    photos: list[str] = data.get("photos", [])
-    photos.append(msg.photo[-1].file_id)
-    await state.update_data(photos=photos[:5])
+async def pub_more_photos(msg: Message, db: Database, state: FSMContext):
+    lang = await _lang(db, msg.from_user.id)
+    async with _photo_locks[msg.from_user.id]:
+        data = await state.get_data()
+        photos: list[str] = data.get("photos", [])
+        photos.append(msg.photo[-1].file_id)
+        await state.update_data(photos=photos[:5])
+        n = min(len(photos), 5)
+    await msg.answer(t("photo_added", lang).format(n=n))
 
 
 @router.message(PublishForm.description, F.text)
@@ -198,18 +209,25 @@ async def _finalize(msg: Message, user, db: Database, state: FSMContext,
     await msg.answer(t("publish_done", lang).format(id=listing_id))
     await _send_listing_card(msg, listing, lang, viewer_id=user.id)
 
-    # moderation card for admins (with one-tap cert confirmation)
+    # moderation card for admins — compact by construction, never sliced mid-tag
+    price_str = _money(listing["price"], "EUR") if listing["price"] else "offers"
+    cert_str = (f"{listing['cert_service']} {listing['cert_number']} "
+                f"[{listing['cert_status']}]" if listing["cert_service"] else "raw")
+    admin_caption = (
+        f"🆕 <b>Листинг #{listing_id} на модерацию</b>\n"
+        f"{esc(title)}\n"
+        f"💶 {esc(price_str)} · 🛡 {esc(cert_str)}\n"
+        f"От: {esc(contact)}"
+    )
     for admin_id in cfg.admin_ids:
         try:
             photos = json.loads(listing["photos"] or "[]")
-            caption = ("🆕 <b>Листинг #%d на модерацию</b>\n\n" % listing_id
-                       + listing_card(listing, "ru"))
             kb = admin_verify_kb(listing)
             if photos:
-                await msg.bot.send_photo(admin_id, photos[0], caption=caption[:1024],
+                await msg.bot.send_photo(admin_id, photos[0], caption=admin_caption,
                                          reply_markup=kb)
             else:
-                await msg.bot.send_message(admin_id, caption, reply_markup=kb)
+                await msg.bot.send_message(admin_id, admin_caption, reply_markup=kb)
         except Exception:
             pass
 
@@ -219,10 +237,12 @@ async def _send_listing_card(msg: Message, listing, lang: str,
                              viewer_id: int | None = None) -> None:
     photos = json.loads(listing["photos"] or "[]")
     caption = listing_card(listing, lang)
+    if len(caption) > 1024:  # never slice HTML mid-tag: drop the quote block
+        caption = listing_card(listing, lang, with_description=False)
     kb = listing_kb(listing, lang, is_owner=(viewer_id == listing["user_id"]))
     if photos:
         try:
-            await msg.answer_photo(photos[0], caption=caption[:1024], reply_markup=kb)
+            await msg.answer_photo(photos[0], caption=caption, reply_markup=kb)
             return
         except Exception:
             pass

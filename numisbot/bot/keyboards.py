@@ -1,10 +1,27 @@
 """Inline keyboards."""
 from __future__ import annotations
 
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
+                           KeyboardButton, ReplyKeyboardMarkup)
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from .texts import INTERESTS
+from .texts import BTN, INTERESTS
+
+
+def main_reply_kb(lang: str) -> ReplyKeyboardMarkup:
+    """Persistent bottom keyboard — the primary navigation."""
+    b = BTN["ru" if lang == "ru" else "en"]
+    rows = [
+        [KeyboardButton(text=b["auctions"]), KeyboardButton(text=b["watchlist"])],
+        [KeyboardButton(text=b["find"]), KeyboardButton(text=b["price"])],
+        [KeyboardButton(text=b["market"]), KeyboardButton(text=b["publish"])],
+        [KeyboardButton(text=b["sell"]), KeyboardButton(text=b["pro"])],
+    ]
+    return ReplyKeyboardMarkup(
+        keyboard=rows, resize_keyboard=True, is_persistent=True,
+        input_field_placeholder=("напр.: /watch рубль 1912" if lang == "ru"
+                                 else "e.g.: /watch rouble 1912"),
+    )
 
 
 def lang_kb() -> InlineKeyboardMarkup:
@@ -45,7 +62,8 @@ def watchlist_kb(watches, lang: str) -> InlineKeyboardMarkup:
     b = InlineKeyboardBuilder()
     for w in watches:
         cap = f" <{w['max_price']:.0f}" if w["max_price"] else ""
-        b.button(text=f"🗑 {w['query']}{cap}", callback_data=f"unwatch:{w['id']}")
+        label = w["query"][:30] + ("…" if len(w["query"]) > 30 else "")
+        b.button(text=f"🗑 {label}{cap}", callback_data=f"unwatch:{w['id']}")
     b.adjust(1)
     return b.as_markup()
 
@@ -57,14 +75,18 @@ def _fit_cb(prefix: str, text: str, limit: int = 64) -> str:
     return raw.decode("utf-8", errors="ignore")
 
 
-def lot_kb(lot, lang: str) -> InlineKeyboardMarkup:
-    """Buttons under a lot card: open on site + quick-add to radar."""
+def lot_kb(lot, lang: str, in_radar: bool = False) -> InlineKeyboardMarkup:
+    """Buttons under a lot card: open on site + quick-add to radar.
+
+    in_radar=True on radar alerts — the lot is already being watched,
+    offering the add button there would just burn a slot.
+    """
     ru = lang == "ru"
     rows = []
     if lot["url"]:
         rows.append(InlineKeyboardButton(
             text="Открыть лот ↗" if ru else "Open lot ↗", url=lot["url"]))
-    if lot["realized"] is None:
+    if lot["realized"] is None and not in_radar:
         rows.append(InlineKeyboardButton(
             text="➕ В радар" if ru else "➕ Watch",
             callback_data=f"wl:{lot['id']}"))
@@ -84,12 +106,18 @@ def auctions_kb(auctions, lang: str) -> InlineKeyboardMarkup:
 
 def price_kb(query: str, lang: str) -> InlineKeyboardMarkup:
     ru = lang == "ru"
+    q = query[:20] + ("…" if len(query) > 20 else "")
     return InlineKeyboardMarkup(inline_keyboard=[[
         InlineKeyboardButton(
-            text=("🔭 Следить за новыми «%s»" % query[:24]) if ru
-            else ("🔭 Watch new “%s”" % query[:24]),
+            text=f"🔭 В радар: {q}" if ru else f"🔭 Watch: {q}",
             callback_data=_fit_cb("wq:", query)),
     ]])
+
+
+def cancel_kb(lang: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
+        text="✖️ Отмена" if lang == "ru" else "✖️ Cancel",
+        callback_data="cancel")]])
 
 
 def publish_price_kb(lang: str) -> InlineKeyboardMarkup:
@@ -124,7 +152,7 @@ def listing_kb(listing, lang: str, is_owner: bool = False) -> InlineKeyboardMark
         rows.append([InlineKeyboardButton(
             text="✅ Продано" if ru else "✅ Sold",
             callback_data=f"mksold:{listing['id']}")])
-    return InlineKeyboardMarkup(inline_keyboard=rows or [[]])
+    return InlineKeyboardMarkup(inline_keyboard=rows) if rows else None
 
 
 def market_more_kb(before_id: int, lang: str) -> InlineKeyboardMarkup:

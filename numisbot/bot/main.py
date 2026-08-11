@@ -9,11 +9,54 @@ from pathlib import Path
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.types import BotCommand
 
 from .config import load_config
 from .db import Database
 from .handlers import ROUTERS
 from .services.scheduler import SchedulerService
+
+COMMANDS = {
+    "ru": [
+        ("auctions", "🏛 Аукционы: текущие и ближайшие"),
+        ("find", "🔎 Поиск лотов на торгах"),
+        ("watch", "🔭 Добавить в радар"),
+        ("watchlist", "📋 Мой радар"),
+        ("price", "📉 Цены + график проходов"),
+        ("market", "🛒 Витрина монет участников"),
+        ("publish", "📤 Разместить свою монету"),
+        ("sell", "💼 Сдать на аукцион Katz"),
+        ("pro", "⭐ Тарифы Pro / Sniper+ / Dealer"),
+        ("menu", "🪙 Меню"),
+        ("cancel", "✖️ Отменить текущее действие"),
+        ("help", "ℹ️ Помощь"),
+    ],
+    None: [
+        ("auctions", "🏛 Live & upcoming auctions"),
+        ("find", "🔎 Search lots on sale"),
+        ("watch", "🔭 Add to radar"),
+        ("watchlist", "📋 My radar"),
+        ("price", "📉 Prices + results chart"),
+        ("market", "🛒 Members coin showcase"),
+        ("publish", "📤 List your coin"),
+        ("sell", "💼 Consign to Katz"),
+        ("pro", "⭐ Plans"),
+        ("menu", "🪙 Menu"),
+        ("cancel", "✖️ Cancel current action"),
+        ("help", "ℹ️ Help"),
+    ],
+}
+
+
+async def register_commands(bot: Bot) -> None:
+    for lang_code, cmds in COMMANDS.items():
+        try:
+            await bot.set_my_commands(
+                [BotCommand(command=c, description=d) for c, d in cmds],
+                language_code=lang_code,
+            )
+        except Exception:
+            pass  # cosmetic — never block startup
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
@@ -26,7 +69,7 @@ def _load_dotenv() -> None:
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip())
+            os.environ.setdefault(k.strip(), v.strip().strip("'\""))
 
 
 async def main() -> None:
@@ -45,6 +88,7 @@ async def main() -> None:
     scheduler = SchedulerService(bot, db, cfg)
     scheduler.start()
     asyncio.create_task(scheduler.refresh_now())  # warm the cache at startup
+    asyncio.create_task(register_commands(bot))
 
     # dependency injection for handlers
     dp["db"] = db

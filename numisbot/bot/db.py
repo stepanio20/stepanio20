@@ -119,7 +119,8 @@ class Database:
         if self.archive_path:
             import os
             if os.path.exists(self.archive_path):
-                await self._db.execute("ATTACH DATABASE ? AS arch", (self.archive_path,))
+                uri = f"file:{self.archive_path}?mode=ro"
+                await self._db.execute("ATTACH DATABASE ? AS arch", (uri,))
                 self.has_archive = True
 
     async def close(self) -> None:
@@ -171,6 +172,12 @@ class Database:
         return [r["id"] for r in await cur.fetchall()]
 
     # -- watches ----------------------------------------------------------
+    async def has_watch(self, user_id: int, query: str) -> bool:
+        cur = await self.db.execute(
+            "SELECT 1 FROM watches WHERE user_id=? AND query=? COLLATE NOCASE",
+            (user_id, query.strip()))
+        return await cur.fetchone() is not None
+
     async def add_watch(self, user_id: int, query: str, max_price: float | None) -> int:
         cur = await self.db.execute(
             "INSERT INTO watches(user_id, query, max_price, created) VALUES(?,?,?,?)",
@@ -215,8 +222,10 @@ class Database:
             "start_price,current_bid,bids,estimate,currency,realized,ends,url,image,updated) "
             "VALUES(:id,:auction_id,:number,:title,:category,:country,:year,:metal,:grade,"
             ":start_price,:current_bid,:bids,:estimate,:currency,:realized,:ends,:url,:image,:updated) "
-            "ON CONFLICT(id) DO UPDATE SET current_bid=:current_bid,bids=:bids,"
-            "realized=:realized,ends=:ends,updated=:updated",
+            "ON CONFLICT(id) DO UPDATE SET "
+            "current_bid=COALESCE(excluded.current_bid, current_bid), bids=excluded.bids,"
+            "realized=COALESCE(excluded.realized, realized),"
+            "ends=COALESCE(excluded.ends, ends), updated=excluded.updated",
             rows,
         )
         await self.db.commit()
@@ -242,7 +251,9 @@ class Database:
         like = f"%{query.strip()}%"
         src = "SELECT * FROM lots"
         if self.has_archive:
-            src += " UNION SELECT * FROM arch.lots"
+            # same lot may be cached in the main DB by api search — dedupe by id
+            src += (" UNION ALL SELECT * FROM arch.lots "
+                    "WHERE arch.lots.id NOT IN (SELECT id FROM lots)")
         cur = await self.db.execute(
             f"SELECT * FROM ({src}) WHERE title LIKE ? COLLATE NOCASE "
             "AND realized IS NOT NULL ORDER BY auction_id DESC, realized DESC LIMIT ?",
@@ -257,6 +268,7 @@ class Database:
     # onboarding interests → SQL over structured lot fields (fixed map, no user input)
     INTEREST_SQL = {
         "ru_imperial": "(country LIKE 'Russia%' OR title LIKE '%Russia%')",
+        "world": "(category LIKE 'Coins - %' AND country NOT LIKE 'Russia%')",
         "ancient": "category LIKE '%Ancient%'",
         "banknotes": "category LIKE 'Banknote%'",
         "medals": "category LIKE 'Phaleristic%'",

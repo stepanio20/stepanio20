@@ -67,9 +67,15 @@ async def cb_buy(cb: CallbackQuery, db: Database, cfg: Config):
     await cb.answer()
 
 
+TIER_LABELS = {"pro": "Pro", "sniper": "Sniper+", "dealer": "Dealer"}
+
+
 @router.pre_checkout_query()
 async def pre_checkout(q: PreCheckoutQuery):
-    await q.answer(ok=q.invoice_payload in TIER_BY_PAYLOAD)
+    if q.invoice_payload in TIER_BY_PAYLOAD:
+        await q.answer(ok=True)
+    else:
+        await q.answer(ok=False, error_message="Счёт устарел — откройте /pro заново")
 
 
 @router.message(F.successful_payment)
@@ -89,4 +95,4 @@ async def on_paid(msg: Message, db: Database):
         bool(sp.is_recurring),
     )
     until_str = dt.datetime.fromtimestamp(until, dt.timezone.utc).strftime("%d.%m.%Y")
-    await msg.answer(t("paid", lang).format(tier=tier.title(), until=until_str))
+    await msg.answer(t("paid", lang).format(tier=TIER_LABELS.get(tier, tier), until=until_str))

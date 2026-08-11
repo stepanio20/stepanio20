@@ -6,6 +6,22 @@ from __future__ import annotations
 import datetime as dt
 from html import escape as esc
 
+# reply-keyboard button labels (exact-match routed in handlers/nav.py)
+BTN = {
+    "ru": {
+        "auctions": "🏛 Аукционы", "watchlist": "🔭 Мой радар",
+        "find": "🔎 Найти лот", "price": "📉 Цены проходов",
+        "market": "🛒 Витрина", "publish": "📤 Продать монету",
+        "sell": "💼 На аукцион Katz", "pro": "⭐ Pro",
+    },
+    "en": {
+        "auctions": "🏛 Auctions", "watchlist": "🔭 My radar",
+        "find": "🔎 Find a lot", "price": "📉 Sold prices",
+        "market": "🛒 Showcase", "publish": "📤 Sell a coin",
+        "sell": "💼 Consign to Katz", "pro": "⭐ Pro",
+    },
+}
+
 INTERESTS = {
     "ru_imperial": {"ru": "🇷🇺 Россия и Империя", "en": "🇷🇺 Russia & Empire"},
     "world": {"ru": "🌍 Монеты мира", "en": "🌍 World coins"},
@@ -59,8 +75,60 @@ T = {
         ),
     },
     "menu": {
-        "ru": "🪙 <b>Меню</b>\n━━━━━━━━━━━━━━━\nВыберите раздел:",
-        "en": "🪙 <b>Menu</b>\n━━━━━━━━━━━━━━━\nPick a section:",
+        "ru": (
+            "🪙 <b>Katz Coins Radar</b>\n\n"
+            "Ловлю лоты по вашим запросам, напоминаю о закрытии торгов, "
+            "показываю цены прошлых продаж и витрину монет участников.\n\n"
+            "Жмите кнопки внизу 👇"
+        ),
+        "en": (
+            "🪙 <b>Katz Coins Radar</b>\n\n"
+            "I catch lots by your queries, remind you before closings, "
+            "show realized prices and the members' coin showcase.\n\n"
+            "Use the buttons below 👇"
+        ),
+    },
+    "welcome_back": {
+        "ru": "🪙 С возвращением! Что посмотрим?",
+        "en": "🪙 Welcome back! What shall we look at?",
+    },
+    "ask_find_query": {
+        "ru": "🔎 Что ищем на торгах? Напишите одним сообщением — например: <code>талер 1780</code> или <code>Nicholas II gold</code>",
+        "en": "🔎 What are we hunting? Type it in one message — e.g. <code>thaler 1780</code> or <code>Nicholas II gold</code>",
+    },
+    "ask_price_query": {
+        "ru": "📉 По какой монете показать цены продаж? Например: <code>полтина 1859</code>",
+        "en": "📉 Which coin's sold prices? E.g. <code>poltina 1859</code>",
+    },
+    "price_empty": {
+        "ru": ("📉 В архиве Katz нет продаж по «{q}».\n"
+               "Попробуйте короче — тип и год: <code>/price рубль 1912</code>\n"
+               "Или поставьте радар: <code>/watch {q}</code> — пришлю, как только лот появится."),
+        "en": ("📉 No Katz sales found for “{q}”.\n"
+               "Try shorter — type and year: <code>/price rouble 1912</code>\n"
+               "Or set a radar: <code>/watch {q}</code> — I'll ping you when one appears."),
+    },
+    "cancelled": {
+        "ru": "✖️ Отменено. Возвращаю в меню 👇",
+        "en": "✖️ Cancelled. Back to the menu 👇",
+    },
+    "stale_button": {
+        "ru": "Кнопка устарела — откройте /menu",
+        "en": "This button expired — open /menu",
+    },
+    "already_watching": {
+        "ru": "Уже в радаре ✅",
+        "en": "Already on your radar ✅",
+    },
+    "watch_too_short": {
+        "ru": ("Запрос слишком короткий — нужно от 3 символов, иначе алерты придут "
+               "почти на каждый лот. Пример: <code>/watch полтина 1859</code>"),
+        "en": ("Query too short — 3+ characters needed, otherwise you'd get alerts "
+               "for nearly every lot. Example: <code>/watch poltina 1859</code>"),
+    },
+    "photo_added": {
+        "ru": "📷 Фото {n}/5 добавлено.",
+        "en": "📷 Photo {n}/5 added.",
     },
     "auctions_header": {
         "ru": "🏛 <b>Аукционы Katz — сейчас и скоро</b>\n━━━━━━━━━━━━━━━",
@@ -94,14 +162,16 @@ T = {
     },
     "watch_limit": {
         "ru": (
-            "🚦 <b>Лимит бесплатного тарифа: {total} отслеживания</b>\n\n"
-            "На Pro — до 50 отслеживаний, снайпер-алерты за 15 минут до конца "
-            "и история цен без ограничений.\n\n👉 /pro"
+            "🚦 <b>Все {total} слота радара заняты</b>\n\n"
+            "⭐ Pro — 25 отслеживаний и напоминания 24 ч / 1 ч\n"
+            "🎯 Sniper+ — безлимит и алерт за 10 минут до закрытия\n\n"
+            "👉 /pro · освободить слот: /watchlist"
         ),
         "en": (
-            "🚦 <b>Free plan limit: {total} watches</b>\n\n"
-            "Pro gives you up to 50 watches, sniper alerts 15 minutes before "
-            "closing and unlimited price history.\n\n👉 /pro"
+            "🚦 <b>All {total} radar slots are in use</b>\n\n"
+            "⭐ Pro — 25 watches plus 24h / 1h reminders\n"
+            "🎯 Sniper+ — unlimited watches and a 10-minute closing alert\n\n"
+            "👉 /pro · free a slot: /watchlist"
         ),
     },
     "watchlist_header": {
@@ -136,37 +206,41 @@ T = {
         "ru": "⏰ <b>Через ~1 час закрывается лот из вашего радара</b>",
         "en": "⏰ <b>A lot on your radar closes in ~1 hour</b>",
     },
+    "alert_closing10": {
+        "ru": "🎯 <b>Снайпер-алерт: ~10 минут до закрытия!</b>",
+        "en": "🎯 <b>Sniper alert: ~10 minutes to close!</b>",
+    },
     "pro_pitch": {
         "ru": (
             "⭐ <b>Pro</b> — для коллекционера\n"
-            "🔔 25 отслеживаний (вместо 3) · напоминания 24ч/1ч\n"
-            "📉 Полная история реализованных цен\n"
-            "📬 Дайджест каждого нового аукциона\n\n"
+            "🔔 25 отслеживаний (вместо 3) · напоминания 24 ч / 1 ч\n"
+            "📉 Полная история цен с графиком (Free — 5 строк)\n"
+            "🛒 3 монеты в витрине (вместо 1)\n\n"
             "🎯 <b>Sniper+</b> — для охотника за лотами\n"
             "Всё из Pro, плюс:\n"
             "♾ Безлимит отслеживаний · алерт за 10 мин до закрытия\n"
-            "📢 Алерт «лот ушёл ниже эстимейта» + фид непроданных\n\n"
+            "🛒 5 монет в витрине · приоритет в поддержке\n\n"
             "💼 <b>Dealer</b> — для продавца и дилера\n"
             "Всё из Sniper+, плюс:\n"
-            "📊 Аналитика спроса: что ищут покупатели прямо сейчас\n"
-            "🏷 Оценка ваших монет по базе прошедших продаж\n"
-            "🤝 Приоритетная сдача лотов на аукцион Katz\n\n"
+            "🛒 До 20 монет в витрине с бейджем дилера\n"
+            "🤝 Приоритетная сдача лотов на аукцион Katz\n"
+            "📊 Аналитика спроса — скоро, для Dealer бесплатно\n\n"
             "Оплата в Telegram Stars, продлевается автоматически, отмена в один тап."
         ),
         "en": (
             "⭐ <b>Pro</b> — for collectors\n"
-            "🔔 25 watches (vs 3) · 24h/1h reminders\n"
-            "📉 Full realized-price history\n"
-            "📬 Digest of every new auction\n\n"
+            "🔔 25 watches (vs 3) · 24h / 1h reminders\n"
+            "📉 Full price history with chart (Free — 5 rows)\n"
+            "🛒 3 showcase listings (vs 1)\n\n"
             "🎯 <b>Sniper+</b> — for lot hunters\n"
             "Everything in Pro, plus:\n"
-            "♾ Unlimited watches · alert 10 min before closing\n"
-            "📢 “Sold below estimate” alerts + unsold feed\n\n"
+            "♾ Unlimited watches · 10-min closing alert\n"
+            "🛒 5 showcase listings · priority support\n\n"
             "💼 <b>Dealer</b> — for sellers & dealers\n"
             "Everything in Sniper+, plus:\n"
-            "📊 Demand analytics: what buyers search right now\n"
-            "🏷 Valuation of your coins vs realized prices\n"
-            "🤝 Priority consignment to Katz auctions\n\n"
+            "🛒 Up to 20 showcase listings with a dealer badge\n"
+            "🤝 Priority consignment to Katz auctions\n"
+            "📊 Demand analytics — coming soon, free for Dealer\n\n"
             "Paid in Telegram Stars, auto-renews, cancel anytime."
         ),
     },
@@ -187,9 +261,10 @@ T = {
             "━━━━━━━━━━━━━━━\n"
             "Katz продаёт тысячи лотов ежемесячно покупателям из 100+ стран.\n\n"
             "Опишите одним сообщением, что хотите продать (страна, номинал, "
-            "год, состояние — можно приложить фото), и оставьте контакт. "
+            "год, состояние — можно приложить фото). "
             "Команда Katz свяжется с оценкой.\n\n"
-            "Напишите описание ⬇️"
+            "Опишите монету одним сообщением ⬇️\n"
+            "Передумали — жмите «Отмена» или /cancel."
         ),
         "en": (
             "💼 <b>Sell via Katz Auction</b>\n"
@@ -399,15 +474,15 @@ CERT_BADGES = {
 }
 
 
-def listing_card(listing, lang: str) -> str:
-    """Showcase card for a user-published coin."""
+def listing_card(listing, lang: str, with_description: bool = True) -> str:
+    """Showcase card for a user-published coin. Fits a photo caption."""
     ru = lang == "ru"
     lines = [f"🪙 <b>{esc(listing['title'])}</b>"]
     desc = (listing["description"] or "").strip()
-    if len(desc) > len(listing["title"]):
+    if with_description and len(desc) > len(listing["title"]):
         extra = desc[len(listing["title"]):].strip(" .,\n")
         if extra:
-            lines.append(f"<blockquote>{esc(extra[:350])}</blockquote>")
+            lines.append(f"<blockquote>{esc(extra[:250])}</blockquote>")
     price = listing["price"]
     lines.append(("💶 Цена: <b>{p}</b>" if ru else "💶 Price: <b>{p}</b>").format(
         p=_money(price, "EUR")) if price
