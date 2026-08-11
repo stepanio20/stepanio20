@@ -2,12 +2,14 @@
 Run: python branding/make_branding.py    Output PNGs land next to this file."""
 from __future__ import annotations
 
-import math
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent))
+from dealcard import draw_brilliant  # shared clean brilliant-cut mark  # noqa: E402
 NAVY1, NAVY2 = (10, 22, 40), (18, 58, 79)
 EMERALD = (31, 111, 92)
 GOLD = (206, 175, 120)
@@ -40,56 +42,12 @@ def gradient(w, h, c1=NAVY1, c2=NAVY2, diagonal=True):
     return img
 
 
-def draw_diamond(d: ImageDraw.ImageDraw, cx: float, cy: float, r: float,
-                 line=GOLD, hi=GOLD_HI, width=3):
-    """A stylized round-brilliant: octagon table + crown facets + pavilion point."""
-    # table (top octagon)
-    top_y = cy - r
-    girdle_y = cy - r * 0.28
-    tip_y = cy + r
-    # octagon table corners
-    tw = r * 0.62      # table half-width
-    tstep = tw * 0.42
-    table = [
-        (cx - tstep, top_y), (cx + tstep, top_y),
-        (cx + tw, top_y + r * 0.22), (cx + tw, girdle_y - r * 0.0),
-    ]
-    # girdle octagon (wider)
-    gw = r * 0.96
-    gstep = gw * 0.42
-    girdle = [
-        (cx - gstep, girdle_y - r * 0.14), (cx + gstep, girdle_y - r * 0.14),
-        (cx + gw, girdle_y), (cx + gstep, girdle_y + r * 0.06),
-        (cx - gstep, girdle_y + r * 0.06), (cx - gw, girdle_y),
-    ]
-    # outline: table octagon
-    d.polygon([
-        (cx - tstep, top_y), (cx + tstep, top_y),
-        (cx + tw, girdle_y), (cx + tstep, girdle_y + r * 0.02),
-        (cx - tstep, girdle_y + r * 0.02), (cx - tw, girdle_y),
-    ], outline=line, width=width)
-    # crown facets (table corners -> girdle)
-    for (tx, ty), (gx, gy) in [
-        ((cx - tstep, top_y), (cx - tw, girdle_y)),
-        ((cx + tstep, top_y), (cx + tw, girdle_y)),
-    ]:
-        d.line([(tx, ty), (gx, gy)], fill=line, width=width)
-    # pavilion: girdle -> tip
-    d.line([(cx - tw, girdle_y), (cx, tip_y)], fill=line, width=width)
-    d.line([(cx + tw, girdle_y), (cx, tip_y)], fill=line, width=width)
-    d.line([(cx - tstep, girdle_y + r * 0.02), (cx, tip_y)], fill=hi, width=max(1, width - 1))
-    d.line([(cx + tstep, girdle_y + r * 0.02), (cx, tip_y)], fill=hi, width=max(1, width - 1))
-    d.line([(cx, girdle_y), (cx, tip_y)], fill=hi, width=max(1, width - 1))
-    # sparkle
-    d.line([(cx + tstep * 0.3, top_y + r * 0.18), (cx + tstep * 0.3, top_y + r * 0.42)], fill=hi, width=2)
-
-
 def make_avatar(size=1024):
     img = gradient(size, size)
     d = ImageDraw.Draw(img)
     # subtle vignette ring
-    d.ellipse([size * 0.06, size * 0.06, size * 0.94, size * 0.94], outline=(255, 255, 255, 20), width=2)
-    draw_diamond(d, size / 2, size * 0.40, size * 0.24, width=7)
+    d.ellipse([size * 0.06, size * 0.06, size * 0.94, size * 0.94], outline=MUTED, width=2)
+    draw_brilliant(d, size / 2, size * 0.38, size * 0.22, GOLD, width=7)
     # wordmark
     f = font(int(size * 0.11))
     txt = "DiamondScan"
@@ -107,7 +65,7 @@ def make_avatar(size=1024):
 def make_banner(w=1280, h=720):
     img = gradient(w, h)
     d = ImageDraw.Draw(img)
-    draw_diamond(d, w * 0.80, h * 0.5, h * 0.30, width=8)
+    draw_brilliant(d, w * 0.80, h * 0.5, h * 0.30, GOLD, width=8)
     d.text((90, 130), "Stop scrolling", font=font(64, bold=False), fill=MUTED)
     d.text((90, 210), "group history", font=font(64, bold=False), fill=MUTED)
     big = font(92)
@@ -126,7 +84,7 @@ def make_banner(w=1280, h=720):
 def make_square_promo(size=1080):
     img = gradient(size, size)
     d = ImageDraw.Draw(img)
-    draw_diamond(d, size / 2, size * 0.30, size * 0.17, width=7)
+    draw_brilliant(d, size / 2, size * 0.30, size * 0.17, GOLD, width=7)
     def center(txt, y, f, fill):
         bb = d.textbbox((0, 0), txt, font=f)
         d.text(((size - (bb[2] - bb[0])) / 2, y), txt, font=f, fill=fill)

@@ -26,7 +26,7 @@ import db
 import matcher
 import payments
 from config import settings
-from dealcard import generate_caption, render_card
+from dealcard import generate_caption, render_card, render_match_card, match_caption
 from enrich import verify_cert, cross_check
 from ingest import ingest_text, import_csv
 from parser import parse_message, Intent
@@ -180,12 +180,24 @@ async def _notify_new_matches(bot: Bot) -> None:
             continue
         kb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
             text=f"🤝 Connect ({m['score']:.0%})", callback_data=f"connect:{lis['id']}")]])
+        # locked caption/card: the seller contact stays behind the subscription (revealed on Connect)
+        caption = match_caption(dem, lis, m["score"], revealed=False,
+                                bot_username=settings.bot_username)
         try:
-            await bot.send_message(
-                dem["tg_id"],
-                f"🔔 <b>Match on your request</b>\nYou wanted: <i>{dem.get('raw_text','')[:80]}</i>\n"
-                f"Now available: <b>{_listing_line(lis)}</b>  ({m['score']:.0%})",
-                reply_markup=kb)
+            card = None
+            try:
+                import tempfile
+                with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+                    tmp_path = tmp.name
+                card = render_match_card(dem, lis, m["score"], tmp_path, revealed=False)
+            except Exception as ce:  # noqa: BLE001
+                log.warning("match card render failed: %s", ce)
+            if card:
+                with open(card, "rb") as f:
+                    await bot.send_photo(dem["tg_id"], BufferedInputFile(f.read(), "match.png"),
+                                         caption=caption, reply_markup=kb)
+            else:
+                await bot.send_message(dem["tg_id"], caption, reply_markup=kb)
         except Exception as e:  # noqa: BLE001
             log.warning("notify failed for %s: %s", dem["tg_id"], e)
         db.mark_notified(m["id"])

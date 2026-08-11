@@ -34,6 +34,30 @@ def _fmt_price(ppc: Optional[float], total: Optional[float]) -> str:
     return "Price on request"
 
 
+def draw_brilliant(d, cx: float, cy: float, s: float, color, width: int = 6) -> None:
+    """Draw a clean round-brilliant diamond outline (crown table + pavilion facets).
+
+    Shared by the deal card, the match card and the branding avatar so the mark
+    is identical everywhere. `s` is the half-width of the stone.
+    """
+    tw = s * 0.46            # half table width
+    ty = cy - s * 0.42       # table (girdle-crown) height
+    gL, gR = cx - s, cx + s  # girdle corners
+    tip = cy + s             # pavilion tip
+    # crown outline (table + two crown flanks down to the girdle)
+    d.polygon([(cx - tw, cy - s), (cx + tw, cy - s), (gR, ty), (gL, ty)],
+              outline=color, width=width)
+    # pavilion (girdle down to the culet tip)
+    d.polygon([(gL, ty), (gR, ty), (cx, tip)], outline=color, width=width)
+    # crown facet lines
+    d.line([(cx - tw, cy - s), (gL, ty)], fill=color, width=max(2, width - 3))
+    d.line([(cx + tw, cy - s), (gR, ty)], fill=color, width=max(2, width - 3))
+    d.line([(cx - tw, cy - s), (cx + tw, cy - s)], fill=color, width=max(2, width - 3))
+    # pavilion facet lines converging to the tip
+    for gx in (gL, cx - tw, cx, cx + tw, gR):
+        d.line([(gx, ty), (cx, tip)], fill=color, width=max(2, width - 4))
+
+
 def _title(stone: dict) -> str:
     parts = []
     if stone.get("shape"):
@@ -155,12 +179,8 @@ def render_card(stone: dict, out_path: str, *, verified: bool = False,
     d.rounded_rectangle([W/2 - 200, 90, W/2 + 200, 170], radius=40, fill=BRAND["accent"])
     center(ribbon, 108, font(46), BRAND["ink"])
 
-    # diamond glyph
-    cx, cy, s = W / 2, 330, 78
-    d.polygon([(cx, cy - s), (cx + s, cy - s/3), (cx, cy + s), (cx - s, cy - s/3)],
-              outline=BRAND["gold"], width=6)
-    d.line([(cx - s, cy - s/3), (cx + s, cy - s/3)], fill=BRAND["gold"], width=4)
-    d.line([(cx, cy - s), (cx, cy + s)], fill=BRAND["gold"], width=2)
+    # diamond glyph (shared brilliant-cut mark)
+    draw_brilliant(d, W / 2, 320, 82, BRAND["gold"], width=6)
 
     # title (auto-fit to width)
     center(_title(stone), 460, fit_font(_title(stone), 76, 40, W - 120), BRAND["ink"])
@@ -209,6 +229,114 @@ def render_card(stone: dict, out_path: str, *, verified: bool = False,
     return out_path
 
 
+def match_caption(demand: dict, listing: dict, score: float, *,
+                  seller_contact: str = "", revealed: bool = False,
+                  bot_username: str = "DiamondScanBot") -> str:
+    """Telegram HTML caption for a buyer↔seller match alert."""
+    e = html.escape
+    lines = [f"⚡ <b>MATCH FOUND</b> · {score:.0%}\n"]
+    want = demand.get("raw_text") or _title(demand)
+    lines.append(f"\U0001F50E <b>You wanted:</b> <i>{e(str(want)[:90])}</i>")
+    lines.append(f"\U0001F48E <b>Now available:</b> <b>{e(_title(listing))}</b>")
+    price = _fmt_price(listing.get("price_per_carat"), listing.get("total_price"))
+    disc = listing.get("rap_discount")
+    lines.append(f"\U0001F4B0 {e(price)}" + (f"  ·  Rap {disc:+g}%" if disc is not None else "") + "\n")
+    if revealed and seller_contact:
+        lines.append(f"\U0001F91D <b>Seller:</b> {e(seller_contact)}")
+        lines.append("<i>Verify the GIA laser inscription before paying.</i>")
+    else:
+        lines.append("\U0001F512 <i>Tap Connect to reveal the seller (subscribers).</i>")
+    lines.append(f"@{e(bot_username)}")
+    return "\n".join(lines)
+
+
+def render_match_card(demand: dict, listing: dict, score: float, out_path: str, *,
+                      buyer_contact: str = "", seller_contact: str = "",
+                      revealed: bool = False) -> Optional[str]:
+    """Render the money-moment card: a buyer request linked to a seller's stone."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except Exception:
+        return None
+
+    W, H = 1080, 1080
+    img = Image.new("RGB", (W, H), BRAND["bg1"])
+    d = ImageDraw.Draw(img)
+    for y in range(H):
+        t = y / H
+        d.line([(0, y), (W, y)], fill=tuple(
+            int(BRAND["bg1"][i] * (1 - t) + BRAND["bg2"][i] * t) for i in range(3)))
+
+    def font(sz, bold=True):
+        for name in (
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold
+            else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+            "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf",
+        ):
+            try:
+                return ImageFont.truetype(name, sz)
+            except Exception:
+                continue
+        return ImageFont.load_default()
+
+    def center(text, y, f, fill):
+        bb = d.textbbox((0, 0), text, font=f)
+        d.text(((W - (bb[2] - bb[0])) / 2, y), text, font=f, fill=fill)
+
+    def fit(text, start, min_sz, max_w, bold=True):
+        sz = start
+        while sz > min_sz:
+            f = font(sz, bold)
+            if d.textbbox((0, 0), text, font=f)[2] <= max_w:
+                return f
+            sz -= 3
+        return font(min_sz, bold)
+
+    def panel(y0, y1, label, title, sub, lcol):
+        # outline-only card on the dark gradient (no fill: RGBA alpha would flatten to solid)
+        d.rounded_rectangle([70, y0, W - 70, y1], radius=28, outline=lcol, width=3)
+        d.text((100, y0 + 26), label, font=font(30), fill=lcol)
+        center(title, y0 + 78, fit(title, 56, 30, W - 260), BRAND["ink"])
+        if sub:
+            center(sub, y0 + 150, font(30, bold=False), BRAND["muted"])
+
+    def compact(stone: dict, limit: int = 40) -> str:
+        t = _title(stone)
+        if t and t != "Diamond":
+            return t
+        raw = str(stone.get("raw_text") or "").strip()
+        return (raw[:limit] + "…") if len(raw) > limit else (raw or "Buyer request")
+
+    # header
+    d.rounded_rectangle([W/2 - 250, 70, W/2 + 250, 156], radius=43, fill=BRAND["gold"])
+    center("✦  MATCH FOUND  ✦", 92, font(44), BRAND["bg1"])
+    center(f"{score:.0%} fit", 180, font(38, bold=False), BRAND["muted"])
+
+    # BUYER panel
+    panel(250, 470, "BUYER WANTS", compact(demand),
+          buyer_contact if revealed else "on the radar", BRAND["accent"])
+
+    # connector diamond in the middle
+    draw_brilliant(d, W / 2, 505, 42, BRAND["gold"], width=5)
+
+    # SELLER panel
+    price = _fmt_price(listing.get("price_per_carat"), listing.get("total_price"))
+    disc = listing.get("rap_discount")
+    subttl = price + (f"  ·  Rap {disc:+g}%" if disc is not None else "")
+    panel(560, 800, "SELLER HAS", _title(listing), subttl, BRAND["gold"])
+
+    # contact / CTA
+    if revealed and seller_contact:
+        center("✓ Seller: " + seller_contact, 852, font(38), BRAND["gold"])
+    else:
+        center("Tap Connect to reveal the seller", 852, font(36, bold=False), BRAND["muted"])
+    center("Verify the laser inscription before paying", 906, font(28, bold=False), BRAND["muted"])
+    center("DiamondScan · Dubai diamond radar", 1004, font(30, bold=False), BRAND["muted"])
+
+    img.save(out_path, "PNG")
+    return out_path
+
+
 if __name__ == "__main__":
     demo = {"shape": "cushion", "carat": 0.90, "fancy_color": "pink",
             "fancy_intensity": "fancy light", "clarity": "SI1", "lab": "GIA",
@@ -217,3 +345,13 @@ if __name__ == "__main__":
     print(generate_caption(demo, verified=True, contact="+971 56 000 0000"))
     p = render_card(demo, str(BASE_DIR / "branding" / "sample_dealcard.png"), verified=True)
     print("card:", p)
+
+    want = {"shape": "cushion", "carat": 0.9, "fancy_color": "pink",
+            "clarity": "SI1", "intent": "want",
+            "raw_text": "Looking for cushion ~0.9ct fancy pink SI GIA, Dubai"}
+    m = render_match_card(want, demo, 0.92,
+                          str(BASE_DIR / "branding" / "sample_matchcard.png"),
+                          buyer_contact="@dubai_buyer", seller_contact="+971 56 000 0000",
+                          revealed=True)
+    print("match card:", m)
+    print(match_caption(want, demo, 0.92, seller_contact="+971 56 000 0000", revealed=True))
