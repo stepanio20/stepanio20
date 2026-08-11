@@ -241,6 +241,40 @@ def get_listing(listing_id: int) -> Optional[dict]:
         return dict(row) if row else None
 
 
+def listings_for_user(tg_id: int, status: str = "active", limit: int = 50) -> list[dict]:
+    with _conn() as con:
+        rows = con.execute(
+            "SELECT * FROM listings WHERE tg_id=? AND status=? ORDER BY created_at DESC LIMIT ?",
+            (tg_id, status, limit)).fetchall()
+        return [dict(r) for r in rows]
+
+
+def count_active_listings(tg_id: int) -> int:
+    with _conn() as con:
+        return con.execute(
+            "SELECT COUNT(*) FROM listings WHERE tg_id=? AND status='active'", (tg_id,)
+        ).fetchone()[0]
+
+
+def demands_for_user(tg_id: int, limit: int = 50) -> list[dict]:
+    with _conn() as con:
+        rows = con.execute(
+            "SELECT * FROM demands WHERE tg_id=? AND status='active' ORDER BY created_at DESC LIMIT ?",
+            (tg_id, limit)).fetchall()
+        return [dict(r) for r in rows]
+
+
+def mark_listing_sold(listing_id: int, tg_id: Optional[int] = None) -> bool:
+    """Mark a listing sold. If tg_id is given, only the owner can do it. Returns success."""
+    with _conn() as con:
+        if tg_id is not None:
+            cur = con.execute("UPDATE listings SET status='sold' WHERE id=? AND tg_id=? AND status='active'",
+                              (listing_id, tg_id))
+        else:
+            cur = con.execute("UPDATE listings SET status='sold' WHERE id=? AND status='active'", (listing_id,))
+        return cur.rowcount > 0
+
+
 def get_demand(demand_id: int) -> Optional[dict]:
     with _conn() as con:
         row = con.execute("SELECT * FROM demands WHERE id=?", (demand_id,)).fetchone()

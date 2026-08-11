@@ -71,14 +71,21 @@ class Settings:
     # MUST be false in production — it disables the paywall.
     free_reveal: bool = _bool(os.environ.get("FREE_REVEAL", ""), default=False)
 
-    # Subscription tiers in AED (charged via veym/MamoPay). usd = rough reference only.
+    # Subscription tiers priced by how many stones you can list (LuxeDiam-style),
+    # charged via veym/MamoPay in AED. max_stock=None means unlimited. usd ≈ reference.
     tiers: dict = field(default_factory=lambda: {
-        "buyer":  {"title": "Buyer",  "aed": 149, "usd": 39,  "days": 30},
-        "broker": {"title": "Broker", "aed": 549, "usd": 149, "days": 30},
+        "free": {"title": "Free", "aed": 0,   "usd": 0,  "max_stock": 500,  "days": 0},
+        "grow": {"title": "Grow", "aed": 99,  "usd": 25, "max_stock": 1000, "days": 30},
+        "pro":  {"title": "Pro",  "aed": 199, "usd": 50, "max_stock": None, "days": 30},
     })
+    paid_tiers: tuple = ("grow", "pro")
 
     contact_phone: str = os.environ.get("CONTACT_PHONE", "+971 56 000 0000")
     bot_username: str = os.environ.get("BOT_USERNAME", "DiamondScanBot")
+    support_url: str = os.environ.get("SUPPORT_URL", "")   # t.me/<user> or https://… for the Support button
+
+    def stock_limit(self, tier: str) -> Optional[int]:
+        return self.tiers.get(tier, self.tiers["free"]).get("max_stock")
 
     def require_token(self) -> str:
         if not self.bot_token:

@@ -245,7 +245,7 @@ def match_caption(demand: dict, listing: dict, score: float, *,
         lines.append(f"\U0001F91D <b>Seller:</b> {e(seller_contact)}")
         lines.append("<i>Verify the GIA laser inscription before paying.</i>")
     else:
-        lines.append("\U0001F512 <i>Tap Connect to reveal the seller (subscribers).</i>")
+        lines.append("\U0001F91D <i>Tap Connect to reach the seller.</i>")
     lines.append(f"@{e(bot_username)}")
     return "\n".join(lines)
 

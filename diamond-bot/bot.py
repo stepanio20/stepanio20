@@ -19,7 +19,7 @@ from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
 from aiogram.types import (
     CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Message,
-    PreCheckoutQuery, BufferedInputFile,
+    BufferedInputFile, ReplyKeyboardMarkup, KeyboardButton,
 )
 
 import db
@@ -78,31 +78,57 @@ def role_of(uid: int) -> str:
     return (u or {}).get("role", "buyer")
 
 
-def main_menu() -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="🔎 I'm buying", callback_data="role:buyer"),
-         InlineKeyboardButton(text="💎 I'm selling", callback_data="role:seller")],
-        [InlineKeyboardButton(text="🤝 I'm a broker", callback_data="role:broker")],
-        [InlineKeyboardButton(text="⭐ Subscribe", callback_data="menu:subscribe"),
-         InlineKeyboardButton(text="✅ Get verified", callback_data="menu:vetting")],
-        [InlineKeyboardButton(text="ℹ️ How it works", callback_data="menu:help")],
-    ])
+# ── LuxeDiam-style persistent reply keyboard ──
+BTN_UPLOAD = "💎 Upload Stock"
+BTN_SEARCH = "🔎 Search Diamond"
+BTN_MINE = "📦 My Diamonds"
+BTN_SAVED = "⭐ Saved"
+BTN_SOLD = "✅ Mark as Sold"
+BTN_SUBSCRIBE = "💳 Subscription"
+BTN_SUPPORT = "🆘 Support"
+BUTTONS = {BTN_UPLOAD, BTN_SEARCH, BTN_MINE, BTN_SAVED, BTN_SOLD, BTN_SUBSCRIBE, BTN_SUPPORT}
+
+# lightweight per-user input mode ("upload" | "search"); resets on restart (fine for MVP)
+_MODE: dict[int, str] = {}
+
+
+def main_kb() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text=BTN_UPLOAD), KeyboardButton(text=BTN_SEARCH)],
+            [KeyboardButton(text=BTN_MINE), KeyboardButton(text=BTN_SAVED)],
+            [KeyboardButton(text=BTN_SOLD), KeyboardButton(text=BTN_SUBSCRIBE)],
+            [KeyboardButton(text=BTN_SUPPORT)],
+        ],
+        resize_keyboard=True, is_persistent=True, input_field_placeholder="Paste a stone or a request…",
+    )
+
+
+def user_tier(uid: int) -> str:
+    sub = db.active_subscription(uid)
+    return sub["tier"] if sub and sub.get("tier") in settings.tiers else "free"
+
+
+def stock_status(uid: int) -> tuple[int, object, str]:
+    """(used, limit_or_None, tier)."""
+    tier = user_tier(uid)
+    return db.count_active_listings(uid), settings.stock_limit(tier), tier
 
 
 def sub_menu() -> InlineKeyboardMarkup:
     rows = [[InlineKeyboardButton(text=payments.plan_label(t), callback_data=f"buy:{t}")]
-            for t in settings.tiers]
+            for t in settings.paid_tiers]
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
 WELCOME = (
     "💎 <b>DiamondScan</b> — the Dubai diamond radar.\n\n"
-    "Paste or <b>forward</b> any stone or request — I structure it, match buyers with "
-    "sellers in real time, and ping you the moment your stone or your buyer appears.\n\n"
-    "Examples you can send me right now:\n"
-    "• <code>Looking for 2ct D VS1 GIA, Rap -25%</code>\n"
-    "• <code>Available Cushion 0.90 Fancy Light Pink SI1 GIA $26,000/ct</code>\n\n"
-    "First, who are you?"
+    "I turn dealer-chat 'have / looking-for' into a structured feed and <b>match buyers with "
+    "sellers automatically</b> — no more scrolling group history.\n\n"
+    "• <b>Upload Stock</b> — forward, paste, or CSV your diamonds\n"
+    "• <b>Search Diamond</b> — describe what you need, I hunt across all stock\n"
+    "• I ping both sides the moment a stone meets a request.\n\n"
+    "Use the menu below 👇"
 )
 
 HELP = (
@@ -112,19 +138,40 @@ HELP = (
     "2️⃣ <b>I structure it.</b> Every 'have' and 'looking-for' becomes a clean record "
     "(shape · carat · color · clarity · cert · Rap%).\n"
     "3️⃣ <b>I match &amp; alert.</b> When a listing meets a request, both sides get pinged.\n"
-    "4️⃣ <b>You connect.</b> Subscribers reveal the counterparty and close the deal your way "
+    "4️⃣ <b>You connect.</b> Tap Connect to reach the counterparty and close the deal your way "
     "(memo or wire) — we don't touch goods or money.\n\n"
     "🔐 <b>Trust:</b> get <b>verified</b> (ID + business + OFAC screen) for the ✅ badge.\n"
     "🛡️ We ingest only what you opt in (forwards, your own stock, groups you already belong to). "
     "No covert scraping.\n\n"
-    f"Plans: {' · '.join(payments.plan_label(t) for t in settings.tiers)}"
+    "💳 <b>Plans</b> (by stock size): Free up to 500 stones · "
+    + " · ".join(f"AED {settings.tiers[t]['aed']}/mo {('unlimited' if settings.tiers[t]['max_stock'] is None else str(settings.tiers[t]['max_stock']))}" for t in settings.paid_tiers)
 )
 
 
-async def _handle_stone_text(msg: Message, text: str, source: str) -> None:
+def at_stock_limit(uid: int) -> bool:
+    used, limit, _ = stock_status(uid)
+    return limit is not None and used >= limit
+
+
+async def _limit_prompt(msg: Message) -> None:
+    used, limit, tier = stock_status(msg.from_user.id)
+    await msg.reply(
+        f"📦 You're at your plan limit (<b>{used}/{limit}</b> stones on <b>{settings.tiers[tier]['title']}</b>).\n"
+        "Upgrade to keep listing — pick a plan 👇", reply_markup=sub_menu())
+
+
+async def _handle_stone_text(msg: Message, text: str, source: str,
+                             force_intent: str | None = None) -> None:
     uid = msg.from_user.id
-    role = role_of(uid)
-    default_intent = {"seller": Intent.HAVE.value, "buyer": Intent.WANT.value}.get(role)
+    if force_intent is None:
+        role = role_of(uid)
+        default_intent = {"seller": Intent.HAVE.value, "buyer": Intent.WANT.value}.get(role)
+    else:
+        default_intent = force_intent
+    # enforce the stock cap before storing a new listing (upload path)
+    if force_intent == Intent.HAVE.value and at_stock_limit(uid):
+        await _limit_prompt(msg)
+        return
     res = ingest_text(text, tg_id=uid, source=source, default_intent=default_intent)
     if not res:
         await msg.reply("🤔 I couldn't read a diamond in that. Try: "
@@ -229,7 +276,8 @@ async def start(msg: Message) -> None:
     db.upsert_user(msg.from_user.id, msg.from_user.username or "",
                    msg.from_user.full_name or "")
     db.log_event("start", msg.from_user.id)
-    await msg.answer(WELCOME, reply_markup=main_menu())
+    _MODE.pop(msg.from_user.id, None)
+    await msg.answer(WELCOME, reply_markup=main_kb())
 
 
 @router.message(Command("help"))
@@ -239,8 +287,7 @@ async def help_cmd(msg: Message) -> None:
 
 @router.message(Command("subscribe"))
 async def subscribe_cmd(msg: Message) -> None:
-    await msg.answer("⭐ <b>Choose a plan</b> — pay in Telegram Stars, cancel anytime:",
-                     reply_markup=sub_menu())
+    await _show_subscription(msg)
 
 
 @router.message(Command("matches"))
@@ -296,11 +343,12 @@ async def _publish_listing(bot: Bot, lis: dict, target) -> None:
         await bot.send_message(target, caption)
 
 
-# forwarded messages
+# forwarded messages = incoming stock (enforce the stock cap)
 @router.message(F.forward_date)
 async def on_forward(msg: Message) -> None:
     if msg.text or msg.caption:
-        await _handle_stone_text(msg, msg.text or msg.caption, source="forward")
+        await _handle_stone_text(msg, msg.text or msg.caption, source="forward",
+                                 force_intent=Intent.HAVE.value)
 
 
 # document (CSV/stock file)
@@ -310,6 +358,9 @@ async def on_document(msg: Message) -> None:
     if not (doc.file_name or "").lower().endswith((".csv", ".txt")):
         await msg.reply("Send a CSV stock file (RapNet-style headers) and I'll import it.")
         return
+    if at_stock_limit(msg.from_user.id):
+        await _limit_prompt(msg)
+        return
     file = await msg.bot.get_file(doc.file_id)
     buf = await msg.bot.download_file(file.file_path)
     res = import_csv(buf.read(), tg_id=msg.from_user.id)
@@ -318,73 +369,139 @@ async def on_document(msg: Message) -> None:
     await _notify_new_matches(msg.bot)
 
 
-# any other free text = a stone or a request
+# ── LuxeDiam-style menu views ──
+
+async def _show_subscription(msg: Message) -> None:
+    used, limit, tier = stock_status(msg.from_user.id)
+    cap = "unlimited" if limit is None else f"{limit:,}"
+    lines = [
+        f"🆓 <b>{settings.tiers[tier]['title']} tier</b>",
+        f"💎 Your stock: <b>{used}</b> stones (limit: <b>{cap}</b>)\n",
+        "📊 <b>Pricing</b>",
+        "• Up to 500 stones — <b>free</b>",
+        f"• 500–1,000 stones — <b>AED {settings.tiers['grow']['aed']} / month</b>",
+        f"• 1,000+ stones — <b>AED {settings.tiers['pro']['aed']} / month</b>\n",
+        "Growing your stock? Pick a plan anytime 👇",
+    ]
+    await msg.answer("\n".join(lines), reply_markup=sub_menu())
+
+
+async def menu_mine(msg: Message) -> None:
+    rows = db.listings_for_user(msg.from_user.id, status="active", limit=30)
+    used, limit, tier = stock_status(msg.from_user.id)
+    cap = "unlimited" if limit is None else f"{limit:,}"
+    if not rows:
+        await msg.answer(f"📦 <b>My Diamonds</b> — 0 / {cap}.\nTap <b>{BTN_UPLOAD}</b> to add stock.")
+        return
+    lines = [f"📦 <b>My Diamonds</b> — {used} / {cap} active:"]
+    for l in rows[:30]:
+        lines.append(f"• #{l['id']} {_listing_line(l)}")
+    await msg.answer("\n".join(lines))
+
+
+async def menu_saved(msg: Message) -> None:
+    rows = db.demands_for_user(msg.from_user.id, limit=30)
+    if not rows:
+        await msg.answer("⭐ <b>Saved searches</b> — none yet.\n"
+                         f"Tap <b>{BTN_SEARCH}</b> and describe a stone; I'll keep hunting it for you.")
+        return
+    lines = ["⭐ <b>Saved searches</b> (I alert you on any match):"]
+    for d in rows[:30]:
+        label = d.get("raw_text") or " ".join(
+            str(d.get(k)) for k in ("shape", "carat", "color", "clarity") if d.get(k)) or "request"
+        lines.append(f"• {label[:70]}")
+    await msg.answer("\n".join(lines))
+
+
+async def menu_sold(msg: Message) -> None:
+    rows = db.listings_for_user(msg.from_user.id, status="active", limit=30)
+    if not rows:
+        await msg.answer("Nothing active to mark sold.")
+        return
+    kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=f"✅ Sold: #{l['id']} {l.get('shape','?')} {l.get('carat','')}ct",
+                              callback_data=f"sold:{l['id']}")] for l in rows[:15]])
+    await msg.answer("✅ <b>Mark as Sold</b> — tap a stone to remove it from the market:", reply_markup=kb)
+
+
+async def menu_support(msg: Message) -> None:
+    if settings.support_url:
+        kb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
+            text="💬 Open chat with support", url=settings.support_url)]])
+        await msg.answer("🆘 Tap below to chat with our support team directly.", reply_markup=kb)
+    else:
+        await msg.answer("🆘 <b>Support</b>\nReply here with your question — the team will get back to you. "
+                         "You can also reach us at " + settings.contact_phone + ".")
+
+
+# router for the persistent keyboard + free text (stone/request), honoring input mode
 @router.message(F.text & ~F.text.startswith("/"))
 async def on_text(msg: Message) -> None:
-    await _handle_stone_text(msg, msg.text, source="manual")
+    t = (msg.text or "").strip()
+    uid = msg.from_user.id
+    if t == BTN_UPLOAD:
+        _MODE[uid] = "upload"
+        used, limit, _ = stock_status(uid)
+        cap = "unlimited" if limit is None else f"{limit:,}"
+        await msg.answer(
+            f"💎 <b>Upload Stock</b> ({used}/{cap} used)\nForward, paste, or send a CSV. One per line works too.\n"
+            "Format: <code>Shape Carat Color Clarity Cut Ratio Rap% Price/ct</code> (+ photo/cert optional)\n"
+            "e.g. <code>Round 1.01 G VS2 EX GIA 2141234567 $5,600/ct Rap -21%</code>")
+        return
+    if t == BTN_SEARCH:
+        _MODE[uid] = "search"
+        await msg.answer("🔎 <b>Search Diamond</b>\nDescribe what you're looking for.\n"
+                         "Example: <code>2 carat round brilliant D VS1</code>")
+        return
+    if t == BTN_MINE:
+        return await menu_mine(msg)
+    if t == BTN_SAVED:
+        return await menu_saved(msg)
+    if t == BTN_SOLD:
+        return await menu_sold(msg)
+    if t == BTN_SUBSCRIBE:
+        return await _show_subscription(msg)
+    if t == BTN_SUPPORT:
+        return await menu_support(msg)
+
+    # otherwise it's a stone or a request — honor the current mode
+    mode = _MODE.get(uid)
+    force = {"upload": Intent.HAVE.value, "search": Intent.WANT.value}.get(mode)
+    await _handle_stone_text(msg, t, source="manual", force_intent=force)
 
 
 # ─────────────────────────────── callbacks ───────────────────────────────────
 
-@router.callback_query(F.data.startswith("role:"))
-async def cb_role(cb: CallbackQuery) -> None:
-    role = cb.data.split(":", 1)[1]
-    db.upsert_user(cb.from_user.id, cb.from_user.username or "", cb.from_user.full_name or "", role=role)
-    db.log_event("role_set", cb.from_user.id, {"role": role})
-    tips = {
-        "buyer": "Send me what you're hunting: <code>Looking for 2ct D VS1 GIA</code>.",
-        "seller": "Forward or paste your stock. I'll alert buyers who want it.",
-        "broker": "Forward both sides — requests and stock. I'll match across them.",
-    }
-    await cb.message.answer(f"Got it — <b>{role}</b>. {tips[role]}")
-    await cb.answer()
-
-
-@router.callback_query(F.data == "menu:subscribe")
-async def cb_subscribe(cb: CallbackQuery) -> None:
-    await cb.message.answer("⭐ <b>Choose a plan</b>:", reply_markup=sub_menu())
-    await cb.answer()
-
-
-@router.callback_query(F.data == "menu:help")
-async def cb_help(cb: CallbackQuery) -> None:
-    await cb.message.answer(HELP)
-    await cb.answer()
-
-
-@router.callback_query(F.data == "menu:vetting")
-async def cb_vetting(cb: CallbackQuery) -> None:
-    db.set_vetting(cb.from_user.id, "pending", "requested via bot")
-    db.log_event("vetting_requested", cb.from_user.id)
-    await cb.message.answer(
-        "✅ <b>Get verified</b>\nReply with: company name, trade licence No., and a photo of "
-        "your ID/licence. We run an OFAC/sanctions screen and grant the ✅ badge (usually &lt;1 business day). "
-        "Verification is what makes buyers trust your listings.")
-    await cb.answer()
+@router.callback_query(F.data.startswith("sold:"))
+async def cb_sold(cb: CallbackQuery) -> None:
+    listing_id = int(cb.data.split(":", 1)[1])
+    ok = db.mark_listing_sold(listing_id, cb.from_user.id)
+    db.log_event("mark_sold", cb.from_user.id, {"listing_id": listing_id, "ok": ok})
+    await cb.answer("Marked sold ✅" if ok else "Not found / not yours", show_alert=not ok)
+    if ok and cb.message:
+        await cb.message.answer(f"✅ #{listing_id} marked sold and removed from the market.")
 
 
 @router.callback_query(F.data.startswith("buy:"))
 async def cb_buy(cb: CallbackQuery) -> None:
     tier = cb.data.split(":", 1)[1]
-    if tier not in settings.tiers:
+    if tier not in settings.paid_tiers:
         await cb.answer("Unknown plan", show_alert=True)
         return
     t = settings.tiers[tier]
+    cap = "unlimited stock" if t["max_stock"] is None else f"up to {t['max_stock']:,} stones"
     pay = await payments.create_payment(tier, cb.from_user.id)
     if pay and pay.get("url"):
         kb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
-            text=f"💳 Pay AED {t['aed']} · {t['title']}", url=pay["url"])]])
+            text=f"💳 Pay AED {t['aed']} / month", url=pay["url"])]])
         await cb.message.answer(
-            f"⭐ <b>{t['title']}</b> — AED {t['aed']} / {t['days']} days.\n"
-            "Pay securely by card (AED). Your plan activates automatically once payment clears.",
-            reply_markup=kb)
+            f"🔒 <b>{t['title']}</b> — {cap}, AED {t['aed']}/month.\n"
+            "Tap below to complete payment securely (AED). Your subscription activates "
+            "automatically after checkout.", reply_markup=kb)
     else:
-        # Payment gateway not fully configured yet — don't dead-end the user.
-        note = ("Card payments (AED) are being switched on. " if not settings.free_reveal
-                else "Test mode: contact reveal is already unlocked — no payment needed. ")
         await cb.message.answer(
-            f"⭐ <b>{t['title']}</b> — AED {t['aed']} / {t['days']} days.\n" + note +
-            "Ping the admin to activate your plan.")
+            f"🔒 <b>{t['title']}</b> — {cap}, AED {t['aed']}/month.\n"
+            "Card payments (AED) are being switched on — ping the admin to activate your plan.")
     await cb.answer()
 
 
@@ -394,12 +511,6 @@ async def cb_connect(cb: CallbackQuery) -> None:
     lis = db.get_listing(listing_id)
     if not lis:
         await cb.answer("Listing expired", show_alert=True)
-        return
-    if not has_sub(cb.from_user.id):
-        await cb.message.answer(
-            "🔒 <b>Contact is a subscriber feature.</b>\nUnlock counterparty details and unlimited "
-            "matches:", reply_markup=sub_menu())
-        await cb.answer()
         return
     owner = db.get_user(lis.get("tg_id")) if lis.get("tg_id") else None
     contact = "—"

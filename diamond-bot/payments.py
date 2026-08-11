@@ -38,9 +38,14 @@ except Exception:  # pragma: no cover
 
 # ─────────────────────────────── copy ────────────────────────────────────────
 
+def _cap(tier: str) -> str:
+    m = settings.tiers[tier].get("max_stock")
+    return "unlimited stock" if m is None else f"up to {m:,} stones"
+
+
 def plan_label(tier: str) -> str:
     t = settings.tiers[tier]
-    return f"{t['title']} — AED {t['aed']}/{t['days']}d  (≈${t['usd']}/mo)"
+    return f"💳 AED {t['aed']}/mo — {_cap(tier)}"
 
 
 def tier_amount(tier: str) -> int:
