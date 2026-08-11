@@ -22,6 +22,20 @@ async def _lang(db: Database, user_id: int) -> str:
     return row["lang"] if row else "ru"
 
 
+async def _maybe_reward_referrer(bot, db: Database, user_id: int, was_first: bool) -> None:
+    """First watch = activation: the inviter earns +30 days of Pro."""
+    if not was_first:
+        return
+    referrer = await db.reward_referral(user_id)
+    if referrer:
+        ref_row = await db.get_user(referrer)
+        ref_lang = ref_row["lang"] if ref_row else "ru"
+        try:
+            await bot.send_message(referrer, t("referral_reward", ref_lang))
+        except Exception:
+            pass
+
+
 def _slots(cfg: Config, tier: str) -> int:
     return cfg.watch_slots(tier)
 
@@ -58,6 +72,7 @@ async def cmd_watch(msg: Message, command: CommandObject, db: Database, cfg: Con
     await db.track(msg.from_user.id, "watch_add")
     cap = f" (&lt;{max_price:.0f})" if max_price else ""
     await msg.answer(t("watch_added", lang).format(q=esc(query), cap=cap, used=used + 1, total=total))
+    await _maybe_reward_referrer(msg.bot, db, msg.from_user.id, was_first=(used == 0))
 
 
 @router.message(Command("watchlist"))
@@ -101,6 +116,7 @@ async def _try_add_watch(cb: CallbackQuery, db: Database, cfg: Config, query: st
         t("watch_added", lang).format(q=esc(query), cap="", used=used + 1, total=total)
     )
     await cb.answer("🔭")
+    await _maybe_reward_referrer(cb.bot, db, cb.from_user.id, was_first=(used == 0))
 
 
 @router.callback_query(F.data.startswith("wl:"))

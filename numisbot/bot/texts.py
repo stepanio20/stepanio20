@@ -280,6 +280,48 @@ T = {
         "ru": "🤝 Принято! Заявка №{lead_id} передана команде Katz. Обычно отвечают в течение 1–2 рабочих дней.",
         "en": "🤝 Got it! Request #{lead_id} sent to the Katz team. They usually reply within 1–2 business days.",
     },
+    "trial_granted": {
+        "ru": ("🎁 <b>7 дней Pro — в подарок за знакомство!</b>\n"
+               "25 слотов радара и полная история цен уже включены. "
+               "Понравится — /pro продлит за 299 ⭐/мес."),
+        "en": ("🎁 <b>7 days of Pro — welcome gift!</b>\n"
+               "25 radar slots and full price history are now on. "
+               "Like it? /pro extends for 299 ⭐/mo."),
+    },
+    "referral_reward": {
+        "ru": "🎉 Ваш друг активировал радар — вам начислено <b>+30 дней Pro</b>! Приглашайте ещё: /invite",
+        "en": "🎉 Your friend activated their radar — you got <b>+30 days of Pro</b>! Invite more: /invite",
+    },
+    "invite": {
+        "ru": ("🎁 <b>Месяц Pro за друга</b>\n\n"
+               "Ваша ссылка:\n{link}\n\n"
+               "Когда друг запустит бота и поставит первое отслеживание — "
+               "вам автоматически прилетит +30 дней Pro (до 6 наград в год)."),
+        "en": ("🎁 <b>A month of Pro per friend</b>\n\n"
+               "Your link:\n{link}\n\n"
+               "When a friend starts the bot and sets their first watch, "
+               "you automatically get +30 days of Pro (up to 6 rewards a year)."),
+    },
+    "new_auction": {
+        "ru": "🏛 <b>Новый аукцион на Katz!</b>\n{title}\n{lots} лотов · старт торгов: {when}",
+        "en": "🏛 <b>New Katz auction!</b>\n{title}\n{lots} lots · starts: {when}",
+    },
+    "new_auction_hits": {
+        "ru": "\n🎯 По вашим интересам — <b>{n}</b> лотов",
+        "en": "\n🎯 Matching your interests — <b>{n}</b> lots",
+    },
+    "digest_header": {
+        "ru": "📬 <b>Дайджест недели</b>\nСамые горячие лоты на торгах прямо сейчас:",
+        "en": "📬 <b>Weekly digest</b>\nHottest lots on sale right now:",
+    },
+    "digest_off": {
+        "ru": "🔕 Дайджесты и анонсы отключены. Включить обратно: /digest",
+        "en": "🔕 Digests and announcements are off. Turn back on: /digest",
+    },
+    "digest_on": {
+        "ru": "🔔 Дайджесты и анонсы включены. Отключить: /digest",
+        "en": "🔔 Digests and announcements are on. Turn off: /digest",
+    },
     "publish_start": {
         "ru": (
             "📸 <b>Публикация монеты — шаг 1 из 4</b>\n\n"
@@ -374,6 +416,8 @@ T = {
             "/market — витрина монет участников\n"
             "/publish — разместить свою монету (c проверкой сертификата)\n"
             "/sell — сдать на аукцион Katz\n"
+            "/invite — месяц Pro за друга\n"
+            "/digest — вкл/выкл дайджесты\n"
             "/pro — тарифы · /lang — язык"
         ),
         "en": (
@@ -386,6 +430,8 @@ T = {
             "/market — members' coin showcase\n"
             "/publish — list your coin (with cert verification)\n"
             "/sell — consign to Katz auctions\n"
+            "/invite — a month of Pro per friend\n"
+            "/digest — toggle digests\n"
             "/pro — plans · /lang — language"
         ),
     },

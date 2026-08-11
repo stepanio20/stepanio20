@@ -100,7 +100,23 @@ CREATE TABLE IF NOT EXISTS events (
     ts INTEGER
 );
 CREATE INDEX IF NOT EXISTS idx_events ON events(name, ts);
+CREATE TABLE IF NOT EXISTS referrals (
+    referee_id INTEGER PRIMARY KEY,      -- who came via the link
+    referrer_id INTEGER NOT NULL,
+    rewarded INTEGER DEFAULT 0,          -- referrer got the bonus month
+    created INTEGER
+);
+CREATE TABLE IF NOT EXISTS announced_auctions (
+    auction_id INTEGER PRIMARY KEY,
+    ts INTEGER
+);
 """
+
+# additive migrations for DBs created before these columns existed
+MIGRATIONS = [
+    "ALTER TABLE users ADD COLUMN trial_used INTEGER DEFAULT 0",
+    "ALTER TABLE users ADD COLUMN digest_off INTEGER DEFAULT 0",
+]
 
 
 class Database:
@@ -119,6 +135,11 @@ class Database:
             "lower_u", 1, lambda s: s.lower() if isinstance(s, str) else s,
             deterministic=True)
         await self._db.executescript(SCHEMA)
+        for mig in MIGRATIONS:
+            try:
+                await self._db.execute(mig)
+            except Exception:
+                pass  # column already exists
         await self._db.commit()
         # local realized-price archive (built by scripts/backfill.py) — read-only
         if self.archive_path:
@@ -338,6 +359,98 @@ class Database:
             (user_id, charge_id, tier, stars, int(is_recurring), int(time.time())),
         )
         await self.db.commit()
+
+    # -- growth: trial, referrals, digest ---------------------------------
+    async def grant_tier_days(self, user_id: int, tier: str, days: int) -> int:
+        """Extend (or start) a tier; returns the new sub_until timestamp."""
+        row = await self.get_user(user_id)
+        now = int(time.time())
+        base = row["sub_until"] if row and row["tier"] == tier and row["sub_until"] > now else now
+        until = base + days * 86400
+        await self.set_tier(user_id, tier, until)
+        return until
+
+    async def try_use_trial(self, user_id: int) -> bool:
+        """One 7-day Pro trial per user, granted at onboarding."""
+        row = await self.get_user(user_id)
+        if not row or row["trial_used"]:
+            return False
+        if await self.effective_tier(user_id) != "free":
+            return False
+        await self.db.execute("UPDATE users SET trial_used=1 WHERE id=?", (user_id,))
+        await self.db.commit()
+        await self.grant_tier_days(user_id, "pro", 7)
+        return True
+
+    async def set_referrer(self, referee_id: int, referrer_id: int) -> None:
+        """Record who invited whom (first link wins, self-invites ignored)."""
+        if referee_id == referrer_id:
+            return
+        if await self.get_user(referee_id):  # existing users can't be "invited"
+            return
+        await self.db.execute(
+            "INSERT OR IGNORE INTO referrals(referee_id, referrer_id, created) "
+            "VALUES(?,?,?)", (referee_id, referrer_id, int(time.time())))
+        await self.db.commit()
+
+    async def reward_referral(self, referee_id: int, yearly_cap: int = 6) -> int | None:
+        """On the referee's activation: give the referrer +30 days of Pro.
+
+        Returns the referrer_id if a reward was granted, else None.
+        """
+        cur = await self.db.execute(
+            "SELECT referrer_id, rewarded FROM referrals WHERE referee_id=?",
+            (referee_id,))
+        row = await cur.fetchone()
+        if not row or row["rewarded"]:
+            return None
+        referrer = row["referrer_id"]
+        year_ago = int(time.time()) - 365 * 86400
+        cur = await self.db.execute(
+            "SELECT COUNT(*) c FROM referrals WHERE referrer_id=? AND rewarded=1 "
+            "AND created>?", (referrer, year_ago))
+        cnt = (await cur.fetchone())["c"]
+        if cnt >= yearly_cap:
+            return None
+        await self.db.execute(
+            "UPDATE referrals SET rewarded=1 WHERE referee_id=?", (referee_id,))
+        await self.db.commit()
+        await self.grant_tier_days(referrer, "pro", 30)
+        return referrer
+
+    async def toggle_digest(self, user_id: int) -> bool:
+        """Flip the digest flag; returns True if digests are now OFF."""
+        row = await self.get_user(user_id)
+        new = 0 if (row and row["digest_off"]) else 1
+        await self.db.execute("UPDATE users SET digest_off=? WHERE id=?", (new, user_id))
+        await self.db.commit()
+        return bool(new)
+
+    async def digest_recipients(self) -> list[aiosqlite.Row]:
+        cur = await self.db.execute("SELECT * FROM users WHERE digest_off=0")
+        return list(await cur.fetchall())
+
+    async def unannounced_auctions(self) -> list[aiosqlite.Row]:
+        """Live/upcoming auctions not yet announced to users."""
+        cur = await self.db.execute(
+            "SELECT * FROM auctions WHERE status IN ('live','upcoming') "
+            "AND id NOT IN (SELECT auction_id FROM announced_auctions)")
+        return list(await cur.fetchall())
+
+    async def mark_announced(self, auction_id: int) -> None:
+        await self.db.execute(
+            "INSERT OR IGNORE INTO announced_auctions(auction_id, ts) VALUES(?,?)",
+            (auction_id, int(time.time())))
+        await self.db.commit()
+
+    async def top_live_lots(self, interests: list[str], limit: int = 3) -> list[aiosqlite.Row]:
+        """Hottest live lots (by current bid) for digest, interest-filtered."""
+        conds = [self.INTEREST_SQL[i] for i in interests if i in self.INTEREST_SQL]
+        where = "(" + " OR ".join(conds) + ")" if conds else "1=1"
+        cur = await self.db.execute(
+            f"SELECT * FROM lots WHERE realized IS NULL AND {where} "
+            "AND current_bid IS NOT NULL ORDER BY current_bid DESC LIMIT ?", (limit,))
+        return list(await cur.fetchall())
 
     # -- listings (C2C showcase) ------------------------------------------
     async def add_listing(self, row: dict[str, Any]) -> int:

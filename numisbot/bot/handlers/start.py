@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from aiogram import F, Router
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command, CommandObject, CommandStart
 from aiogram.types import CallbackQuery, FSInputFile, Message
 
 from ..db import Database
@@ -23,9 +23,13 @@ async def _lang(db: Database, user_id: int) -> str:
 
 
 @router.message(CommandStart())
-async def cmd_start(msg: Message, db: Database, state=None):
+async def cmd_start(msg: Message, command: CommandObject, db: Database, state=None):
     if state is not None:
         await state.clear()
+    # referral deep link: t.me/<bot>?start=ref_<user_id>
+    payload = (command.args or "").strip()
+    if payload.startswith("ref_") and payload[4:].isdigit():
+        await db.set_referrer(msg.from_user.id, int(payload[4:]))
     await db.upsert_user(msg.from_user.id, msg.from_user.username)
     await db.track(msg.from_user.id, "start")
     row = await db.get_user(msg.from_user.id)
@@ -76,6 +80,9 @@ async def cb_interest(cb: CallbackQuery, db: Database):
     if choice == "done":
         await _edit(cb.message, t("onboarded", lang))
         await db.track(cb.from_user.id, "onboard_done")
+        # welcome gift: 7 days of Pro, once per user
+        if await db.try_use_trial(cb.from_user.id):
+            await cb.message.answer(t("trial_granted", lang))
         # instant value: show live lots matching the chosen interests
         total, sample = await db.interest_lots(sorted(selected), limit=3)
         if total:
@@ -110,3 +117,30 @@ async def cb_help(cb: CallbackQuery, db: Database):
     from ..keyboards import main_reply_kb
     await cb.message.answer(t("help", lang), reply_markup=main_reply_kb(lang))
     await cb.answer()
+
+
+@router.message(Command("invite"))
+async def cmd_invite(msg: Message, db: Database):
+    lang = await _lang(db, msg.from_user.id)
+    me = await msg.bot.me()
+    link = f"https://t.me/{me.username}?start=ref_{msg.from_user.id}"
+    await msg.answer(t("invite", lang).format(link=link),
+                     disable_web_page_preview=True)
+    await db.track(msg.from_user.id, "invite_view")
+
+
+@router.message(Command("digest"))
+async def cmd_digest(msg: Message, db: Database):
+    lang = await _lang(db, msg.from_user.id)
+    off = await db.toggle_digest(msg.from_user.id)
+    await msg.answer(t("digest_off" if off else "digest_on", lang))
+
+
+@router.callback_query(F.data == "digest:off")
+async def cb_digest_off(cb: CallbackQuery, db: Database):
+    lang = await _lang(db, cb.from_user.id)
+    row = await db.get_user(cb.from_user.id)
+    if row and not row["digest_off"]:
+        await db.toggle_digest(cb.from_user.id)
+    await cb.message.answer(t("digest_off", lang))
+    await cb.answer("🔕")

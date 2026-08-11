@@ -7,10 +7,11 @@ from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 import asyncio
+import datetime as dt
 
 from ..config import Config
 from ..db import Database
-from ..keyboards import lot_kb
+from ..keyboards import digest_kb, lot_kb
 from ..texts import esc, lot_card, photo_url, t
 from .katz_parser import KatzParser
 
@@ -32,6 +33,9 @@ class SchedulerService:
             minutes=self.cfg.parse_interval_minutes, id="refresh",
         )
         self.scheduler.add_job(self.closing_alerts, "interval", minutes=7, id="closing")
+        # Monday 09:00 UTC ≈ late morning across the RU/EU audience
+        self.scheduler.add_job(self.weekly_digest, "cron",
+                               day_of_week="mon", hour=9, id="digest")
         self.scheduler.start()
 
     async def shutdown(self) -> None:
@@ -46,6 +50,8 @@ class SchedulerService:
             return await self._refresh_now_locked()
 
     async def _refresh_now_locked(self) -> str:
+        cur = await self.db.db.execute("SELECT COUNT(*) c FROM auctions")
+        first_run = (await cur.fetchone())["c"] == 0
         try:
             auctions = await self.parser.fetch_auctions()
         except Exception as e:
@@ -63,8 +69,58 @@ class SchedulerService:
                 continue
             await self.db.upsert_lots(lots)
             new_lots += len(lots)
+        await self.announce_new_auctions(silent=first_run)
         await self.match_watches()
         return f"{len(auctions)} auctions, {new_lots} lots"
+
+    async def announce_new_auctions(self, silent: bool = False) -> None:
+        """Broadcast newly published auctions once; silent on the first sync."""
+        fresh = await self.db.unannounced_auctions()
+        for a in fresh:
+            await self.db.mark_announced(a["id"])
+            if silent:
+                continue
+            when = "—"
+            if a["starts"]:
+                when = dt.datetime.fromtimestamp(
+                    a["starts"], dt.timezone.utc).strftime("%d.%m %H:%M UTC")
+            for u in await self.db.digest_recipients():
+                lang = u["lang"] or "ru"
+                text = t("new_auction", lang).format(
+                    title=esc(a["title"].strip()), lots=a["lots_count"], when=when)
+                interests = [x for x in (u["interests"] or "").split(",") if x]
+                if interests:
+                    n, _ = await self.db.interest_lots(interests, limit=1)
+                    if n:
+                        text += t("new_auction_hits", lang).format(n=n)
+                try:
+                    await self.bot.send_message(u["id"], text,
+                                                reply_markup=digest_kb(lang))
+                except Exception:
+                    pass
+                await asyncio.sleep(0.05)
+
+    async def weekly_digest(self) -> None:
+        """Monday digest: hottest live lots by each user's interests."""
+        for u in await self.db.digest_recipients():
+            lang = u["lang"] or "ru"
+            interests = [x for x in (u["interests"] or "").split(",") if x]
+            lots = await self.db.top_live_lots(interests, limit=3)
+            if not lots:
+                continue
+            lines = [t("digest_header", lang)]
+            for lot in lots:
+                bid = f"€{lot['current_bid']:.0f}" if lot["current_bid"] else "€5"
+                title = esc(lot["title"][:60])
+                lines.append(f'▫️ <a href="{lot["url"]}">{title}</a> — {bid}')
+            try:
+                await self.bot.send_message(
+                    u["id"], "\n".join(lines),
+                    reply_markup=digest_kb(lang), disable_web_page_preview=True)
+                await self.db.track(u["id"], "digest_sent")
+            except Exception:
+                pass
+            await asyncio.sleep(0.05)
 
     async def api_search(self, query: str, live_only: bool = True, limit: int = 8):
         """Live global search straight from the Katz API (all ~520k lots).

@@ -114,6 +114,12 @@ def price_kb(query: str, lang: str) -> InlineKeyboardMarkup:
     ]])
 
 
+def digest_kb(lang: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
+        text="🔕 Не присылать дайджесты" if lang == "ru" else "🔕 Mute digests",
+        callback_data="digest:off")]])
+
+
 def cancel_kb(lang: str) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
         text="✖️ Отмена" if lang == "ru" else "✖️ Cancel",
