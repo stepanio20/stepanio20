@@ -7,8 +7,8 @@ from html import escape as esc
 
 import pytest
 
-from bot.texts import (INTERESTS, T, category_icon, listing_card, lot_card,
-                       photo_url, price_summary, realized_line, t)
+from bot.texts import (BTN, INTERESTS, T, category_icon, listing_card,
+                       lot_card, photo_url, price_summary, realized_line, t)
 
 UTC = dt.timezone.utc
 ENDS_TS = int(dt.datetime(2025, 12, 31, 23, 59, tzinfo=UTC).timestamp())
@@ -87,6 +87,15 @@ def test_t_known_and_fallback_lang():
 def test_interests_have_both_langs():
     for key, labels in INTERESTS.items():
         assert labels["ru"] and labels["en"], key
+
+
+def test_btn_registry_symmetric():
+    """Reply-keyboard routing does exact text match — both langs need the
+    same set of actions and no duplicate labels within a language."""
+    assert set(BTN["ru"]) == set(BTN["en"])
+    for lang in ("ru", "en"):
+        labels = list(BTN[lang].values())
+        assert len(labels) == len(set(labels))
 
 
 # ------------------------------------------------------------------- lot_card
@@ -247,19 +256,30 @@ def test_listing_card_sqlite_row_equals_dict():
     assert listing_card(as_row(listing), "ru") == listing_card(listing, "ru")
 
 
-def test_listing_card_long_description_fits_photo_caption():
-    """KNOWN BUG: description is user input (max 1500 chars in the handler).
-    listing_card slices the tail to 350 chars BEFORE html-escaping, so
-    '&'/'<'-dense text inflates up to ~6x (&quot; = 6 chars) and the card
-    exceeds Telegram's 1024-char photo-caption limit. market.py then sends
-    caption[:1024], which can cut inside an entity/blockquote tag ->
-    Telegram rejects the HTML -> the admin moderation card is silently
-    dropped (except: pass in market._finalize).
+def test_listing_card_with_description_false_drops_blockquote():
+    listing = make_listing(title="Coin A", description="Coin A with a long story")
+    card = listing_card(listing, "ru", with_description=False)
+    assert "<blockquote>" not in card
+    assert "💶 Цена" in card
+
+
+def test_listing_card_compact_fallback_always_fits_photo_caption():
+    """Contract the market handler relies on: the full card may overflow 1024
+    because the description tail is sliced BEFORE html-escaping ('&' -> &amp;
+    inflates 5-6x), but then _send_listing_card retries with
+    with_description=False and sends THAT without further truncation — so the
+    compact variant must always fit Telegram's 1024-char photo-caption cap.
     """
-    title = "Rare coin & slab, see description"
-    desc = title + " " + "&" * 500          # hostile but legal user input
-    card = listing_card(make_listing(title=title, description=desc), "ru")
-    assert len(card) <= 1024
+    title = "Rare coin & slab " * 4          # <=70 chars after handler trim
+    desc = (title + " " + "&" * 500)[:1500]  # hostile but legal user input
+    listing = make_listing(
+        title=title[:70], description=desc,
+        cert_service="PCGS", cert_number="45689164", cert_status="verified",
+        cert_note='"rare" & <fine> ' * 20)
+    full = listing_card(listing, "ru")
+    compact = listing_card(listing, "ru", with_description=False)
+    assert len(full) > 1024                  # why the fallback exists
+    assert len(compact) <= 1024
 
 
 # -------------------------------------------------------------- price_summary

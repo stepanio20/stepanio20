@@ -113,6 +113,11 @@ class Database:
     async def connect(self) -> None:
         self._db = await aiosqlite.connect(self.path)
         self._db.row_factory = aiosqlite.Row
+        # SQLite NOCASE only folds ASCII; register a Unicode-aware lower()
+        # so Cyrillic queries ("рубль" vs "Рубль") match case-insensitively
+        await self._db.create_function(
+            "lower_u", 1, lambda s: s.lower() if isinstance(s, str) else s,
+            deterministic=True)
         await self._db.executescript(SCHEMA)
         await self._db.commit()
         # local realized-price archive (built by scripts/backfill.py) — read-only
@@ -174,7 +179,7 @@ class Database:
     # -- watches ----------------------------------------------------------
     async def has_watch(self, user_id: int, query: str) -> bool:
         cur = await self.db.execute(
-            "SELECT 1 FROM watches WHERE user_id=? AND query=? COLLATE NOCASE",
+            "SELECT 1 FROM watches WHERE user_id=? AND lower_u(query)=lower_u(?)",
             (user_id, query.strip()))
         return await cur.fetchone() is not None
 
@@ -237,25 +242,25 @@ class Database:
         return list(await cur.fetchall())
 
     async def search_lots(self, query: str, limit: int = 8) -> list[aiosqlite.Row]:
-        like = f"%{query.strip()}%"
+        like = f"%{query.strip().lower()}%"
         cur = await self.db.execute(
             "SELECT l.*, a.title AS auction_title FROM lots l "
             "LEFT JOIN auctions a ON a.id=l.auction_id "
-            "WHERE l.title LIKE ? COLLATE NOCASE AND (l.realized IS NULL) "
+            "WHERE lower_u(l.title) LIKE ? AND (l.realized IS NULL) "
             "ORDER BY l.ends IS NULL, l.ends LIMIT ?",
             (like, limit),
         )
         return list(await cur.fetchall())
 
     async def price_history(self, query: str, limit: int = 8) -> list[aiosqlite.Row]:
-        like = f"%{query.strip()}%"
+        like = f"%{query.strip().lower()}%"
         src = "SELECT * FROM lots"
         if self.has_archive:
             # same lot may be cached in the main DB by api search — dedupe by id
             src += (" UNION ALL SELECT * FROM arch.lots "
                     "WHERE arch.lots.id NOT IN (SELECT id FROM lots)")
         cur = await self.db.execute(
-            f"SELECT * FROM ({src}) WHERE title LIKE ? COLLATE NOCASE "
+            f"SELECT * FROM ({src}) WHERE lower_u(title) LIKE ? "
             "AND realized IS NOT NULL ORDER BY auction_id DESC, realized DESC LIMIT ?",
             (like, limit),
         )

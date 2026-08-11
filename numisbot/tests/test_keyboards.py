@@ -2,14 +2,16 @@
 from __future__ import annotations
 
 from bot.keyboards import (_fit_cb, auctions_kb, interests_kb, lang_kb,
-                           listing_kb, lot_kb, menu_kb, price_kb,
-                           watchlist_kb)
+                           listing_kb, lot_kb, main_reply_kb, menu_kb,
+                           price_kb, watchlist_kb)
 from bot.services.certs import lookup_url
-from bot.texts import INTERESTS
+from bot.texts import BTN, INTERESTS
 
 
 def buttons(markup):
-    """Flatten InlineKeyboardMarkup to a list of buttons."""
+    """Flatten InlineKeyboardMarkup (possibly None) to a list of buttons."""
+    if markup is None:
+        return []
     return [b for row in markup.inline_keyboard for b in row]
 
 
@@ -79,6 +81,14 @@ def test_lot_kb_realized_without_url_is_empty():
     assert buttons(lot_kb(lot, "ru")) == []
 
 
+def test_lot_kb_in_radar_hides_watch_button():
+    """Radar alerts pass in_radar=True — no '+ watch' for an already-watched lot."""
+    lot = {"id": 11, "url": "https://katz/lot/11", "realized": None}
+    bs = buttons(lot_kb(lot, "ru", in_radar=True))
+    assert [b.url for b in bs] == ["https://katz/lot/11"]
+    assert all(b.callback_data is None for b in bs)
+
+
 # ----------------------------------------------------------------- listing_kb
 def _listing(**over):
     listing = {"id": 3, "user_id": 42, "contact": "@ivan",
@@ -95,7 +105,8 @@ def test_listing_kb_username_contact_gets_tme_link():
 def test_listing_kb_digits_contact_no_tme_link():
     """Sellers without a username are stored as bare digits (user id):
     t.me/<digits> is not a valid profile link and must not be rendered."""
-    bs = buttons(listing_kb(_listing(contact="5551234567"), "ru"))
+    kb = listing_kb(_listing(contact="5551234567"), "ru")
+    bs = buttons(kb)
     assert all(not (b.url and "t.me" in b.url) for b in bs)
     assert bs == []                                   # nothing else to show
 
@@ -138,6 +149,11 @@ def test_watchlist_kb_rows_and_cap():
     assert b2.text == "🗑 poltina" and b2.callback_data == "unwatch:2"
 
 
+def test_watchlist_kb_long_query_label_trimmed():
+    (b,) = buttons(watchlist_kb([{"id": 3, "query": "q" * 40, "max_price": None}], "ru"))
+    assert b.text == "🗑 " + "q" * 30 + "…"
+
+
 # ------------------------------------------------------------------- price_kb
 def test_price_kb_callback_fits_64_bytes_cyrillic():
     query = "полтина серебряная николаевская дореформенная"
@@ -145,7 +161,13 @@ def test_price_kb_callback_fits_64_bytes_cyrillic():
     (b,) = buttons(kb)
     assert b.callback_data.startswith("wq:")
     assert len(b.callback_data.encode("utf-8")) <= 64
-    assert query[:24] in b.text
+    assert query[:20] in b.text and b.text.endswith("…")
+
+
+def test_price_kb_short_query_no_ellipsis():
+    (b,) = buttons(price_kb("рубль", "en"))
+    assert "рубль" in b.text and not b.text.endswith("…")
+    assert b.callback_data == "wq:рубль"
 
 
 # ---------------------------------------------------------------- auctions_kb
@@ -186,3 +208,14 @@ def test_interests_kb_marks_selected_and_has_done():
     assert by_cb["int:gold"].text.startswith("✅ ")
     assert not by_cb["int:world"].text.startswith("✅")
     assert by_cb["int:done"].callback_data == "int:done"
+
+
+def test_main_reply_kb_labels_match_btn_registry():
+    """Bottom-nav labels must equal BTN texts — handlers route on exact match."""
+    for lang in ("ru", "en"):
+        kb = main_reply_kb(lang)
+        texts = [b.text for row in kb.keyboard for b in row]
+        assert sorted(texts) == sorted(BTN[lang].values())
+        assert kb.resize_keyboard and kb.is_persistent
+        assert len(kb.keyboard) == 4                        # 4 rows x 2 buttons
+        assert all(len(row) == 2 for row in kb.keyboard)

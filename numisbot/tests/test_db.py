@@ -123,7 +123,7 @@ async def test_free_limit_scenario_via_slots(db):
 async def test_upsert_lots_idempotent_and_partial_update(db):
     await db.upsert_lots([make_lot(100), make_lot(101)])
     await db.upsert_lots([make_lot(100, current_bid=50.0, bids=3,
-                                   title="CHANGED", realized=None)])
+                                   title="CHANGED", realized=None, ends=555)])
     cur = await db.db.execute("SELECT COUNT(*) c FROM lots")
     assert (await cur.fetchone())["c"] == 2
     lot = await db.get_lot(100)
@@ -132,6 +132,12 @@ async def test_upsert_lots_idempotent_and_partial_update(db):
     # archive flip: realized set on a later sync
     await db.upsert_lots([make_lot(100, realized=77.0)])
     assert (await db.get_lot(100))["realized"] == 77.0
+    # COALESCE semantics: None in a later sync must not wipe known values
+    await db.upsert_lots([make_lot(100, current_bid=None, realized=None, ends=None)])
+    lot = await db.get_lot(100)
+    assert lot["current_bid"] == 50.0
+    assert lot["realized"] == 77.0
+    assert lot["ends"] == 555
 
 
 async def test_upsert_lots_empty_iterable_noop(db):
@@ -147,18 +153,28 @@ async def test_search_lots_ascii_case_insensitive(db):
     assert len(await db.search_lots("  rouble  ")) == 1   # query trimmed
 
 
+async def test_has_watch_ascii_case_insensitive(db):
+    await db.add_watch(8, "Rouble 1912", None)
+    assert await db.has_watch(8, "rouble 1912")
+    assert await db.has_watch(8, "  ROUBLE 1912  ")
+    assert not await db.has_watch(8, "poltina")
+    assert not await db.has_watch(9, "Rouble 1912")       # other user
+
+
 async def test_search_lots_cyrillic_case_insensitive():
-    """KNOWN BUG: LIKE ... COLLATE NOCASE folds case for ASCII only.
+    """KNOWN BUG: LIKE/= ... COLLATE NOCASE folds case for ASCII only.
     The schema comment promises 'matched case-insensitively' and the bot's
     own onboarding suggests Cyrillic watches ('/watch рубль 1912'), but a
-    lowercase Cyrillic query does not match a capitalized title, so /find
-    and radar alerts silently miss lots for RU users."""
+    lowercase Cyrillic query does not match a capitalized title, so /find,
+    radar alerts and has_watch dedup silently miss for RU users."""
     d = Database(":memory:")
     await d.connect()
     try:
         await d.upsert_lots([make_lot(1, title="Рубль Николая II 1912")])
         assert len(await d.search_lots("Рубль")) == 1     # exact case works
+        await d.add_watch(1, "Рубль 1912", None)
         assert len(await d.search_lots("рубль")) == 1     # FAILS: NOCASE is ASCII-only
+        assert await d.has_watch(1, "рубль 1912")         # same root cause
     finally:
         await d.close()
 
@@ -201,12 +217,12 @@ async def test_price_history_case_and_limit(db):
 # ------------------------------------------------------------- interest_lots
 async def _seed_interest_lots(db):
     await db.upsert_lots([
-        make_lot(1, country="Russia"),
-        make_lot(2, category="Ancient Greece"),
+        make_lot(1, country="Russia", category="Coins - Europe"),
+        make_lot(2, category="Ancient coins"),
         make_lot(3, category="Banknotes"),
         make_lot(4, category="Phaleristics"),
         make_lot(5, metal="Gold"),
-        make_lot(6, title="Plain world coin"),
+        make_lot(6, category="Coins - Europe", country="Austria"),
         make_lot(7, country="Russia", realized=10.0),     # archived — excluded
     ])
 
@@ -218,20 +234,22 @@ async def test_interest_lots_fixed_map(db):
     assert (await db.interest_lots(["banknotes"]))[0] == 1
     assert (await db.interest_lots(["medals"]))[0] == 1
     assert (await db.interest_lots(["ancient"]))[0] == 1
+    # world = 'Coins - %' categories excluding Russia -> only lot 6
+    assert (await db.interest_lots(["world"]))[0] == 1
     total, sample = await db.interest_lots(["ru_imperial", "gold"])
     assert total == 2 and len(sample) == 2
 
 
-async def test_interest_lots_unmapped_interest_means_all_live(db):
+async def test_interest_lots_no_or_unknown_interests_mean_all_live(db):
     await _seed_interest_lots(db)
-    # 'world' has no SQL mapping -> falls back to 1=1 over live lots
-    assert (await db.interest_lots(["world"]))[0] == 6
+    # unknown keys are skipped; empty conds fall back to 1=1 over live lots
     assert (await db.interest_lots([]))[0] == 6
+    assert (await db.interest_lots(["no_such_interest"]))[0] == 6
 
 
 async def test_interest_lots_sample_limit(db):
     await _seed_interest_lots(db)
-    _, sample = await db.interest_lots(["world"], limit=3)
+    _, sample = await db.interest_lots([], limit=3)
     assert len(sample) == 3
 
 

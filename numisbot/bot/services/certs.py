@@ -26,10 +26,12 @@ import httpx
 log = logging.getLogger(__name__)
 
 # slab numbering schemes (kept permissive on purpose — schemes drift over time)
+# re.ASCII: \d must mean [0-9] only — Unicode digit homoglyphs would slip past
+# the one-cert-one-listing anti-fraud check and build broken registry URLs
 _PATTERNS = {
-    "PCGS": re.compile(r"^\d{7,9}$"),
-    "NGC": re.compile(r"^\d{6,8}-\d{3}$"),
-    "PMG": re.compile(r"^\d{6,8}-\d{3}$"),
+    "PCGS": re.compile(r"^\d{7,9}$", re.ASCII),
+    "NGC": re.compile(r"^\d{6,8}-\d{3}$", re.ASCII),
+    "PMG": re.compile(r"^\d{6,8}-\d{3}$", re.ASCII),
 }
 
 LOOKUP_URLS = {
@@ -41,7 +43,8 @@ LOOKUP_URLS = {
 
 def parse_cert_input(text: str) -> tuple[str, str] | None:
     """'NGC 1234567-001' / 'pcgs 45689164' → (service, number) or None."""
-    m = re.match(r"^\s*(ngc|pcgs|pmg)[\s:#-]*([\d-]+)\s*$", text.strip(), re.IGNORECASE)
+    m = re.match(r"^\s*(ngc|pcgs|pmg)[\s:#-]*([\d-]+)\s*$", text.strip(),
+                 re.IGNORECASE | re.ASCII)
     if not m:
         return None
     service = m.group(1).upper()
