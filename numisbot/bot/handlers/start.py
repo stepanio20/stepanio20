@@ -7,7 +7,7 @@ from aiogram.types import CallbackQuery, Message
 
 from ..db import Database
 from ..keyboards import interests_kb, lang_kb, menu_kb
-from ..texts import t
+from ..texts import lot_card, t
 
 router = Router()
 
@@ -40,6 +40,12 @@ async def cb_interest(cb: CallbackQuery, db: Database):
     selected = set(x for x in (row["interests"] or "").split(",") if x)
     if choice == "done":
         await cb.message.edit_text(t("onboarded", lang))
+        # instant value: show live lots matching the chosen interests
+        total, sample = await db.interest_lots(sorted(selected), limit=3)
+        if total:
+            await cb.message.answer(t("onboarded_hits", lang).format(n=total))
+            for lot in sample:
+                await cb.message.answer(lot_card(lot, lang), disable_web_page_preview=True)
         await cb.message.answer(t("menu", lang), reply_markup=menu_kb(lang))
         await cb.answer()
         return

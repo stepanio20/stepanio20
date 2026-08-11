@@ -217,6 +217,31 @@ class Database:
         )
         return list(await cur.fetchall())
 
+    # onboarding interests → SQL over structured lot fields (fixed map, no user input)
+    INTEREST_SQL = {
+        "ru_imperial": "(country LIKE 'Russia%' OR title LIKE '%Russia%')",
+        "ancient": "category LIKE '%Ancient%'",
+        "banknotes": "category LIKE 'Banknote%'",
+        "medals": "category LIKE 'Phaleristic%'",
+        "gold": "metal='Gold'",
+    }
+
+    async def interest_lots(self, interests: list[str], limit: int = 3) -> tuple[int, list[aiosqlite.Row]]:
+        """Count + sample of live lots matching onboarding interests."""
+        conds = [self.INTEREST_SQL[i] for i in interests if i in self.INTEREST_SQL]
+        where = "(" + " OR ".join(conds) + ")" if conds else "1=1"
+        cur = await self.db.execute(
+            f"SELECT COUNT(*) c FROM lots WHERE realized IS NULL AND {where}"
+        )
+        row = await cur.fetchone()
+        total = row["c"] if row else 0
+        cur = await self.db.execute(
+            f"SELECT * FROM lots WHERE realized IS NULL AND {where} "
+            "ORDER BY RANDOM() LIMIT ?",
+            (limit,),
+        )
+        return total, list(await cur.fetchall())
+
     async def closing_soon(self, within_minutes: int) -> list[aiosqlite.Row]:
         now = int(time.time())
         cur = await self.db.execute(

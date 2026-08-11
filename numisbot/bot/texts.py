@@ -40,6 +40,10 @@ T = {
             "What are you into? (pick a few)"
         ),
     },
+    "onboarded_hits": {
+        "ru": "🎯 В текущих торгах Katz — <b>{n}</b> лотов по вашим интересам. Вот несколько:",
+        "en": "🎯 Live Katz auctions have <b>{n}</b> lots matching your interests. A few of them:",
+    },
     "onboarded": {
         "ru": (
             "Отлично! 🎯 Интересы сохранены.\n\n"
