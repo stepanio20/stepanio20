@@ -78,6 +78,28 @@ CREATE TABLE IF NOT EXISTS payments (
     is_recurring INTEGER DEFAULT 0,
     created INTEGER
 );
+CREATE TABLE IF NOT EXISTS listings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    contact TEXT,
+    title TEXT,
+    description TEXT,
+    price REAL,                          -- asking price, EUR; NULL = 'offers'
+    photos TEXT,                         -- json array of telegram file_ids
+    cert_service TEXT,                   -- NGC | PCGS | PMG | '' (raw/no slab)
+    cert_number TEXT,
+    cert_status TEXT DEFAULT 'none',     -- none|pending|linked|verified|mismatch|rejected
+    cert_note TEXT DEFAULT '',           -- what the verifier saw (grade/name)
+    status TEXT DEFAULT 'active',        -- active|sold|hidden
+    created INTEGER
+);
+CREATE INDEX IF NOT EXISTS idx_listings_status ON listings(status, id);
+CREATE TABLE IF NOT EXISTS events (
+    user_id INTEGER,
+    name TEXT,
+    ts INTEGER
+);
+CREATE INDEX IF NOT EXISTS idx_events ON events(name, ts);
 """
 
 
@@ -299,6 +321,91 @@ class Database:
             (user_id, charge_id, tier, stars, int(is_recurring), int(time.time())),
         )
         await self.db.commit()
+
+    # -- listings (C2C showcase) ------------------------------------------
+    async def add_listing(self, row: dict[str, Any]) -> int:
+        cur = await self.db.execute(
+            "INSERT INTO listings(user_id,contact,title,description,price,photos,"
+            "cert_service,cert_number,cert_status,cert_note,created) "
+            "VALUES(:user_id,:contact,:title,:description,:price,:photos,"
+            ":cert_service,:cert_number,:cert_status,:cert_note,:created)",
+            row,
+        )
+        await self.db.commit()
+        return cur.lastrowid or 0
+
+    async def get_listing(self, listing_id: int) -> aiosqlite.Row | None:
+        cur = await self.db.execute("SELECT * FROM listings WHERE id=?", (listing_id,))
+        return await cur.fetchone()
+
+    async def browse_listings(self, before_id: int | None = None, limit: int = 3) -> list[aiosqlite.Row]:
+        if before_id:
+            cur = await self.db.execute(
+                "SELECT * FROM listings WHERE status='active' AND cert_status!='rejected' "
+                "AND id<? ORDER BY id DESC LIMIT ?", (before_id, limit))
+        else:
+            cur = await self.db.execute(
+                "SELECT * FROM listings WHERE status='active' AND cert_status!='rejected' "
+                "ORDER BY id DESC LIMIT ?", (limit,))
+        return list(await cur.fetchall())
+
+    async def active_listings_of(self, user_id: int) -> int:
+        cur = await self.db.execute(
+            "SELECT COUNT(*) c FROM listings WHERE user_id=? AND status='active'", (user_id,))
+        row = await cur.fetchone()
+        return row["c"] if row else 0
+
+    async def cert_in_use(self, service: str, number: str) -> bool:
+        """One certificate — one active listing (anti-fraud)."""
+        cur = await self.db.execute(
+            "SELECT 1 FROM listings WHERE cert_service=? AND cert_number=? "
+            "AND status='active' AND cert_status!='rejected'", (service, number))
+        return await cur.fetchone() is not None
+
+    async def set_cert_status(self, listing_id: int, status: str, note: str = "") -> None:
+        await self.db.execute(
+            "UPDATE listings SET cert_status=?, cert_note=? WHERE id=?",
+            (status, note, listing_id))
+        await self.db.commit()
+
+    async def set_listing_status(self, listing_id: int, user_id: int | None, status: str) -> None:
+        if user_id is None:  # admin action
+            await self.db.execute("UPDATE listings SET status=? WHERE id=?", (status, listing_id))
+        else:
+            await self.db.execute(
+                "UPDATE listings SET status=? WHERE id=? AND user_id=?",
+                (status, listing_id, user_id))
+        await self.db.commit()
+
+    # -- product metrics ---------------------------------------------------
+    async def track(self, user_id: int, name: str) -> None:
+        await self.db.execute(
+            "INSERT INTO events(user_id,name,ts) VALUES(?,?,?)",
+            (user_id, name, int(time.time())))
+        await self.db.commit()
+
+    async def metrics(self) -> dict[str, Any]:
+        now = int(time.time())
+        day, week, month = now - 86400, now - 7 * 86400, now - 30 * 86400
+        out: dict[str, Any] = {}
+        async def one(sql: str, *args) -> int:
+            cur = await self.db.execute(sql, args)
+            row = await cur.fetchone()
+            return list(row)[0] if row else 0
+        out["dau"] = await one("SELECT COUNT(DISTINCT user_id) FROM events WHERE ts>?", day)
+        out["wau"] = await one("SELECT COUNT(DISTINCT user_id) FROM events WHERE ts>?", week)
+        out["mau"] = await one("SELECT COUNT(DISTINCT user_id) FROM events WHERE ts>?", month)
+        total_users = await one("SELECT COUNT(*) FROM users")
+        activated = await one("SELECT COUNT(DISTINCT user_id) FROM watches")
+        out["activation_pct"] = round(100 * activated / total_users, 1) if total_users else 0.0
+        paying = await one(
+            "SELECT COUNT(*) FROM users WHERE tier!='free' AND sub_until>?", now)
+        out["conversion_pct"] = round(100 * paying / total_users, 1) if total_users else 0.0
+        out["searches_7d"] = await one(
+            "SELECT COUNT(*) FROM events WHERE name IN ('find','price') AND ts>?", week)
+        out["listings_active"] = await one(
+            "SELECT COUNT(*) FROM listings WHERE status='active'")
+        return out
 
     async def stats(self) -> dict[str, int]:
         out: dict[str, int] = {}

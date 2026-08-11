@@ -22,12 +22,17 @@ async def cmd_stats(msg: Message, db: Database, cfg: Config):
     if not _is_admin(cfg, msg.from_user.id):
         return
     s = await db.stats()
+    m = await db.metrics()
     await msg.answer(
-        "📊 <b>Статистика</b>\n"
-        f"Пользователи: {s['users']} (платящих: {s['paying']})\n"
-        f"Отслеживаний: {s['watches']}\n"
-        f"Лотов в базе: {s['lots']}\n"
-        f"Заявок на продажу: {s['leads']}"
+        "📊 <b>Метрики продукта</b>\n\n"
+        f"👥 Пользователи: <b>{s['users']}</b> · платящих: <b>{s['paying']}</b> "
+        f"(конверсия {m['conversion_pct']}%)\n"
+        f"📈 DAU {m['dau']} · WAU {m['wau']} · MAU {m['mau']}\n"
+        f"🎯 Активация (≥1 радар): <b>{m['activation_pct']}%</b>\n"
+        f"🔭 Отслеживаний: {s['watches']} · поисков за 7д: {m['searches_7d']}\n"
+        f"🛒 Листингов в витрине: {m['listings_active']}\n"
+        f"💼 Заявок на консигнацию: {s['leads']}\n"
+        f"🗃 Лотов в базе: {s['lots']}"
     )
 
 

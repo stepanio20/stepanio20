@@ -5,10 +5,11 @@ import datetime as dt
 
 from aiogram import F, Router
 from aiogram.filters import Command, CommandObject
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import BufferedInputFile, CallbackQuery, Message
 
 from ..db import Database
 from ..keyboards import auctions_kb, lot_kb, price_kb
+from ..services.charts import price_chart
 from ..texts import lot_card, photo_url, price_summary, t
 
 router = Router()
@@ -77,6 +78,7 @@ async def cmd_find(msg: Message, command: CommandObject, db: Database, scheduler
     if not query:
         await msg.answer(t("search_usage", lang))
         return
+    await db.track(msg.from_user.id, "find")
     lots = []
     if scheduler_service is not None:
         try:
@@ -99,6 +101,7 @@ async def cmd_price(msg: Message, command: CommandObject, db: Database, schedule
     if not query:
         await msg.answer(t("history_usage", lang))
         return
+    await db.track(msg.from_user.id, "price")
     # local archive first (fast, offline); fall back to live API
     rows = await db.price_history(query, limit=30)
     if not rows and scheduler_service is not None:
@@ -113,13 +116,16 @@ async def cmd_price(msg: Message, command: CommandObject, db: Database, schedule
     tier = await db.effective_tier(msg.from_user.id)
     shown = len(rows) if tier != "free" else min(5, len(rows))
     locked = len(rows) - shown
-    caption = price_summary(query, rows, lang, shown=shown, locked=locked)
+    caption = price_summary(query, rows, lang, shown=min(shown, 6), locked=locked)
     kb = price_kb(query, lang)
 
-    url = photo_url(rows[0]) if rows[0]["image"] else None
-    if url and len(caption) <= 1024:
+    # branded chart card: bars of realized prices + median
+    if len(rows) >= 2 and len(caption) <= 1024:
         try:
-            await msg.answer_photo(photo=url, caption=caption, reply_markup=kb)
+            png = price_chart(query, [r["realized"] for r in rows], lang)
+            await msg.answer_photo(
+                photo=BufferedInputFile(png, filename="prices.png"),
+                caption=caption, reply_markup=kb)
             return
         except Exception:
             pass

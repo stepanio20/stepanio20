@@ -205,30 +205,113 @@ T = {
         "ru": "🤝 Принято! Заявка №{lead_id} передана команде Katz. Обычно отвечают в течение 1–2 рабочих дней.",
         "en": "🤝 Got it! Request #{lead_id} sent to the Katz team. They usually reply within 1–2 business days.",
     },
+    "publish_start": {
+        "ru": (
+            "📸 <b>Публикация монеты — шаг 1 из 4</b>\n\n"
+            "Пришлите фото монеты (аверс; можно добавить ещё до 5 фото на следующем шаге).\n\n"
+            "<i>Хорошее фото = быстрая продажа: дневной свет, тёмный фон, обе стороны.</i>"
+        ),
+        "en": (
+            "📸 <b>List your coin — step 1 of 4</b>\n\n"
+            "Send a photo of the coin (obverse; you can add up to 5 photos at the next step).\n\n"
+            "<i>Good photos sell faster: daylight, dark background, both sides.</i>"
+        ),
+    },
+    "publish_photo_ok": {
+        "ru": ("✅ Фото получено.\n\n<b>Шаг 2 из 4.</b> Теперь опишите монету одним сообщением: "
+               "страна, номинал, год, металл, состояние/грейд. Можно докинуть ещё фото."),
+        "en": ("✅ Photo received.\n\n<b>Step 2 of 4.</b> Now describe the coin in one message: "
+               "country, denomination, year, metal, condition/grade. You may add more photos."),
+    },
+    "publish_need_photo": {
+        "ru": "Нужно фото 📷 — пришлите изображение монеты (или /menu для отмены).",
+        "en": "A photo is required 📷 — send an image of the coin (or /menu to cancel).",
+    },
+    "publish_desc_short": {
+        "ru": "Слишком коротко. Опишите подробнее: страна, номинал, год, металл, состояние.",
+        "en": "Too short. More detail please: country, denomination, year, metal, condition.",
+    },
+    "publish_price_ask": {
+        "ru": "<b>Шаг 3 из 4.</b> Какая цена в EUR? Напишите число — или жмите «Открыт к предложениям».",
+        "en": "<b>Step 3 of 4.</b> Asking price in EUR? Type a number — or tap “Open to offers”.",
+    },
+    "publish_price_bad": {
+        "ru": "Не понял цену. Напишите число (например <code>150</code>) или жмите кнопку.",
+        "en": "Couldn't parse that. Type a number (e.g. <code>150</code>) or tap the button.",
+    },
+    "publish_cert_ask": {
+        "ru": (
+            "<b>Шаг 4 из 4 — верификация.</b>\n\n"
+            "Если монета в слабе NGC / PCGS / PMG — пришлите номер сертификата, например:\n"
+            "<code>PCGS 45689164</code> или <code>NGC 6805461-001</code>\n\n"
+            "🛡 Проверяем по официальному реестру грейдера: PCGS — автоматически через "
+            "PCGS Public API, NGC/PMG — по публичной странице проверки + модерация. "
+            "Листинги с подтверждённым сертификатом получают бейдж ✅ и доверие покупателей."
+        ),
+        "en": (
+            "<b>Step 4 of 4 — verification.</b>\n\n"
+            "If the coin is slabbed by NGC / PCGS / PMG — send the cert number, e.g.:\n"
+            "<code>PCGS 45689164</code> or <code>NGC 6805461-001</code>\n\n"
+            "🛡 We check the grader's official registry: PCGS — automatically via the "
+            "PCGS Public API, NGC/PMG — via the public cert-lookup page + moderation. "
+            "Listings with a confirmed cert get a ✅ badge and buyer trust."
+        ),
+    },
+    "publish_cert_bad": {
+        "ru": ("Не похоже на номер сертификата. Формат: <code>PCGS 45689164</code>, "
+               "<code>NGC 6805461-001</code>, <code>PMG 1234567-001</code> — или «Без сертификата»."),
+        "en": ("That doesn't look like a cert number. Format: <code>PCGS 45689164</code>, "
+               "<code>NGC 6805461-001</code>, <code>PMG 1234567-001</code> — or “No certificate”."),
+    },
+    "publish_cert_dup": {
+        "ru": "⚠️ Этот сертификат уже привязан к активному листингу. Один слаб — один листинг.",
+        "en": "⚠️ This certificate already backs an active listing. One slab — one listing.",
+    },
+    "publish_limit": {
+        "ru": "🚦 Лимит активных листингов на вашем тарифе: {limit}. Больше слотов — в Pro/Dealer: /pro",
+        "en": "🚦 Active-listing limit on your plan: {limit}. More slots — Pro/Dealer: /pro",
+    },
+    "publish_done": {
+        "ru": ("🎉 <b>Листинг #{id} опубликован!</b>\n"
+               "Он появился в витрине /market и уйдёт в еженедельный дайджест. "
+               "Продали? Отметьте кнопкой под карточкой."),
+        "en": ("🎉 <b>Listing #{id} is live!</b>\n"
+               "It's now in /market and goes into the weekly digest. "
+               "Sold it? Mark it with the button under the card."),
+    },
+    "market_header": {
+        "ru": "🛒 <b>Витрина коллекционеров</b>\nСвежие монеты от участников — с проверкой сертификатов:",
+        "en": "🛒 <b>Collectors' showcase</b>\nFresh coins from members — certs verified:",
+    },
+    "market_empty": {
+        "ru": "Витрина пока пуста. Станьте первым: /publish 🪙",
+        "en": "The showcase is empty so far. Be the first: /publish 🪙",
+    },
+    "market_more": {"ru": "Показать ещё?", "en": "Show more?"},
     "help": {
         "ru": (
-            "🪙 <b>Команды</b>\n"
-            "━━━━━━━━━━━━━━━\n"
+            "🪙 <b>Команды</b>\n\n"
             "/auctions — текущие и ближайшие аукционы\n"
             "/find — поиск по лотам на торгах\n"
             "/watch — добавить отслеживание\n"
-            "/watchlist — мои отслеживания\n"
-            "/price — история реализованных цен\n"
-            "/sell — продать через Katz\n"
-            "/pro — тарифы Pro и Dealer\n"
-            "/lang — язык · /help — это меню"
+            "/watchlist — мой радар\n"
+            "/price — цены: за сколько уходило + график\n"
+            "/market — витрина монет участников\n"
+            "/publish — разместить свою монету (c проверкой сертификата)\n"
+            "/sell — сдать на аукцион Katz\n"
+            "/pro — тарифы · /lang — язык"
         ),
         "en": (
-            "🪙 <b>Commands</b>\n"
-            "━━━━━━━━━━━━━━━\n"
+            "🪙 <b>Commands</b>\n\n"
             "/auctions — live & upcoming auctions\n"
             "/find — search lots on sale\n"
             "/watch — add a watch\n"
-            "/watchlist — my watches\n"
-            "/price — realized price history\n"
-            "/sell — consign via Katz\n"
-            "/pro — Pro & Dealer plans\n"
-            "/lang — language · /help — this menu"
+            "/watchlist — my radar\n"
+            "/price — realized prices + chart\n"
+            "/market — members' coin showcase\n"
+            "/publish — list your coin (with cert verification)\n"
+            "/sell — consign to Katz auctions\n"
+            "/pro — plans · /lang — language"
         ),
     },
 }
@@ -306,6 +389,41 @@ def realized_line(lot, lang: str) -> str:
     cur = lot["currency"] or "EUR"
     title = esc(str(lot["title"])[:70])
     return f"▫️ {title} — <b>{_money(lot['realized'], cur)}</b>"
+
+
+CERT_BADGES = {
+    "verified": {"ru": "✅ Сертификат {svc} №{num} подтверждён", "en": "✅ {svc} cert #{num} verified"},
+    "linked": {"ru": "🛡 {svc} №{num} — проверьте в реестре по кнопке", "en": "🛡 {svc} #{num} — check via the registry button"},
+    "pending": {"ru": "⏳ {svc} №{num} — проверка сертификата идёт", "en": "⏳ {svc} #{num} — cert check in progress"},
+    "mismatch": {"ru": "⚠️ {svc} №{num} не найден в реестре", "en": "⚠️ {svc} #{num} not found in the registry"},
+}
+
+
+def listing_card(listing, lang: str) -> str:
+    """Showcase card for a user-published coin."""
+    ru = lang == "ru"
+    lines = [f"🪙 <b>{esc(listing['title'])}</b>"]
+    desc = (listing["description"] or "").strip()
+    if len(desc) > len(listing["title"]):
+        extra = desc[len(listing["title"]):].strip(" .,\n")
+        if extra:
+            lines.append(f"<blockquote>{esc(extra[:350])}</blockquote>")
+    price = listing["price"]
+    lines.append(("💶 Цена: <b>{p}</b>" if ru else "💶 Price: <b>{p}</b>").format(
+        p=_money(price, "EUR")) if price
+        else ("💬 Открыт к предложениям" if ru else "💬 Open to offers"))
+    if listing["cert_service"] and listing["cert_status"] in CERT_BADGES:
+        badge = CERT_BADGES[listing["cert_status"]]
+        line = badge.get(lang, badge["ru"]).format(
+            svc=listing["cert_service"], num=esc(listing["cert_number"]))
+        if listing["cert_status"] == "verified" and listing["cert_note"]:
+            line += f"\n<i>{esc(listing['cert_note'][:120])}</i>"
+        lines.append(line)
+    elif not listing["cert_service"]:
+        lines.append("◽️ Без сертификата (raw)" if ru else "◽️ No certificate (raw)")
+    lines.append(("Продавец: {c}" if ru else "Seller: {c}").format(
+        c=esc(listing["contact"] or "")))
+    return "\n".join(lines)
 
 
 def price_summary(query: str, rows, lang: str, shown: int, locked: int) -> str:

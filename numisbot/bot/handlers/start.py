@@ -1,9 +1,11 @@
 """Onboarding: /start → language → interests → menu. Plus /help, /lang, menu callbacks."""
 from __future__ import annotations
 
+from pathlib import Path
+
 from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, FSInputFile, Message
 
 from ..db import Database
 from ..keyboards import interests_kb, lang_kb, menu_kb
@@ -11,6 +13,8 @@ from ..texts import t
 from .auctions import send_lot_card
 
 router = Router()
+
+HERO = Path(__file__).resolve().parent.parent.parent / "assets" / "hero.png"
 
 
 async def _lang(db: Database, user_id: int) -> str:
@@ -21,7 +25,23 @@ async def _lang(db: Database, user_id: int) -> str:
 @router.message(CommandStart())
 async def cmd_start(msg: Message, db: Database):
     await db.upsert_user(msg.from_user.id, msg.from_user.username)
+    await db.track(msg.from_user.id, "start")
+    if HERO.exists():
+        try:
+            await msg.answer_photo(FSInputFile(HERO), caption=t("choose_lang", "ru"),
+                                   reply_markup=lang_kb())
+            return
+        except Exception:
+            pass
     await msg.answer(t("choose_lang", "ru"), reply_markup=lang_kb())
+
+
+async def _edit(message: Message, text: str, kb=None) -> None:
+    """Edit either a text message or a photo caption (the /start hero)."""
+    if message.photo:
+        await message.edit_caption(caption=text, reply_markup=kb)
+    else:
+        await message.edit_text(text, reply_markup=kb)
 
 
 @router.callback_query(F.data.startswith("lang:"))
@@ -29,7 +49,7 @@ async def cb_lang(cb: CallbackQuery, db: Database):
     lang = cb.data.split(":", 1)[1]
     await db.upsert_user(cb.from_user.id, cb.from_user.username)
     await db.set_lang(cb.from_user.id, lang)
-    await cb.message.edit_text(t("welcome", lang), reply_markup=interests_kb(lang, set()))
+    await _edit(cb.message, t("welcome", lang), interests_kb(lang, set()))
     await cb.answer()
 
 
@@ -40,7 +60,8 @@ async def cb_interest(cb: CallbackQuery, db: Database):
     row = await db.get_user(cb.from_user.id)
     selected = set(x for x in (row["interests"] or "").split(",") if x)
     if choice == "done":
-        await cb.message.edit_text(t("onboarded", lang))
+        await _edit(cb.message, t("onboarded", lang))
+        await db.track(cb.from_user.id, "onboard_done")
         # instant value: show live lots matching the chosen interests
         total, sample = await db.interest_lots(sorted(selected), limit=3)
         if total:

@@ -48,6 +48,7 @@ async def cmd_watch(msg: Message, command: CommandObject, db: Database, cfg: Con
         return
 
     await db.add_watch(msg.from_user.id, query, max_price)
+    await db.track(msg.from_user.id, "watch_add")
     cap = f" (&lt;{max_price:.0f})" if max_price else ""
     await msg.answer(t("watch_added", lang).format(q=query, cap=cap, used=used + 1, total=total))
 
@@ -85,6 +86,7 @@ async def _try_add_watch(cb: CallbackQuery, db: Database, cfg: Config, query: st
         await cb.answer("🚦")
         return
     await db.add_watch(cb.from_user.id, query, None)
+    await db.track(cb.from_user.id, "watch_add")
     await cb.message.answer(
         t("watch_added", lang).format(q=query, cap="", used=used + 1, total=total)
     )
