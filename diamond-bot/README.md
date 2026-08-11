@@ -43,9 +43,9 @@ cards to a channel), adapted from real estate to diamonds.
 | `db.py` | SQLite persistence (users, subscriptions, listings, demands, matches, groups, events) |
 | `ingest.py` | forward / CSV import / BYO-session Telegram reader |
 | `enrich.py` | GIA Report Results API cert verification + cross-check vs text (anti-cert-swap) |
-| `dealcard.py` | Channel caption (Telegram HTML, FOMO) + PNG deal-card infographic (Pillow) |
-| `payments.py` | Telegram **Stars** subscriptions (fiat provider token optional) |
-| `bot.py` | aiogram 3 handlers, menus, callbacks, admin `/status` `/publish` |
+| `dealcard.py` | Channel caption (FOMO) + PNG **deal-card** and buyer↔seller **match-card** infographics (Pillow) |
+| `payments.py` | **veym** gateway subscriptions (MamoPay-backed, AED) + `/mamopay-webhook` |
+| `bot.py` | aiogram 3 handlers, menus, callbacks, payment webhook, admin `/status` `/publish` |
 | `branding/` | Avatar, promo banner/square, sample deal card (generator: `make_branding.py`) |
 
 ## Run it
@@ -60,21 +60,27 @@ python -m pytest -q           # or: python tests/test_parser.py
 
 Docker: `docker build -t diamondscan . && docker run --env-file .env diamondscan`
 
-> **Note (this repo's sandbox only):** outbound HTTPS is proxied with a self-signed CA, so a
-> raw `python bot.py` here fails TLS. On a normal host it just works. The runtime was verified
-> end-to-end through the proxy (getMe, set_my_commands, get_updates, polling all pass).
+**Deploy 24/7:** see [`DEPLOY.md`](./DEPLOY.md) (Railway — one process runs both long-polling
+and the payment webhook, binding `$PORT`).
+
+> **Note (this repo's sandbox only):** outbound HTTPS is proxied with a self-signed CA. `bot.py`
+> auto-detects `HTTPS_PROXY` + the proxy CA and routes through them **only when present**, so it
+> runs here *and* unchanged on a normal host. Verified live: `getMe`, `set_my_commands`, polling,
+> and the `/health` + `/mamopay-webhook` server.
 
 ## Monetization
 
-Telegram Stars subscriptions (native, no merchant account):
+Subscriptions via the **veym** gateway (MamoPay-backed, **AED**) — the same gateway as the Dubai
+Unit Bot. Charge is created on MamoPay (hosted checkout → pay link); veym relays the result to
+`/mamopay-webhook`, which activates the plan.
 
-| Tier | Stars / 30d | ≈ USD | For |
+| Tier | AED / 30d | ≈ USD | For |
 |---|---|---|---|
-| **Buyer** | 1,900 ⭐ | ~$39/mo | small/private jewelers sourcing per-order |
-| **Broker** | 7,500 ⭐ | ~$149/mo | brokers/sellers — highest willingness to pay |
+| **Buyer** | AED 149 | ~$39/mo | small/private jewelers sourcing per-order |
+| **Broker** | AED 549 | ~$149/mo | brokers/sellers — highest willingness to pay |
 
-Contact reveal + full match history are gated to active subscribers. Adjust prices in
-`config.py`. A fiat card provider token (from @BotFather) drops in without code changes.
+Contact reveal + full match history are gated to active subscribers. Adjust prices in `config.py`.
+`FREE_REVEAL=true` opens the paywall for demos (must be `false` in production).
 
 ## Deal mechanics the service accounts for (and what it deliberately skips)
 

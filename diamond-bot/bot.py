@@ -35,6 +35,24 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger("diamondscan")
 router = Router()
 
+# Dev-only egress shim: some sandboxes route outbound HTTPS through a TLS-intercepting
+# proxy with a private CA. Trust that CA and route aiogram through the proxy — but ONLY
+# when those are present. In production (Railway) neither exists, so this is a no-op and
+# the default direct session is used.
+import os as _os
+_CA = "/root/.ccr/ca-bundle.crt"
+if _os.path.exists(_CA) and not _os.environ.get("SSL_CERT_FILE"):
+    _os.environ["SSL_CERT_FILE"] = _CA
+
+
+def _build_session():
+    proxy = _os.environ.get("HTTPS_PROXY") or _os.environ.get("https_proxy")
+    if not proxy:
+        return None  # production: default session, direct egress
+    from aiogram.client.session.aiohttp import AiohttpSession
+    log.info("Routing Telegram API through proxy %s", proxy)
+    return AiohttpSession(proxy=proxy)
+
 SEED_GROUPS = [
     {"handle": "@demandsnatural", "title": "DEMANDS Natural Diamonds", "members": 2136, "nature": "want"},
     {"handle": "@diamondsexport", "title": "Natural Diamonds & Jewellery", "members": 1050, "nature": "have"},
@@ -51,7 +69,8 @@ def is_admin(uid: int) -> bool:
 
 
 def has_sub(uid: int) -> bool:
-    return is_admin(uid) or db.active_subscription(uid) is not None
+    # FREE_REVEAL is a testing switch that opens the paywall for everyone (see config).
+    return settings.free_reveal or is_admin(uid) or db.active_subscription(uid) is not None
 
 
 def role_of(uid: int) -> str:
@@ -350,7 +369,22 @@ async def cb_buy(cb: CallbackQuery) -> None:
     if tier not in settings.tiers:
         await cb.answer("Unknown plan", show_alert=True)
         return
-    await payments.send_invoice(cb.bot, cb.from_user.id, tier)
+    t = settings.tiers[tier]
+    pay = await payments.create_payment(tier, cb.from_user.id)
+    if pay and pay.get("url"):
+        kb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
+            text=f"💳 Pay AED {t['aed']} · {t['title']}", url=pay["url"])]])
+        await cb.message.answer(
+            f"⭐ <b>{t['title']}</b> — AED {t['aed']} / {t['days']} days.\n"
+            "Pay securely by card (AED). Your plan activates automatically once payment clears.",
+            reply_markup=kb)
+    else:
+        # Payment gateway not fully configured yet — don't dead-end the user.
+        note = ("Card payments (AED) are being switched on. " if not settings.free_reveal
+                else "Test mode: contact reveal is already unlocked — no payment needed. ")
+        await cb.message.answer(
+            f"⭐ <b>{t['title']}</b> — AED {t['aed']} / {t['days']} days.\n" + note +
+            "Ping the admin to activate your plan.")
     await cb.answer()
 
 
@@ -380,20 +414,43 @@ async def cb_connect(cb: CallbackQuery) -> None:
     await cb.answer()
 
 
-# ─────────────────────────────── payments ────────────────────────────────────
+# ─────────────────────────── payment webhook (veym) ──────────────────────────
 
-@router.pre_checkout_query()
-async def pre_checkout(q: PreCheckoutQuery) -> None:
-    await q.answer(ok=True)
+async def _webhook_app(bot: Bot):
+    """aiohttp app: receives veym/MamoPay events and a health check. Binds $PORT so
+    the same Railway service handles both long-polling and inbound webhooks."""
+    from aiohttp import web
 
+    async def mamopay_webhook(request: "web.Request"):
+        auth = request.headers.get("authorization", "") or request.headers.get("Authorization", "")
+        if not payments.verify_webhook_auth(auth):
+            return web.json_response({"ok": False, "error": "unauthorized"}, status=401)
+        try:
+            event = await request.json()
+        except Exception:
+            return web.json_response({"ok": False, "error": "bad json"}, status=400)
+        result = payments.handle_webhook_event(event)
+        if result:
+            tg_id, tier = result
+            try:
+                await bot.send_message(
+                    tg_id, f"✅ <b>{settings.tiers[tier]['title']} active.</b> Contact reveals and "
+                           "full match history are unlocked. Send a request or forward your stock.")
+            except Exception as e:  # noqa: BLE001
+                log.warning("post-payment notify failed for %s: %s", tg_id, e)
+        return web.json_response({"ok": True})
 
-@router.message(F.successful_payment)
-async def paid(msg: Message) -> None:
-    sp = msg.successful_payment
-    tier = await payments.on_successful_payment(
-        msg.from_user.id, sp.invoice_payload, sp.telegram_payment_charge_id, sp.total_amount)
-    await msg.answer(f"✅ <b>{settings.tiers[tier]['title']} active.</b> Contact reveals and full "
-                     "match history unlocked. Send me a request or forward your stock.")
+    async def ok(_):
+        from aiohttp import web as _w
+        return _w.Response(text="DiamondScan up")
+
+    app = web.Application()
+    app.router.add_post("/mamopay-webhook", mamopay_webhook)
+    app.router.add_get("/health", ok)
+    app.router.add_get("/", ok)
+    app.router.add_get("/paid", lambda r: web.Response(text="Payment received — you can return to Telegram."))
+    app.router.add_get("/failed", lambda r: web.Response(text="Payment failed — try again in the bot."))
+    return app
 
 
 # ─────────────────────────────── runner ──────────────────────────────────────
@@ -401,8 +458,8 @@ async def paid(msg: Message) -> None:
 async def _set_commands(bot: Bot) -> None:
     from aiogram.types import BotCommand
     await bot.set_my_commands([
-        BotCommand(command="start", description="Start / main menu"),
-        BotCommand(command="subscribe", description="Plans & Stars payment"),
+        BotCommand(command="start", description="What DiamondScan does"),
+        BotCommand(command="subscribe", description="Plans & payment (AED)"),
         BotCommand(command="matches", description="Your recent matches"),
         BotCommand(command="help", description="How it works"),
     ])
@@ -411,13 +468,27 @@ async def _set_commands(bot: Bot) -> None:
 async def main() -> None:
     db.init_db()
     db.seed_groups(SEED_GROUPS)
-    bot = Bot(settings.require_token(), default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot = Bot(settings.require_token(), session=_build_session(),
+              default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
     dp.include_router(router)
     await _set_commands(bot)
     me = await bot.get_me()
-    log.info("Starting @%s (id=%s), market=%s", me.username, me.id, settings.market)
-    await dp.start_polling(bot)
+    log.info("Starting @%s (id=%s), market=%s, free_reveal=%s", me.username, me.id,
+             settings.market, settings.free_reveal)
+
+    # webhook server (payments) alongside long-polling, both in one process
+    from aiohttp import web
+    app = await _webhook_app(bot)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, host="0.0.0.0", port=settings.port)
+    await site.start()
+    log.info("Webhook server on :%s (POST /mamopay-webhook)", settings.port)
+    try:
+        await dp.start_polling(bot)
+    finally:
+        await runner.cleanup()
 
 
 if __name__ == "__main__":

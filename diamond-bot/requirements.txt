@@ -1,4 +1,5 @@
 aiogram>=3.4,<4
+aiohttp>=3.9          # payment webhook server (ships with aiogram; pinned explicitly)
 Pillow>=10
 # optional — only needed for BYO-session Telegram group ingestion:
 telethon>=1.34

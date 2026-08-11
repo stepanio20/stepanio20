@@ -35,10 +35,15 @@ def _ids(raw: str) -> set[int]:
     return out
 
 
+def _bool(raw: str, default: bool = False) -> bool:
+    if raw == "":
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+
 @dataclass(frozen=True)
 class Settings:
     bot_token: str = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    provider_token: str = os.environ.get("TELEGRAM_PROVIDER_TOKEN", "")
     gia_api_key: str = os.environ.get("GIA_API_KEY", "")
     anthropic_api_key: str = os.environ.get("ANTHROPIC_API_KEY", "")
     market: str = os.environ.get("MARKET", "dubai")
@@ -46,11 +51,30 @@ class Settings:
     channel_id: str = os.environ.get("TELEGRAM_CHANNEL_ID", "")
     admin_user_ids: set[int] = field(default_factory=lambda: _ids(os.environ.get("ADMIN_USER_IDS", "")))
 
-    # Subscription tiers, in Telegram Stars (XTR). ~ USD shown for reference in copy.
-    # Stars price is what Telegram charges; adjust to taste. 1 Star ≈ $0.013–0.02 net.
+    # ── Payments: veym gateway (MamoPay-backed, AED). No Telegram Stars. ──
+    # veym exposes: GET /v1/payments, GET /v1/payments/:id, /v1/webhooks (auth via `apikey` header).
+    # Charges are created on MamoPay; veym relays events to our /mamopay-webhook.
+    veym_base_url: str = os.environ.get("VEYM_BASE_URL", "https://veym.up.railway.app/v1").rstrip("/")
+    veym_api_key: str = os.environ.get("VEYM_API_KEY", "")
+    veym_webhook_secret: str = os.environ.get("VEYM_WEBHOOK_SECRET", "")
+    # How a charge is created. Filled from the Dubai Unit Bot's flow: a MamoPay charge/link
+    # endpoint that returns a hosted payment URL. Left configurable until confirmed.
+    mamo_api_key: str = os.environ.get("MAMO_API_KEY", "")
+    mamo_base_url: str = os.environ.get("MAMO_BASE_URL", "https://business.mamopay.com/manage_api/v1").rstrip("/")
+    currency: str = os.environ.get("CURRENCY", "AED")
+
+    # Public HTTPS base (Railway domain) — used for webhook + return URLs. e.g. https://xxx.up.railway.app
+    public_base_url: str = os.environ.get("PUBLIC_BASE_URL", "").rstrip("/")
+    port: int = int(os.environ.get("PORT", "8080") or "8080")
+
+    # Testing switch: reveal counterparty contact without a paid subscription.
+    # MUST be false in production — it disables the paywall.
+    free_reveal: bool = _bool(os.environ.get("FREE_REVEAL", ""), default=False)
+
+    # Subscription tiers in AED (charged via veym/MamoPay). usd = rough reference only.
     tiers: dict = field(default_factory=lambda: {
-        "buyer":  {"title": "Buyer",  "stars": 1900, "usd": 39,  "days": 30},
-        "broker": {"title": "Broker", "stars": 7500, "usd": 149, "days": 30},
+        "buyer":  {"title": "Buyer",  "aed": 149, "usd": 39,  "days": 30},
+        "broker": {"title": "Broker", "aed": 549, "usd": 149, "days": 30},
     })
 
     contact_phone: str = os.environ.get("CONTACT_PHONE", "+971 56 000 0000")
