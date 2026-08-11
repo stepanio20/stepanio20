@@ -1,4 +1,4 @@
-"""/auctions, /find, /price — browse cached auction data."""
+"""/auctions, /find, /price — Telegram-native cards: photo-first, buttons."""
 from __future__ import annotations
 
 import datetime as dt
@@ -8,7 +8,8 @@ from aiogram.filters import Command, CommandObject
 from aiogram.types import CallbackQuery, Message
 
 from ..db import Database
-from ..texts import lot_card, realized_line, t
+from ..keyboards import auctions_kb, lot_kb, price_kb
+from ..texts import lot_card, photo_url, price_summary, t
 
 router = Router()
 
@@ -18,11 +19,23 @@ async def _lang(db: Database, user_id: int) -> str:
     return row["lang"] if row else "ru"
 
 
-def _fmt_ts(ts: int | None, lang: str) -> str:
+async def send_lot_card(msg: Message, lot, lang: str) -> None:
+    caption = lot_card(lot, lang)
+    kb = lot_kb(lot, lang)
+    url = photo_url(lot)
+    if url:
+        try:
+            await msg.answer_photo(photo=url, caption=caption, reply_markup=kb)
+            return
+        except Exception:
+            pass  # bad/expired image — fall back to text
+    await msg.answer(caption, reply_markup=kb, disable_web_page_preview=True)
+
+
+def _fmt_ts(ts: int | None) -> str:
     if not ts:
         return "—"
-    d = dt.datetime.fromtimestamp(ts, dt.timezone.utc)
-    return d.strftime("%d.%m.%Y %H:%M UTC")
+    return dt.datetime.fromtimestamp(ts, dt.timezone.utc).strftime("%d.%m %H:%M UTC")
 
 
 @router.message(Command("auctions"))
@@ -42,16 +55,19 @@ async def _show_auctions(msg: Message, user_id: int, db: Database):
     if not auctions:
         await msg.answer(t("auctions_header", lang) + "\n" + t("no_auctions", lang))
         return
-    lines = [t("auctions_header", lang)]
-    for a in auctions[:10]:
-        status = "🟢 LIVE" if a["status"] == "live" else "🗓"
-        when = _fmt_ts(a["starts"], lang) if a["status"] != "live" else _fmt_ts(a["ends"], lang)
-        label = ("завершение" if a["status"] == "live" else "старт") if lang == "ru" else (
-            "ends" if a["status"] == "live" else "starts")
-        lots = f" · {a['lots_count']} " + ("лотов" if lang == "ru" else "lots") if a["lots_count"] else ""
-        link = f' — <a href="{a["url"]}">↗</a>' if a["url"] else ""
-        lines.append(f"{status} <b>{a['title']}</b>{lots}\n     {label}: {when}{link}")
-    await msg.answer("\n".join(lines), disable_web_page_preview=True)
+    ru = lang == "ru"
+    lines = [t("auctions_header", lang), ""]
+    for a in auctions[:8]:
+        if a["status"] == "live":
+            when = ("завершение " if ru else "ends ") + _fmt_ts(a["ends"])
+            mark = "🟢"
+        else:
+            when = ("старт " if ru else "starts ") + _fmt_ts(a["starts"])
+            mark = "🗓"
+        lots = f" · {a['lots_count']} " + ("лотов" if ru else "lots") if a["lots_count"] else ""
+        lines.append(f"{mark} <b>{a['title'].strip()}</b>{lots}\n      {when}")
+    await msg.answer("\n".join(lines), reply_markup=auctions_kb(auctions, lang),
+                     disable_web_page_preview=True)
 
 
 @router.message(Command("find"))
@@ -72,8 +88,8 @@ async def cmd_find(msg: Message, command: CommandObject, db: Database, scheduler
     if not lots:
         await msg.answer(t("search_empty", lang).format(q=query))
         return
-    for lot in lots[:5]:
-        await msg.answer(lot_card(lot, lang), disable_web_page_preview=False)
+    for lot in lots[:4]:
+        await send_lot_card(msg, lot, lang)
 
 
 @router.message(Command("price"))
@@ -83,26 +99,31 @@ async def cmd_price(msg: Message, command: CommandObject, db: Database, schedule
     if not query:
         await msg.answer(t("history_usage", lang))
         return
-    rows = []
-    if scheduler_service is not None:
+    # local archive first (fast, offline); fall back to live API
+    rows = await db.price_history(query, limit=30)
+    if not rows and scheduler_service is not None:
         try:
-            rows = await scheduler_service.api_price_history(query, limit=20)
+            rows = await scheduler_service.api_price_history(query, limit=30)
         except Exception:
             rows = []
     if not rows:
-        rows = await db.price_history(query, limit=20)
-    if not rows:
         await msg.answer(t("search_empty", lang).format(q=query))
         return
+
     tier = await db.effective_tier(msg.from_user.id)
-    shown = rows if tier != "free" else rows[:3]
-    header = ("📉 <b>Реализованные цены: «{q}»</b>\n━━━━━━━━━━━━━━━" if lang == "ru"
-              else "📉 <b>Realized prices: “{q}”</b>\n━━━━━━━━━━━━━━━").format(q=query)
-    body = "\n".join(realized_line(r, lang) for r in shown)
-    tail = ""
-    if tier == "free" and len(rows) > len(shown):
-        tail = t("history_free_teaser", lang).format(shown=len(shown), found=len(rows))
-    await msg.answer(f"{header}\n{body}{tail}", disable_web_page_preview=True)
+    shown = len(rows) if tier != "free" else min(5, len(rows))
+    locked = len(rows) - shown
+    caption = price_summary(query, rows, lang, shown=shown, locked=locked)
+    kb = price_kb(query, lang)
+
+    url = photo_url(rows[0]) if rows[0]["image"] else None
+    if url and len(caption) <= 1024:
+        try:
+            await msg.answer_photo(photo=url, caption=caption, reply_markup=kb)
+            return
+        except Exception:
+            pass
+    await msg.answer(caption, reply_markup=kb, disable_web_page_preview=True)
 
 
 @router.callback_query(F.data == "m:price")

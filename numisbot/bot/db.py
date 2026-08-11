@@ -82,8 +82,10 @@ CREATE TABLE IF NOT EXISTS payments (
 
 
 class Database:
-    def __init__(self, path: str):
+    def __init__(self, path: str, archive_path: str | None = None):
         self.path = path
+        self.archive_path = archive_path
+        self.has_archive = False
         self._db: aiosqlite.Connection | None = None
 
     async def connect(self) -> None:
@@ -91,6 +93,12 @@ class Database:
         self._db.row_factory = aiosqlite.Row
         await self._db.executescript(SCHEMA)
         await self._db.commit()
+        # local realized-price archive (built by scripts/backfill.py) — read-only
+        if self.archive_path:
+            import os
+            if os.path.exists(self.archive_path):
+                await self._db.execute("ATTACH DATABASE ? AS arch", (self.archive_path,))
+                self.has_archive = True
 
     async def close(self) -> None:
         if self._db:
@@ -210,12 +218,19 @@ class Database:
 
     async def price_history(self, query: str, limit: int = 8) -> list[aiosqlite.Row]:
         like = f"%{query.strip()}%"
+        src = "SELECT * FROM lots"
+        if self.has_archive:
+            src += " UNION SELECT * FROM arch.lots"
         cur = await self.db.execute(
-            "SELECT * FROM lots WHERE title LIKE ? COLLATE NOCASE AND realized IS NOT NULL "
-            "ORDER BY updated DESC LIMIT ?",
+            f"SELECT * FROM ({src}) WHERE title LIKE ? COLLATE NOCASE "
+            "AND realized IS NOT NULL ORDER BY auction_id DESC, realized DESC LIMIT ?",
             (like, limit),
         )
         return list(await cur.fetchall())
+
+    async def get_lot(self, lot_id: int) -> aiosqlite.Row | None:
+        cur = await self.db.execute("SELECT * FROM lots WHERE id=?", (lot_id,))
+        return await cur.fetchone()
 
     # onboarding interests → SQL over structured lot fields (fixed map, no user input)
     INTEREST_SQL = {

@@ -1,6 +1,10 @@
-"""All user-facing copy, RU + EN. Design language: dark-gold Katz palette,
-coin iconography, compact cards. HTML parse mode everywhere."""
+"""All user-facing copy, RU + EN. Design language: Telegram-native cards —
+photo-first, short lines, buttons instead of raw links. HTML parse mode
+everywhere, so every dynamic value goes through esc()."""
 from __future__ import annotations
+
+import datetime as dt
+from html import escape as esc
 
 INTERESTS = {
     "ru_imperial": {"ru": "🇷🇺 Россия и Империя", "en": "🇷🇺 Russia & Empire"},
@@ -18,26 +22,22 @@ T = {
     },
     "welcome": {
         "ru": (
-            "🪙 <b>Katz Coins Radar</b> — ваш радар на аукционах Katz\n"
-            "━━━━━━━━━━━━━━━\n"
-            "Тысячи лотов каждый месяц: монеты, банкноты, медали, ордена. "
-            "Бот следит за ними за вас:\n\n"
-            "🔔 <b>Алерты по ключевым словам</b> — «полтина 1859», «Nicholas II», «таульер»…\n"
-            "⏰ <b>Напоминания</b> — лот из вотчлиста закрывается через час\n"
-            "📉 <b>История цен</b> — за сколько такие лоты реально уходили\n"
-            "💼 <b>Продавцам</b> — оценка и сдача монет на аукцион\n\n"
-            "Что вам интереснее всего? (можно несколько)"
+            "🪙 <b>Katz Coins Radar</b>\n\n"
+            "Слежу за аукционами Katz вместо вас:\n\n"
+            "🔔 поймаю лот по вашим словам — «полтина 1859», «Nicholas II»\n"
+            "⏰ напомню за час до закрытия\n"
+            "📉 покажу, за сколько такое реально уходило\n"
+            "💼 помогу продать через Katz\n\n"
+            "<b>Что собираете?</b> Можно выбрать несколько:"
         ),
         "en": (
-            "🪙 <b>Katz Coins Radar</b> — your radar for Katz auctions\n"
-            "━━━━━━━━━━━━━━━\n"
-            "Thousands of lots every month: coins, banknotes, medals, orders. "
-            "The bot watches them for you:\n\n"
-            "🔔 <b>Keyword alerts</b> — “poltina 1859”, “Nicholas II”, “thaler”…\n"
-            "⏰ <b>Reminders</b> — your watched lot closes in an hour\n"
-            "📉 <b>Price history</b> — what similar lots really sold for\n"
-            "💼 <b>For sellers</b> — valuation & consignment to auction\n\n"
-            "What are you into? (pick a few)"
+            "🪙 <b>Katz Coins Radar</b>\n\n"
+            "I watch Katz auctions for you:\n\n"
+            "🔔 catch lots by your keywords — “poltina 1859”, “Nicholas II”\n"
+            "⏰ remind you an hour before closing\n"
+            "📉 show what similar lots really sold for\n"
+            "💼 help you sell via Katz\n\n"
+            "<b>What do you collect?</b> Pick a few:"
         ),
     },
     "onboarded_hits": {
@@ -239,30 +239,92 @@ def t(key: str, lang: str) -> str:
     return entry.get(lang, entry["ru"])
 
 
+def photo_url(lot) -> str | None:
+    """Bunny CDN resizes on the fly; ask for a Telegram-friendly width."""
+    img = lot["image"]
+    if not img:
+        return None
+    return img + ("&" if "?" in img else "?") + "width=700"
+
+
+def category_icon(category: str | None) -> str:
+    c = (category or "").lower()
+    if c.startswith("banknote") or "paper" in c:
+        return "💵"
+    if c.startswith("phaleristic"):
+        return "🎖"
+    return "🪙"
+
+
+def _money(v: float | None, cur: str) -> str:
+    if v is None:
+        return ""
+    sym = "€" if cur == "EUR" else cur + " "
+    return f"{sym}{v:,.0f}".replace(",", " ")
+
+
+def _fmt_ends(ts: int | None, lang: str) -> str:
+    if not ts:
+        return ""
+    d = dt.datetime.fromtimestamp(ts, dt.timezone.utc)
+    return d.strftime("%d.%m %H:%M UTC")
+
+
 def lot_card(lot, lang: str) -> str:
-    """Compact lot card. `lot` is a sqlite Row or dict with lot fields."""
-    g = lot["grade"] or ""
-    parts_meta = " · ".join(x for x in [lot["country"] or "", str(lot["year"] or ""), lot["metal"] or "", g] if x)
-    cur = lot["currency"] or "USD"
-    price_bits = []
-    if lot["current_bid"]:
-        price_bits.append(("Ставка" if lang == "ru" else "Bid") + f": <b>{lot['current_bid']:.0f} {cur}</b>")
-    elif lot["start_price"]:
-        price_bits.append(("Старт" if lang == "ru" else "Start") + f": <b>{lot['start_price']:.0f} {cur}</b>")
-    if lot["estimate"]:
-        price_bits.append(("Эстимейт" if lang == "ru" else "Est.") + f": {lot['estimate']:.0f} {cur}")
-    if lot["bids"]:
-        price_bits.append(("ставок " if lang == "ru" else "bids ") + str(lot["bids"]))
-    lines = [f"🪙 <b>{lot['title']}</b>"]
-    if parts_meta:
-        lines.append(f"<i>{parts_meta}</i>")
-    if price_bits:
-        lines.append(" · ".join(price_bits))
-    if lot["url"]:
-        lines.append(f'<a href="{lot["url"]}">' + ("Открыть лот ↗" if lang == "ru" else "Open lot ↗") + "</a>")
+    """Telegram-native lot card: short lines, fits a photo caption (<=1024).
+
+    `lot` is a sqlite Row or dict with lot fields; all text is HTML-escaped.
+    """
+    ru = lang == "ru"
+    cur = lot["currency"] or "EUR"
+    icon = category_icon(lot["category"] if "category" in lot.keys() else None)
+    meta = " · ".join(
+        esc(str(x)) for x in [lot["country"], lot["year"], lot["metal"], lot["grade"]] if x
+    )
+    lines = [f"{icon} <b>{esc(lot['title'])}</b>"]
+    if meta:
+        lines.append(f"<i>{meta}</i>")
+    lines.append("")
+    if lot["realized"] is not None:
+        lines.append(("✅ Продан за <b>{p}</b>" if ru else "✅ Sold for <b>{p}</b>")
+                     .format(p=_money(lot["realized"], cur)))
+    else:
+        bid = lot["current_bid"]
+        if bid:
+            lines.append(("💶 Ставка: <b>{p}</b>" if ru else "💶 Bid: <b>{p}</b>")
+                         .format(p=_money(bid, cur)))
+        elif lot["start_price"]:
+            lines.append(("💶 Старт: <b>{p}</b>" if ru else "💶 Start: <b>{p}</b>")
+                         .format(p=_money(lot["start_price"], cur)))
+        ends = _fmt_ends(lot["ends"], lang)
+        if ends:
+            lines.append(("⏳ Закрытие: {e}" if ru else "⏳ Closes: {e}").format(e=ends))
     return "\n".join(lines)
 
 
 def realized_line(lot, lang: str) -> str:
-    cur = lot["currency"] or "USD"
-    return f"• {lot['title']} — <b>{lot['realized']:.0f} {cur}</b>"
+    cur = lot["currency"] or "EUR"
+    title = esc(str(lot["title"])[:70])
+    return f"▫️ {title} — <b>{_money(lot['realized'], cur)}</b>"
+
+
+def price_summary(query: str, rows, lang: str, shown: int, locked: int) -> str:
+    """Header + stats + list for /price. Fits a photo caption when trimmed."""
+    ru = lang == "ru"
+    prices = sorted(r["realized"] for r in rows)
+    med = prices[len(prices) // 2]
+    head = (f"📉 <b>«{esc(query)}» на аукционах Katz</b>" if ru
+            else f"📉 <b>“{esc(query)}” at Katz auctions</b>")
+    stats = (
+        f"Продано: <b>{len(rows)}</b> · медиана <b>{_money(med, 'EUR')}</b> · "
+        f"{_money(prices[0], 'EUR')}–{_money(prices[-1], 'EUR')}"
+        if ru else
+        f"Sold: <b>{len(rows)}</b> · median <b>{_money(med, 'EUR')}</b> · "
+        f"{_money(prices[0], 'EUR')}–{_money(prices[-1], 'EUR')}"
+    )
+    body = "\n".join(realized_line(r, lang) for r in rows[:shown])
+    tail = ""
+    if locked > 0:
+        tail = ("\n\n🔒 Ещё {n} проходов — в Pro: /pro" if ru
+                else "\n\n🔒 {n} more results — in Pro: /pro").format(n=locked)
+    return f"{head}\n{stats}\n\n{body}{tail}"

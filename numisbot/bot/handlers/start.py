@@ -7,7 +7,8 @@ from aiogram.types import CallbackQuery, Message
 
 from ..db import Database
 from ..keyboards import interests_kb, lang_kb, menu_kb
-from ..texts import lot_card, t
+from ..texts import t
+from .auctions import send_lot_card
 
 router = Router()
 
@@ -45,7 +46,7 @@ async def cb_interest(cb: CallbackQuery, db: Database):
         if total:
             await cb.message.answer(t("onboarded_hits", lang).format(n=total))
             for lot in sample:
-                await cb.message.answer(lot_card(lot, lang), disable_web_page_preview=True)
+                await send_lot_card(cb.message, lot, lang)
         await cb.message.answer(t("menu", lang), reply_markup=menu_kb(lang))
         await cb.answer()
         return

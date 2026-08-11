@@ -34,7 +34,7 @@ async def main() -> None:
     cfg = load_config()
     Path(cfg.db_path).parent.mkdir(parents=True, exist_ok=True)
 
-    db = Database(cfg.db_path)
+    db = Database(cfg.db_path, archive_path=cfg.archive_db_path)
     await db.connect()
 
     bot = Bot(cfg.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))

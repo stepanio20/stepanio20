@@ -75,6 +75,43 @@ async def _show_watchlist(msg: Message, user_id: int, db: Database, cfg: Config)
     await msg.answer(header, reply_markup=watchlist_kb(watches, lang))
 
 
+async def _try_add_watch(cb: CallbackQuery, db: Database, cfg: Config, query: str) -> None:
+    lang = await _lang(db, cb.from_user.id)
+    tier = await db.effective_tier(cb.from_user.id)
+    used = len(await db.list_watches(cb.from_user.id))
+    total = _slots(cfg, tier)
+    if used >= total:
+        await cb.message.answer(t("watch_limit", lang).format(total=total))
+        await cb.answer("🚦")
+        return
+    await db.add_watch(cb.from_user.id, query, None)
+    await cb.message.answer(
+        t("watch_added", lang).format(q=query, cap="", used=used + 1, total=total)
+    )
+    await cb.answer("🔭")
+
+
+@router.callback_query(F.data.startswith("wl:"))
+async def cb_watch_lot(cb: CallbackQuery, db: Database, cfg: Config):
+    """'➕ В радар' under a lot card: watch by the lot's title prefix."""
+    lot = await db.get_lot(int(cb.data.split(":", 1)[1]))
+    if lot is None:
+        await cb.answer("⚠️", show_alert=False)
+        return
+    query = " ".join(lot["title"].split())[:40].strip()
+    await _try_add_watch(cb, db, cfg, query)
+
+
+@router.callback_query(F.data.startswith("wq:"))
+async def cb_watch_query(cb: CallbackQuery, db: Database, cfg: Config):
+    """'🔭 Следить' under /price results: watch the searched query."""
+    query = cb.data.split(":", 1)[1].strip()
+    if not query:
+        await cb.answer()
+        return
+    await _try_add_watch(cb, db, cfg, query)
+
+
 @router.callback_query(F.data.startswith("unwatch:"))
 async def cb_unwatch(cb: CallbackQuery, db: Database, cfg: Config):
     watch_id = int(cb.data.split(":", 1)[1])

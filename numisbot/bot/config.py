@@ -15,6 +15,7 @@ class Config:
     bot_token: str = field(default_factory=lambda: os.environ["BOT_TOKEN"])
     admin_ids: set[int] = field(default_factory=_admin_ids)
     db_path: str = field(default_factory=lambda: os.getenv("DB_PATH", "data/numisbot.sqlite3"))
+    archive_db_path: str = field(default_factory=lambda: os.getenv("ARCHIVE_DB_PATH", "data/archive.sqlite3"))
     katz_base_url: str = field(default_factory=lambda: os.getenv("KATZ_BASE_URL", "https://katzauction.com"))
     parse_interval_minutes: int = field(default_factory=lambda: int(os.getenv("PARSE_INTERVAL_MINUTES", "30")))
     http_timeout: float = field(default_factory=lambda: float(os.getenv("HTTP_TIMEOUT_SECONDS", "25")))
