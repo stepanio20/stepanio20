@@ -1,0 +1,8 @@
+# runtime
+*.db
+diamond_bot.db
+branding/_card.png
+_card.png
+__pycache__/
+*.pyc
+.env

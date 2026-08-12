@@ -1,0 +1,634 @@
+<meta charset="utf-8">
+<title>Рынок B2B-торговли бриллиантами — ресёрч и продуктовое предложение</title>
+<style>
+  :root{
+    --ink:#14161c; --muted:#5b6270; --faint:#8a91a0;
+    --line:#e4e7ec; --line2:#eef1f5;
+    --accent:#1f6f5c;      /* emerald */
+    --accent2:#0d3b66;     /* deep blue */
+    --gold:#9a7b2e;
+    --danger:#a3352b;
+    --bg-soft:#f6f8f8;
+    --bg-blue:#f2f6fb;
+    --bg-gold:#faf6ec;
+    --bg-red:#fbf1ef;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{
+    font-family:"Georgia","Times New Roman",serif;
+    color:var(--ink); line-height:1.5; font-size:10.4pt; margin:0;
+  }
+  .sans{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+
+  /* ---- page rhythm ---- */
+  @page{ size:A4; margin:17mm 16mm 18mm 16mm; }
+  section{ page-break-after:always; }
+  section:last-of-type{ page-break-after:auto; }
+  h1,h2,h3,h4{ font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.2; }
+  h2{ break-after:avoid; }
+  h3,h4{ break-after:avoid; }
+  table{ break-inside:auto; }
+  tr{ break-inside:avoid; }
+  .box,.stat,.card{ break-inside:avoid; }
+
+  /* ---- cover ---- */
+  .cover{
+    min-height:263mm; display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(160deg,#0d3b66 0%,#123a4f 45%,#1f6f5c 100%);
+    color:#fff; margin:-17mm -16mm 0 -16mm; padding:26mm 20mm 20mm 20mm;
+  }
+  .cover .kicker{ font-family:-apple-system,"Segoe UI",sans-serif; letter-spacing:.28em; text-transform:uppercase; font-size:9pt; opacity:.8; }
+  .cover h1{ font-size:31pt; line-height:1.1; margin:14px 0 6px; font-weight:700; }
+  .cover .sub{ font-size:13pt; opacity:.92; font-family:Georgia,serif; font-style:italic; max-width:150mm;}
+  .cover .facets{ display:flex; gap:10px; flex-wrap:wrap; margin-top:26px;}
+  .cover .facet{ background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22); border-radius:8px; padding:11px 14px; font-family:-apple-system,sans-serif; font-size:8.6pt; min-width:38mm;}
+  .cover .facet b{ display:block; font-size:15pt; margin-bottom:2px;}
+  .cover .meta{ font-family:-apple-system,sans-serif; font-size:8.5pt; opacity:.8; display:flex; justify-content:space-between; border-top:1px solid rgba(255,255,255,.2); padding-top:12px;}
+
+  /* ---- headings in body ---- */
+  h2.part{
+    font-size:8.5pt; letter-spacing:.2em; text-transform:uppercase; color:var(--accent);
+    margin:0 0 2px; font-weight:700;
+  }
+  h2.title{ font-size:19pt; margin:0 0 10px; color:var(--ink); border-bottom:2px solid var(--accent); padding-bottom:8px;}
+  h3{ font-size:12.5pt; margin:18px 0 5px; color:var(--accent2);}
+  h4{ font-size:10.5pt; margin:13px 0 3px; color:var(--ink); }
+  p{ margin:6px 0; }
+  a{ color:var(--accent2); text-decoration:none; }
+  small{ font-size:8.4pt; color:var(--muted); }
+  .lead{ font-size:11.4pt; color:#2b2f38; line-height:1.55; }
+
+  ul,ol{ margin:6px 0 6px 0; padding-left:18px; }
+  li{ margin:3px 0; }
+
+  /* ---- callout boxes ---- */
+  .box{ border-radius:9px; padding:12px 15px; margin:12px 0; font-family:-apple-system,sans-serif; font-size:9.4pt; line-height:1.5;}
+  .box .bx-h{ font-weight:700; font-size:8.4pt; letter-spacing:.09em; text-transform:uppercase; margin-bottom:5px; display:flex; align-items:center; gap:7px;}
+  .box p{ margin:5px 0; }
+  .box.fact{ background:var(--bg-blue); border:1px solid #d3e2f2;} .box.fact .bx-h{ color:var(--accent2);}
+  .box.myth{ background:var(--bg-red); border:1px solid #eecfca;} .box.myth .bx-h{ color:var(--danger);}
+  .box.win{ background:var(--bg-soft); border:1px solid #cfe3dc;} .box.win .bx-h{ color:var(--accent);}
+  .box.gold{ background:var(--bg-gold); border:1px solid #e8dcbd;} .box.gold .bx-h{ color:var(--gold);}
+  .box.big{ font-size:10pt; }
+
+  .verdict{ display:inline-block; font-family:-apple-system,sans-serif; font-weight:700; font-size:8pt; padding:2px 8px; border-radius:20px; vertical-align:middle;}
+  .v-false{ background:#f6d9d4; color:#8f2a20;}
+  .v-true{ background:#d4ead9; color:#1e5a34;}
+  .v-part{ background:#f6ead0; color:#836419;}
+
+  /* ---- stat strip ---- */
+  .stats{ display:flex; gap:9px; margin:14px 0; flex-wrap:wrap;}
+  .stat{ flex:1; min-width:33mm; background:var(--bg-soft); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:7px; padding:9px 11px; font-family:-apple-system,sans-serif;}
+  .stat b{ display:block; font-size:15pt; color:var(--accent2); line-height:1.1;}
+  .stat span{ font-size:8.1pt; color:var(--muted);}
+
+  /* ---- tables ---- */
+  table{ width:100%; border-collapse:collapse; margin:12px 0; font-family:-apple-system,sans-serif; font-size:8.5pt;}
+  th{ background:#eef2f0; text-align:left; padding:6px 8px; border-bottom:2px solid var(--accent); color:#2b2f38; font-weight:700; vertical-align:bottom;}
+  td{ padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{ background:#fafbfc;}
+  td.num{ text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums;}
+  .tag{ display:inline-block; font-size:7.2pt; padding:1px 6px; border-radius:4px; font-weight:600;}
+  .t-green{ background:#dcefe4; color:#1e5a34;}
+  .t-red{ background:#f6dcd7; color:#8f2a20;}
+  .t-amber{ background:#f7ecd2; color:#836419;}
+  .t-gray{ background:#e9ecf0; color:#4a5262;}
+
+  /* ---- two columns ---- */
+  .cols{ display:flex; gap:18px; } .cols>div{ flex:1; }
+
+  /* ---- source footnotes ---- */
+  .src{ font-size:7.8pt; color:var(--faint); word-break:break-word; line-height:1.45;}
+  .srcgrid{ column-count:2; column-gap:16px; font-size:7.8pt; color:var(--faint);}
+  .srcgrid p{ margin:0 0 4px; break-inside:avoid;}
+
+  .toc{ font-family:-apple-system,sans-serif; font-size:9.6pt;}
+  .toc a{ color:var(--ink); display:flex; justify-content:space-between; border-bottom:1px dotted var(--line); padding:6px 0;}
+  .toc .n{ color:var(--accent); font-weight:700; width:22px; display:inline-block;}
+  .toc b{ color:var(--faint); font-weight:400;}
+
+  .footer-note{ font-family:-apple-system,sans-serif; font-size:7.6pt; color:var(--faint); border-top:1px solid var(--line); margin-top:14px; padding-top:6px;}
+  hr.soft{ border:none; border-top:1px solid var(--line2); margin:14px 0;}
+  .pill{ display:inline-block; background:#eef2f0; border:1px solid var(--line); border-radius:6px; padding:1px 7px; font-family:-apple-system,sans-serif; font-size:8pt; color:#37506a; margin:1px 2px 1px 0;}
+</style>
+
+<!-- ============================ COVER ============================ -->
+<section>
+<div class="cover">
+  <div>
+    <div class="kicker">Отраслевой ресёрч &nbsp;•&nbsp; Продуктовое предложение</div>
+    <h1>Рынок B2B-торговли<br>бриллиантами</h1>
+    <div class="sub">Как устроена торговля «руками» в закрытых чатах — и можно ли построить подписочный сервис, который парсит эту дату и коннектит покупателей с продавцами.</div>
+    <div class="facets">
+      <div class="facet"><b>≈$20 млрд</b>оптовый оборот полированных камней в год (B2B)</div>
+      <div class="facet"><b>~30 000</b>дилеров-членов бирж по миру (WFDB)</div>
+      <div class="facet"><b>4 хаба</b>Нью-Йорк · Рамат-Ган · Мумбаи/Сурат · Дубай</div>
+      <div class="facet"><b>0</b>сервисов, которые сегодня парсят чаты дилеров</div>
+    </div>
+  </div>
+  <div class="meta">
+    <span>Подготовлено по заказу · внутренний документ</span>
+    <span>Дата: 11 августа 2026 · Данные: 2024–2026</span>
+  </div>
+</div>
+</section>
+
+<!-- ============================ TL;DR ============================ -->
+<section>
+<h2 class="part">Резюме для занятых</h2>
+<h2 class="title">Главное на одной странице</h2>
+
+<p class="lead">Рынок реальный и «болит» правильно: торговля до сих пор идёт вручную через закрытые WhatsApp/Telegram-группы, структурированного поиска по истории нет, и <b>никто сегодня не парсит эти чаты</b>. Но это узкий, сжимающийся и построенный на доверии рынок — деньги здесь делаются не на «ещё одном маркетплейсе», а на скорости в том слое, где сделки реально закрываются: в мессенджерах.</p>
+
+<div class="stats">
+  <div class="stat"><b>Да</b><span>боль настоящая: ручной поиск по истории групп</span></div>
+  <div class="stat"><b>Пусто</b><span>чат-парсинг диамант-групп никто не занял</span></div>
+  <div class="stat"><b>Риск</b><span>WhatsApp-парсинг нарушает ToS, баны и закон</span></div>
+  <div class="stat"><b>$25–250</b><span>реалистичная подписка в мес. (сегмент-зависимо)</span></div>
+</div>
+
+<h3>Что подтвердилось, а что — миф (из вашей переписки)</h3>
+<table>
+  <tr><th style="width:42%">Тезис из чата</th><th style="width:12%">Вердикт</th><th>Что на самом деле</th></tr>
+  <tr>
+    <td>«Компания из Амстердама держит 90% сапплая на складе и может обрушить цену»</td>
+    <td><span class="verdict v-false">Миф</span></td>
+    <td>Это De&nbsp;Beers (Лондон→Ботсвана, не Амстердам). 90% было в 1980-х; сегодня ~26–30% добычи. Склад на ~$2 млрд есть, но это <i>непроданное</i> — признак слабости, а не власти: в 2024 они <b>сами резали</b> цены на 10–15%.</td>
+  </tr>
+  <tr>
+    <td>«Рапнет — индийская»</td>
+    <td><span class="verdict v-false">Миф</span></td>
+    <td>Rapaport/RapNet — <b>американская</b> компания (Нью-Йорк, 1976; офисы в Лас-Вегасе и Рамат-Гане). С мая 2026 переименована в «Rapaport&nbsp;Trade».</td>
+  </tr>
+  <tr>
+    <td>«Там больше ляма камней»</td>
+    <td><span class="verdict v-true">Правда</span></td>
+    <td>На RapNet <b>1,8 млн+</b> камней на ~$8 млрд ежедневно. У Get-Diamonds ~1,4 млн, у Nivoda 2 млн+.</td>
+  </tr>
+  <tr>
+    <td>«Сабка чет $150»</td>
+    <td><span class="verdict v-part">Почти</span></td>
+    <td>Сам прайс-лист — $21–29/мес. ~$150/мес — это членство RapNet уровня Dealer ($125/мес при годовой оплате, до $250 помесячно).</td>
+  </tr>
+  <tr>
+    <td>«Продалась апка, где было 18к юзеров»</td>
+    <td><span class="verdict v-false">Не подтверждается</span></td>
+    <td>Такой сделки в отраслевой прессе <b>нет</b>. Ближайшее — Get-Diamonds (~29к аккаунтов), проданная WFDB за <b>символические $5 000</b> в 2020. Как аргумент «рынок ликвидный» — это скорее против.</td>
+  </tr>
+  <tr>
+    <td>«Живых юзеров тысяч 20»</td>
+    <td><span class="verdict v-true">Правда</span></td>
+    <td>Снизу по биржам: NY ~2,6к + Израиль ~3,1к + Мумбаи ~4к + Дубай ~1,3к + Антверпен ~1,5к ≈ 12,5к фирм × 1–3 активных чел. → <b>15–35к</b>. Оценка адекватная.</td>
+  </tr>
+</table>
+
+<h3>Рекомендация в одну строку</h3>
+<div class="box win big">
+  <div class="bx-h">▶ Что делать</div>
+  <p><b>Строить не маркетплейс, а «поисковый радар» поверх чатов — Telegram-first, на модели «принеси свою сессию» (BYO-session) плюс opt-in-фиды от продавцов.</b> Начать с Telegram-бота (не iOS): дилер пересылает боту стоки и запросы, бот структурирует «есть/ищу», сам мэтчит и шлёт алерты «на твой запрос 2ct D VS1 появилось 3 камня». Монетизация — подписка $25–75/мес покупателю, $100–250 брокеру/продавцу. Ковровый парсинг WhatsApp «одним аккаунтом» — <b>не делать</b>: это гарантированные баны и юридический риск (см. §5).</p>
+</div>
+
+<div class="footer-note">Ниже — доказательная база: структура рынка, механика сделок, полный разбор конкурентов и цен, инвентаризация API и открытых данных, техническая и юридическая выполнимость, затем детальное предложение и дорожная карта. Все цифры — со ссылками на первоисточники (сводка ссылок — в конце).</div>
+</section>
+
+<!-- ============================ TOC ============================ -->
+<section>
+<h2 class="part">Навигация</h2>
+<h2 class="title">Содержание</h2>
+<div class="toc">
+  <a href="#p1"><span><span class="n">1</span>Структура рынка: кто добывает, где торгуют, почему сейчас интересно</span><b>стр. 4</b></a>
+  <a href="#p2"><span><span class="n">2</span>Как торгуют сегодня: чаты, механика сделок, доверие и фрод</span><b>стр. 5</b></a>
+  <a href="#p3"><span><span class="n">3</span>Конкуренты: платформы, аналитика, кто (не) парсит чаты</span><b>стр. 6</b></a>
+  <a href="#p4"><span><span class="n">4</span>API и открытые данные: на чём можно строить</span><b>стр. 8</b></a>
+  <a href="#p5"><span><span class="n">5</span>Выполнимость: Telegram против WhatsApp, право и баны</span><b>стр. 9</b></a>
+  <a href="#p6"><span><span class="n">6</span>Продуктовое предложение: что реально построить</span><b>стр. 10</b></a>
+  <a href="#p7"><span><span class="n">7</span>Дорожная карта, юнит-экономика, риски и вердикт</span><b>стр. 12</b></a>
+  <a href="#src"><span><span class="n">•</span>Источники</span><b>стр. 13</b></a>
+</div>
+
+<div class="box fact" style="margin-top:22px">
+  <div class="bx-h">Как это исследовалось</div>
+  <p>13 параллельных агентов-ресёрчеров, ~600 обращений к первоисточникам (отраслевая пресса JCK, Rapaport News, National Jeweler, Israeli Diamond, AWDC, DMCC, GJEPC; документация API; ToS-страницы; судебные прецеденты; каталоги Telegram/WhatsApp-групп). Приоритет данных — 2024–2026. Где источники расходились, цифры сверялись минимум по двум изданиям. Отдельный агент-критик искал пробелы, после чего 4 добор-агента закрыли ключевые вопросы (в т.ч. проверку истории про «апку с 18к юзеров» и живой сэмпл трафика групп).</p>
+</div>
+</section>
+
+<!-- ============================ PART 1 ============================ -->
+<section id="p1">
+<h2 class="part">Часть 1</h2>
+<h2 class="title">Структура рынка: кто добывает, где торгуют, почему момент удачный</h2>
+
+<p class="lead">Организованный медленный рынок в глубоком кризисе — и это, как верно заметил собеседник, «заебись». Кризис ломает старые каналы и делает людей восприимчивыми к инструментам, которые дают скорость и экономят маржу.</p>
+
+<div class="stats">
+  <div class="stat"><b>118 млн</b><span>карат добыто в 2024 (Kimberley Process), $11,5 млрд</span></div>
+  <div class="stat"><b>−47%</b><span>стоимость мировой добычи 2022→2025 (AWDC)</span></div>
+  <div class="stat"><b>~90%</b><span>всех камней гранят в Сурате, Индия</span></div>
+  <div class="stat"><b>3–6%</b><span>маржа мидстрима (была 8–12%)</span></div>
+</div>
+
+<h3>Сапплай: концентрация есть, но не там, где думают</h3>
+<p>Добыча по-прежнему в руках немногих: Россия (АЛРОСА) — крупнейший по объёму (37,3 млн кар / $3,34 млрд в 2024), Ботсвана (Debswana, СП 50:50 с De&nbsp;Beers), затем сам De&nbsp;Beers. Rio&nbsp;Tinto <b>вышла из бриллиантов полностью</b> (закрыла Argyle в 2020, Diavik — в марте 2026).</p>
+
+<div class="box myth">
+  <div class="bx-h">Разбор мифа «Амстердам держит 90% на складе»</div>
+  <p><b>De&nbsp;Beers никогда не был в Амстердаме</b> — единый канал продаж (CSO) шёл из <b>Лондона</b>, а с 2013 сайты проходят в <b>Габороне (Ботсвана)</b>. Цифра «90%» — из 1980-х; к концу 1990-х доля упала ниже 60%, картельная модель заброшена. Сегодня De&nbsp;Beers — <b>~26–30%</b> добычи по объёму.</p>
+  <p>Склад <i>есть</i>: ~$2 млрд непроданных стоков, крупнейший с 2008. Но это симптом <b>слабости</b>: в декабре 2024 De&nbsp;Beers сам срезал цены на рафе на 10–15%, а Anglo&nbsp;American списал его на $6,8 млрд за 2023–25 и продаёт (~$1 млрд, закрытие во 2П 2026). «Обрушить цену» сейчас может рынок, а не один игрок.</p>
+</div>
+
+<h3>Санкции — структурный сдвиг, который создаёт спрос на трейс</h3>
+<p>ЕС/G7 запретили российские бриллианты: прямой импорт с 01.01.2024, камни ≥1,0 кар огранённые в третьих странах — с 01.03.2024, ≥0,5 кар — с 01.09.2024. С 01.01.2026 действует полный режим (в США — самосертификация импортёра). АЛРОСА под санкциями ЕС, прибыль −77% в 2024, часть добычи выкупает Гохран. <b>Вывод для продукта:</b> происхождение и номера сертификатов (G7/KP, GIA) становятся обязательным атрибутом листинга — это то, что должен нести в себе структурированный камень.</p>
+
+<h3>Хабы и где кто сидит</h3>
+<table>
+  <tr><th>Хаб</th><th>Что это</th><th class="num">Масштаб</th><th>Роль</th></tr>
+  <tr><td><b>Дубай (DMCC)</b></td><td>Dubai Diamond Exchange, крупнейший торговый зал</td><td class="num">1 365+ фирм<br>$41,7 млрд оборот 2025</td><td>Обошёл Антверпен по рафу; растёт быстрее всех</td></tr>
+  <tr><td><b>Мумбаи</b></td><td>Bharat Diamond Bourse (крупнейшая биржа мира)</td><td class="num">~2 500 офисов<br>~4 000 членов</td><td>~98% экспорта Индии; рядом Сурат (огранка)</td></tr>
+  <tr><td><b>Рамат-Ган</b></td><td>Israel Diamond Exchange</td><td class="num">~3 100 членов<br>~15 000 человек</td><td>Handshake-культура, «мазаль», WhatsApp-heavy</td></tr>
+  <tr><td><b>Нью-Йорк</b></td><td>Diamond Dealers Club, 47-я улица</td><td class="num">~2 600 бизнесов</td><td>~90% камней, въезжающих в США</td></tr>
+  <tr><td><b>Антверпен</b></td><td>AWDC, исторический центр</td><td class="num">~1 600 фирм</td><td>Падает: −22% оборота в 2025 после потери рафа РФ</td></tr>
+</table>
+
+<h3>Почему момент удачный</h3>
+<ul>
+  <li><b>Банки ушли.</b> Финансирование мидстрима упало с ~$16 млрд (2013) до &lt;$11 млрд: закрылись Antwerp Diamond Bank, дески ABN&nbsp;Amro и др. Дилеры ищут любую эффективность.</li>
+  <li><b>Маржа сжата до 3–6%.</b> В Сурате массовые увольнения. Каждый процент экономии на посредниках теперь заметен.</li>
+  <li><b>Lab-grown обвалил структуру.</b> Опт LGD −86–90% с 2018; 1 кар LGD дошёл до ~$168. LGD — уже ~61% <i>штук</i> помолвочных колец в США (но лишь ~21% стоимости). Натуральные ищут дифференциацию через происхождение и трейс.</li>
+  <li><b>Старый рынок ещё не оцифрован в самом «горячем» слое.</b> Открытие: <b>сделки закрываются в WhatsApp</b>, а структурированные площадки видят только верх воронки.</li>
+</ul>
+</section>
+
+<!-- ============================ PART 2 ============================ -->
+<section id="p2">
+<h2 class="part">Часть 2</h2>
+<h2 class="title">Как торгуют сегодня: чаты, механика, доверие и фрод</h2>
+
+<p class="lead">Ровно тот паттерн, что описан в переписке: покупатель кидает в группу «ищу такой-то камень», продавцы шлют стоки, и трейдер руками листает историю. Это подтверждается словами самого CEO Rapaport.</p>
+
+<div class="box fact">
+  <div class="bx-h">Цитата, которая описывает всю боль (CEO Rapaport)</div>
+  <p><i>«Дилер замечает бриллиант, находит номер WhatsApp, подтверждает, что камень ещё в наличии, потом договаривается — о цене, но и о доставке, сроках».</i> То есть <b>обнаружение — на платформе, а сделка закрывается в WhatsApp.</b> Ровно этот слой сегодня не оцифрован.</p>
+</div>
+
+<h3>Чат-трейдинг — реальный и полу-институциональный</h3>
+<ul>
+  <li><b>Нью-Йорк:</b> Diamond Dealers Club во время COVID завёл <b>официальные WhatsApp-группы для членов</b> и оставил их. Президент DDC: «все в чатах проверенные… без наворотов платформ, но работает».</li>
+  <li><b>Израиль:</b> торговля до сих пор на рукопожатии и «мазаль» с минимумом документов; сила WhatsApp доказана в марте 2020, когда бунт против прайс-листа Rapaport собрал «сотни дилеров из Мумбаи, Антверпена, Тель-Авива, Нью-Йорка и Дубая за часы».</li>
+  <li><b>Индия:</b> экспортёры Сурата прямо пишут, что покупатели из ОАЭ/Гонконга «предпочитают быструю связь через WhatsApp»; стандартный запрос = форма/карат/цвет/чистота/кол-во в WhatsApp → варианты и цены в ответ.</li>
+  <li><b>Дубай:</b> вокруг Almas Tower — 1 365+ компаний; публичные директории листят «Dubai Gold Seller»-группы.</li>
+</ul>
+
+<h3>Анатомия групп (живой сэмпл)</h3>
+<p>Мы нашли и разобрали реальные открытые Telegram-группы, чтобы оценить парсируемость. Два уровня: <b>(а) закрытые биржевые/брокерские</b> — невидимы поиску, вход по членству; <b>(б) открытые «директорийные»</b> — их листят агрегаторы ссылок (от 25 до 1 500+). WhatsApp лимит группы — 1 024 участника.</p>
+<table>
+  <tr><th>Группа (Telegram, открытая)</th><th class="num">Участн.</th><th>Тип</th></tr>
+  <tr><td>DEMANDS Natural Diamonds <span class="pill">@demandsnatural</span></td><td class="num">2 136</td><td>Только спрос: «постите только запросы», сделки в ЛС</td></tr>
+  <tr><td>Natural Diamonds &amp; Jewellery <span class="pill">@diamondsexport</span></td><td class="num">1 050</td><td>Сторона предложения; цены в фиде запрещены</td></tr>
+  <tr><td>Certified Polished Diamonds <span class="pill">@certifieddiamonds</span></td><td class="num">206</td><td>Канал производителя, 0.30–25 кар</td></tr>
+  <tr><td>Diamonds &amp; Jewels Antwerp <span class="pill">@diamonds_jewels_antwerp</span></td><td class="num">93</td><td>Активный fancy-color дилер; медиа-heavy</td></tr>
+</table>
+<p><b>Формат сообщений «есть» (дословно):</b> «Today deal 1.43ct oval Fancy intense pink $32,000 per ct» · «GIA Cushion 0.90ct Fancy light Pink SI1 … $26.000 per ct» · «Pear shape 3.24ct D-IF». Шорткод регулярный: <span class="pill">форма</span><span class="pill">карат</span><span class="pill">цвет</span><span class="pill">чистота</span><span class="pill">$/кар</span> плюс неформальные хвосты («TOP TOP SI1 like VS») и смешанные разделители («$26.000»).</p>
+
+<div class="box gold">
+  <div class="bx-h">Ключевые наблюдения для парсера</div>
+  <p>① Текст на ~90% извлекаем regex+LLM для формы/карата/цвета/чистоты. ② Цена есть примерно в половине постов (во многих группах правилами <b>запрещена</b> в фиде — берётся на этапе ЛС). ③ Номер GIA (10 цифр) <b>почти никогда не в тексте</b> — он на фото/PDF сертификата, значит нужен OCR/vision для обогащения. ④ «Есть» и «ищу» часто уже разведены по разным группам — чистая разметка. ⑤ Заметная доля открытого «diamond»-трафика — скам или сленг: нужен фрод-фильтр.</p>
+</div>
+
+<h3>Механика сделки — что сервис обязан учитывать</h3>
+<div class="cols">
+  <div>
+    <h4>Как закрывают</h4>
+    <ul>
+      <li><b>Memo/консигнация</b> — камни уходят «на memo» на 30–90 дней, титул у продавца, платят по факту продажи.</li>
+      <li><b>Оплата</b> — wire против инвойса, но кредит 60–120+ дней распространён (в Индии RBI разрешает до 180).</li>
+      <li><b>Брокеридж</b> — норма 1–2% в дилер-дилер сделках.</li>
+      <li><b>«Мазаль у браха»</b> — устное «мазаль» = заключённый договор, отказ карается арбитражем биржи.</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Доверие и фрод</h4>
+    <ul>
+      <li>Арбитраж WFDB + чёрные списки бирж (де-факто, но эрозия: жулики возвращаются под именами родственников).</li>
+      <li>Вэттинг RapNet: гос-ID, лицензия, торговые референсы, OFAC-скрин, ~1 год в отрасли.</li>
+      <li>Волна memo-скама в США (с 2023, 20+ оптовиков, &gt;$1 млн); подмена натуралов инскрайб-синтетикой ($460к, NYC); фейковые GIA-инскрипшены.</li>
+      <li>Общий KYC-утиль: <b>MyKYCBank</b> (GJEPC) — им пользуются BDB, AWDC, DMCC/DDE.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box win">
+  <div class="bx-h">Что можно пропустить, а что — нет</div>
+  <p><b>Обязательно:</b> реальный вэттинг (ID + бизнес-регистрация + OFAC) — это ядро доверия; метаданные санкций (происхождение, G7/KP, ≥0,5 кар самосерт.); хуки верификации сертификата (GIA + матч инскрипции); механизм жалоб/сусп­ендов; шаблоны memo-vs-sale с арбитражной оговоркой. <b>Можно отдать партнёрам/пропустить:</b> логистику (Malca-Amit/Brink's/Ferrari — котируют пошипментно и страхуют), эскроу (0,5–5%), финансирование (дорогой ров Nivoda). Своя AML-программа нужна <b>только если</b> вы трогаете деньги/товар — чистый «сервис знакомств» в основном вне определения дилера (31 CFR 1027). <b>Монетизировать как брокер</b> (принятые ~1–2%), а не как ритейл-наценку.</p>
+</div>
+</section>
+
+<!-- ============================ PART 3 ============================ -->
+<section id="p3">
+<h2 class="part">Часть 3</h2>
+<h2 class="title">Конкуренты: платформы, аналитика, кто (не) парсит чаты</h2>
+
+<p class="lead">Площадок для <i>структурированных</i> листингов много и они сильные. Но все они — «пункт назначения», куда надо прийти. Слой, где сделки реально происходят (мессенджеры), не занят никем.</p>
+
+<h3>Основные B2B-платформы</h3>
+<table>
+  <tr><th>Платформа</th><th>Кто/где</th><th class="num">Масштаб</th><th>Цена</th><th>API</th><th>Chat-native</th></tr>
+  <tr>
+    <td><b>Rapaport&nbsp;Trade</b> (ex-RapNet)</td><td>США (NY/Вегас + Рамат-Ган)</td>
+    <td class="num">1,8 млн камней<br>~$8 млрд/день<br>~20к клиентов</td>
+    <td>Buyer $62,5 · Dealer $125/мес (год.)</td>
+    <td><span class="tag t-green">Да, 5 REST</span></td>
+    <td><span class="tag t-red">Нет</span> (только broadcast-канал)</td>
+  </tr>
+  <tr>
+    <td><b>Nivoda</b></td><td>Лондон (NY/Антверпен/Мумбаи)</td>
+    <td class="num">2 млн+ камней<br>10к+ ювелиров</td>
+    <td>Бесплатно + комиссия/маржа</td>
+    <td><span class="tag t-green">GraphQL</span> (верифиц.)</td>
+    <td><span class="tag t-red">Нет</span></td>
+  </tr>
+  <tr>
+    <td><b>Get-Diamonds</b> (WFDB)</td><td>Non-profit, Израиль/WFDB</td>
+    <td class="num">~1,4 млн камней<br>~29к членов</td>
+    <td>Листинг бесплатно (пожизненно)</td>
+    <td><span class="tag t-amber">White-label</span></td>
+    <td><span class="tag t-red">Нет</span></td>
+  </tr>
+  <tr>
+    <td><b>IDEX Online</b></td><td>Рамат-Ган (23% у Sarine)</td>
+    <td class="num">~1,2 млн камней<br>7к+ трейдеров</td>
+    <td>Free · Premium $720 · Pro $1080/год</td>
+    <td><span class="tag t-green">Фиды+индекс</span></td>
+    <td><span class="tag t-red">Нет</span></td>
+  </tr>
+  <tr>
+    <td><b>VDB</b></td><td>Нью-Йорк, app-first</td>
+    <td class="num">1,5 млн+ items<br>26–30к членов</td>
+    <td>Custom (Shopify $150–450/мес)</td>
+    <td><span class="tag t-green">API+webhooks</span></td>
+    <td><span class="tag t-amber">In-app chat</span></td>
+  </tr>
+  <tr>
+    <td><b>UNI Diamonds</b></td><td>Гонконг (израильск. корни)</td>
+    <td class="num">2 млн+ камней<br>450+ поставщиков</td>
+    <td>Комиссия/интегр. шиппинг</td>
+    <td><span class="tag t-gray">—</span></td>
+    <td><span class="tag t-red">Нет</span></td>
+  </tr>
+  <tr>
+    <td><b>Liquid Diamonds</b></td><td>NY/Мумбаи, ~$3,2 млн привл.</td>
+    <td class="num">Реверс-аукцион</td>
+    <td>—</td>
+    <td><span class="tag t-gray">—</span></td>
+    <td><span class="tag t-red">Нет</span></td>
+  </tr>
+  <tr>
+    <td><b>Stone Search</b></td><td>Мумбаи (Opera House)</td>
+    <td class="num">Индия</td>
+    <td>Free trial · ₹1000–1500/мес</td>
+    <td><span class="tag t-gray">—</span></td>
+    <td><span class="tag t-green">WhatsApp-flow</span> (opt-in)</td>
+  </tr>
+</table>
+
+<h3>Ландшафт финансирования (кто во что верит)</h3>
+<div class="stats">
+  <div class="stat"><b>~$203 млн</b><span>Nivoda всего (Series C $51M, Northzone, 2024)</span></div>
+  <div class="stat"><b>$5 000</b><span>цена Get-Diamonds при передаче WFDB (2020)</span></div>
+  <div class="stat"><b>$29M→$3M</b><span>Clara: куплена Lucara / продана назад (2024)</span></div>
+  <div class="stat"><b>$1,1 млн</b><span>Liquid Diamonds (2024)</span></div>
+</div>
+<p><small>Инвест-сигнал смешанный: серьёзные деньги идут в <b>Nivoda</b>, которая выиграла не листингами, а встроенным <b>кредитом+логистикой</b> (то, чего лишились банки). Единственные «ценовые» выходы — Clara (записана в убыток) и ритейл (Blue Nile→Signet $360M, James Allen→Signet $328M — другая категория). Вывод: чистый маркетплейс монетизируется плохо; выигрывает тот, кто решает <b>боль ликвидности/скорости</b>.</small></p>
+
+<h3>Стек аналитики и прайсинга (что реально используют)</h3>
+<table>
+  <tr><th>Инструмент</th><th>Что даёт</th><th>Цена</th><th>Данные/API</th></tr>
+  <tr><td><b>Rapaport Price List</b></td><td>Де-факто бенчмарк; котировки «Rap −X%»</td><td>$21–29/мес</td><td>CSV/DAT/DBF в тарифе Plus</td></tr>
+  <tr><td><b>RAPI</b> (RapNet Index)</td><td>Индекс по 10% дешёвых круглых</td><td>Заголовки бесплатно</td><td>—</td></tr>
+  <tr><td><b>IDEX Index</b></td><td>Реалтайм-индекс с 2004, прозрачнее</td><td>Индекс бесплатно</td><td>3 API индекса + Real-Time Prices (по запросу)</td></tr>
+  <tr><td><b>Zimnisky</b></td><td>Индекс рафа, «State of the Market»</td><td>Индекс бесплатно · отчёт $900/год</td><td>Суб-индексы (вкл. LGD) платно</td></tr>
+  <tr><td><b>Tenoris</b> (Edahn Golan)</td><td>POS-аналитика ритейла США</td><td>По запросу</td><td>—</td></tr>
+  <tr><td><b>Sarine</b></td><td>Galaxy-сканы, e-Grading, трейс</td><td>Per-carat / per-use</td><td>api.sarine.com (контракт)</td></tr>
+</table>
+
+<h3>А кто-нибудь уже парсит чаты? — Почти пусто</h3>
+<div class="box win">
+  <div class="bx-h">Главный вывод по конкуренции</div>
+  <p><b>Ни один продукт сегодня не забирает чаты сторонних дилеров и не структурирует «есть/ищу» в базу с мэтчингом.</b> Мультиязычные прочёсы (англ., иврит, гуджарати, русский, китайский; GitHub, Product Hunt, YC) дали только косвенных соседей:</p>
+  <ul>
+    <li><b>GistGem</b> — расширение Chrome поверх WhatsApp/Telegram Web, по запросу вынимает «инвентарь поставщика X в таблицу». Есть даже лендинг для диамант-трейдеров. Но: <b>по запросу, без состояния, без мэтчинга, без маркетплейса</b>. $7,99/мес. Ближайшая по идее вещь — и она обходит ToS тем, что работает <b>на стороне пользователя в браузере</b> (важный архитектурный намёк).</li>
+    <li><b>Stone Search</b> (Мумбаи) — WhatsApp-native мэтчинг, но по <b>opt-in</b> (юзеры пишут номеру платформы), не парсинг групп. ₹1000–1500/мес.</li>
+    <li><b>Rapaport Buy Requests</b> — структурированный мэтчинг «ищу» против 1,5 млн листингов, но это форма на платформе, не чат.</li>
+    <li>Индийские ERP+WhatsApp (Diamx Pro, SaathiX, AVDIAM, DiamondSync) только <b>рассылают</b> сток наружу — не читают чаты.</li>
+  </ul>
+  <p>Причина пустоты понятна: ковровый парсинг групп нарушает ToS WhatsApp. Именно клиент-сайд-архитектура GistGem это обходит — и это ключевое проектное/юридическое решение вашего продукта (§5).</p>
+</div>
+</section>
+
+<!-- ============================ PART 4 ============================ -->
+<section id="p4">
+<h2 class="part">Часть 4</h2>
+<h2 class="title">API и открытые данные: на чём можно строить</h2>
+
+<p class="lead">Полностью открытого API инвентаря нет — доступ к камням всегда «висит» на членстве маркетплейса. Но есть дешёвый вход для данных о ценах и сертификатах, а также богатая открытая макро-дата.</p>
+
+<h3>Коммерческие API инвентаря</h3>
+<table>
+  <tr><th>API</th><th>Что даёт</th><th>Доступ и цена</th></tr>
+  <tr><td><b>RapNet / Rapaport</b></td><td>5 REST: Price List, Instant Inventory (~1,5 млн камней), Upload, Media, Manage</td><td>Членство Dealer $125/мес + Instant Inventory $95/мес (или $550/год)</td></tr>
+  <tr><td><b>Nivoda</b></td><td>GraphQL: поиск, фото/видео 2 млн+; Pro — заказы/холды</td><td>Только верифиц. клиентам, после Feed Agreement</td></tr>
+  <tr><td><b>IDEX Online</b></td><td>Onsite Full Feed (CSV каждые 2ч, 40+ полей), Diamond Search, Real-Time Prices</td><td>Аддон к подписке, цена по запросу</td></tr>
+  <tr><td><b>VDB</b></td><td>Инвентарь CSV/XML/JSON + webhooks + маркапы</td><td>$150–450/мес (Shopify-планы)</td></tr>
+  <tr><td><b>DiamondsOnCall</b></td><td>1 млн+ камней sightholder’ов, HD-видео, ринг-билдер</td><td>По аккаунту</td></tr>
+  <tr><td colspan="3"><small><b>RapidAPI и маркетплейсы API:</b> серьёзных инвентарь-API нет — только игрушечные оценщики цен по 4С. Реальные фиды — всегда прямой контракт.</small></td></tr>
+</table>
+
+<h3>Сертификаты и трейс — тут есть настоящий метрируемый API</h3>
+<table>
+  <tr><th>Источник</th><th>Что</th><th>Цена</th></tr>
+  <tr><td><b>GIA Report Results API</b></td><td>GraphQL, полная grading-дата + PDF/фото/видео. <b>Единственная лаба с настоящим публичным метрируемым API</b></td><td>Свои сабмишены бесплатно · PAYG <b>$0,20/lookup</b> · подписки $1000/мес (10к) … $15000/мес (500к, $0,03)</td></tr>
+  <tr><td>IGI / HRD</td><td>Только веб-верификация, публичного API нет</td><td>—</td></tr>
+  <tr><td>Tracr (De Beers)</td><td>Блокчейн-провенанс, есть API-сьют; &gt;50% добычи De&nbsp;Beers</td><td>По членству</td></tr>
+  <tr><td>Sarine</td><td>Diamond Journey трейс + e-Grading через api.sarine.com</td><td>Контракт</td></tr>
+</table>
+<div class="box fact">
+  <div class="bx-h">Дёшево на пилоте</div>
+  <p>Обогащение сертификатами доступно и недорого: <b>1 000 камней ≈ $200</b> по GIA PAYG. То есть извлечь номер сертификата из фото (OCR/vision) → дёрнуть GIA API → отдать полную 4С-карточку с проверкой — экономически реально уже на MVP.</p>
+</div>
+
+<h3>Де-факто стандарт файла инвентаря — CSV загрузки RapNet</h3>
+<p>Практически каждый сток-файл поставщика и каждый шаблон агрегатора — вариация этой схемы. Ключевые поля: <span class="pill">Stock #</span><span class="pill">Shape</span><span class="pill">Weight</span><span class="pill">Color</span><span class="pill">Clarity</span><span class="pill">Cut/Polish/Sym</span><span class="pill">Fluorescence</span><span class="pill">Lab</span><span class="pill">Cert #</span><span class="pill">Depth%/Table%</span><span class="pill">Measurements</span><span class="pill">Cash Price / Disc%</span><span class="pill">RapNet Disc%</span><span class="pill">Availability</span><span class="pill">image/video URL</span>. <b>Продукту стоит принять эту схему как каноническую</b> — тогда любой сток импортируется без трения, а спарсенное из чата сообщение маппится в те же поля.</p>
+
+<h3>Открытая / бесплатная дата</h3>
+<table>
+  <tr><th>Источник</th><th>Что можно вытащить</th><th>Доступ</th></tr>
+  <tr><td><b>Kimberley Process</b></td><td>Годовая добыча, кварт. импорт/экспорт по странам, 2004–2025</td><td>Таблицы/PDF, без API</td></tr>
+  <tr><td><b>UN Comtrade</b></td><td>HS 7102 (алмазы) и 7104 (синтетика; 7104.21/.91 — LGD): двусторонняя торговля</td><td>Free REST API (гость ~100/ч)</td></tr>
+  <tr><td><b>GJEPC (Индия)</b></td><td>Мес/кварт экспорт-импорт огранки, рафа, LGD — лучший месячный прокси спроса</td><td>Бесплатные PDF/таблицы</td></tr>
+  <tr><td><b>Zimnisky / IDEX Index</b></td><td>Тренд цен рафа и полировки</td><td>Бесплатно к просмотру</td></tr>
+</table>
+<p><small><b>Итог по данным:</b> самый дешёвый структурированный вход — Rapaport Plus ($29/мес) за фид прайс-листа; полный листинг-API — Dealer $125/мес + Instant Inventory $550/год; Nivoda/IDEX/VDB — по договору. GIA — единственный настоящий метрируемый публичный API лаборатории. Открытая макро-дата (KP, Comtrade, GJEPC, Zimnisky, IDEX) закрывает сапплай/потоки/тренд цен, но не даёт инвентарь на уровне камня. <b>Значит уникальная дата продукта — не купленная, а спарсенная из чатов.</b> В этом и защитный ров, и главный риск.</small></p>
+</section>
+
+<!-- ============================ PART 5 ============================ -->
+<section id="p5">
+<h2 class="part">Часть 5</h2>
+<h2 class="title">Выполнимость: Telegram против WhatsApp, право и баны</h2>
+
+<p class="lead">Это раздел «go/no-go по инженерии». Короткий вывод: <b>Telegram — можно, WhatsApp ковром — нельзя</b>. Способ, которым вы читаете чаты, определяет и юридический риск, и выживаемость аккаунтов.</p>
+
+<h3>Telegram — рабочая половина</h3>
+<ul>
+  <li><b>User-session (MTProto, Telethon/Pyrogram):</b> логинишься как пользователь и читаешь всё, что видит аккаунт в <i>вступивших</i> группах/каналах — без прав админа. Это естественный примитив ингестии.</li>
+  <li><b>Bot API:</b> бот-админ (или с выключенным privacy) видит все сообщения — но его должен <b>добавить админ</b>, т.е. это opt-in путь (санкционированный, почти нулевой риск бана).</li>
+  <li><b>Терпимость условная:</b> пассивное <b>read-only</b> членство (без рассылки, без масс-джойна) на практике в допустимых рамках; банят за исходящий абьюз — чего read-only-ингестор избегает.</li>
+</ul>
+
+<h3>WhatsApp — половина, которая может убить продукт</h3>
+<ul>
+  <li><b>Официальный Cloud API</b> читать чужие группы <b>не может</b> в принципе: видит только группы, которые бизнес <b>сам создал</b> (бета группы — лимит 8 участников, нет истории). Комплаентного пути к ковровому парсингу нет.</li>
+  <li><b>Неофициальные API</b> (Baileys, whatsapp-web.js, Whapi $29/мес, Green-API, Periskope) регистрируются как «linked device» и <b>технически</b> читают все сообщения группы, куда вступил номер. Но это реверс-инжиниринг и прямое нарушение ToS.</li>
+  <li><b>Баны агрессивные:</b> реверс-клиенты «живут 2–8 недель до детекта»; в 2025 Meta усилила автодетект. Пассивное чтение переживает лучше (&lt;2%/год), любая <b>отправка</b> взлетает до 15–30%/год. Отсюда индустрия «прогрева» номеров.</li>
+  <li><b>Судебная практика дорогая:</b> WhatsApp v. NSO — иск по CFAA + нарушению ToS; hiQ v. LinkedIn — скрапинг <i>публичного</i> пережил CFAA, но <b>проиграл по нарушению ToS</b>. Контент группы <b>непубличный</b>, поэтому щита hiQ нет — covert-парсинг это и нарушение ToS, и более сильная экспозиция по CFAA.</li>
+</ul>
+
+<div class="box myth">
+  <div class="bx-h">Красная линия</div>
+  <p>Единый центральный «скрапер-аккаунт», притворяющийся членом групп, — это <b>поза фейкового члена/имперсонации</b>: наивысший риск бана <i>и</i> он всё равно не пройдёт вэттинг закрытых бирж. Ковровый WhatsApp-скрапинг стоит считать <b>непоставляемым риском</b>, а не MVP-шорткатом.</p>
+</div>
+
+<h3>Правовая экспозиция по регионам</h3>
+<p>Все целевые юрисдикции — consent-first по персданным: <b>ЕС (GDPR)</b> — нужна законная основа, «легитимный интерес» не проходит балансировку для чужой частной переписки; <b>ОАЭ PDPL</b> + Cybercrime Law (несанкц. доступ — уголовка, штраф AED 20–100к); <b>Израиль</b> — Поправка 13 (в силе с 14.08.2025) классифицирует несанкц. скрапинг персданных как «тяжёлый инцидент безопасности»; <b>Индия DPDP 2023</b> — есть исключение для публично доступных данных, но гайденс требует согласия, штрафы до ₹250 крор.</p>
+
+<h3>Рекомендуемая архитектура ингестии</h3>
+<table>
+  <tr><th>Регион</th><th>WhatsApp</th><th>Telegram</th></tr>
+  <tr><td><b>США (DDC)</b></td><td><span class="tag t-red">Только BYO-session</span> высокий риск</td><td><span class="tag t-green">Работает</span> через сессию члена</td></tr>
+  <tr><td><b>Израиль</b></td><td><span class="tag t-red">Не годится</span> (WhatsApp-heavy, закрыто)</td><td><span class="tag t-amber">Ограниченно</span></td></tr>
+  <tr><td><b>Дубай</b></td><td><span class="tag t-amber">Opt-in фид DMCC</span>, не парсинг</td><td><span class="tag t-green">Работает</span></td></tr>
+  <tr><td><b>Индия (BDB)</b></td><td><span class="tag t-amber">BYO-session</span> умеренный риск</td><td><span class="tag t-green">Лучше всего</span> (Telegram-heavy)</td></tr>
+</table>
+<div class="box win">
+  <div class="bx-h">Вердикт инженерии</div>
+  <p><b>Telegram-first на per-subscriber MTProto (read-only)</b>; WhatsApp — <b>только BYO-session</b> (linked-device в стиле Periskope/Whapi, никогда центральный скрапер) с прогревом и жёсткой дисциплиной лимитов; параллельно формально добиваться <b>opt-in-фидов</b> (модель Дубая) как долговечного ToS-безопасного канала. Обработка — <b>на устройстве/по подписчику</b>, извлекать только структурированные офферы, минимизировать/хешировать телефоны.</p>
+</div>
+</section>
+
+<!-- ============================ PART 6 ============================ -->
+<section id="p6">
+<h2 class="part">Часть 6</h2>
+<h2 class="title">Продуктовое предложение: что реально построить</h2>
+
+<p class="lead">Не «ещё один маркетплейс» (их 7+, у них 1–2 млн камней и мы не выиграем ликвидностью), а <b>слой скорости поверх мессенджеров</b> — то, что дубайские боты сделали для недвижимости, но для бриллиантов и с честной моделью ингестии.</p>
+
+<h3>Позиционирование</h3>
+<div class="box gold big">
+  <div class="bx-h">Одна фраза</div>
+  <p>«<b>Радар камней в твоих чатах.</b> Перешли боту свои дилерские группы и запросы — он превратит хаос сообщений в структурированную базу «есть/ищу», сам найдёт совпадения и мгновенно скажет, у кого есть нужный камень и кто ищет твой».</p>
+</div>
+
+<h3>Почему Telegram-бот, а не iOS-апка (сначала)</h3>
+<table>
+  <tr><th>Критерий</th><th>Telegram-бот</th><th>iOS-апка</th></tr>
+  <tr><td>Время до MVP</td><td><span class="tag t-green">2–3 мес</span></td><td><span class="tag t-red">5–7 мес + ревью</span></td></tr>
+  <tr><td>Доступ к чат-дате</td><td><span class="tag t-green">Нативно</span> (та же экосистема)</td><td><span class="tag t-red">Нет прямого доступа к WhatsApp/TG</span></td></tr>
+  <tr><td>Трение входа</td><td><span class="tag t-green">Ноль установки</span></td><td>App Store, аккаунт</td></tr>
+  <tr><td>Где сидят дилеры Индии/Дубая</td><td><span class="tag t-green">Уже в Telegram</span></td><td>—</td></tr>
+  <tr><td>Апселл до апки/веба</td><td>Позже, для дэшборда и брокеров</td><td>—</td></tr>
+</table>
+<p><b>Решение:</b> Telegram-бот как продукт №1. iOS/веб-дэшборд — фаза 2 для брокеров (там нужны таблицы, история, аналитика спроса).</p>
+
+<h3>MVP — что именно строим (фаза 1, ~3 месяца)</h3>
+<ol>
+  <li><b>Ингест-движок.</b> (а) Форвард в бота: дилер пересылает сообщения/стоки — парсим сразу. (б) BYO-session Telegram: подписчик подключает свой аккаунт, read-only читаем группы, где он <i>уже</i> состоит. (в) Импорт CSV/Excel в схеме RapNet.</li>
+  <li><b>Парсер «есть/ищу».</b> Regex + LLM извлекают форму/карат/цвет/чистоту/огранку/флуор/цену/$-per-ct; классификатор have-vs-want; нормализация в канон RapNet; фрод-фильтр (скам/сленг/дубли).</li>
+  <li><b>Обогащение сертификатом.</b> OCR/vision по фото-серту → номер GIA → GIA Report Results API ($0,20/lookup) → полная 4С-карточка с проверкой подлинности.</li>
+  <li><b>Мэтчинг-движок.</b> Индекс запросов ↔ индекс инвентаря; допуски (±0,05 кар, соседние цвета/чистоты, «Rap −X%» как ценовой фильтр); мгновенный алерт: «на твой запрос 2ct D VS1 — 3 совпадения».</li>
+  <li><b>Коннект + доверие.</b> Кнопка «связаться» открывает контакт (без переезда в чекаут — уважаем культуру ЛС); базовый вэттинг (ID + бизнес-рег + OFAC-скрин через готовый провайдер); статус «проверен».</li>
+</ol>
+
+<div class="box fact">
+  <div class="bx-h">Дифференциаторы, которых нет у RapNet/Nivoda</div>
+  <p>① Видим инвентарь, который <b>никогда не попадает</b> на площадки (сделки-то в WhatsApp/TG). ② Ноль трения: не надо загружать сток — просто форварди. ③ Мэтчинг «ищу→есть» в реальном времени по <i>чужим</i> чатам, а не только по своим листингам. ④ Санкшн-/GIA-обогащение из коробки. ⑤ Цена в 3–5× ниже RapNet Dealer.</p>
+</div>
+
+<h3>Монетизация (сегментно)</h3>
+<table>
+  <tr><th>Сегмент</th><th>Боль</th><th>План</th><th>Обоснование цены</th></tr>
+  <tr><td><b>Брокер/продавец</b> (главный клин)</td><td>Найти покупателя на конкретный камень быстрее конкурентов</td><td><b>$100–250/мес</b> за место</td><td>Зеркалит RapNet Dealer $125 и DAT broker $159–449; брокер монетизирует каждый мэтч → WTP выше всех</td></tr>
+  <tr><td><b>Малый/частный ювелир</b> (покупатель)</td><td>Нет $1500/год на RapNet; ищет камень под заказ</td><td><b>$25–75/мес</b></td><td>Ниже RapNet Buyer ($62,5), выше «бесплатных» — оправдание = скорость по off-platform инвентарю</td></tr>
+  <tr><td><b>Пробный/индийский</b></td><td>Низкий ARPU-регион</td><td>Free trial + <b>₹1000–1500/мес</b></td><td>Паритет со Stone Search</td></tr>
+  <tr><td><b>Опционально</b></td><td>Не хотят подписку</td><td><b>$0 + fee за сделку</b> (модель Nivoda)</td><td>Сегмент уже принял эту модель</td></tr>
+</table>
+<p><small><b>Где деньги честнее всего:</b> сторона <b>продавца/брокера</b> — более защищённый клин. Бесплатные площадки уже насытили поиск на стороне покупателя, а вот <b>WhatsApp-поток сделок не парсит никто</b> — именно там ценность.</small></p>
+
+<div class="box myth">
+  <div class="bx-h">Честный контраргумент, который нельзя прятать</div>
+  <p>Прямая аналогия «апка с 18к юзеров продалась дорого» <b>не подтвердилась</b> (её нет в прессе; ближайшее — Get-Diamonds за $5к). Единственный «ценовой» выход на этом рынке — ритейл, не B2B-площадки. Это значит: <b>не рассчитывать на быстрый flip маркетплейса</b>. Реальные деньги — либо (1) устойчивая подписка на узкой, но платящей базе брокеров, либо (2) как у Nivoda — прирастить к мэтчингу платёж/логистику/кредит и брать transaction fee. Второе — больше денег, но и больше стройки/комплаенса.</p>
+</div>
+</section>
+
+<!-- ============================ PART 7 ============================ -->
+<section id="p7">
+<h2 class="part">Часть 7</h2>
+<h2 class="title">Дорожная карта, юнит-экономика, риски и вердикт</h2>
+
+<h3>Дорожная карта</h3>
+<table>
+  <tr><th>Фаза</th><th>Срок</th><th>Что</th><th>Цель</th></tr>
+  <tr><td><b>0. Валидация</b></td><td>3–4 нед</td><td>Вступить в 4–5 живых открытых TG-групп (уже нашли), собрать бесплатный размеченный корпус «есть/ищу», прогнать через прототип парсера; 15–20 интервью с брокерами (США/Дубай/Индия)</td><td>Подтвердить, что мэтч экономит часы и за него платят</td></tr>
+  <tr><td><b>1. MVP-бот</b></td><td>~3 мес</td><td>Ингест (форвард + CSV + BYO-session TG) → парсер → мэтчинг → алерты; GIA-обогащение; базовый вэттинг</td><td>50–100 платящих брокеров/дилеров</td></tr>
+  <tr><td><b>2. Доверие+фиды</b></td><td>+2–3 мес</td><td>Opt-in фиды (Дубай-модель), MyKYCBank-интеграция, шаблоны memo/арбитраж, репутация/жалобы</td><td>Удержание, сетевой эффект внутри хабов</td></tr>
+  <tr><td><b>3. Дэшборд/веб+iOS</b></td><td>+3 мес</td><td>Аналитика спроса для брокеров, история, командные места; iOS для покупателей</td><td>Апселл ARPU, брокерские команды</td></tr>
+  <tr><td><b>4. Транзакции (опц.)</b></td><td>по сигналу</td><td>Эскроу-партнёр + логистика (Malca-Amit/Brink's) + transaction fee</td><td>Переход к Nivoda-подобной экономике</td></tr>
+</table>
+
+<h3>Ориентир юнит-экономики (иллюстрация, не прогноз)</h3>
+<div class="stats">
+  <div class="stat"><b>~$200</b><span>GIA-обогащение 1 000 камней (PAYG $0,20)</span></div>
+  <div class="stat"><b>&lt;$1/юзер</b><span>инференс парсера в месяц при разумном объёме</span></div>
+  <div class="stat"><b>$0</b><span>стоимость уникальной чат-даты (не покупаем)</span></div>
+  <div class="stat"><b>500–2000</b><span>платящих на выход — реалистичный потолок ниши</span></div>
+</div>
+<p><small>Грубо: 1 000 платящих × ~$80/мес ≈ <b>$960к ARR</b>. Это ниша, не единорог: TAM ограничен ~30к дилеров-членов + длинный хвост частных ювелиров. Хорошо для прибыльного узкого SaaS или как модуль внутри более крупной платёжно-логистической истории; плохо, если цель — венчурный «ракетный» рост.</small></p>
+
+<h3>Матрица рисков</h3>
+<table>
+  <tr><th>Риск</th><th>Серьёзность</th><th>Митигация</th></tr>
+  <tr><td>Баны WhatsApp / нарушение ToS</td><td><span class="tag t-red">Высокая</span></td><td>Telegram-first; WhatsApp только BYO-session read-only; никогда центр. скрапер; прогрев+лимиты</td></tr>
+  <tr><td>Право по персданным (GDPR/PDPL/DPDP/Израиль)</td><td><span class="tag t-red">Высокая</span></td><td>Обработка по подписчику; извлекать офферы, не личности; хешировать телефоны; opt-in фиды где можно</td></tr>
+  <tr><td>Холодный старт ликвидности</td><td><span class="tag t-amber">Средняя</span></td><td>Начать с брокеров (у них и спрос, и сток); засеять из открытых групп; одна сторона (продавец) платит первой</td></tr>
+  <tr><td>Точность парсинга (шорткод, цена в ЛС, серт на фото)</td><td><span class="tag t-amber">Средняя</span></td><td>LLM+regex, human-in-loop на старте, OCR для сертов, консервативные допуски мэтча</td></tr>
+  <tr><td>Скам/фейки в мэтчах</td><td><span class="tag t-amber">Средняя</span></td><td>Вэттинг + OFAC + GIA-проверка + репутация; не трогать деньги/товар на MVP</td></tr>
+  <tr><td>Ответ инкумбента (Rapaport заведёт свой чат-парсинг)</td><td><span class="tag t-gray">Низкая-сред.</span></td><td>Скорость; ниша; культурная близость к дилерам; они боятся ToS так же</td></tr>
+  <tr><td>Узкий сжимающийся TAM</td><td><span class="tag t-gray">Структурная</span></td><td>Принять как «прибыльная ниша», не единорог; опция апселла в транзакции</td></tr>
+</table>
+
+<h3>Итоговый вердикт</h3>
+<div class="box win big">
+  <div class="bx-h">▶ Go — но с открытыми глазами</div>
+  <p><b>Строить стоит</b>, потому что боль реальна, слой сделок (мессенджеры) не оцифрован никем, а техническая ниша (чат-парсинг диамантов) пуста. <b>Формат:</b> Telegram-бот-«радар» на BYO-session + opt-in фиды, Telegram-first, монетизация со стороны брокера/продавца ($100–250) и покупателя ($25–75).</p>
+  <p><b>Три вещи, которые определят успех:</b> ① дисциплина ингестии (никакого коврового WhatsApp — это убьёт продукт баном/иском); ② вэттинг как ядро доверия (иначе первый скам похоронит репутацию); ③ клин со стороны брокера, у которого выше WTP и кто приносит и спрос, и предложение.</p>
+  <p><b>Чего НЕ ждать:</b> быстрого дорогого exit’а маркетплейса — прецедентов нет (Get-Diamonds ушла за $5к). Это прибыльная ниша или модуль под будущую платёжно-логистическую платформу, а не венчурная ракета сама по себе.</p>
+</div>
+
+<div class="footer-note">Следующий разумный шаг — Фаза 0 (3–4 недели, дёшево): сесть в найденные открытые Telegram-группы, собрать корпус, довести парсер до &gt;90% точности на реальном трафике и провести 15–20 интервью с брокерами о готовности платить. Это снимает главную неопределённость почти без затрат до строительства.</div>
+</section>
+
+<!-- ============================ SOURCES ============================ -->
+<section id="src">
+<h2 class="part">Доказательная база</h2>
+<h2 class="title">Источники (выборка ключевых)</h2>
+<p><small>Полный ресёрч содержит ~150+ ссылок; ниже — опорные первоисточники по разделам. Все цифры сверялись минимум по двум изданиям, где возможно.</small></p>
+<div class="srcgrid">
+  <p><b>Структура рынка:</b> Kimberley Process statistics; AWDC Antwerp trade figures 2025; Paul Zimnisky (market-share, история De Beers, индекс рафа); JCK / Mining.com (снижение цен De Beers 2024); De Beers preliminary results 2025; Ecofin / The Deep Dive (продажа De Beers); Rapaport News (АЛРОСА, Debswana); Miningmx (Rio Tinto Diavik).</p>
+  <p><b>Санкции/комплаенс:</b> Lewis Brisbois (G7 diamond ban); National Jeweler (EU traceability); OFAC FAQ 1165; AWDC G7 FAQ; eCFR 31 CFR 1027; UAE FIU goAML guidance; FIU-IND PMLA guidance; EU AMLR 2024/1624.</p>
+  <p><b>Платформы/конкуренты:</b> rapaport.com/trade (планы, ребрендинг Rapaport Trade); Nivoda (Series B/C, GraphQL API repo); JCK (WFDB покупка Get-Diamonds за $5 000); get-diamonds.com; idexonline.com; vdbapp.com; uni.diamonds; Lucara (Clara buy/sell-back); DiamondsOnCall LinkedIn.</p>
+  <p><b>Цены/аналитика:</b> rapaport.com (Price List tiers, RAPI); Wikipedia Rapaport Diamond Report; idexonline.com (индекс, Real-Time Prices API); paulzimnisky.com (индекс рафа, отчёт $900); tenoris.bi; sarine.com; JCK (суспензия прайс-листа март 2020).</p>
+  <p><b>Чат-трейдинг:</b> JCK «State of the Diamond District 2023» (WhatsApp-группы DDC); Israeli Diamond (бунт март 2020); Southern Jewelry News (memo-скам, GN Diamond WhatsApp-линия); Rapaport RapChat signup; nyddc.com/membership; t.me/@demandsnatural, @diamondsexport, @diamonds_jewels_antwerp (живой сэмпл).</p>
+  <p><b>API/данные:</b> raptech.rapaport.com; github.com/Nivoda/nivoda-api; api.idexonline.com; gia.edu/report-results-api; tracr.com; UN Comtrade (HS 7102/7104); gjepc.org/statistics; kimberleyprocessstatistics.org.</p>
+  <p><b>Парсинг/прецеденты:</b> onlineproperty.io, Emirates.Estate, BurjViewBot (Дубай-недвижимость); Vahak (фрахт, $14M Series A); Dealerway/CarAuctionBot (авто); gistgem.com; stonesearch.co.in; periskope.app.</p>
+  <p><b>Право/выполнимость:</b> developers.facebook.com (WhatsApp Cloud/Groups API); whatsapp.com/legal (ToS, Business Terms); github.com/WhiskeySockets/Baileys; core.telegram.org/bots/features (privacy mode), /api/obtaining_api_id; WhatsApp v. NSO; hiQ v. LinkedIn; Meta v. Bright Data; gdpr-info.eu; iapp.org (Israel Amendment 13); UAE PDPL; India DPDP Act 2023.</p>
+  <p><b>Спрос/монетизация:</b> JBT / JCK (число ювелиров США, −3%/год); gold.org (структура рынка Индии); GJEPC Solitaire (Китай/ГК); dat.com/load-boards (компаратор цен B2B-алертов $59–449); rapaport.com (workflow «discovery on-platform, close on WhatsApp»).</p>
+</div>
+<div class="footer-note">Методология: 13 агентов-ресёрчеров (8 направлений + критик + 4 добор-агента), ~600 обращений к источникам, ~924k токенов. Приоритет — данные 2024–2026. Документ подготовлен как внутренний материал для принятия решения; проверяемые ссылки на первоисточники доступны в полном логе ресёрча.</div>
+</section>
