@@ -191,7 +191,7 @@ def test_auctions_kb_upcoming_marker_and_short_title():
 
 # ----------------------------------------------------- static menus / selects
 def test_lang_kb_callbacks():
-    assert [b.callback_data for b in buttons(lang_kb())] == ["lang:ru", "lang:en"]
+    assert [b.callback_data for b in buttons(lang_kb())] == ["lang:ru", "lang:en", "lang:de", "lang:cs"]
 
 
 def test_menu_kb_has_8_sections():

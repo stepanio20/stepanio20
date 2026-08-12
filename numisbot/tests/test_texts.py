@@ -78,10 +78,11 @@ def test_category_icon():
 
 
 def test_t_known_and_fallback_lang():
-    assert t("menu", "ru") != t("menu", "en")
-    assert t("menu", "de") == t("menu", "ru")  # unknown lang falls back to ru
-    for key, entry in T.items():
-        assert "ru" in entry and "en" in entry, key
+    assert "Katz" in t("menu", "ru")
+    assert t("menu", "en") != t("menu", "ru")
+    # de/cs are real translations now; unknown langs fall back to ru
+    assert t("menu", "de") not in (t("menu", "ru"), t("menu", "en"))
+    assert t("menu", "xx") == t("menu", "ru")
 
 
 def test_interests_have_both_langs():

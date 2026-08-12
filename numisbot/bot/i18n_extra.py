@@ -101,6 +101,31 @@ EXTRA = {
             "Anders überlegt? Tippen Sie auf „Abbrechen“ oder /cancel."
         ),
         "sell_thanks": "🤝 Angekommen! Anfrage Nr. {lead_id} ist beim Katz-Team. Eine Antwort kommt meist innerhalb von 1–2 Werktagen.",
+        "estimate_start": ("🏷 <b>Schätzung auf Basis der Katz-Zuschläge</b>\n\n"
+                           "Beschreiben Sie die Münze in einer Nachricht: Land, Nominal, Jahr, "
+                           "Besonderheiten (für eine Verkaufsanfrage gern mit Foto).\n"
+                           "Beispiel: <code>Russland Poltina 1859 Alexander II</code>"),
+        "estimate_result": ("🏷 <b>Schätzung nach {n} realen Katz-Verkäufen</b>\n"
+                            "Typischer Bereich: <b>{p25}–{p75}</b>\n"
+                            "Median: <b>{med}</b> · gesamte Spanne {lo}–{hi}\n"
+                            "<i>Treffer auf: {words}</i>\n\n"
+                            "Ähnliche Zuschläge:\n{comps}\n\n"
+                            "💼 Verkaufen? /sell — bei Katz einliefern\n"
+                            "🛒 Oder in die Vitrine: /publish"),
+        "estimate_none": ("Zu dieser Beschreibung fanden sich im Katz-Archiv keine Vergleichsstücke. "
+                          "Versuchen Sie es anders: Land + Nominal + Jahr, ohne Füllwörter. "
+                          "Oder holen Sie sich eine persönliche Einschätzung vom Team: /sell"),
+        "estimate_quota": ("🚦 Das Schätzungs-Limit Ihres Tarifs ist erreicht ({used}/{quota} pro 30 Tage).\n"
+                           "⭐ Pro — 5/Monat · 🎯 Sniper+ — 15 · 💼 Dealer — 30 👉 /pro"),
+        "pf_header": "🧺 <b>Sammlungs-Portfolio</b> ({n} Pos.)\nBewertet nach frischen Katz-Zuschlägen:",
+        "pf_empty": ("🧺 Das Portfolio ist leer. Fügen Sie die erste Münze hinzu — ich bewerte sie "
+                     "nach jeder frischen Katz-Auktion neu."),
+        "pf_total": "\nGesamtschätzung: <b>{lo}–{hi}</b> (Mediane: {med}){vs}",
+        "pf_vs_buy": " · investiert {buy}",
+        "pf_add_ask": ("Beschreiben Sie die Münze (Land, Nominal, Jahr). Auf Wunsch mit Kaufpreis "
+                       "am Ende: <code>… for 250</code>"),
+        "pf_added": "✅ Ins Portfolio aufgenommen: <b>{title}</b>{buy}",
+        "pf_limit": "🚦 Portfolio-Limit in Ihrem Tarif: {limit} Positionen. Mehr — mit Pro: /pro",
         "trial_granted": ("🎁 <b>7 Tage Pro — als Willkommensgeschenk!</b>\n"
                           "25 Radar-Slots und die volle Preishistorie sind schon freigeschaltet. "
                           "Gefällt es Ihnen? /pro verlängert für 299 ⭐/Monat."),
@@ -153,6 +178,8 @@ EXTRA = {
             "/market — Münzvitrine der Mitglieder\n"
             "/publish — eigene Münze einstellen (mit Zertifikatsprüfung)\n"
             "/sell — bei Katz einliefern\n"
+            "/estimate — Münzschätzung nach dem Zuschlagsarchiv\n"
+            "/portfolio — Sammlungs-Portfolio mit Neubewertung\n"
             "/invite — ein Monat Pro pro Freund\n"
             "/digest — Digests an/aus\n"
             "/pro — Tarife · /lang — Sprache"
@@ -252,6 +279,31 @@ EXTRA = {
             "Rozmysleli jste si to? Ťukněte na „Zrušit“ nebo /cancel."
         ),
         "sell_thanks": "🤝 Přijato! Žádost č. {lead_id} putuje k týmu Katz. Odpověď obvykle přijde do 1–2 pracovních dnů.",
+        "estimate_start": ("🏷 <b>Ocenění podle archivu příklepů Katz</b>\n\n"
+                           "Popište minci jednou zprávou: země, nominál, rok, "
+                           "zvláštnosti (pro nabídku k prodeji můžete přiložit fotku).\n"
+                           "Příklad: <code>Rusko poltina 1859 Alexandr II</code>"),
+        "estimate_result": ("🏷 <b>Ocenění podle {n} skutečných prodejů Katz</b>\n"
+                            "Typické rozpětí: <b>{p25}–{p75}</b>\n"
+                            "Medián: <b>{med}</b> · celkový rozptyl {lo}–{hi}\n"
+                            "<i>Podle slov: {words}</i>\n\n"
+                            "Podobné příklepy:\n{comps}\n\n"
+                            "💼 Chcete prodat? /sell — dát do aukce Katz\n"
+                            "🛒 Nebo do vitríny: /publish"),
+        "estimate_none": ("K tomuto popisu se v archivu Katz žádné srovnatelné kusy nenašly. "
+                          "Zkuste to jinak: země + nominál + rok, bez zbytečných slov. "
+                          "Nebo pošlete minci na živé ocenění týmu: /sell"),
+        "estimate_quota": ("🚦 Limit ocenění ve vašem tarifu je vyčerpán ({used}/{quota} za 30 dní).\n"
+                           "⭐ Pro — 5/měs. · 🎯 Sniper+ — 15 · 💼 Dealer — 30 👉 /pro"),
+        "pf_header": "🧺 <b>Portfolio sbírky</b> ({n} poz.)\nOcenění podle čerstvých příklepů Katz:",
+        "pf_empty": ("🧺 Portfolio je prázdné. Přidejte první minci — po každé nové aukci Katz "
+                     "ji znovu ocením."),
+        "pf_total": "\nCelkové ocenění: <b>{lo}–{hi}</b> (mediány: {med}){vs}",
+        "pf_vs_buy": " · investováno {buy}",
+        "pf_add_ask": ("Popište minci (země, nominál, rok). Chcete-li, připište na konec "
+                       "kupní cenu: <code>… for 250</code>"),
+        "pf_added": "✅ Přidáno do portfolia: <b>{title}</b>{buy}",
+        "pf_limit": "🚦 Limit pozic v portfoliu ve vašem tarifu: {limit}. Víc — v Pro: /pro",
         "trial_granted": ("🎁 <b>7 dní Pro — dárek na uvítanou!</b>\n"
                           "25 slotů radaru a kompletní historie cen jsou už zapnuté. "
                           "Zalíbí se vám? /pro prodlouží za 299 ⭐/měs."),
@@ -304,6 +356,8 @@ EXTRA = {
             "/market — vitrína mincí členů\n"
             "/publish — vystavit vlastní minci (s ověřením certifikátu)\n"
             "/sell — dát do aukce Katz\n"
+            "/estimate — ocenění mince podle archivu příklepů\n"
+            "/portfolio — portfolio sbírky s přeceňováním\n"
             "/invite — měsíc Pro za přítele\n"
             "/digest — zapnout/vypnout přehledy\n"
             "/pro — tarify · /lang — jazyk"
@@ -364,6 +418,8 @@ COMMANDS_EXTRA = {
         ("market", "🛒 Münzvitrine der Mitglieder"),
         ("publish", "📤 Eigene Münze einstellen"),
         ("sell", "💼 Bei Katz einliefern"),
+        ("estimate", "🏷 Münzschätzung nach Zuschlägen"),
+        ("portfolio", "🧺 Sammlungs-Portfolio"),
         ("pro", "⭐ Tarife Pro / Sniper+ / Dealer"),
         ("invite", "🎁 Ein Monat Pro pro Freund"),
         ("digest", "📬 Digests an/aus"),
@@ -380,6 +436,8 @@ COMMANDS_EXTRA = {
         ("market", "🛒 Vitrína mincí členů"),
         ("publish", "📤 Vystavit vlastní minci"),
         ("sell", "💼 Dát do aukce Katz"),
+        ("estimate", "🏷 Ocenění mince podle příklepů"),
+        ("portfolio", "🧺 Portfolio sbírky"),
         ("pro", "⭐ Tarify Pro / Sniper+ / Dealer"),
         ("invite", "🎁 Měsíc Pro za přítele"),
         ("digest", "📬 Zapnout/vypnout přehledy"),

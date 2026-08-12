@@ -280,19 +280,22 @@ async def test_add_get_listing(db):
     lid = await db.add_listing(make_listing(price=150.0, title="Poltina"))
     assert lid > 0
     row = await db.get_listing(lid)
-    assert row["title"] == "Poltina" and row["status"] == "active"
+    # allow-list moderation: new listings are born pending, admin activates
+    assert row["title"] == "Poltina" and row["status"] == "pending"
     assert row["cert_status"] == "none"
 
 
 async def test_browse_listings_filters_and_pagination(db):
     ids = [await db.add_listing(make_listing(title=f"L{i}")) for i in range(1, 7)]
+    assert await db.browse_listings(limit=5) == []        # pending is invisible
+    for lid in ids:
+        await db.set_listing_status(lid, None, "active")  # admin approval
     await db.set_listing_status(ids[0], None, "sold")
-    await db.set_listing_status(ids[1], None, "hidden")
-    await db.set_cert_status(ids[2], "rejected")
+    await db.set_listing_status(ids[1], None, "hidden")   # reject flow hides
     page1 = await db.browse_listings(limit=2)
     assert [r["id"] for r in page1] == [ids[5], ids[4]]   # newest first
     page2 = await db.browse_listings(before_id=page1[-1]["id"], limit=2)
-    assert [r["id"] for r in page2] == [ids[3]]           # sold/hidden/rejected gone
+    assert [r["id"] for r in page2] == [ids[3], ids[2]]   # sold/hidden gone
 
 
 async def test_active_listings_of_counts_only_active(db):
@@ -318,7 +321,9 @@ async def test_cert_in_use_lifecycle(db):
 async def test_cert_in_use_ignores_rejected(db):
     lid = await db.add_listing(make_listing(
         cert_service="NGC", cert_number="6805461-001", cert_status="linked"))
+    assert await db.cert_in_use("NGC", "6805461-001")     # pending occupies too
     await db.set_cert_status(lid, "rejected", "fake slab")
+    await db.set_listing_status(lid, None, "hidden")      # reject flow hides
     assert not await db.cert_in_use("NGC", "6805461-001")
 
 
@@ -332,7 +337,7 @@ async def test_set_cert_status_updates_note(db):
 async def test_set_listing_status_ownership(db):
     lid = await db.add_listing(make_listing(user_id=42))
     await db.set_listing_status(lid, 999, "sold")         # wrong owner — no-op
-    assert (await db.get_listing(lid))["status"] == "active"
+    assert (await db.get_listing(lid))["status"] == "pending"
     await db.set_listing_status(lid, 42, "sold")          # owner
     assert (await db.get_listing(lid))["status"] == "sold"
     await db.set_listing_status(lid, None, "hidden")      # admin override

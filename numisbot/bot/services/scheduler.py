@@ -13,6 +13,7 @@ from ..config import Config
 from ..db import Database
 from ..keyboards import digest_kb, lot_kb
 from ..texts import esc, lot_card, photo_url, t
+from .aftersale import run_aftersale
 from .katz_parser import KatzParser
 
 log = logging.getLogger(__name__)
@@ -26,6 +27,8 @@ class SchedulerService:
         self.parser = KatzParser(cfg.katz_base_url, cfg.http_timeout)
         self.scheduler = AsyncIOScheduler()
         self._refresh_lock = asyncio.Lock()
+        # user-triggered searches share a small budget against the Katz API
+        self._search_sem = asyncio.Semaphore(2)
 
     def start(self) -> None:
         self.scheduler.add_job(
@@ -36,7 +39,12 @@ class SchedulerService:
         # Monday 09:00 UTC ≈ late morning across the RU/EU audience
         self.scheduler.add_job(self.weekly_digest, "cron",
                                day_of_week="mon", hour=9, id="digest")
+        # daily unsold-lots feed for Sniper+/Dealer (3 cards/run, dedup inside)
+        self.scheduler.add_job(self.aftersale, "cron", hour=10, id="aftersale")
         self.scheduler.start()
+
+    async def aftersale(self) -> int:
+        return await run_aftersale(self.bot, self.db)
 
     async def shutdown(self) -> None:
         self.scheduler.shutdown(wait=False)
@@ -128,14 +136,16 @@ class SchedulerService:
         Results are cached into our own DB (lot rows incl. image URLs) so
         card buttons like '➕ В радар' can look the lot up later.
         """
-        rows = await self.parser.search_lots(query, pages=1)
+        async with self._search_sem:
+            rows = await self.parser.search_lots(query, pages=1)
         await self.db.upsert_lots(rows)
         if live_only:
             rows = [r for r in rows if r["realized"] is None]
         return rows[:limit]
 
     async def api_price_history(self, query: str, limit: int = 20):
-        rows = await self.parser.search_lots(query, pages=2)
+        async with self._search_sem:
+            rows = await self.parser.search_lots(query, pages=2)
         await self.db.upsert_lots(rows)
         return [r for r in rows if r["realized"] is not None][:limit]
 

@@ -33,8 +33,8 @@ INTERESTS = {
 
 T = {
     "choose_lang": {
-        "ru": "🪙 <b>Katz Coins Radar</b>\n\nВыберите язык / Choose language",
-        "en": "🪙 <b>Katz Coins Radar</b>\n\nChoose language / Выберите язык",
+        "ru": "🪙 <b>Katz Coins Radar</b>\n\nВыберите язык · Choose language · Sprache wählen · Zvolte jazyk",
+        "en": "🪙 <b>Katz Coins Radar</b>\n\nChoose language · Выберите язык · Sprache wählen · Zvolte jazyk",
     },
     "welcome": {
         "ru": (
@@ -461,12 +461,52 @@ T = {
         "en": "🚦 Active-listing limit on your plan: {limit}. More slots — Pro/Dealer: /pro",
     },
     "publish_done": {
-        "ru": ("🎉 <b>Листинг #{id} опубликован!</b>\n"
-               "Он появился в витрине /market и уйдёт в еженедельный дайджест. "
-               "Продали? Отметьте кнопкой под карточкой."),
-        "en": ("🎉 <b>Listing #{id} is live!</b>\n"
-               "It's now in /market and goes into the weekly digest. "
-               "Sold it? Mark it with the button under the card."),
+        "ru": ("📨 <b>Листинг #{id} отправлен на модерацию</b>\n"
+               "Проверяем описание и сертификат — обычно в течение рабочего дня. "
+               "Как только одобрим, он появится в витрине /market, а вам придёт уведомление."),
+        "en": ("📨 <b>Listing #{id} submitted for review</b>\n"
+               "We check the description and certificate — usually within a business day. "
+               "Once approved it appears in /market and you get a notification."),
+    },
+    "publish_approved": {
+        "ru": "✅ Листинг #{id} одобрен и опубликован в витрине /market!",
+        "en": "✅ Listing #{id} approved and now live in /market!",
+    },
+    "publish_need_username": {
+        "ru": ("Для публикации нужен @username в Telegram — иначе покупатели не смогут "
+               "с вами связаться. Настройки → Имя пользователя, затем возвращайтесь!"),
+        "en": ("A Telegram @username is required to publish — buyers couldn't reach you "
+               "otherwise. Settings → Username, then come back!"),
+    },
+    "publish_cooldown": {
+        "ru": "⏳ Публиковать можно не чаще одного листинга в 10 минут. Попробуйте позже.",
+        "en": "⏳ One listing per 10 minutes. Try again a bit later.",
+    },
+    "publish_banned": {
+        "ru": "🚫 Публикация недоступна: несколько ваших листингов были отклонены модерацией. Напишите /paysupport, если это ошибка.",
+        "en": "🚫 Publishing is disabled: several of your listings were rejected. Contact /paysupport if this is a mistake.",
+    },
+    "paysupport": {
+        "ru": ("💬 <b>Поддержка по оплатам</b>\n\n"
+               "Опишите проблему одним сообщением (какой тариф, когда платили) — "
+               "передам команде, ответим здесь же. Возвраты Stars — по правилам Telegram."),
+        "en": ("💬 <b>Payment support</b>\n\n"
+               "Describe the issue in one message (which plan, when paid) — "
+               "I'll pass it to the team and we'll reply here. Star refunds follow Telegram rules."),
+    },
+    "paysupport_sent": {
+        "ru": "🤝 Передал команде. Ответим в этом чате.",
+        "en": "🤝 Passed to the team. We'll reply in this chat.",
+    },
+    "forgetme_confirm": {
+        "ru": ("⚠️ Удалить все ваши данные: радар, портфель, листинги, интересы, историю? "
+               "Записи о платежах сохраняются по требованиям учёта. Это необратимо."),
+        "en": ("⚠️ Delete all your data: radar, portfolio, listings, interests, history? "
+               "Payment records are kept for accounting. This cannot be undone."),
+    },
+    "forgetme_done": {
+        "ru": "🗑 Готово — все данные удалены. Спасибо, что были с нами. /start — если вернётесь.",
+        "en": "🗑 Done — all your data is deleted. Thanks for being with us. /start — if you return.",
     },
     "market_header": {
         "ru": "🛒 <b>Витрина коллекционеров</b>\nСвежие монеты от участников — с проверкой сертификатов:",
@@ -514,7 +554,21 @@ T = {
 }
 
 
+# merge in agent-authored German/Czech translations (Katz UI languages)
+try:
+    from .i18n_extra import BTN_EXTRA, EXTRA, INTERESTS_EXTRA
+except ImportError:  # pragma: no cover — translations are optional
+    EXTRA, INTERESTS_EXTRA, BTN_EXTRA = {}, {}, {}
+for _lang, _labels in INTERESTS_EXTRA.items():
+    for _key, _val in _labels.items():
+        INTERESTS[_key][_lang] = _val
+for _lang, _labels in BTN_EXTRA.items():
+    BTN[_lang] = _labels
+
+
 def t(key: str, lang: str) -> str:
+    if lang in EXTRA and key in EXTRA[lang]:
+        return EXTRA[lang][key]
     entry = T[key]
     return entry.get(lang, entry["ru"])
 
@@ -589,7 +643,7 @@ def realized_line(lot, lang: str) -> str:
 
 
 CERT_BADGES = {
-    "verified": {"ru": "✅ Сертификат {svc} №{num} подтверждён", "en": "✅ {svc} cert #{num} verified"},
+    "verified": {"ru": "✅ Сертификат {svc} №{num} найден в реестре", "en": "✅ {svc} cert #{num} found in the registry"},
     "linked": {"ru": "🛡 {svc} №{num} — проверьте в реестре по кнопке", "en": "🛡 {svc} #{num} — check via the registry button"},
     "pending": {"ru": "⏳ {svc} №{num} — проверка сертификата идёт", "en": "⏳ {svc} #{num} — cert check in progress"},
     "mismatch": {"ru": "⚠️ {svc} №{num} не найден в реестре", "en": "⚠️ {svc} #{num} not found in the registry"},

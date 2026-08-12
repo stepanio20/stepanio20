@@ -11,6 +11,8 @@ import time
 
 from aiogram import F, Router
 from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, LabeledPrice, Message, PreCheckoutQuery
 
 from ..config import Config
@@ -19,6 +21,10 @@ from ..keyboards import pro_kb
 from ..texts import t
 
 router = Router()
+
+
+class PaySupportForm(StatesGroup):
+    waiting = State()
 
 SUB_PERIOD = 2592000  # 30 days, the only period Telegram allows for Stars subs
 TIER_BY_PAYLOAD = {"sub:pro": "pro", "sub:sniper": "sniper", "sub:dealer": "dealer"}
@@ -78,10 +84,35 @@ async def pre_checkout(q: PreCheckoutQuery):
         await q.answer(ok=False, error_message="Счёт устарел — откройте /pro заново")
 
 
+@router.message(Command("paysupport"))
+async def cmd_paysupport(msg: Message, db: Database, state: FSMContext):
+    lang = await _lang(db, msg.from_user.id)
+    await state.set_state(PaySupportForm.waiting)
+    await msg.answer(t("paysupport", lang))
+
+
+@router.message(PaySupportForm.waiting, F.text | F.photo)
+async def paysupport_msg(msg: Message, db: Database, state: FSMContext, cfg: Config):
+    lang = await _lang(db, msg.from_user.id)
+    await state.clear()
+    await msg.answer(t("paysupport_sent", lang))
+    for admin_id in cfg.admin_ids:
+        try:
+            await msg.forward(admin_id)
+            await msg.bot.send_message(
+                admin_id, f"💬 <b>/paysupport</b> от id {msg.from_user.id} "
+                          f"(@{msg.from_user.username or '—'})")
+        except Exception:
+            pass
+
+
 @router.message(F.successful_payment)
 async def on_paid(msg: Message, db: Database):
     lang = await _lang(db, msg.from_user.id)
     sp = msg.successful_payment
+    # duplicate delivery of the same charge must not re-grant anything
+    if await db.payment_exists(sp.telegram_payment_charge_id):
+        return
     tier = TIER_BY_PAYLOAD.get(sp.invoice_payload, "pro")
     until = int(time.time()) + SUB_PERIOD
     if sp.subscription_expiration_date:

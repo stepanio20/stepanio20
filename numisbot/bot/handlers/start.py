@@ -129,6 +129,28 @@ async def cmd_invite(msg: Message, db: Database):
     await db.track(msg.from_user.id, "invite_view")
 
 
+@router.message(Command("forgetme"))
+async def cmd_forgetme(msg: Message, db: Database):
+    lang = await _lang(db, msg.from_user.id)
+    from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    kb = InlineKeyboardMarkup(inline_keyboard=[[
+        InlineKeyboardButton(text="🗑 Да, удалить всё" if lang == "ru" else "🗑 Yes, delete all",
+                             callback_data="forget:yes"),
+        InlineKeyboardButton(text="Отмена" if lang == "ru" else "Cancel",
+                             callback_data="cancel"),
+    ]])
+    await msg.answer(t("forgetme_confirm", lang), reply_markup=kb)
+
+
+@router.callback_query(F.data == "forget:yes")
+async def cb_forget(cb: CallbackQuery, db: Database):
+    lang = await _lang(db, cb.from_user.id)
+    await db.wipe_user(cb.from_user.id)
+    from aiogram.types import ReplyKeyboardRemove
+    await cb.message.answer(t("forgetme_done", lang), reply_markup=ReplyKeyboardRemove())
+    await cb.answer("🗑")
+
+
 @router.message(Command("digest"))
 async def cmd_digest(msg: Message, db: Database):
     lang = await _lang(db, msg.from_user.id)

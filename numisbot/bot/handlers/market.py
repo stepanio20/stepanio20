@@ -42,15 +42,29 @@ async def _lang(db: Database, user_id: int) -> str:
 
 
 # ---------------------------------------------------------------- publish
+async def _publish_gate(user, db: Database, lang: str) -> str | None:
+    """Returns a rejection message key, or None when publishing is allowed."""
+    if not user.username:
+        return "publish_need_username"  # buyers must be able to reach the seller
+    if await db.rejected_count(user.id) >= 3:
+        return "publish_banned"
+    import time as _time
+    if _time.time() - await db.last_listing_ts(user.id) < 600:
+        return "publish_cooldown"
+    tier = await db.effective_tier(user.id)
+    if await db.active_listings_of(user.id) >= LISTING_SLOTS.get(tier, 1):
+        return "publish_limit"
+    return None
+
+
 @router.message(Command("publish"))
 async def cmd_publish(msg: Message, db: Database, state: FSMContext):
     lang = await _lang(db, msg.from_user.id)
-    tier = await db.effective_tier(msg.from_user.id)
-    active = await db.active_listings_of(msg.from_user.id)
-    limit = LISTING_SLOTS.get(tier, 1)
-    if active >= limit:
-        await msg.answer(t("publish_limit", lang).format(limit=limit))
-        await db.track(msg.from_user.id, "publish_limit")
+    gate = await _publish_gate(msg.from_user, db, lang)
+    if gate:
+        limit = LISTING_SLOTS.get(await db.effective_tier(msg.from_user.id), 1)
+        await msg.answer(t(gate, lang).format(limit=limit))
+        await db.track(msg.from_user.id, "publish_gate_" + gate)
         return
     await state.set_state(PublishForm.photos)
     await state.update_data(photos=[])
@@ -61,11 +75,10 @@ async def cmd_publish(msg: Message, db: Database, state: FSMContext):
 @router.callback_query(F.data == "m:publish")
 async def cb_publish(cb: CallbackQuery, db: Database, state: FSMContext):
     lang = await _lang(db, cb.from_user.id)
-    tier = await db.effective_tier(cb.from_user.id)
-    active = await db.active_listings_of(cb.from_user.id)
-    limit = LISTING_SLOTS.get(tier, 1)
-    if active >= limit:
-        await cb.message.answer(t("publish_limit", lang).format(limit=limit))
+    gate = await _publish_gate(cb.from_user, db, lang)
+    if gate:
+        limit = LISTING_SLOTS.get(await db.effective_tier(cb.from_user.id), 1)
+        await cb.message.answer(t(gate, lang).format(limit=limit))
         await cb.answer()
         return
     await state.set_state(PublishForm.photos)
@@ -265,10 +278,20 @@ async def cmd_market(msg: Message, db: Database):
                          reply_markup=market_more_kb(rows[-1]["id"], lang))
 
 
+def _cb_int(data: str, idx: int) -> int | None:
+    try:
+        return int(data.split(":")[idx])
+    except (ValueError, IndexError):
+        return None
+
+
 @router.callback_query(F.data.startswith("mk:"))
 async def cb_market_more(cb: CallbackQuery, db: Database):
     lang = await _lang(db, cb.from_user.id)
-    before_id = int(cb.data.split(":", 1)[1])
+    before_id = _cb_int(cb.data, 1)
+    if before_id is None:
+        await cb.answer()
+        return
     rows = await db.browse_listings(before_id=before_id, limit=3)
     if not rows:
         await cb.answer("∅")
@@ -283,7 +306,10 @@ async def cb_market_more(cb: CallbackQuery, db: Database):
 
 @router.callback_query(F.data.startswith("mksold:"))
 async def cb_mark_sold(cb: CallbackQuery, db: Database):
-    listing_id = int(cb.data.split(":", 1)[1])
+    listing_id = _cb_int(cb.data, 1)
+    if listing_id is None:
+        await cb.answer()
+        return
     await db.set_listing_status(listing_id, cb.from_user.id, "sold")
     await cb.answer("✅")
 
@@ -294,24 +320,31 @@ async def cb_admin_verify(cb: CallbackQuery, db: Database, cfg: Config):
     if cb.from_user.id not in cfg.admin_ids:
         await cb.answer()
         return
-    _, verdict, sid = cb.data.split(":")
-    listing_id = int(sid)
+    parts = cb.data.split(":")
+    verdict = parts[1] if len(parts) > 2 else ""
+    listing_id = _cb_int(cb.data, 2)
+    if listing_id is None:
+        await cb.answer()
+        return
     listing = await db.get_listing(listing_id)
     if not listing:
         await cb.answer("∅")
         return
+    owner_lang = await _lang(db, listing["user_id"])
     if verdict == "ok":
-        await db.set_cert_status(listing_id, "verified",
-                                 listing["cert_note"] or "confirmed by moderator")
-        await cb.answer("✅ verified")
-        note = "✅ Сертификат подтверждён модератором"
+        if listing["cert_service"] and listing["cert_status"] in ("linked", "pending"):
+            await db.set_cert_status(listing_id, "verified",
+                                     listing["cert_note"] or "confirmed by moderator")
+        await db.set_listing_status(listing_id, None, "active")
+        await cb.answer("✅ approved")
+        note = t("publish_approved", owner_lang).format(id=listing_id)
     else:
         await db.set_cert_status(listing_id, "rejected", "rejected by moderator")
         await db.set_listing_status(listing_id, None, "hidden")
         await cb.answer("❌ rejected")
-        note = "❌ Листинг отклонён модерацией"
+        note = ("❌ Листинг #%d отклонён модерацией" % listing_id
+                if owner_lang == "ru" else "❌ Listing #%d was rejected" % listing_id)
     try:
-        await cb.bot.send_message(listing["user_id"],
-                                  f"{note} (листинг #{listing_id})")
+        await cb.bot.send_message(listing["user_id"], note)
     except Exception:
         pass

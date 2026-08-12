@@ -56,6 +56,13 @@ COMMANDS = {
 }
 
 
+try:
+    from .i18n_extra import COMMANDS_EXTRA
+    COMMANDS.update(COMMANDS_EXTRA)
+except ImportError:  # pragma: no cover
+    pass
+
+
 async def register_commands(bot: Bot) -> None:
     for lang_code, cmds in COMMANDS.items():
         try:
@@ -90,6 +97,10 @@ async def main() -> None:
 
     bot = Bot(cfg.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
+    from .middleware import GuardMiddleware
+    guard = GuardMiddleware()
+    dp.message.middleware(guard)
+    dp.callback_query.middleware(guard)
     for r in ROUTERS:
         dp.include_router(r)
 

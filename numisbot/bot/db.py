@@ -124,6 +124,8 @@ CREATE TABLE IF NOT EXISTS announced_auctions (
 MIGRATIONS = [
     "ALTER TABLE users ADD COLUMN trial_used INTEGER DEFAULT 0",
     "ALTER TABLE users ADD COLUMN digest_off INTEGER DEFAULT 0",
+    # duplicate successful_payment deliveries must not double-charge tiers
+    "CREATE UNIQUE INDEX IF NOT EXISTS idx_payments_charge ON payments(charge_id)",
 ]
 
 
@@ -487,11 +489,13 @@ class Database:
 
     # -- listings (C2C showcase) ------------------------------------------
     async def add_listing(self, row: dict[str, Any]) -> int:
+        """New listings are born 'pending' — the showcase is allow-listed:
+        nothing is visible to other users until an admin approves it."""
         cur = await self.db.execute(
             "INSERT INTO listings(user_id,contact,title,description,price,photos,"
-            "cert_service,cert_number,cert_status,cert_note,created) "
+            "cert_service,cert_number,cert_status,cert_note,status,created) "
             "VALUES(:user_id,:contact,:title,:description,:price,:photos,"
-            ":cert_service,:cert_number,:cert_status,:cert_note,:created)",
+            ":cert_service,:cert_number,:cert_status,:cert_note,'pending',:created)",
             row,
         )
         await self.db.commit()
@@ -502,27 +506,56 @@ class Database:
         return await cur.fetchone()
 
     async def browse_listings(self, before_id: int | None = None, limit: int = 3) -> list[aiosqlite.Row]:
+        """Only admin-approved listings are visible (allow-list moderation)."""
         if before_id:
             cur = await self.db.execute(
-                "SELECT * FROM listings WHERE status='active' AND cert_status!='rejected' "
+                "SELECT * FROM listings WHERE status='active' "
                 "AND id<? ORDER BY id DESC LIMIT ?", (before_id, limit))
         else:
             cur = await self.db.execute(
-                "SELECT * FROM listings WHERE status='active' AND cert_status!='rejected' "
+                "SELECT * FROM listings WHERE status='active' "
                 "ORDER BY id DESC LIMIT ?", (limit,))
         return list(await cur.fetchall())
 
     async def active_listings_of(self, user_id: int) -> int:
+        """Pending items occupy a slot too — no queue-stuffing."""
         cur = await self.db.execute(
-            "SELECT COUNT(*) c FROM listings WHERE user_id=? AND status='active'", (user_id,))
+            "SELECT COUNT(*) c FROM listings WHERE user_id=? "
+            "AND status IN ('active','pending')", (user_id,))
         row = await cur.fetchone()
         return row["c"] if row else 0
 
     async def cert_in_use(self, service: str, number: str) -> bool:
-        """One certificate — one active listing (anti-fraud)."""
+        """One certificate — one live-or-queued listing (anti-fraud)."""
         cur = await self.db.execute(
             "SELECT 1 FROM listings WHERE cert_service=? AND cert_number=? "
-            "AND status='active' AND cert_status!='rejected'", (service, number))
+            "AND status IN ('active','pending')", (service, number))
+        return await cur.fetchone() is not None
+
+    async def last_listing_ts(self, user_id: int) -> int:
+        cur = await self.db.execute(
+            "SELECT MAX(created) m FROM listings WHERE user_id=?", (user_id,))
+        row = await cur.fetchone()
+        return row["m"] or 0
+
+    async def rejected_count(self, user_id: int) -> int:
+        cur = await self.db.execute(
+            "SELECT COUNT(*) c FROM listings WHERE user_id=? AND cert_status='rejected'",
+            (user_id,))
+        return (await cur.fetchone())["c"]
+
+    async def wipe_user(self, user_id: int) -> None:
+        """GDPR right-to-erasure. Payment records stay (billing obligation)."""
+        await self.db.execute("DELETE FROM users WHERE id=?", (user_id,))
+        for table in ("watches", "alerts_sent", "events", "portfolio",
+                      "seller_leads", "listings"):
+            await self.db.execute(f"DELETE FROM {table} WHERE user_id=?", (user_id,))
+        await self.db.execute("DELETE FROM referrals WHERE referee_id=?", (user_id,))
+        await self.db.commit()
+
+    async def payment_exists(self, charge_id: str) -> bool:
+        cur = await self.db.execute(
+            "SELECT 1 FROM payments WHERE charge_id=?", (charge_id,))
         return await cur.fetchone() is not None
 
     async def set_cert_status(self, listing_id: int, status: str, note: str = "") -> None:

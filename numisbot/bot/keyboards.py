@@ -25,10 +25,12 @@ def main_reply_kb(lang: str) -> ReplyKeyboardMarkup:
 
 
 def lang_kb() -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(inline_keyboard=[[
-        InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru"),
-        InlineKeyboardButton(text="🇬🇧 English", callback_data="lang:en"),
-    ]])
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru"),
+         InlineKeyboardButton(text="🇬🇧 English", callback_data="lang:en")],
+        [InlineKeyboardButton(text="🇩🇪 Deutsch", callback_data="lang:de"),
+         InlineKeyboardButton(text="🇨🇿 Čeština", callback_data="lang:cs")],
+    ])
 
 
 def interests_kb(lang: str, selected: set[str]) -> InlineKeyboardMarkup:
