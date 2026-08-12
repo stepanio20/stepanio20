@@ -165,6 +165,9 @@ def handle_webhook_event(event: dict) -> Optional[tuple[int, str]]:
     tg_id, tier, charge_id, amount, status = _extract(event)
     if status not in {"success", "paid", "succeeded", "captured"}:
         return None
+    if not charge_id:
+        log.warning("webhook success without charge_id — ignoring (replay guard): %s", str(event)[:200])
+        return None
     if tg_id is None:
         log.warning("webhook success but no tg_id in metadata: %s", str(event)[:200])
         return None

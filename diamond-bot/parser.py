@@ -49,8 +49,9 @@ SHAPES = {
 # color: D–Z, plus fancy colors
 FANCY_COLORS = [
     "pink", "blue", "yellow", "green", "orange", "red", "purple",
-    "violet", "brown", "champagne", "cognac", "gray", "grey", "black", "white",
+    "violet", "brown", "champagne", "cognac", "gray", "grey", "black",
 ]
+# "white" is universal dealer slang for colorless (D–F), NOT a fancy color — never treat it as fancy.
 FANCY_INTENSITY = [
     "faint", "very light", "light", "fancy light", "fancy",
     "fancy intense", "intense", "fancy vivid", "vivid", "fancy deep", "deep", "fancy dark",
@@ -114,11 +115,12 @@ class ParsedStone:
 
 # ─────────────────────────────── regexes ─────────────────────────────────────
 
+# carat accepts a dot OR comma decimal (RU/EU/HE dealers write "1,50ct"); converted in parse.
 _CARAT_RE = re.compile(
-    r"(?<![\d.])(\d{1,2}(?:\.\d{1,2})?)\s*(?:ct|cts|carat|carats|c)\b", re.I,
+    r"(?<![\d.,])(\d{1,2}(?:[.,]\d{1,2})?)\s*(?:ct|cts|carat|carats|c)\b", re.I,
 )
 _CARAT_RANGE_RE = re.compile(
-    r"(\d{1,2}(?:\.\d{1,2})?)\s*[-–to]{1,3}\s*(\d{1,2}(?:\.\d{1,2})?)\s*(?:ct|cts|carat|carats)\b", re.I,
+    r"(\d{1,2}(?:[.,]\d{1,2})?)\s*[-–to]{1,3}\s*(\d{1,2}(?:[.,]\d{1,2})?)\s*(?:ct|cts|carat|carats)\b", re.I,
 )
 _WHITE_COLOR_RE = re.compile(r"\b([D-N])\b(?!['a-z])")
 # bare-decimal carat fallback, e.g. "Round 1.01 G VS2" (no 'ct' suffix)
@@ -126,9 +128,13 @@ _BARE_CARAT_RE = re.compile(r"(?<![\$\d.])\b(\d{1,2}\.\d{1,2})\b(?!\s*%)")
 _CLARITY_RE = re.compile(r"\b(FL|IF|VVS[12]|VS[12]|SI[123]|I[123])\b", re.I)
 _CERT_RE = re.compile(r"\b(\d{7,12})\b")
 _PRICE_PER_CT_RE = re.compile(
-    r"(?:\$|usd)\s*([\d.,]+)\s*(?:/|per\s*)?\s*(?:ct|carat|c)\b", re.I,
+    r"(?:\$|usd|aed|د\.إ)\s*([\d.,]+)\s*(?:/|per\s*)?\s*(?:ct|carat|c)\b", re.I,
 )
-_PRICE_TOTAL_RE = re.compile(r"(?:\$|usd)\s*([\d.,]+)\b", re.I)
+# symbol-less per-carat, common in Dubai ("5040/ct", "26000 per ct"); guarded by min value in parse.
+_PRICE_PER_CT_BARE_RE = re.compile(
+    r"(?<![\d.,])([\d.,]{3,})\s*(?:/\s*ct|per\s*ct|per\s*carat|p\s*/?\s*c)\b", re.I,
+)
+_PRICE_TOTAL_RE = re.compile(r"(?:\$|usd|aed)\s*([\d.,]+)\b", re.I)
 _RAP_RE = re.compile(r"rap\s*(?:net)?\s*([+-]?\s*\d{1,2}(?:\.\d)?)\s*%?", re.I)
 _DISCOUNT_PCT_RE = re.compile(r"([+-]\s*\d{1,2}(?:\.\d)?)\s*%")
 
@@ -218,14 +224,14 @@ def parse_message(text: str, default_intent: Optional[str] = None) -> Optional[P
 
     st = ParsedStone(raw_text=original)
 
-    # carat (range first, then single)
+    # carat (range first, then single); accept comma decimals ("1,50ct" → 1.5)
     m = _CARAT_RANGE_RE.search(original)
     if m:
-        st.carat_min = float(m.group(1))
-        st.carat_max = float(m.group(2))
+        st.carat_min = float(m.group(1).replace(",", "."))
+        st.carat_max = float(m.group(2).replace(",", "."))
     m = _CARAT_RE.search(original)
     if m:
-        st.carat = float(m.group(1))
+        st.carat = float(m.group(1).replace(",", "."))
 
     st.shape = _find_shape(original)
 
@@ -267,14 +273,20 @@ def parse_message(text: str, default_intent: Optional[str] = None) -> Optional[P
             st.fluorescence = "none" if fl == "nil" else fl
             break
 
-    # price per carat, then total
+    # price per carat ($/usd/aed, then symbol-less "…/ct"), then total
     m = _PRICE_PER_CT_RE.search(original)
     if m:
         st.price_per_carat = _norm_number(m.group(1))
     else:
-        m = _PRICE_TOTAL_RE.search(original)
-        if m:
-            st.total_price = _norm_number(m.group(1))
+        bm = _PRICE_PER_CT_BARE_RE.search(original)
+        if bm:
+            v = _norm_number(bm.group(1))
+            if v and v >= 100:  # ignore tiny numbers (carats/counts); no real $/ct is under $100
+                st.price_per_carat = v
+        if st.price_per_carat is None:
+            m = _PRICE_TOTAL_RE.search(original)
+            if m:
+                st.total_price = _norm_number(m.group(1))
 
     # Rap discount / premium
     m = _RAP_RE.search(original)

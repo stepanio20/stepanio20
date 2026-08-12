@@ -15,7 +15,7 @@ import logging
 import re
 from html import escape as _esc
 
-from aiogram import Bot, Dispatcher, F, Router
+from aiogram import BaseMiddleware, Bot, Dispatcher, F, Router
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
@@ -47,6 +47,23 @@ _BRAND = _Path(__file__).resolve().parent / "branding"
 _CA = "/root/.ccr/ca-bundle.crt"
 if _os.path.exists(_CA) and not _os.environ.get("SSL_CERT_FILE"):
     _os.environ["SSL_CERT_FILE"] = _CA
+
+
+class Throttle(BaseMiddleware):
+    """Per-user rate limit — drops bursts so a single client can't DoS the loop or scrape fast."""
+    def __init__(self, rate: float = 0.7):
+        self.rate = rate
+        self._seen: dict[int, float] = {}
+
+    async def __call__(self, handler, event, data):
+        u = data.get("event_from_user")
+        if u is not None:
+            now = asyncio.get_event_loop().time()
+            last = self._seen.get(u.id, 0.0)
+            if now - last < self.rate:
+                return None
+            self._seen[u.id] = now
+        return await handler(event, data)
 
 
 def _build_session():
@@ -235,7 +252,7 @@ async def _handle_stone_text(msg: Message, text: str, source: str,
         pairs = matcher.run_matching(demands, [{**stone.to_dict(), "id": res["id"]}], threshold=0.6)
         note = f"✅ Listed: <b>{_esc(stone.key_summary())}</b>."
         if stone.cert_number and stone.lab == "GIA":
-            cert = verify_cert(stone.cert_number, "GIA")
+            cert = await asyncio.to_thread(verify_cert, stone.cert_number, "GIA")  # off the event loop
             issues = cross_check(stone.to_dict(), cert or {})
             if cert and cert.get("verified"):
                 note += "\n📄 GIA cert verified."
@@ -354,6 +371,8 @@ def role_kb() -> InlineKeyboardMarkup:
 
 
 async def _show_shared_stone(msg: Message, lis: dict) -> None:
+    # arriving via a seller's share link is the seller's own act of exposure → allow Connect
+    db.grant_reveal(msg.from_user.id, lis["id"])
     kb = InlineKeyboardMarkup(inline_keyboard=[[
         InlineKeyboardButton(text="🤝 Connect with seller", callback_data=f"connect:{lis['id']}")]])
     await msg.answer("💎 <b>Shared stone</b>\n\n" + _stone_block(1, lis, 1.0) +
@@ -506,7 +525,9 @@ async def on_document(msg: Message) -> None:
     try:
         file = await msg.bot.get_file(doc.file_id)
         buf = await msg.bot.download_file(file.file_path)
-        res = import_stock(buf.read(), doc.file_name or "", tg_id=uid, remaining=remaining)
+        # parse off the event loop so a big file can't freeze the bot for everyone
+        res = await asyncio.to_thread(import_stock, buf.read(), doc.file_name or "",
+                                      tg_id=uid, remaining=remaining)
     except Exception as e:  # noqa: BLE001
         log.warning("stock import failed: %s", e)
         await msg.reply("⚠️ Couldn't read that file. Check that <b>row 1 is your column headers</b> "
@@ -723,11 +744,28 @@ def _reveal_text(listing_id: int) -> tuple[str, bool, bool]:
             True, True)
 
 
+def _may_reveal(uid: int, listing_id: int) -> bool:
+    """Anti-enumeration: a user may reveal a seller only for a listing they legitimately reached —
+    their own match, a share-link grant, their own listing, or an active subscription/admin."""
+    if has_sub(uid) or db.user_matched_listing(uid, listing_id) or db.has_reveal_grant(uid, listing_id):
+        return True
+    lis = db.get_listing(listing_id)
+    return bool(lis and lis.get("tg_id") == uid)
+
+
+_REVEAL_DENIED = ("🔎 I reveal a seller only on <b>your own matches</b>. "
+                  "Tap <b>🔎 Search Diamond</b>, describe the stone, then tap Connect on a result.")
+
+
 @router.callback_query(F.data.startswith("connect:"))
 async def cb_connect(cb: CallbackQuery) -> None:
     listing_id = _cb_id(cb.data)
     if listing_id is None:
         await cb.answer()
+        return
+    if not _may_reveal(cb.from_user.id, listing_id):
+        await cb.answer("Search for a stone first — I reveal sellers on your matches.", show_alert=True)
+        await cb.message.answer(_REVEAL_DENIED)
         return
     text, ok, reachable = _reveal_text(listing_id)
     if not ok:
@@ -744,6 +782,9 @@ async def connect_cmd(msg: Message) -> None:
     if not m:
         return
     listing_id = int(m.group(1))
+    if not _may_reveal(msg.from_user.id, listing_id):
+        await msg.answer(_REVEAL_DENIED)
+        return
     text, ok, reachable = _reveal_text(listing_id)
     if ok:
         db.log_event("contact_revealed", msg.from_user.id, {"listing_id": listing_id, "seller_reachable": reachable})
@@ -810,24 +851,29 @@ async def main() -> None:
     bot = Bot(settings.require_token(), session=_build_session(),
               default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
+    dp.message.middleware(Throttle())
+    dp.callback_query.middleware(Throttle())
     dp.include_router(router)
-    await _set_commands(bot)
-    me = await bot.get_me()
-    log.info("Starting @%s (id=%s), market=%s, free_reveal=%s", me.username, me.id,
-             settings.market, settings.free_reveal)
 
-    # webhook server (payments) alongside long-polling, both in one process
+    # Bind $PORT and serve /health FIRST, before any Telegram network call — so a slow/bad
+    # token can't block the port bind and fail Railway's healthcheck into a crash-loop.
     from aiohttp import web
     app = await _webhook_app(bot)
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, host="0.0.0.0", port=settings.port)
     await site.start()
-    log.info("Webhook server on :%s (POST /mamopay-webhook)", settings.port)
+    log.info("Webhook server on :%s (POST /mamopay-webhook, GET /health)", settings.port)
+
     try:
+        await _set_commands(bot)
+        me = await bot.get_me()
+        log.info("Starting @%s (id=%s), market=%s, free_reveal=%s", me.username, me.id,
+                 settings.market, settings.free_reveal)
         await dp.start_polling(bot)
     finally:
         await runner.cleanup()
+        await bot.session.close()
 
 
 if __name__ == "__main__":

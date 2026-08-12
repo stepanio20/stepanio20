@@ -98,6 +98,13 @@ CREATE TABLE IF NOT EXISTS events (
     created_at  REAL
 );
 
+CREATE TABLE IF NOT EXISTS reveal_grants (
+    tg_id       INTEGER NOT NULL,
+    listing_id  INTEGER NOT NULL,
+    created_at  REAL,
+    UNIQUE(tg_id, listing_id)
+);
+
 CREATE INDEX IF NOT EXISTS ix_listings_match ON listings(status, shape, carat);
 CREATE INDEX IF NOT EXISTS ix_listings_owner ON listings(tg_id, status);
 CREATE INDEX IF NOT EXISTS ix_demands_active ON demands(status, tg_id);
@@ -376,6 +383,29 @@ def unnotified_matches() -> list[dict]:
 def mark_notified(match_id: int) -> None:
     with _conn() as con:
         con.execute("UPDATE matches SET notified=1 WHERE id=?", (match_id,))
+
+
+def user_matched_listing(tg_id: int, listing_id: int) -> bool:
+    """True if this user has a search that matched this listing (anti-enumeration for Connect)."""
+    with _conn() as con:
+        row = con.execute(
+            "SELECT 1 FROM matches m JOIN demands d ON d.id=m.demand_id "
+            "WHERE m.listing_id=? AND d.tg_id=? LIMIT 1", (listing_id, tg_id)).fetchone()
+        return row is not None
+
+
+def grant_reveal(tg_id: int, listing_id: int) -> None:
+    """Record that a user may reveal a listing (e.g. arrived via a seller's share link)."""
+    with _conn() as con:
+        con.execute("INSERT OR IGNORE INTO reveal_grants(tg_id, listing_id, created_at) VALUES (?,?,?)",
+                    (tg_id, listing_id, time.time()))
+
+
+def has_reveal_grant(tg_id: int, listing_id: int) -> bool:
+    with _conn() as con:
+        row = con.execute("SELECT 1 FROM reveal_grants WHERE tg_id=? AND listing_id=? LIMIT 1",
+                          (tg_id, listing_id)).fetchone()
+        return row is not None
 
 
 def matches_for_user(tg_id: int, limit: int = 20) -> list[dict]:

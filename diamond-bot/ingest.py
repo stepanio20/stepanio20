@@ -94,7 +94,8 @@ _SHAPE_ALIAS = {v: canon for canon, variants in SHAPES.items() for v in variants
 # extra dealer codes safe in a dedicated shape column (from the LuxeDiam alias map).
 # NB: RD=round (not radiant), OMB=Oval Modified Brilliant→oval, PS=pear, PR=princess.
 _SHAPE_ALIAS.update({
-    "rd": "round", "rbc": "round", "rnd": "round", "b": "round", "rb": "round",
+    "rd": "round", "rbc": "round", "rnd": "round", "b": "round", "rb": "round", "br": "round",
+    "as": "asscher", "asc": "asscher",
     "ov": "oval", "oc": "oval", "omb": "oval",
     "ps": "pear", "psh": "pear", "pb": "pear", "pmb": "pear", "pe": "pear",
     "mq": "marquise", "mqb": "marquise", "mc": "marquise",

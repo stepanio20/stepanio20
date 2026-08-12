@@ -66,6 +66,13 @@ def score(demand: dict, listing: dict) -> float:
     if carat_c is None:
         return 0.0
 
+    # price ceiling is a HARD filter — budget is budget. Live search passes the parsed
+    # max under 'price_per_carat'; stored demands use 'price_max_per_carat'. Read either.
+    cap = demand.get("price_max_per_carat") or demand.get("price_per_carat")
+    lp = listing.get("price_per_carat")
+    if cap and lp and lp > cap * 1.05:
+        return 0.0
+
     # natural and lab-grown never cross-match — separate pools both directions
     if ("lab_grown" in (listing.get("flags") or "")) != ("lab_grown" in (demand.get("flags") or "")):
         return 0.0
@@ -108,11 +115,9 @@ def score(demand: dict, listing: dict) -> float:
     elif not demand.get("shape"):
         s += weights["shape"] * 0.7
 
-    # price ceiling: if demand has a max $/ct, listing must be under it
-    cap = demand.get("price_max_per_carat")
-    lp = listing.get("price_per_carat")
+    # price weight (over-budget already hard-filtered above)
     if cap and lp:
-        s += weights["price"] if lp <= cap * 1.05 else 0.0
+        s += weights["price"]
     else:
         s += weights["price"] * 0.6
 
