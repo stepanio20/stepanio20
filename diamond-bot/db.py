@@ -131,6 +131,11 @@ def _conn():
 
 
 def init_db() -> None:
+    # ensure the DB directory exists (e.g. a mounted Railway volume at /data)
+    import os
+    parent = os.path.dirname(os.path.abspath(settings.database_path))
+    if parent:
+        os.makedirs(parent, exist_ok=True)
     with _conn() as con:
         con.executescript(SCHEMA)
 
