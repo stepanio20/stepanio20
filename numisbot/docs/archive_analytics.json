@@ -1,0 +1,302 @@
+{
+ "auctions": 36,
+ "lots": 80955,
+ "sold": 38780,
+ "sell_through_pct": 47.9,
+ "hammer_total_eur": 2746756,
+ "median_eur": 26.0,
+ "mean_eur": 70.8,
+ "by_kind": {
+  "Coins": {
+   "lots": 39599,
+   "sold": 22191,
+   "sell_through_pct": 56.0,
+   "hammer_eur": 1872526,
+   "median_eur": 30.0
+  },
+  "Gold": {
+   "lots": 354,
+   "sold": 71,
+   "sell_through_pct": 20.1,
+   "hammer_eur": 58604,
+   "median_eur": 703.0
+  },
+  "Paper Money": {
+   "lots": 41002,
+   "sold": 16518,
+   "sell_through_pct": 40.3,
+   "hammer_eur": 815626,
+   "median_eur": 21.0
+  }
+ },
+ "price_histogram": [
+  {
+   "bin": "5–10",
+   "count": 6687
+  },
+  {
+   "bin": "10–20",
+   "count": 8881
+  },
+  {
+   "bin": "20–50",
+   "count": 12178
+  },
+  {
+   "bin": "50–100",
+   "count": 5913
+  },
+  {
+   "bin": "100–200",
+   "count": 2897
+  },
+  {
+   "bin": "200–500",
+   "count": 1493
+  },
+  {
+   "bin": "500–1000",
+   "count": 467
+  },
+  {
+   "bin": "1000–5000",
+   "count": 248
+  },
+  {
+   "bin": "5000+",
+   "count": 16
+  }
+ ],
+ "top_categories": [
+  {
+   "name": "Coins - Europe",
+   "sold": 4645,
+   "hammer_eur": 363563,
+   "median_eur": 30.0
+  },
+  {
+   "name": "Paper Money - Europe",
+   "sold": 5546,
+   "hammer_eur": 248981,
+   "median_eur": 16.0
+  },
+  {
+   "name": "Coins - America",
+   "sold": 3341,
+   "hammer_eur": 234389,
+   "median_eur": 34.0
+  },
+  {
+   "name": "Coins - German States (Before 1871)",
+   "sold": 679,
+   "hammer_eur": 102212,
+   "median_eur": 60.0
+  },
+  {
+   "name": "Russia (1894-1917) - Nicholas II",
+   "sold": 548,
+   "hammer_eur": 95785,
+   "median_eur": 30.0
+  },
+  {
+   "name": "Coins - Austria",
+   "sold": 851,
+   "hammer_eur": 81174,
+   "median_eur": 34.0
+  },
+  {
+   "name": "Coins - Africa",
+   "sold": 1446,
+   "hammer_eur": 75005,
+   "median_eur": 25.5
+  },
+  {
+   "name": "Coins - German Empire (1871 - 1918)",
+   "sold": 728,
+   "hammer_eur": 69928,
+   "median_eur": 40.0
+  },
+  {
+   "name": "Coins - Great Britain",
+   "sold": 510,
+   "hammer_eur": 68284,
+   "median_eur": 38.5
+  },
+  {
+   "name": "Coins - Asia",
+   "sold": 1312,
+   "hammer_eur": 63002,
+   "median_eur": 25.0
+  }
+ ],
+ "top_countries": [
+  {
+   "name": "Russia",
+   "sold": 1805,
+   "hammer_eur": 393220,
+   "median_eur": 38.0
+  },
+  {
+   "name": "Austria",
+   "sold": 2129,
+   "hammer_eur": 114553,
+   "median_eur": 17.0
+  },
+  {
+   "name": "German States",
+   "sold": 741,
+   "hammer_eur": 104572,
+   "median_eur": 55.0
+  },
+  {
+   "name": "United Kingdom",
+   "sold": 717,
+   "hammer_eur": 86791,
+   "median_eur": 34.0
+  },
+  {
+   "name": "United States of America",
+   "sold": 838,
+   "hammer_eur": 73797,
+   "median_eur": 42.0
+  },
+  {
+   "name": "Germany - Empire",
+   "sold": 879,
+   "hammer_eur": 70830,
+   "median_eur": 34.0
+  },
+  {
+   "name": "Russia - USSR",
+   "sold": 712,
+   "hammer_eur": 69556,
+   "median_eur": 33.0
+  },
+  {
+   "name": "Bulgaria",
+   "sold": 673,
+   "hammer_eur": 67063,
+   "median_eur": 40.0
+  },
+  {
+   "name": "Romania",
+   "sold": 811,
+   "hammer_eur": 66144,
+   "median_eur": 27.0
+  },
+  {
+   "name": "France",
+   "sold": 796,
+   "hammer_eur": 59707,
+   "median_eur": 28.0
+  }
+ ],
+ "metal_hammer_eur": {
+  "Silver": 1114064,
+  "Other/unspecified": 891567,
+  "Gold": 562655,
+  "Copper": 101890,
+  "Bronze": 52021,
+  "Nickel": 13170,
+  "Brass": 5890,
+  "Platinum": 5499
+ },
+ "top_lots": [
+  {
+   "title": "Russia 1 Rouble 1742 ММД NGC XF45",
+   "realized_eur": 23000.0,
+   "country": "Russia",
+   "category": "Russia (1741-1762) - Elizabeth",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043378"
+  },
+  {
+   "title": "Russia 1 Rouble 1741 ММД R1 NGC AU50",
+   "realized_eur": 20007.0,
+   "country": "Russia",
+   "category": "Russia (1740-1741) - Ioann Antonovitch",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043371"
+  },
+  {
+   "title": "Russia 1 Rouble 1744 ММД R1",
+   "realized_eur": 13441.0,
+   "country": "Russia",
+   "category": "Russia (1741-1762) - Elizabeth",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043381"
+  },
+  {
+   "title": "Great Britain 5 Pounds 1911 BM NGC PF62",
+   "realized_eur": 9200.0,
+   "country": "United Kingdom",
+   "category": "Coins - Great Britain",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1042865"
+  },
+  {
+   "title": "German States Saxe-Old-Gotha 1 Taler 1637 EF",
+   "realized_eur": 9000.0,
+   "country": "German States",
+   "category": "Coins - German States (Before 1871)",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043717"
+  },
+  {
+   "title": "Great Britain 2 Pounds 1831 R",
+   "realized_eur": 8921.0,
+   "country": "United Kingdom",
+   "category": "Coins - Great Britain",
+   "auction": "Auction 177 - Coins, Medals & Awards of the World",
+   "url": "https://katzauction.com/lot/1053219"
+  },
+  {
+   "title": "Roman Empire Carus AV Aureus 283 AD (ND)",
+   "realized_eur": 7600.0,
+   "country": "Réunion",
+   "category": "",
+   "auction": "Auction 190 - Coins, Medals & Awards of the World",
+   "url": "https://katzauction.com/lot/1164990"
+  },
+  {
+   "title": "Russia 1 Rouble 1859 Nicholas I Memorial NGS MS63 PL",
+   "realized_eur": 6679.0,
+   "country": "Russia",
+   "category": "Russia (1854-1881) - Alexander II",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043500"
+  },
+  {
+   "title": "Russia 1 Rouble 1886 АГ",
+   "realized_eur": 6600.0,
+   "country": "Russia",
+   "category": "Russia (1881-1894) - Alexander III",
+   "auction": "Auction 201 - Coins, Medals & Awards of the World.",
+   "url": "https://katzauction.com/lot/1223814"
+  },
+  {
+   "title": "Bulgaria 1000 Leva Zlatni 1920 (ND) PCGS 55 PPQ Abiut Uncirculated",
+   "realized_eur": 6200.0,
+   "country": "Bulgaria",
+   "category": "Paper Money - Europe",
+   "auction": "Auction 191 - Paper Money of the World",
+   "url": "https://katzauction.com/lot/1174519"
+  },
+  {
+   "title": "Russia 1 Rouble 1745 СПБ",
+   "realized_eur": 6001.0,
+   "country": "Russia",
+   "category": "Russia (1741-1762) - Elizabeth",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043382"
+  },
+  {
+   "title": "Russia - USSR 1 Chervonets 1923 NGC MS63",
+   "realized_eur": 5802.0,
+   "country": "Russia - USSR",
+   "category": "Russia (1917-1991) - USSR",
+   "auction": "PREMIUM AUCTION 175 -  COINS, MEDALS & AWARDS OF THE WORLD",
+   "url": "https://katzauction.com/lot/1043631"
+  }
+ ]
+}

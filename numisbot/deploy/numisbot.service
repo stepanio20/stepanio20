@@ -1,0 +1,32 @@
+# systemd unit для numisbot (вариант без Docker), см. deploy/DEPLOY.md, раздел 11.
+# Установка: cp deploy/numisbot.service /etc/systemd/system/ && systemctl daemon-reload
+#            systemctl enable --now numisbot
+[Unit]
+Description=numisbot — Katz Coins Radar Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=numisbot
+Group=numisbot
+WorkingDirectory=/opt/stepanio20/numisbot
+EnvironmentFile=/opt/stepanio20/numisbot/.env
+Environment=PYTHONUNBUFFERED=1
+# venv из DEPLOY.md; без venv замените на /usr/bin/python3 -m bot.main
+ExecStart=/opt/stepanio20/numisbot/venv/bin/python3 -m bot.main
+Restart=always
+RestartSec=5
+
+# Журналирование: journalctl -u numisbot -f
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=numisbot
+
+# Базовое усиление
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
