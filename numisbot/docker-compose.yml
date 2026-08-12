@@ -5,3 +5,16 @@ services:
     env_file: .env
     volumes:
       - ./data:/app/data
+    healthcheck:
+      # pgrep, если procps установлен; иначе fallback — python:slim без procps,
+      # а процесс бота в контейнере всегда PID 1
+      test: ["CMD-SHELL", "pgrep -f bot.main >/dev/null 2>&1 || grep -aq bot.main /proc/1/cmdline"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
