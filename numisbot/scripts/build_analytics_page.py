@@ -154,6 +154,17 @@ th {{ text-align:left; font-family:'Oswald',sans-serif; font-weight:500; font-si
 td {{ padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }}
 tr:last-child td {{ border-bottom:none; }}
 
+@media (max-width: 640px) {{
+  .wrap {{ padding: 30px 16px 60px; }}
+  h1 {{ font-size: 27px; }}
+  h2 {{ font-size: 20px; }}
+  .hb {{ grid-template-columns: 1fr 82px; row-gap: 2px; }}
+  .hb-name {{ grid-column: 1 / -1; white-space: normal; }}
+  .scrollx {{ overflow-x: auto; -webkit-overflow-scrolling: touch; }}
+  .vchart {{ min-width: 520px; }}
+  .panel {{ padding: 14px; }}
+  .tile b {{ font-size: 24px; }}
+}}
 #tip {{ position:fixed; pointer-events:none; background:var(--ink); color:var(--bg);
   font-size:12.5px; padding:6px 10px; border-radius:6px; max-width:340px; z-index:10;
   opacity:0; transition:opacity .08s; line-height:1.4; }}
@@ -181,7 +192,7 @@ tr:last-child td {{ border-bottom:none; }}
 
   <h2>Где лежат деньги: распределение цен продажи</h2>
   <p class="sub">Число проданных лотов по ценовым корзинам, EUR (молот).</p>
-  <div class="panel"><div class="vchart">{vbars(d['price_histogram'], 'bin', 'count', '€{bin}: {count} лотов')}</div></div>
+  <div class="panel scrollx"><div class="vchart">{vbars(d['price_histogram'], 'bin', 'count', '€{bin}: {count} лотов')}</div></div>
 
   <h2>Топ-категорий по обороту</h2>
   <div class="panel">{hbar_rows(d['top_categories'], 'name', 'hammer_eur', 'median_eur')}</div>

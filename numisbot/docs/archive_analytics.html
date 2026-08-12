@@ -1,4 +1,18 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
 <title>Katz Archive Analytics</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img,svg{max-width:100%;height:auto}
+</style>
+</head>
+<body>
 <style>
 @font-face {
   font-family: 'Oswald';
@@ -137,6 +151,17 @@ th { text-align:left; font-family:'Oswald',sans-serif; font-weight:500; font-siz
 td { padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
 tr:last-child td { border-bottom:none; }
 
+@media (max-width: 640px) {
+  .wrap { padding: 30px 16px 60px; }
+  h1 { font-size: 27px; }
+  h2 { font-size: 20px; }
+  .hb { grid-template-columns: 1fr 82px; row-gap: 2px; }
+  .hb-name { grid-column: 1 / -1; white-space: normal; }
+  .scrollx { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .vchart { min-width: 520px; }
+  .panel { padding: 14px; }
+  .tile b { font-size: 24px; }
+}
 #tip { position:fixed; pointer-events:none; background:var(--ink); color:var(--bg);
   font-size:12.5px; padding:6px 10px; border-radius:6px; max-width:340px; z-index:10;
   opacity:0; transition:opacity .08s; line-height:1.4; }
@@ -182,7 +207,7 @@ tr:last-child td { border-bottom:none; }
 
   <h2>Где лежат деньги: распределение цен продажи</h2>
   <p class="sub">Число проданных лотов по ценовым корзинам, EUR (молот).</p>
-  <div class="panel"><div class="vchart">
+  <div class="panel scrollx"><div class="vchart">
       <div class="vb" data-tip="€5–10: 6687 лотов">
         <div class="vb-val">6 687</div>
         <div class="vb-track"><div class="vb-fill" style="height:54.9%"></div></div>
@@ -401,3 +426,6 @@ document.querySelectorAll('[data-tip]').forEach(el => {
   el.addEventListener('mouseleave', () => tip.style.opacity = 0);
 });
 </script>
+
+</body>
+</html>
