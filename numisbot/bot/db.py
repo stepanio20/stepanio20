@@ -100,6 +100,14 @@ CREATE TABLE IF NOT EXISTS events (
     ts INTEGER
 );
 CREATE INDEX IF NOT EXISTS idx_events ON events(name, ts);
+CREATE TABLE IF NOT EXISTS portfolio (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    title TEXT NOT NULL,                 -- free-text coin description
+    buy_price REAL,                      -- what the user paid, EUR (optional)
+    created INTEGER
+);
+CREATE INDEX IF NOT EXISTS idx_portfolio_user ON portfolio(user_id);
 CREATE TABLE IF NOT EXISTS referrals (
     referee_id INTEGER PRIMARY KEY,      -- who came via the link
     referrer_id INTEGER NOT NULL,
@@ -451,6 +459,31 @@ class Database:
             f"SELECT * FROM lots WHERE realized IS NULL AND {where} "
             "AND current_bid IS NOT NULL ORDER BY current_bid DESC LIMIT ?", (limit,))
         return list(await cur.fetchall())
+
+    # -- portfolio ---------------------------------------------------------
+    async def portfolio_add(self, user_id: int, title: str, buy_price: float | None) -> int:
+        cur = await self.db.execute(
+            "INSERT INTO portfolio(user_id,title,buy_price,created) VALUES(?,?,?,?)",
+            (user_id, title.strip(), buy_price, int(time.time())))
+        await self.db.commit()
+        return cur.lastrowid or 0
+
+    async def portfolio_list(self, user_id: int) -> list[aiosqlite.Row]:
+        cur = await self.db.execute(
+            "SELECT * FROM portfolio WHERE user_id=? ORDER BY id", (user_id,))
+        return list(await cur.fetchall())
+
+    async def portfolio_delete(self, user_id: int, item_id: int) -> None:
+        await self.db.execute(
+            "DELETE FROM portfolio WHERE id=? AND user_id=?", (item_id, user_id))
+        await self.db.commit()
+
+    # -- monthly quota by tracked events ----------------------------------
+    async def month_usage(self, user_id: int, event: str) -> int:
+        cur = await self.db.execute(
+            "SELECT COUNT(*) c FROM events WHERE user_id=? AND name=? AND ts>?",
+            (user_id, event, int(time.time()) - 30 * 86400))
+        return (await cur.fetchone())["c"]
 
     # -- listings (C2C showcase) ------------------------------------------
     async def add_listing(self, row: dict[str, Any]) -> int:

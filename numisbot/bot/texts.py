@@ -280,6 +280,78 @@ T = {
         "ru": "🤝 Принято! Заявка №{lead_id} передана команде Katz. Обычно отвечают в течение 1–2 рабочих дней.",
         "en": "🤝 Got it! Request #{lead_id} sent to the Katz team. They usually reply within 1–2 business days.",
     },
+    "estimate_start": {
+        "ru": ("🏷 <b>Оценка по базе проходов Katz</b>\n\n"
+               "Опишите монету одним сообщением: страна, номинал, год, "
+               "особенности (можно приложить фото для заявки продавцу).\n"
+               "Пример: <code>Россия полтина 1859 Александр II</code>"),
+        "en": ("🏷 <b>Valuation from the Katz sales archive</b>\n\n"
+               "Describe the coin in one message: country, denomination, year, "
+               "specifics (a photo is welcome for a seller lead).\n"
+               "Example: <code>Russia poltina 1859 Alexander II</code>"),
+    },
+    "estimate_result": {
+        "ru": ("🏷 <b>Оценка по {n} реальным продажам Katz</b>\n"
+               "Диапазон (типичный): <b>{p25}–{p75}</b>\n"
+               "Медиана: <b>{med}</b> · весь разброс {lo}–{hi}\n"
+               "<i>По словам: {words}</i>\n\n"
+               "Похожие проходы:\n{comps}\n\n"
+               "💼 Хотите продать? /sell — сдать на аукцион Katz\n"
+               "🛒 Или в витрину: /publish"),
+        "en": ("🏷 <b>Estimate from {n} real Katz sales</b>\n"
+               "Typical range: <b>{p25}–{p75}</b>\n"
+               "Median: <b>{med}</b> · full spread {lo}–{hi}\n"
+               "<i>Matched on: {words}</i>\n\n"
+               "Similar results:\n{comps}\n\n"
+               "💼 Want to sell? /sell — consign to Katz\n"
+               "🛒 Or list it: /publish"),
+    },
+    "estimate_none": {
+        "ru": ("По этому описанию в архиве Katz аналогов не нашлось. "
+               "Попробуйте иначе: страна + номинал + год, без лишних слов. "
+               "Или отправьте на живую оценку команде: /sell"),
+        "en": ("No comparables in the Katz archive for that description. "
+               "Try country + denomination + year, no extra words. "
+               "Or send it to the team for a live valuation: /sell"),
+    },
+    "estimate_quota": {
+        "ru": ("🚦 Лимит оценок на вашем тарифе исчерпан ({used}/{quota} за 30 дней).\n"
+               "⭐ Pro — 5/мес · 🎯 Sniper+ — 15 · 💼 Dealer — 30 👉 /pro"),
+        "en": ("🚦 Valuation limit reached ({used}/{quota} per 30 days).\n"
+               "⭐ Pro — 5/mo · 🎯 Sniper+ — 15 · 💼 Dealer — 30 👉 /pro"),
+    },
+    "pf_header": {
+        "ru": "🧺 <b>Портфель коллекции</b> ({n} поз.)\nОценка по свежим проходам Katz:",
+        "en": "🧺 <b>Collection portfolio</b> ({n} items)\nValued against fresh Katz results:",
+    },
+    "pf_empty": {
+        "ru": ("🧺 Портфель пуст. Добавьте первую монету — и я буду переоценивать "
+               "её по каждым свежим торгам Katz."),
+        "en": ("🧺 Portfolio is empty. Add your first coin — I'll revalue it "
+               "against every fresh Katz sale."),
+    },
+    "pf_total": {
+        "ru": "\nИтого оценка: <b>{lo}–{hi}</b> (медианы: {med}){vs}",
+        "en": "\nTotal estimate: <b>{lo}–{hi}</b> (medians: {med}){vs}",
+    },
+    "pf_vs_buy": {
+        "ru": " · вложено {buy}",
+        "en": " · invested {buy}",
+    },
+    "pf_add_ask": {
+        "ru": ("Опишите монету (страна, номинал, год). Если хотите — добавьте цену "
+               "покупки в конце: <code>… за 250</code>"),
+        "en": ("Describe the coin (country, denomination, year). Optionally append "
+               "the buy price: <code>… for 250</code>"),
+    },
+    "pf_added": {
+        "ru": "✅ Добавлено в портфель: <b>{title}</b>{buy}",
+        "en": "✅ Added to portfolio: <b>{title}</b>{buy}",
+    },
+    "pf_limit": {
+        "ru": "🚦 Лимит позиций портфеля на вашем тарифе: {limit}. Больше — в Pro: /pro",
+        "en": "🚦 Portfolio limit on your plan: {limit}. More — in Pro: /pro",
+    },
     "trial_granted": {
         "ru": ("🎁 <b>7 дней Pro — в подарок за знакомство!</b>\n"
                "25 слотов радара и полная история цен уже включены. "
@@ -416,6 +488,8 @@ T = {
             "/market — витрина монет участников\n"
             "/publish — разместить свою монету (c проверкой сертификата)\n"
             "/sell — сдать на аукцион Katz\n"
+            "/estimate — оценка монеты по базе проходов\n"
+            "/portfolio — портфель коллекции с переоценкой\n"
             "/invite — месяц Pro за друга\n"
             "/digest — вкл/выкл дайджесты\n"
             "/pro — тарифы · /lang — язык"
@@ -430,6 +504,8 @@ T = {
             "/market — members' coin showcase\n"
             "/publish — list your coin (with cert verification)\n"
             "/sell — consign to Katz auctions\n"
+            "/estimate — coin valuation from sales archive\n"
+            "/portfolio — collection tracker with revaluation\n"
             "/invite — a month of Pro per friend\n"
             "/digest — toggle digests\n"
             "/pro — plans · /lang — language"
