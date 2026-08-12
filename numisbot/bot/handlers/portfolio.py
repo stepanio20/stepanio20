@@ -78,8 +78,19 @@ async def _show_portfolio(msg: Message, user_id: int, db: Database):
     lines.append(t("pf_total", lang).format(
         lo=_money(total_lo, "EUR"), hi=_money(total_hi, "EUR"),
         med=_money(total_med, "EUR"), vs=vs))
-    await msg.answer("\n".join(lines), reply_markup=_pf_kb(items, lang),
-                     disable_web_page_preview=True)
+    # Telegram caps messages at 4096 chars — chunk large portfolios
+    chunks: list[str] = []
+    cur = ""
+    for line in lines:
+        if len(cur) + len(line) + 1 > 3500:
+            chunks.append(cur)
+            cur = line
+        else:
+            cur = f"{cur}\n{line}" if cur else line
+    chunks.append(cur)
+    for i, chunk in enumerate(chunks):
+        kb = _pf_kb(items, lang) if i == len(chunks) - 1 else None
+        await msg.answer(chunk, reply_markup=kb, disable_web_page_preview=True)
 
 
 @router.callback_query(F.data == "pf:add")
@@ -96,7 +107,7 @@ async def cb_pf_add(cb: CallbackQuery, db: Database, cfg: Config, state: FSMCont
     await cb.answer()
 
 
-@router.message(PortfolioForm.waiting_item, F.text)
+@router.message(PortfolioForm.waiting_item, F.text & ~F.text.startswith("/"))
 async def pf_add_item(msg: Message, db: Database, state: FSMContext):
     lang = await _lang(db, msg.from_user.id)
     text = (msg.text or "").strip()

@@ -62,7 +62,9 @@ async def cb_buy(cb: CallbackQuery, db: Database, cfg: Config):
              "dealer": cfg.price_dealer_stars}.get(tier, cfg.price_pro_stars)
     title_key = {"pro": "invoice_title_pro", "sniper": "invoice_title_sniper",
                  "dealer": "invoice_title_dealer"}.get(tier, "invoice_title_pro")
-    await cb.message.answer_invoice(
+    # subscription_period is a createInvoiceLink-only parameter (Bot API 8.0);
+    # sendInvoice silently ignores it and the payment becomes one-off
+    link = await cb.bot.create_invoice_link(
         title=t(title_key, lang),
         description=t("invoice_desc", lang),
         payload=f"sub:{tier}",
@@ -70,6 +72,12 @@ async def cb_buy(cb: CallbackQuery, db: Database, cfg: Config):
         prices=[LabeledPrice(label=t(title_key, lang), amount=stars)],
         subscription_period=SUB_PERIOD,
     )
+    from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    kb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(
+        text=(f"⭐ Оплатить {stars} Stars/мес" if lang == "ru"
+              else f"⭐ Pay {stars} Stars/mo"), url=link)]])
+    await cb.message.answer(t(title_key, lang) + "\n" + t("invoice_desc", lang),
+                            reply_markup=kb)
     await cb.answer()
 
 
@@ -88,10 +96,17 @@ async def pre_checkout(q: PreCheckoutQuery):
 async def cmd_paysupport(msg: Message, db: Database, state: FSMContext):
     lang = await _lang(db, msg.from_user.id)
     await state.set_state(PaySupportForm.waiting)
-    await msg.answer(t("paysupport", lang))
+    from ..keyboards import cancel_kb
+    await msg.answer(t("paysupport", lang), reply_markup=cancel_kb(lang))
 
 
-@router.message(PaySupportForm.waiting, F.text | F.photo)
+def _nav_labels() -> set[str]:
+    from ..texts import BTN
+    return {label for labels in BTN.values() for label in labels.values()}
+
+
+@router.message(PaySupportForm.waiting,
+                (F.text & ~F.text.startswith("/") & ~F.text.in_(_nav_labels())) | F.photo)
 async def paysupport_msg(msg: Message, db: Database, state: FSMContext, cfg: Config):
     lang = await _lang(db, msg.from_user.id)
     await state.clear()

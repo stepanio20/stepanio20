@@ -29,6 +29,10 @@ class GuardMiddleware(BaseMiddleware):
     ) -> Any:
         user = None
         if isinstance(event, Message):
+            # money must never be rate-limited: a dropped successful_payment
+            # would mean paid Stars with no tier granted
+            if event.successful_payment is not None:
+                return await handler(event, data)
             if event.chat.type != "private":
                 return None  # the bot is a personal radar, not a group bot
             user = event.from_user

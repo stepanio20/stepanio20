@@ -446,3 +446,51 @@ COMMANDS_EXTRA = {
         ("help", "ℹ️ Nápověda"),
     ],
 }
+
+
+# --- moderation/security keys added after the initial translation pass ----
+_PATCH = {
+    "de": {
+        "publish_done": ("📨 <b>Los #{id} zur Prüfung eingereicht</b>\n"
+                         "Wir prüfen Beschreibung und Zertifikat — in der Regel innerhalb "
+                         "eines Werktags. Nach der Freigabe erscheint es in /market, "
+                         "Sie erhalten eine Benachrichtigung."),
+        "publish_approved": "✅ Los #{id} wurde freigegeben und ist jetzt in /market!",
+        "publish_need_username": ("Zum Veröffentlichen brauchen Sie einen Telegram-@Benutzernamen — "
+                                  "sonst können Käufer Sie nicht erreichen. "
+                                  "Einstellungen → Benutzername, dann kommen Sie zurück!"),
+        "publish_cooldown": "⏳ Höchstens ein Inserat alle 10 Minuten. Bitte später erneut versuchen.",
+        "publish_banned": ("🚫 Veröffentlichen deaktiviert: mehrere Ihrer Inserate wurden abgelehnt. "
+                           "Bei einem Irrtum: /paysupport."),
+        "paysupport": ("💬 <b>Zahlungs-Support</b>\n\n"
+                       "Beschreiben Sie das Problem in einer Nachricht (welcher Tarif, wann bezahlt) — "
+                       "wir antworten hier. Stars-Erstattungen folgen den Telegram-Regeln."),
+        "paysupport_sent": "🤝 An das Team weitergeleitet. Wir antworten in diesem Chat.",
+        "forgetme_confirm": ("⚠️ Alle Ihre Daten löschen: Radar, Portfolio, Inserate, Interessen, "
+                             "Verlauf? Zahlungsbelege bleiben aus Buchhaltungsgründen erhalten. "
+                             "Das ist unwiderruflich."),
+        "forgetme_done": "🗑 Erledigt — alle Daten gelöscht. Danke, dass Sie dabei waren. /start — falls Sie zurückkehren.",
+    },
+    "cs": {
+        "publish_done": ("📨 <b>Položka #{id} odeslána ke schválení</b>\n"
+                         "Kontrolujeme popis a certifikát — obvykle do jednoho pracovního dne. "
+                         "Po schválení se objeví v /market a přijde vám oznámení."),
+        "publish_approved": "✅ Položka #{id} byla schválena a je nyní v /market!",
+        "publish_need_username": ("K publikování potřebujete @uživatelské jméno v Telegramu — "
+                                  "jinak vás kupující nekontaktují. "
+                                  "Nastavení → Uživatelské jméno, pak se vraťte!"),
+        "publish_cooldown": "⏳ Nejvýše jedna položka za 10 minut. Zkuste to prosím později.",
+        "publish_banned": ("🚫 Publikování je zablokováno: několik vašich položek bylo zamítnuto. "
+                           "Pokud jde o omyl: /paysupport."),
+        "paysupport": ("💬 <b>Podpora plateb</b>\n\n"
+                       "Popište problém jednou zprávou (jaký tarif, kdy zaplaceno) — "
+                       "odpovíme zde. Vracení Stars se řídí pravidly Telegramu."),
+        "paysupport_sent": "🤝 Předáno týmu. Odpovíme v tomto chatu.",
+        "forgetme_confirm": ("⚠️ Smazat všechna vaše data: radar, portfolio, položky, zájmy, "
+                             "historii? Platební záznamy zůstávají kvůli účetnictví. "
+                             "Tuto akci nelze vrátit."),
+        "forgetme_done": "🗑 Hotovo — všechna data smazána. Díky, že jste byli s námi. /start — kdybyste se vrátili.",
+    },
+}
+for _lang, _kv in _PATCH.items():
+    EXTRA[_lang].update(_kv)

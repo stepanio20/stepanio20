@@ -143,8 +143,10 @@ async def cmd_forgetme(msg: Message, db: Database):
 
 
 @router.callback_query(F.data == "forget:yes")
-async def cb_forget(cb: CallbackQuery, db: Database):
+async def cb_forget(cb: CallbackQuery, db: Database, state=None):
     lang = await _lang(db, cb.from_user.id)
+    if state is not None:
+        await state.clear()  # a live FSM flow must not outlive the erasure
     await db.wipe_user(cb.from_user.id)
     from aiogram.types import ReplyKeyboardRemove
     await cb.message.answer(t("forgetme_done", lang), reply_markup=ReplyKeyboardRemove())

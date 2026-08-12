@@ -118,6 +118,12 @@ CREATE TABLE IF NOT EXISTS announced_auctions (
     auction_id INTEGER PRIMARY KEY,
     ts INTEGER
 );
+CREATE TABLE IF NOT EXISTS pub_guard (
+    -- abuse counters that survive /forgetme (numbers only, no personal data)
+    user_id INTEGER PRIMARY KEY,
+    rejects INTEGER DEFAULT 0,
+    last_pub INTEGER DEFAULT 0
+);
 """
 
 # additive migrations for DBs created before these columns existed
@@ -371,11 +377,19 @@ class Database:
         await self.db.commit()
 
     # -- growth: trial, referrals, digest ---------------------------------
+    _TIER_RANK = {"free": 0, "pro": 1, "sniper": 2, "dealer": 3}
+
     async def grant_tier_days(self, user_id: int, tier: str, days: int) -> int:
-        """Extend (or start) a tier; returns the new sub_until timestamp."""
+        """Extend (or start) a tier; never downgrades an active higher tier —
+        a paying Sniper+/Dealer who earns a Pro reward gets their own tier
+        extended instead. Returns the new sub_until timestamp."""
         row = await self.get_user(user_id)
         now = int(time.time())
-        base = row["sub_until"] if row and row["tier"] == tier and row["sub_until"] > now else now
+        base = now
+        if row and row["sub_until"] > now and row["tier"] != "free":
+            if self._TIER_RANK.get(row["tier"], 0) >= self._TIER_RANK.get(tier, 0):
+                tier = row["tier"]
+            base = row["sub_until"] if row["tier"] == tier else now
         until = base + days * 86400
         await self.set_tier(user_id, tier, until)
         return until
@@ -533,16 +547,35 @@ class Database:
         return await cur.fetchone() is not None
 
     async def last_listing_ts(self, user_id: int) -> int:
+        """From pub_guard (survives /forgetme), falling back to listings."""
+        cur = await self.db.execute(
+            "SELECT last_pub FROM pub_guard WHERE user_id=?", (user_id,))
+        row = await cur.fetchone()
+        if row and row["last_pub"]:
+            return row["last_pub"]
         cur = await self.db.execute(
             "SELECT MAX(created) m FROM listings WHERE user_id=?", (user_id,))
         row = await cur.fetchone()
         return row["m"] or 0
 
+    async def note_publication(self, user_id: int) -> None:
+        await self.db.execute(
+            "INSERT INTO pub_guard(user_id, last_pub) VALUES(?,?) "
+            "ON CONFLICT(user_id) DO UPDATE SET last_pub=excluded.last_pub",
+            (user_id, int(time.time())))
+        await self.db.commit()
+
+    async def note_rejection(self, user_id: int) -> None:
+        await self.db.execute(
+            "INSERT INTO pub_guard(user_id, rejects) VALUES(?,1) "
+            "ON CONFLICT(user_id) DO UPDATE SET rejects=rejects+1", (user_id,))
+        await self.db.commit()
+
     async def rejected_count(self, user_id: int) -> int:
         cur = await self.db.execute(
-            "SELECT COUNT(*) c FROM listings WHERE user_id=? AND cert_status='rejected'",
-            (user_id,))
-        return (await cur.fetchone())["c"]
+            "SELECT rejects FROM pub_guard WHERE user_id=?", (user_id,))
+        row = await cur.fetchone()
+        return row["rejects"] if row else 0
 
     async def wipe_user(self, user_id: int) -> None:
         """GDPR right-to-erasure. Payment records stay (billing obligation)."""

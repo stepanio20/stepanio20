@@ -216,6 +216,7 @@ async def _finalize(msg: Message, user, db: Database, state: FSMContext,
         "cert_status": cert_status, "cert_note": cert_note,
         "created": int(time.time()),
     })
+    await db.note_publication(user.id)  # cooldown counter, survives /forgetme
     await db.track(user.id, "publish_done")
 
     listing = await db.get_listing(listing_id)
@@ -335,12 +336,18 @@ async def cb_admin_verify(cb: CallbackQuery, db: Database, cfg: Config):
         if listing["cert_service"] and listing["cert_status"] in ("linked", "pending"):
             await db.set_cert_status(listing_id, "verified",
                                      listing["cert_note"] or "confirmed by moderator")
+        elif listing["cert_status"] == "rejected":  # admin changed their mind
+            await db.set_cert_status(
+                listing_id, "linked" if listing["cert_service"] else "none", "")
         await db.set_listing_status(listing_id, None, "active")
         await cb.answer("✅ approved")
         note = t("publish_approved", owner_lang).format(id=listing_id)
     else:
+        already = listing["cert_status"] == "rejected"
         await db.set_cert_status(listing_id, "rejected", "rejected by moderator")
         await db.set_listing_status(listing_id, None, "hidden")
+        if not already:  # double-tap on ❌ must not double-count the strike
+            await db.note_rejection(listing["user_id"])
         await cb.answer("❌ rejected")
         note = ("❌ Листинг #%d отклонён модерацией" % listing_id
                 if owner_lang == "ru" else "❌ Listing #%d was rejected" % listing_id)

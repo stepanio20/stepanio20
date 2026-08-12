@@ -40,7 +40,8 @@ async def cmd_estimate(msg: Message, db: Database, state: FSMContext):
     await msg.answer(t("estimate_start", lang), reply_markup=cancel_kb(lang))
 
 
-@router.message(EstimateForm.waiting_description, F.text | F.photo)
+@router.message(EstimateForm.waiting_description,
+                (F.text & ~F.text.startswith("/")) | F.photo)
 async def estimate_run(msg: Message, db: Database, state: FSMContext, cfg: Config):
     lang = await _lang(db, msg.from_user.id)
     text = (msg.text or msg.caption or "").strip()

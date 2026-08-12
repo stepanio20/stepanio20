@@ -10,7 +10,7 @@ from .texts import BTN, INTERESTS
 
 def main_reply_kb(lang: str) -> ReplyKeyboardMarkup:
     """Persistent bottom keyboard — the primary navigation."""
-    b = BTN["ru" if lang == "ru" else "en"]
+    b = BTN.get(lang, BTN["en"])
     rows = [
         [KeyboardButton(text=b["auctions"]), KeyboardButton(text=b["watchlist"])],
         [KeyboardButton(text=b["find"]), KeyboardButton(text=b["price"])],
