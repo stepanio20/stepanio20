@@ -49,8 +49,33 @@ Optional ingestion (BYO-session — see `login.py`):
 - Logs show: `Starting @DiamondScanBot ...` and `Webhook server on :<port>`.
 - DM the bot `/start` → it replies.
 
+## 5. Production checklist (do NOT skip — data-loss & security)
+
+**Persistence (critical).** SQLite lives on the container's ephemeral disk → every redeploy
+wipes all users, subscriptions, listings, demands and matches. Fix before real users:
+1. Railway → service → **Volumes → New Volume**, mount path `/data`.
+2. Set `DATABASE_PATH=/data/diamond_bot.db` (the app auto-creates the dir).
+3. Seed the volume once (the 38k inventory is not in git):
+   `python seed_inventory.py "<stock file>" --source market --replace` run inside the
+   deployed container (Railway shell), or copy an existing `diamond_bot.db` onto the volume.
+   *(For scale, swap SQLite for managed Postgres by reimplementing `db.py`'s function surface.)*
+
+**Single replica.** A Telegram long-poller cannot be load-balanced — keep **Replicas = 1**.
+A second replica = a second `getUpdates` = HTTP 409 and dropped updates.
+
+**Secrets — rotate everything shared in chat (treat as burned):**
+- `TELEGRAM_BOT_TOKEN` → @BotFather `/revoke`.
+- `VEYM_API_KEY`, `VEYM_WEBHOOK_SECRET`, `MAMO_API_KEY` → rotate in veym/MamoPay, then
+  re-register the webhook (step 3) with the new secret.
+- Set all only as Railway service variables — never in chat or git.
+- Keep `FREE_REVEAL=false` in production (it opens the reveal gate for everyone).
+
+**Webhook hardening.** Front `/mamopay-webhook` with Railway/Cloudflare per-IP rate limiting
+(the in-app throttle covers Telegram handlers, not the webhook).
+
 ## Notes
 - Only one process may long-poll a bot token at a time. Stop any other instance
   (e.g. a local test run) before/after deploying, or Telegram returns 409 Conflict.
 - To read group messages, @BotFather → `/setprivacy` → **Disable**, then add the bot
   to the group (bot-based) — or use `login.py` (user-session) for groups you already belong to.
+- Admin `/stats` shows the acquisition→revenue funnel (set `ADMIN_USER_IDS`).

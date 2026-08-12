@@ -330,7 +330,7 @@ async def _notify_new_matches(bot: Bot) -> None:
                 import tempfile
                 with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
                     tmp_path = tmp.name
-                card = render_match_card(dem, lis, m["score"], tmp_path, revealed=False)
+                card = await asyncio.to_thread(render_match_card, dem, lis, m["score"], tmp_path, revealed=False)
             except Exception as ce:  # noqa: BLE001
                 log.warning("match card render failed: %s", ce)
             if card:
@@ -460,6 +460,26 @@ async def status_cmd(msg: Message) -> None:
     await msg.answer("📊 <b>Radar status</b>\n" + "\n".join(f"{k}: <b>{v}</b>" for k, v in c.items()))
 
 
+@router.message(Command("stats"))
+async def stats_cmd(msg: Message) -> None:
+    """Admin: acquisition→revenue funnel + inventory."""
+    if not is_admin(msg.from_user.id):
+        return
+    f = db.funnel()
+    c = db.counts()
+    labels = {"started": "▶️ Started", "role_set": "🎭 Picked a role", "uploaded": "💎 Uploaded stock",
+              "searched": "🔎 Searched", "matched": "✨ Saw a match", "connected": "🤝 Revealed a seller",
+              "buy_clicked": "💳 Clicked buy", "subscribed": "✅ Subscribed"}
+    lines = ["📈 <b>Funnel</b> (unique users)"]
+    started = max(1, f.get("started", 0))
+    for k, lab in labels.items():
+        v = f.get(k, 0)
+        lines.append(f"{lab}: <b>{v}</b>  <i>{v / started:.0%}</i>")
+    lines.append(f"\n💠 Inventory: <b>{c['listings']:,}</b> live · {c['demands']} open searches · "
+                 f"{c['matches']} matches · {c['subs']} active subs")
+    await msg.answer("\n".join(lines))
+
+
 @router.message(Command("publish"))
 async def publish_cmd(msg: Message) -> None:
     """Admin: /publish <listing_id> — post a deal card to the channel."""
@@ -485,7 +505,7 @@ async def _publish_listing(bot: Bot, lis: dict, target) -> None:
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
         card_path = tmp.name
     try:
-        path = render_card(lis, card_path, verified=True)
+        path = await asyncio.to_thread(render_card, lis, card_path, verified=True)
         if path:
             with open(path, "rb") as f:
                 await bot.send_photo(target, BufferedInputFile(f.read(), "deal.png"), caption=caption)

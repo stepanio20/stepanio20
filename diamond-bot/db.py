@@ -430,6 +430,26 @@ def seed_groups(rows: Iterable[dict]) -> None:
             )
 
 
+def funnel() -> dict:
+    """Acquisition→revenue funnel from the events table (distinct users per stage)."""
+    stages = {
+        "started": "type='start'",
+        "role_set": "type='role_selected'",
+        "uploaded": "type IN ('listing_created','csv_imported')",
+        "searched": "type='demand_created'",
+        "matched": "type='match_shown'",
+        "connected": "type='contact_revealed'",
+        "buy_clicked": "type='buy_clicked'",
+        "subscribed": "type='subscription_paid'",
+    }
+    out = {}
+    with _conn() as con:
+        for name, cond in stages.items():
+            out[name] = con.execute(
+                f"SELECT COUNT(DISTINCT tg_id) FROM events WHERE {cond}").fetchone()[0]
+    return out
+
+
 def counts() -> dict:
     with _conn() as con:
         def one(q):
